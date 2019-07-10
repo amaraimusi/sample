@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>プルダウン・パネル</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="pulldown_panel.js"></script>
+
+		<script>
+		$(function(){
+			// プルダウン・パネルのCSSデータ
+			var css={
+				'width':'300px',
+				'height':'200px',
+				'background-color':'#f8e7ba',
+			};
+			
+			
+			// プルダウン・パネルを作成する
+			pulldown_panel('#btn1','neko_div','タイトル1','<div>あいうえお</div>',css);
+		});
+
+		</script>
+
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>プルダウン・パネル</h1>
+	</div>
+	
+	ボタンなどトリガー要素の下にパネルをプルダウン表示します。<br>
+	<br>
+	
+	<h2>サンプル</h2>
+	いろはにほへと<input id="btn1" type="button" value="XXXテスト1" /><br>
+	ちりぬるをわかよたれそつねならむ　うゐのおくやまけふこえてあさきゆめみしゑひもせす
+	
+
+	
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-19 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

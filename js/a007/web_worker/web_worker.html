@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>バックグランドの並列処理 | WebWorkerの使い方  | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="web_worker.js"></script>
+	
+	<style>
+		.kensho{
+			float:left;
+			width:45%;
+			padding:10px;
+			border:solid #caf0db 4px;
+		}
+	</style>
+</head>
+<body>
+<div id="header" ><h1>バックグランドの並列処理 | WebWorkerの使い方  | ワクガンス</h1></div>
+<div class="container">
+
+
+
+
+<h2>検証</h2>
+JavaScriptにはsetTimeout関数,setInterval関数,XMLHttpRequest(Ajax)などの非同期処理が存在する。
+しかし、JavaScriptの非同期処理は並列処理は同じものとは言えない。<br>
+JavaScriptの非同期処理は、サーバー側に仕事をさせる場合（Ajax,XMLHttpRequest)、並列処理がなされる。<br>
+しかし、自スクリプト中の他の処理を、非同期処理させようとしても並列処理にはならない。<br>
+つまり同期処理では、JavaScriptで書かれた重たい処理を並列実行することができない。<br>
+<br>
+だが <strong>Web Worker</strong>を使えば、JavaScriptで書かれた重たい処理を並列実行させることができる。<br>
+しかし、Web WorkerはDOM操作やjQueryが使えないという弱点が存在する。<br>
+<br>
+
+
+<div class="kensho">
+	<h3>検証1:setTimeout（非同期処理）</h3>
+	<input type="button" value="テスト1" onclick="test1()" class="btn btn-primary" />
+	<input type="button" value="並列処理テスト" title="並列処理の確認" onclick="parallelCheck1()" class="btn btn-warning btn-sm" /><br>
+	setTimeout関数では並列処理ができない。<br>
+</div>
+<div class="kensho">
+	<h3>検証2:Web Worker (並列処理)</h3>
+	<input type="button" value="テスト2" onclick="test2()" class="btn btn-primary" />
+	<input type="button" value="並列処理テスト" title="並列処理の確認" onclick="parallelCheck1()" class="btn btn-warning btn-sm" /><br>
+</div>
+<div style="clear:both"></div>
+<div style="margin-top:40px;">
+	出力：<div id="res1" style="padding:20px;color:#1ca261;"></div>
+</div>
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>バックグランドの並列処理 | WebWorkerの使い方 </li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-6-20</div>
+</body>
+</html>

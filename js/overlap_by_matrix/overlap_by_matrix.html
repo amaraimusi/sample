@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>2次元配列の重複チェック</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+
+			$(document).ready(function(){
+
+
+
+
+				var data=[[1,'neko',99],[2,'usi',99],[3,'usi',20],[3,'usi',99],[4,'tora',20],];
+				//var data=[];
+				var clm_no=2;//重複チェックする列番号
+
+
+				var rtns=overlapChkForMatrix(data,clm_no);
+
+				var rtns3=overlapChkForMatrix(data,clm_no,1);
+
+
+				//出力用にJSON文字列にする。
+				var a1 = JSON.stringify(data);
+				var a2 = JSON.stringify(rtns);
+				var a3 = JSON.stringify(rtns3);
+
+				$("#a1").html(a1);
+				$("#a2").html(a2);
+				$("#a3").html(a3);
+
+
+			});
+
+			/**
+			*重複チェック（2次元配列用）
+			* @param data 2次元配列
+			* @param clmNo チェックする列番号
+			* @param type 返値タイプ  0:重複情報オブジェクト   1:重複値配列
+			* @return 重複情報オブジェクトか重複値配列
+			*
+			*/
+			function overlapChkForMatrix(data,clmNo,type){
+				if(data =='' || data==null || !(data instanceof Array)){
+					return null;
+				}
+				if(data.length==0){
+					return null;
+				}
+
+				var data2=transpose(data);//行列変換
+				var ary1=data2[clmNo];//チェック対象列の配列を取得
+
+
+				var rtns={};//重複情報
+
+				//重複フィルター処理
+				var overlap_vals = ary1.filter(function (v, i, ary) {
+							if(ary.indexOf(v) === i && i !== ary.lastIndexOf(v)){
+
+								//重複情報をセット
+								rtns[i]=v;
+
+								return true;
+							}else{
+								return false;
+							}
+
+				        });
+
+				if(type==1){
+					return overlap_vals;
+				}else{
+					return rtns;
+				}
+			}
+
+			//2次元配列の行列入替(nullはエラーになるので注意)
+			function transpose(a) {
+			    return Object.keys(a[0]).map(function (c) {
+			        return a.map(function (r) {
+			            return r[c];
+			        });
+			    });
+			}
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">2次元配列の重複チェック</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<div>2次元配列</div>
+				<div id="a1"></div>
+				チェックする列番号=2
+				<hr>
+				<div>重複情報（要素と値）</div>
+				<div id="a2"></div><br>
+				<div>重複情報(重複値のみ)</div>
+				<div id="a3"></div><br>
+
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/05</div>
+		</div><!-- page1 -->
+	</body>
+</html>

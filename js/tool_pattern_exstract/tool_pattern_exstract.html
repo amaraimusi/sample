@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>パターン抜出ツール</title>
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="tool_pattern_exstract.js"></script>
+
+
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>パターン抜出ツール</h1>
+			<p> 対象文字列から抜型にパターン一致する文字を抽出します。</p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		対象文字列<br>
+		<textarea id="pasting_csv" class="form-control" rows="6" placeholder="CSVを貼り付けてください" title="CSVを貼り付けてください。Excelからそのまま貼り付け可能。タブ区切りのデータ。">echo "&lt;td&gt;".$fields['neko']."&lt;/td&gt;";&#13;echo "&lt;td&gt;".$fields['yagi']."&lt;/td&gt;";&#13;echo "&lt;td&gt;".$fields['daiou-ika']."&lt;/td&gt;";&#13;echo "&lt;td&gt;".$fields['ka']."&lt;/td&gt;";&#13;echo "&lt;td&gt;".$fields['']."&lt;/td&gt;";&#13;</textarea>
+		<br>
+		
+		<strong>抜型</strong>&nbsp;&nbsp;&nbsp;&nbsp;抜き出す文字部分は「%%」にします。改行「\n」も使用可能です。<br>
+		<textarea id="hina" class="form-control" rows="6" placeholder="ひな形を入力してください" title="ひな形を入力してください。変値は「%+列番」">$fields['%%']</textarea>
+
+		<br>
+		<input type="button" value="抜出" onclick="execution1()" class="btn btn-primary" />
+		<pre id="res" style="margin:20px;"></pre>
+		
+		
+
+	</div>
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-2-4</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

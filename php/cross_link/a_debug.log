@@ -1,0 +1,10 @@
+■2014-05-02 10:49:25
+max_id2
+■■■□□□■■■□□□■■■□□□
+url=
+title=
+note=
+omomi=1
+btn1=追加
+id=3
+INSERT INTO cross_links (id, title,url,note,omomi) VALUES (3, '','','',1);

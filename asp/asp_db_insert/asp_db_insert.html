@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>ASP | INSERT</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function test_func1(){
+				var x=document.getElementById('xxx1').innerHTML;
+				alert(x);
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">ASP | INSERT</div>
+		<div id="content" >
+		
+			<div class="sec1">
+				DBにデータをINSERTするサンプルです。<br />
+				UPDATE文やDELETE文も同様な方法で実行できます。<br />
+				サンプルではトランザクションも実装しています。SqlParameterにパラメータを渡すことによりSQLインジェクション対策にもなります。<br />
+				
+				<br />
+				<strong>ASPソースコード</strong>
+				<pre>			
+protected void Button1_Click(object sender, EventArgs e)
+{
+	string cnnStr = ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString;//接続文字列を取得
+	SqlConnection conn = new SqlConnection(cnnStr);//DBコネクションを作成。
+	conn.Open();//コネクションを開く。
+	
+	//SQLクエリを生成。
+	string query =
+		" INSERT INTO TestTbl( " +
+		" value1, " +
+		" text1, " +
+		" updateDateTime " +
+		" ) " +
+		" VALUES " +
+		"( " +
+		" @value1, " +
+		" @text1, " +
+		" CONVERT(DATETIME, @updateDateTime) " +
+		" ) ";
+	
+	SqlTransaction trn = conn.BeginTransaction();//トランザクション開始
+	
+	try
+	{
+		SqlCommand cmd = new SqlCommand(query, conn,trn);
+
+		//パラメータをセットする。
+		SqlParameter param1 = new SqlParameter("@value1", 123);
+		cmd.Parameters.Add(param1);
+		SqlParameter param2 = new SqlParameter("@text1", "neko");
+		cmd.Parameters.Add(param2);
+		string dtm = DateTime.Now.ToString();//本日日時
+		SqlParameter param3 = new SqlParameter("@updateDateTime", dtm);
+		cmd.Parameters.Add(param3);
+
+		//☆SQLクエリを実行。
+		cmd.ExecuteNonQuery();
+	}
+	catch (Exception)
+	{
+	
+		trn.Rollback();//ロールバック
+		throw;
+	
+	}
+	finally{
+		trn.Commit();//コミット
+	}
+	
+	conn.Close();//DBコネクションを閉じる。
+
+}
+
+				</pre>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/03/20</div>
+		</div><!-- page1 -->
+	</body>
+</html>

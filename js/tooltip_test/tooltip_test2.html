@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>オリジナルツールチップ</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+				
+				$(document).click(
+						function (){
+							$('#tooltip_x').hide();
+						});
+				
+				$('#test1').hover(
+						function(){
+
+							//マウスオーバーイベント
+							
+							//対象セレクタ
+							var slt="#test1";
+							
+							//対象要素の右上位置を取得
+							var offset=$(slt).offset();
+							var left = offset.left;
+							var top = offset.top;
+							
+							//対象要素の外幅を取得
+							var width= $(slt).width();
+							var height= $(slt).height();
+							
+							var tt_html=$('#tt1').html();
+							
+							$('#tooltip_x').show();
+							
+							$('#tooltip_x').css('z-index',2147483647);
+							
+							//ツールチップにHTMLをセット
+							$('#tooltip_x').html(tt_html);
+							
+							//ツールチップの位置を算出
+							var tt_left=left;
+							var tt_top=top + height;
+
+							//ツールチップ要素に位置をセット
+							$('#tooltip_x').offset({'top':tt_top,'left':tt_left });
+							
+
+						},
+						function(){
+							//マウスアウトイベント
+						}
+					);
+				
+					//領域外クリックでツールチップを閉じるが、ツールチップ自体は領域内と判定させ閉じないようにする。
+					$('#tooltip_x').click(function(e) {
+						e.stopPropagation();
+					});
+				
+				
+			});
+
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >オリジナルツールチップ</h1>
+
+
+<div>
+	<a id="test1" >いろは歌</a>
+</div>
+<hr>
+
+<div style="width:100px;height:800px">
+</div>
+<hr>
+
+
+<div id="tt1" >
+	<div style="background-color:#c1c1c1">
+	いろはにほへとちりぬるをわかよたれそつねならむ<br>
+	うゐのおくやまけふこえてあさきゆめみしゑひもせす<br>
+	</div>
+</div>
+<hr>
+
+<div id="tooltip_x" >いろは</div>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-12-21</p>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>JavaScriptでクラスを実現する</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		
+		
+		<script src="Animal.js"></script>
+
+
+		<script>
+		var animal;
+		
+		$( function() {
+			
+			// 初期値を渡しながら、Animalクラスを作成する。
+			var param ={
+					'res_slt':'#res',
+					'animal_name':'ヤンバルクイナ'};
+			animal = new Animal(param);
+			
+
+			
+		});
+
+		function test1(){
+			
+			// タイトルを表示する
+			animal.showTitle();
+			
+			// 数秒後に動物名を表示する
+			animal.showAnimalName('国頭村');
+
+		}
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>JavaScriptでクラスを実現する</h1>
+			<p></p>
+		</div>
+	</div>
+	
+	JavaScriptでもクラスを実現することができる。<br>
+	<br>
+
+	Publicメソッドだけでなく、コンストラクタやPrivateメソッドも実現可能である。<br>
+	コールバック関数やPrivateメソッドからメンバにアクセスする場合、thisではなくmyselfを介すること。<br>
+	<br>
+	
+	<a href="../sample3/class_base.html" >継承</a>も実現可能である。<br>
+	<br>
+
+	
+	<p>実装ソースコード<p>
+	<pre>
+	&lt;script src="jquery.js"&gt;&lt;/script&gt;
+	&lt;script src="Animal.js"&gt;&lt;/script&gt;
+	～省略～
+	&lt;script&gt;
+	var animal;//動物クラス
+	
+	$( function() {
+		// 初期値を渡しながら、Animalクラスを作成する。
+		var param ={
+			'res_slt':'#res',
+			'animal_name':'ヤンバルクイナ'};
+			
+		animal = new Animal(param);
+	});
+
+	function test1(){
+		// タイトルを表示する
+		animal.showTitle();
+		
+		// 数秒後に動物名を表示する
+		animal.showAnimalName('国頭村');
+	}
+	&lt;/script&gt;
+	～省略～
+	&lt;input type="button" value="テスト実行" onclick="test1()" /&gt;
+	&lt;div id="res"&gt;&lt;/div&gt;
+	</pre>
+	<br>
+	
+	<p>Animalクラスのソースコード<p>
+	<pre>
+	var Animal =function(p_params){
+		
+		// 出力要素
+		this.res_slt = p_params.res_slt;
+		
+		// 動物名
+		this.animal_name = p_params.animal_name;
+	
+		// 自分自身のインスタンス。  プライベートメソッドやコールバック関数で利用するときに使う。
+		var myself=this;
+	
+		/**
+		 * コンストラクタ
+		 */
+		this.constract=function(){
+			var str = "コンストラクタが呼び出されました。&lt;br&gt;";
+			$(this.res_slt).append(str);
+		};
+		
+		/**
+		 * 当クラスのインスタンスを取得する
+		 */
+		this.getInstance = function(){
+			return this;
+		};
+		
+		/**
+		 * タイトルを表示する
+		 */
+		this.showTitle = function(){
+			var str = '動物のタイトル&lt;br&gt;';
+			$(this.res_slt).append(str);
+		};
+	
+		/**
+		 * 動物名を表示させる。
+		 * 
+		 * コールバック系の関数であるsetTimeoutを使い、2秒後に動物名を表示させる。
+		 * @param string place 場所
+		 */
+		this.showAnimalName=function(place){
+		    setTimeout(function(){
+		    	var str = place + 'の' + myself.animal_name + 'について。【2秒後に表示】&lt;br&gt;';
+		    	$(myself.res_slt).append(str);
+	
+				privateName();//プライベートメソッドを呼び出せる
+		    	
+		    },2000);
+		};
+		
+		
+		/**
+		 * プライベートなメソッド
+		 * メンバにアクセスするときはthisではなくmyselfを使ってアクセスすること。
+		 */
+		function privateName(){
+			var str = 'プライベートな' + myself.animal_name;;
+			$(myself.res_slt).append(str);
+		};
+		
+		//コンストラクタ呼出し(クラス末尾にて定義すること）
+		this.constract();
+	};
+	</pre>
+	<br>
+	
+
+	<h3>出力</h3>
+	<input type="button" value="テスト実行" onclick="test1()" class="btn btn-success" />
+	<div id="res" class="output_data"></div>
+	
+	<hr>
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-4-5</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

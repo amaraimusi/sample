@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>フォーカスしたときに値を全選択する</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+
+
+		<script>
+		$(function(){
+
+			$("#test1").focus(function() {
+			    $(this).select();
+			});
+
+
+			$("#test2").focus(function() {
+			    $(this).select();
+			});
+			
+		});
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>フォーカスしたときに値を全選択する</h1>
+	</div>
+
+	入力フォームをフォーカスしたとき、内部の文字列を全選択する。<br>
+	<bR>
+	
+	<h2>サンプル</h2>
+	
+	<p>html</p>
+	<pre>
+	&lt;input id="test1" type="text" value="ネコがネズミを食べる" /&gt;
+	&lt;textarea  id="test2" cols="30" rows="10"&gt;ネコが&amp;#13;魚用エサを盗み食いする。&lt;/textarea&gt;
+	</pre><br>
+	
+	<p>javascript/jquery</p>
+	<pre>
+	$(function(){
+		$("#test1").focus(function() {
+		    $(this).select();
+		});
+
+		$("#test2").focus(function() {
+		    $(this).select();
+		});
+	});
+	</pre>
+	
+	<hr>
+	
+	<h3>検証</h3>
+	<input id="test1" type="text" value="ネコがネズミを食べる" /><br>
+	<br>
+	<textarea  id="test2" cols="30" rows="10">ネコが&#13;魚用エサを盗み食いする。</textarea><br>
+
+
+
+
+	<hr>
+	<a href="http://amaraimusi.sakura.ne.jp/" class="btn btn-link btn-xs">ホーム</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-28
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

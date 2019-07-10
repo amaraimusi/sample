@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>cssをJavaScritで切り替える</title>
+
+
+
+		<link rel="stylesheet" type="text/css" href="test_a.css" id="css_x">
+		
+		<script>
+			function test_a(){
+				document.getElementById('css_x').href = 'test_a.css';
+			}
+			function test_b(){
+				document.getElementById('css_x').href = 'test_b.css';
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >cssをJavaScritで切り替える</h1>
+
+<div id="neko">吾輩は猫である</div>
+<input type="button" value="CSS A" onclick="test_a()" />
+<input type="button" value="CSS B" onclick="test_b()" />
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-10-14</p>
+</body>
+</html>

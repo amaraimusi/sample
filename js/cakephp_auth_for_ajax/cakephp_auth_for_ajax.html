@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CakePHPのユーザー認証状態をAjaxで取得する</title>
+
+	<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+	<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+	<script src="/sample/style2/js/bootstrap.min.js"></script>
+
+	<script>
+	function test1(){
+
+		
+		$.ajax({
+			type: "GET",
+			url: "/zss_rec/auth_check/ajax_auth_check",
+			cache: false,
+			dataType: "text",
+			success: function(str_json, type) {
+
+				if(str_json == 'none'){
+					$("#res").html('未認証です。');
+				}else{
+	
+					try{
+						var data=$.parseJSON(str_json);//パース
+						var msg = 
+							'ユーザー名：' + data.username + '<br>' +
+							'権限：' + data.role + '<br>';
+						$("#res").html(msg);
+						
+					}catch(e){
+						alert('エラー');
+						$("#res").html(str_json);
+					}
+				}
+
+			},
+			error: function(xmlHttpRequest, textStatus, errorThrown){
+				$('#res').html(xmlHttpRequest.responseText);
+				alert(textStatus);
+			}
+		});
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>CakePHPのユーザー認証状態をAjaxで取得する</h1></div>
+<div class="container">
+
+
+
+
+
+
+<h2>サンプル</h2>
+<input type="button" class="btn btn-success" value="TEST" onclick="test1()" /><br>
+<br>
+
+<p>レスポンス出力</p>
+<pre id="res"><code>
+</code></pre>
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/php">ＰＨＰ　｜　サンプル</a></li>
+	<li>CakePHPのユーザー認証状態をAjaxで取得する</li>
+</ol>
+</div><!-- container  -->
+<div id="footer"  ><a href="/">(c)wacgance</a> 2016-7-20</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>SectionEditK.js | div内の節文を編集可およびAjax送受信する</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="SectionEditK.js"></script>
+
+
+		<style>
+
+		</style>
+		
+		<script>
+		$(function(){
+			
+			sectionEditK('#test1',
+						['.id','#animal_name','.note','#note_text','#note_ta','#category1'],
+						'test_save.php',
+						'test_read.php'
+						);
+			
+			sectionEditK('#test2',
+					['.id','.animal_name','.note'],
+					'test_save.php',
+					'test_read.php'
+					);
+		});
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>SectionEditK.js | div内の節文を編集可およびAjax送受信する</h1>
+	</div>
+	
+	div内の文章を編集可能にします。<br>
+	また更新ボタンも表示します。<br>
+	更新ボタンを押すと編集した文章をサーバー側へAjaxで送ります。<br>
+	div以外にinputなど他の各要素にも対応しています。<br>
+	<br>
+	
+	読込機能も備えています。<br>
+	最初に表示する際、サーバーからAjaxによるデータ取得を行い、各要素に表示します。<br>
+	<br>
+	
+	<p>html</p>
+	<pre class="intro_source_code">
+	&lt;div id="test2"&gt;
+		&lt;div class="id"&gt;100&lt;/div&gt;
+		&lt;div class="animal_name"&gt;fox&lt;/div&gt;
+		&lt;div class="note"&gt;abc123&lt;/div&gt;
+	&lt;/div&gt;
+	</pre>
+	
+	<p>JavaScript</p>
+	<pre class="intro_source_code">
+	sectionEditK('#test2',
+		['.id','.animal_name','.note'],
+		'test_save.php',
+		'test_read.php'
+		);
+	</pre>
+	
+	
+	
+	サンプルでは更新ボタンを押したとき、セッションへデータを保存しています。<br>
+	
+	
+	<hr><hr>
+
+	<h2>サンプル</h2>
+	
+	<br>
+	
+	
+	<div id="test2">
+		<div class="id">100</div>
+		<div class="animal_name">fox</div>
+		<div class="note">abc123</div>
+	</div>
+	<hr>
+	
+	
+	<div id="test1">
+	
+		<div class="id">99</div>
+		<div id="animal_name">タヌキ</div>
+		<div class="note">元々極東にのみ生息する世界的に見れば珍しい動物であり[1]、日本、朝鮮半島、中国、ロシア東部などに分布していた。</div>
+		<input id="note_text" type="text" value="大きなタヌキ" ><br>
+		<textarea id="note_ta">都心部のタヌキ</textarea><br>
+		<select id="category1">
+			<option value="1">日本産</option>
+			<option value="2">中国産</option>
+			<option value="3" selected>ロシア産</option>
+		</select><br>
+	</div>
+	
+	<hr>
+	
+
+	<a href="session_clear.php" class="btn btn-danger btn-xs">セッションクリア</a>
+	
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-10
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

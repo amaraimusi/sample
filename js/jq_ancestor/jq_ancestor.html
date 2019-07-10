@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>特定タグを持つ先祖をさかのぼる</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+
+			function test(){
+				var x=$("#test").parents('label').html();
+				alert(x);
+			}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">特定タグを持つ先祖をさかのぼる</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<label xxx="x_kani">先祖<div>祖父<div>親<div id="test">子</div></div></div></label>
+
+				<input type="button" onclick="test()" value="test" />
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/12</div>
+		</div><!-- page1 -->
+	</body>
+</html>

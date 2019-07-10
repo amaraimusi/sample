@@ -1,0 +1,168 @@
+<!DOCTYPE html> 
+<html lang="ja"> 
+	<head> 
+	<title>AJAX TEST</title> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+	<script type="text/javascript" language="javascript">
+	      
+
+	        //▼ページ初期化イベント
+	        $(document).bind("pageinit", function(){
+	        	
+	        });
+	        
+	        //ボタン１をクリック
+	        $('#btn1').live('click', function() {
+						var x=$('#text1').val();
+	        	x=encodeURIComponent(x);
+	        	alert(x);
+		        //☆AJAX非同期通信
+						$.ajax({
+							type: "POST",
+							url: "test.php",
+							data: "key1="+x+"&key2=あいうえお",
+							cache: false,
+							dataType: "text",
+							success: function(data, type) {
+								alert(data);
+								alert(type);
+							},
+							error: function(xmlHttpRequest, textStatus, errorThrown){
+								alert(textStatus);
+							}
+						});
+
+	        });
+	</script> 
+
+	<style type="text/css">
+		table{
+			border-collapse:collapse;
+			border-color:#b7badb;
+		
+		}
+		table thead{
+			background-color:#cccee6;
+		}
+		table tbody{
+			background-color:#f5f9fe;
+		}
+	
+		pre{
+			background-color:#ffded9;
+		}
+		.sec1{
+			background-color:#ffaa9d;
+			border-style:solid;
+			border-width:2px;
+			border-color:#db2617;
+			padding:10px;
+			margin-bottom:50px;
+		}
+		
+		
+	</style>
+
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header" data-position="inline" data-backbtn="false">
+		<h1>AJAX TEST</h1>
+		
+	</div>
+	
+
+	<div data-role="content">	
+		
+		<div class="sec1">
+			<h3>基本的なAjaxによる非同期通信。</h3>
+			<input type="text" id ="text1" value="" />
+			<input type="button" id ="btn1" value="テスト実行"  />
+			<strong>JavaScriptコードの主要部分を抜粋</strong>
+			<pre>
+	
+	//☆AJAX非同期通信
+	$.ajax({
+		type: "POST",
+		url: "test.php",
+		data: "key1=neko&key2=あいうえお",
+		cache: false,
+		dataType: "text",
+		success: function(data, type) {
+			alert(data);
+			alert(type);
+		},
+		error: function(xmlHttpRequest, textStatus, errorThrown){
+			alert(textStatus);
+		}
+	});
+			</pre>
+			
+			
+			<br /><strong>test.php</strong>
+			<pre>
+	header("Access-Control-Allow-Origin:*");//クロスドメイン通信を許可する。
+	$ret=$_REQUEST['key1'].'-'.$_REQUEST['key2'];
+	echo $ret;
+			</pre>
+			※echoで何らかの値を出力しないとajax送信側でエラーイベントが発生してしまうので注意。
+			
+			<br /><br /><br /><br />
+			
+			ajaxのパラメータについて
+			<table border="1">
+				<thead>
+					<tr><th>パラメータ</th><th>説明</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>type</td><td>postまたはgetを設定</td></tr>
+					<tr><td>url</td><td>通信先URL</td></tr>
+					<tr><td>data</td><td>送るデータ。キーと値の組み合わせ。URLにGETデータを付加させるやり方と同じ。</td></tr>
+					<tr><td>cashe</td><td>デフォルトではtrueなのでfalseを。</td></tr>
+					<tr><td>dataType</td><td>返値の型</td></tr>
+					<tr><td>success</td><td>通信完了時に呼び出される関数。第1引数は返値、第２引数はmineタイプなど。引数は省略可能</td></tr>
+					<tr><td>error</td><td>通信失敗時に呼び出される。引数は省略しても良い。詳細はドキュメントを参照。</td></tr>
+				</tbody>
+			</table><br />
+			※他にもパラメータは存在する。あたパラメータは省略可能である。<br />
+			<a href="http://semooh.jp/jquery/api/ajax/jQuery.ajax/options/"  data-ajax="false" rel="external">jquery ドキュメント</a>
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>(C)kenji uehara　2013/2/25 - 2013/3/1</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

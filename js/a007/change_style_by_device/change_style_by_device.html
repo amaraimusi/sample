@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>バイスによるテーブル型入力フォームの切替 | PC版とスマホ版（SP版)の切替</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="change_style_by_device.js"></script>
+	
+	<style>
+	
+	.tbl_sp{
+		display:block;
+		width:100%;
+	}
+	.tbl_sp thead{
+		display:none;
+	}
+	.tbl_sp tbody{
+		display:block;
+		width:100%;
+	}
+	.tbl_sp tr{
+		display:block;
+		width:100%;
+	}
+	.tbl_sp td{
+		display:block;
+		width:100%;
+	}
+	.tbl_sp  td:last-child{
+		padding-bottom:16px;
+	}
+	.tbl_sp input[type="text"]{
+		width:100%;
+	}
+	.tbl_sp textarea{
+		width:100%;
+	}
+
+	</style>
+	
+</head>
+<body>
+<div id="header" >
+	<h1>バイスによるテーブル型入力フォームの切替 </h1>
+	<p>PC版とスマホ版（SP版)の切替</p>
+</div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+<h2>テーブルのモバイル化</h2>
+<input type="button" value="SP化" class="btn btn-success" onclick="changeStyleByDevice('.test_tbl1','sp')" />
+<input type="button" value="PC化" class="btn btn-success" onclick="changeStyleByDevice('.test_tbl1','pc')" />
+<table class="tbl2 test_tbl1">
+	<thead><tr><th>id</th><th>name</th><th>value</th></tr></thead>
+	<tbody>
+		<tr><td>ネコ</td><td><input type="text" /></td><td>100</td></tr>
+		<tr><td>カニ</td><td><input type="text" /></td><td>200</td></tr>
+		<tr><td>サメ</td><td><input type="checkbox" />チェックボックス</td><td>300</td></tr>
+		<tr><td>シカ</td><td><textarea name="" id="" cols="30" rows="10"></textarea></td><td>400</td></tr>
+	</tbody>
+</table>
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>バイスによるテーブル型入力フォームの切替 | PC版とスマホ版（SP版)の切替</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-4-25</div>
+</body>
+</html>

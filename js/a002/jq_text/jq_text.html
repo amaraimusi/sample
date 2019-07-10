@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>複数要素である場合の $('#xxx').text() を検証する</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	
+	<script src="jq_text.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>複数要素である場合の $('#xxx').text() を検証する</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>検証</h2>
+
+$('#xxx').text();が取得するテキストを検証する。
+要素内部が複数要素になっている場合、text関数はどのような値を返すか？<br>
+<br>
+
+下記の検証結果<br>
+複数要素の文字列を連結し、一つの文字列して返す。<br>
+<hr>
+
+<p>サンプル</p>
+<div id="neko">ベンガル<span style="color:blue">シャムネコ</span><strong>スフィンクス<span style="color:red">三毛猫</span></strong>タヌキ</div>
+<input type="button" class="btn btn-primary" value="$('#xxx').text()" onclick="test1()" />
+<input type="button" class="btn btn-primary" value="$('#xxx :first').text()" onclick="test2()" />
+
+
+<hr>
+
+<p>出力</p>
+<pre id="res"></pre>
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>複数要素である場合の $('#xxx').text() を検証する</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-9-28</div>
+</body>
+</html>

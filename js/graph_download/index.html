@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>jqPlotグラフのダウンロード</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="FileSaver.js"></script>
+		<script type="text/javascript" src="html2canvas.js"></script>
+
+		<script>
+			$( function() {
+
+					//▽グラフ作成処理
+					rec1 =[[1,null],[2,null],[3,null],[4,null],[5,null],[6,null],[7,null],[8,null],[9,null],[10,13],[11,9],[12,15],[13,14],[14,null],[15,null],[16,null],[17,null],[18,null],[19,null],[20,14],[21,10],[22,6],[23,40],[24,7],[25,7],[26,7],[27,40],[28,null],[29,null],[30,null],[31,null],];
+			     	rec2 =[[1,5],[2,54],[3,12],[4,52],[5,null],[6,null],[7,null],[8,null],[9,25],[10,23],[11,19],[12,5],[13,4],[14,5],[15,null],[16,null],[17,35],[18,null],[19,null],[20,24],[21,13],[22,16],[23,30],[24,37],[25,27],[26,17],[27,14],[28,null],[29,null],[30,null],[31,8],];
+					$.jqplot(
+				        'graph_div',
+				        [
+				        	rec1,
+				        	rec2
+				        ],
+				        {
+				            series: [
+				                { label: 'test' }
+				            ],
+				            legend: {
+				                show: true,
+
+				            },
+				            axes:{
+				                xaxis:{
+				                    label:'日',
+				                    ticks: [
+				                    	'1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31',
+
+				                    ],
+				                },
+				                yaxis:{
+				                	label:'縦軸Y',
+				                    ticks: [
+
+										'50','45','40','35','30','25','20','15','10','5','1',                    ],
+				                }
+				            }
+				        }
+			    	);
+
+
+
+
+
+			});
+
+
+
+			//グラフをimg要素へ表示する。
+			function test_show_img(){
+
+
+		        var element = $('#graph_div')[0];
+
+		        //DOM要素をcanvasに変換する。html2canvas.jsの機能
+		        html2canvas(element, { onrendered: function(canvas) {
+
+		    	  	var imgData = canvas.toDataURL('image/png');
+		            $('#img1')[0].src = imgData;
+
+		        }});
+
+			}
+
+
+			//グラフダウンロード(シンプルコード版)
+			function test_graph_download_smp(){
+		        var element = $('#graph_div')[0];
+
+		        //DOM要素をcanvasに変換してからダウンロード
+		        html2canvas(element, { onrendered: function(canvas) {
+
+		    	  	var imgData= canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+
+		            window.location.href = imgData;
+
+		    	  	//window.open(imgData, 'save');//←こちらの方法でもダウンロードできる
+
+		        }});
+			}
+
+
+			//グラフダウンロード
+			function test_graph_download(){
+
+				var element = $('#graph_div')[0];
+
+		        //DOM要素をcanvasに変換する。html2canvas.jsの機能
+		        html2canvas(element, { onrendered: function(canvas) {
+
+					//canvas.toBlob()が実装されていないブラウザに対応。
+		        	var type = 'image/jpeg';
+		        	// canvas から DataURL で画像を出力
+		        	var dataurl = canvas.toDataURL(type);
+		        	// DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+		        	var bin = atob(dataurl.split(',')[1]);
+		        	// 空の Uint8Array ビューを作る
+		        	var buffer = new Uint8Array(bin.length);
+		        	// Uint8Array ビューに 1 バイトずつ値を埋める
+		        	for (var i = 0; i < bin.length; i++) {
+		        	  buffer[i] = bin.charCodeAt(i);
+		        	}
+		        	// Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+		        	var blob = new Blob([buffer.buffer], {type: type});
+
+
+		        	//★FileSaver.jsによるファイルダウンロード
+			  		saveAs(
+		    	  			  blob
+		    	  			, "test.png"
+		    	  		);
+
+			  		/*
+		    	  	canvas.toBlob(function(blob) {
+		    	  		saveAs(
+		    	  			  blob
+		    	  			, "test.png"
+		    	  		);
+	    	  		});*/
+
+
+		        }});
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >jqPlotグラフのダウンロード</h1>
+
+<div id="graph_div" style="height: 400px; width: 100%;"></div>
+<input type="button" value="img要素に表示" onclick="test_show_img()" />
+<input type="button" value="グラフダウンロード(シンプル版)" onclick="test_graph_download_smp()" />
+<input type="button" value="グラフダウンロード(ファイル名指定可)" onclick="test_graph_download()" />
+
+
+<hr>
+<p>img要素</p>
+<img id="img1" src=""  />
+※img要素なので右クリックによる画像ダウンロードができる。<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-06-12</p>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+	RewriteCond %{REQUEST_URI} /sample/apache/htaccess_put_rules/a/animal/animal.html [OR]
+	RewriteCond %{REQUEST_URI} /sample/apache/htaccess_put_rules/a/animal/fish/fish.html
+	RewriteRule ^(.*)$ /sample/apache/htaccess_put_rules/b.html [R=301,L]
+</IfModule>
+
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+	RewriteCond %{REQUEST_URI} /sample/apache/htaccess_put_rules/a/a.html
+	RewriteRule ^(.*)$ /sample/apache/htaccess_put_rules/c.html [R=301,L]
+</IfModule>
+

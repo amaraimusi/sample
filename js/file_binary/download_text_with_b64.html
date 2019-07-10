@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>BASE64をテキストファイルとしてダウンロードする</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="download_text_with_b64.js"></script>
+
+
+		<style>
+			.res{
+				font-weight:bold;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>BASE64をテキストファイルとしてダウンロードする</h1>
+		<p>JavaScriptによるファイルとバイナリデータの扱い</p>
+	</div>
+
+
+	<h2>サンプル</h2>
+	<input id="text1" type="text" value="いろは"/>
+	<input type="button" value="TEST1" onclick="test1()" class="btn btn-primary" /><br>
+	<a id="txt_dl" href="" class="btn btn-success" style="display:none">ダウンロード</a><br>
+	<br><hr>
+
+	<h3>説明</h3>
+	BASE64をBlobを経てBlobURLスキームに変換する。<br>
+	BlobURLスキームをa要素にセットすれば、ダウンロードリンクの完成である。<br>
+	<br>
+	
+	<p>html</p>
+	<pre>
+	&lt;input type="button" value="TEST1" onclick="test1()"  /&gt;
+	&lt;a id="txt_dl" href="" &gt;ダウンロード&lt;/a&gt;&lt;br&gt;
+	</pre>
+	
+	<p>javascript</p>
+	<pre>
+	function test1(){
+
+		var text1 = "いろは";
+		
+		// utf8からbase64に変換する。
+		var b64 = utf8_to_b64(text1);
+
+		// Blobを BASE64とMIMEコンテンツタイプから作成する。
+		<span class='marker'>var mime_ctype = "text/plain";
+		var blob = toBlob(b64,mime_ctype);</span>
+		
+		// BlobURLスキームをBlobから作成する。
+		<span class="marker">var blob_url = window.URL.createObjectURL(blob);</span>
+	
+		// a要素にBlobURLスキームをセットしてダウンロードできるようにする。
+		<span class="marker">$('#txt_dl').attr('href',blob_url);
+		$('#txt_dl').attr('download','test.txt');</span>
+
+	}
+	
+	// BASE64とMIMEコンテンツタイプからBlobオブジェクトを作成する
+	function toBlob(base64,mime_ctype) {
+		// 日本語の文字化けに対処するためBOMを作成する。
+		var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+		
+	    var bin = atob(base64.replace(/^.*,/, ''));
+	    var buffer = new Uint8Array(bin.length);
+	    for (var i = 0; i &lt; bin.length; i++) {
+	        buffer[i] = bin.charCodeAt(i);
+	    }
+	    // Blobを作成
+	    try{
+	        var blob = new Blob([bom,buffer.buffer], {
+	            type: mime_ctype,
+	            
+	        });
+	    }catch (e){
+	        return false;
+	    }
+	    return blob;
+	}
+
+	
+	// utf8からbase64に変換する
+	function utf8_to_b64(str) {
+		return window.btoa( unescape(encodeURIComponent( str )) );
+	}
+	</pre>
+	
+
+
+
+	<hr>
+
+	<br><br>
+	<a href="index.html" class="btn btn-link btn-xs">目次へ戻る</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-6-1 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

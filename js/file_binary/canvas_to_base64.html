@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>canvasからBASE64を作成する</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="canvas_to_base64.js"></script>
+
+
+		<style>
+			.res{
+				font-weight:bold;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>canvasからBASE64を作成する</h1>
+		<p>JavaScriptによるファイルとバイナリデータの扱い</p>
+	</div>
+
+
+	<h2>サンプル</h2>
+	<strong>canvas</strong><br>
+	<canvas id="canvas1" style="width:300px;height:300px;border:solid 2px #a9bad5"></canvas><br>
+	<input type="button" id="dl_btn"  class="btn btn-primary btn-xs" onclick="test1()" value="検証" title="canvasから取得したデータURLからimg要素やダウンロードリンクが作成できるか検証する" /><br>
+	<div id="res" style="display:none">
+		<h4>検証結果</h4>
+		
+		<strong>canvasから作成した画像ダウンロードリンク</strong>
+		<a id="canvas_dl" href="" class="btn btn-success" download >ダウンロード</a><br>
+		
+		<strong>canvasから作成したimg要素の画像</strong>
+		<img src="" alt="" id="img1" /><br>
+		<br>
+		
+		<strong>canvasから作成したBASE64のダンプ</strong>
+		<div id="base64_dump"></div>
+		<hr>
+	</div><br><br>
+	
+	
+	
+	
+	
+	<h3>説明</h3>
+	
+	canvas要素からデータURLスキームを取得することができ、
+	そのデータURLスキームからBASE64に変換作成できる。<br>
+	<br>
+	
+	html
+	<pre>	&lt;canvas id="canvas1"&gt;&lt;/canvas&gt;</pre><br>
+
+	javascript
+	<pre>
+	// canvas要素から描画コンテキストを取得する
+	var canvas = document.getElementById('canvas1');
+	var ctx = canvas.getContext('2d');
+	
+	// canvasへ適当に描画する
+	ctx.beginPath();
+	ctx.moveTo(10,150);
+	ctx.lineTo(70,10);
+	ctx.lineTo(150,150);
+	ctx.lineTo(10,40);
+	ctx.lineTo(140,50);
+	ctx.closePath();
+	ctx.stroke();
+	
+	// canvasからデータURLスキームを経由し、BASE64を取得する
+	var mime_type = "jpeg/image";
+	var data_url = canvas.<strong>toDataURL</strong>(mime_type);// canvasからデータURLスキームを取得する。
+	var <strong>base64</strong> = window.btoa(data_url);// データURLスキームからBASE64を作成する。
+	console.log(base64);
+	</pre><br>
+
+
+	<hr>
+
+	<br><br>
+	<a href="index.html" class="btn btn-link btn-xs">目次へ戻る</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-6-3 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

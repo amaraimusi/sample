@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>オリジン許可を必要としないクロスドメイン | jquery.xdomainajax.js | スクレイピング</title>
+
+
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="jquery.xdomainajax.js"></script>
+
+		<script>
+
+			function test(){
+				
+				// 外部ページのURL
+				url = ' http://www.yahoo.co.jp/';
+				
+				// jquery.xdomainajax.jsによるクロスドメイン（スクレイピング）
+				$.get(url, function(data){
+					
+					// 外部ページのHTMLテキスト（ソース）を取得する
+					var html_text = data.responseText;
+					
+					// HTMLテキストをjQueryオブジェクトにパースする。$.parseHTMLは外部ページのJavaScriptを実行しない。
+					var jobj = $.parseHTML(html_text);
+					
+					// 外部ページから一部の要素だけ抜き出し、表示する。
+					var content = $(jobj).find('.topicsindex').html();
+					$("#res").html(content);
+				});
+
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >オリジン許可を必要としないクロスドメイン | jquery.xdomainajax.js | スクレイピング</h1>
+
+外部ページであるYahooのトップページからトピックスだけ抜き出し、表示する。<br>
+<br>
+
+下記ボタンを押し数秒ほど待つと、Yahooのトピックス部分だけが出力される。<br>
+<br>
+
+<input type="button" value="Test" onclick="test()" />　<br>
+<br>
+
+<p>出力</p>
+<div id="res"></div>
+
+
+
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2016-7-14</p>
+</body>
+</html>

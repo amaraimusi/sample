@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>location | プロトコル、ホスト、ポートなどを取得</title>
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+	<script>
+	$(function(){
+		
+
+		
+		var href = location.href; // 完全なURL
+		var hash = location.hash; // ハッシュ、またはフラグメント。
+		var host = location.host; // ホスト名。ポート番号付き。
+		var hostname = location.hostname; // ホスト名
+		var pathname = location.pathname; // 相対パス
+		var port = location.port; // ポート番号
+		var protocol = location.protocol; // プロトコル
+		var search = location.search; // クエリ
+		
+		$('#href').html(href);
+		$('#hash').html(hash);
+		$('#host').html(host);
+		$('#hostname').html(hostname);
+		$('#pathname').html(pathname);
+		$('#port').html(port);
+		$('#protocol').html(protocol);
+		$('#search').html(search);
+		
+	});
+	</script>
+</head>
+<body>
+<div id="header" ><h1>location | プロトコル、ホスト、ポートなどを取得</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+<table class="table">
+<tbody><tr><th>プロパティ</th><th>説明</th><th>値</th></tr></tbody>
+<tbody>
+<tr><td>href</td><td>完全なURL</td><td id="href"></td></tr>
+<tr><td>hash</td><td>ハッシュ、またはフラグメント。</td><td id="hash"></td></tr>
+<tr><td>host</td><td>ホスト名。ポート番号付き。</td><td id="host"></td></tr>
+<tr><td>hostname</td><td>ホスト名</td><td id="hostname"></td></tr>
+<tr><td>pathname</td><td>相対パス</td><td id="pathname"></td></tr>
+<tr><td>port</td><td>ポート番号</td><td id="port"></td></tr>
+<tr><td>protocol</td><td>プロトコル</td><td id="protocol"></td></tr>
+<tr><td>search</td><td>クエリ</td><td id="search"></td></tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript　｜　サンプル</a></li>
+	<li>テンプレート</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-7-14</div>
+</body>
+</html>

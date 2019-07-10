@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JSでクラスを実現する</title>
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="class_sample.js"></script>
+		<script type="text/javascript" src="Animal.js"></script>
+		<script>
+
+			function test_func1(){
+				var animal = 
+
+				/*
+				var c =new Class1();
+				c.set('ニホンカモシカ');
+				ret=c.get();
+				$("#test").html(ret);
+				*/
+			}
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JSでクラスを実現する</h1>
+		<div id="content" >
+
+				<div class="sec1">
+					<input type="button" onclick="test_func1()" value="TEST" />
+
+					<div id="test"></div>
+
+				</div><!-- sec1 -->
+
+<strong>サンプル【クライアント】</strong><br />
+<pre>
+	function test_func1(){
+
+		var c =new Class1();
+		c.set('ニホンカモシカ');
+		ret=c.get();
+		$("#test").html(ret);
+	}
+
+</pre>
+
+<strong>サンプル【Class1】</strong><br />
+<pre>
+	var Class1 =function(){
+
+	this.m_test=8;//プロパティ
+
+
+	//メソッド1
+	this.get=function(){
+
+		return this.m_test;
+	};
+
+	//メソッド2
+	this.set=function(test){
+
+		this.m_test=test;
+	};
+
+
+
+};
+
+</pre>
+
+
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/19</div>
+		</div><!-- page1 -->
+	</body>
+</html>

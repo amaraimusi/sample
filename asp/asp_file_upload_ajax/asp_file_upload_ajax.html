@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>ASP.NET | AJAXファイルアップロード</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
+		
+		<script>
+
+		//submitボタンが押されたときのイベント。
+		$(function(){
+			  $("#form1").submit(function(){
+
+				  //ファイルアップローＵＲＬを組み立て。
+				  var host=$("#host_id").val();
+				  var aspx=$("#aspx_id").val();
+				  var url=host+aspx;
+
+				  //ファイルアップロードエレメントを取得。
+			    var form = $(this);
+			    var fd = new FormData(form[0]);
+
+			    //☆非同期通信によるファイルアップロード。
+			    $.ajax(url, {
+			      type: 'post',
+			      processData: false,
+			      contentType: false,
+			      data: fd,
+			      dataType: 'html',
+			      success: function(data){
+				      //ファイルアップロード成功時の処理。
+				      var imgUrl=host+"uploads/"+data;//ファイル名を作成。
+				      $("#img1").attr("src",imgUrl);//imgタグのsrc属性にファイル名をセット。
+			        console.log(data);//ログ出力。
+			      }
+			    });
+			    return false;//submitで画面遷移させない。
+			  });
+			});
+	   
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">ASP.NET | AJAXファイルアップロード</div>
+		<div id="content" >
+		
+			<div class="sec1">
+			
+			ASP.NETのサーバーへファイルをアップロードするサンプルです。。<br />
+			submitでファイルをASP.NETのサーバー転送しています。またそのときにsubmitによるページ遷移をさせないようにしています。<br />
+			jQuery.uploadを利用していません。jQuery.uploadでは「http://localhost/」を付加したＵＲＬでは正常に動作しませんが、このサンプルでは動作します。<br />
+			「http://localhost/」が使えるということは、ポートの異なるApache開発環境とAsp.net開発環境の間でデータをやりとりできることになります。
+			
+			<hr />
+			<strong>サンプル</strong>
+			<table style="width:100%"><tbody style="background-color:#ff816f">
+				<tr><td style="width:20%">ホスト名</td><td>：</td><td style="widht:70%"><input type="text" id="host_id" value="http://localhost:4877/mob2/jiko/" /></td></tr>
+				<tr><td>ASP.NETファイルアップロードaspx</td><td>：</td><td><input type="text" id="aspx_id" value="JikoImgUpload.aspx" /></td></tr>
+			</tbody></table>
+			<form id="form1" method="post" action="" enctype="multipart/form-data">
+			  <div><input id="upload_file" type="file" name="upload_file"></div>
+			  <input id="submit1" type="submit" value="アップロード">
+			</form>
+			<img id="img1" src="" />
+			<hr />
+			
+
+				
+			<p>JavaScript</p>
+			<pre>
+			
+		//submitボタンが押されたときのイベント。
+		$(function(){
+			  $("#form1").submit(function(){
+
+				  //ファイルアップローＵＲＬを組み立て。
+				  var host=$("#host_id").val();
+				  var aspx=$("#aspx_id").val();
+				  var url=host+aspx;
+
+				  //ファイルアップロードエレメントを取得。
+			    var form = $(this);
+			    var fd = new FormData(form[0]);
+
+			    //☆非同期通信によるファイルアップロード。
+			    $.ajax(url, {
+			      type: 'post',
+			      processData: false,
+			      contentType: false,
+			      data: fd,
+			      dataType: 'html',
+			      success: function(data){
+				      //ファイルアップロード成功時の処理。
+				      var imgUrl=host+"uploads/"+data;//ファイル名を作成。
+				      $("#img1").attr("src",imgUrl);//imgタグのsrc属性にファイル名をセット。
+			        console.log(data);//ログ出力。
+			      }
+			    });
+			    return false;//submitで画面遷移させない。
+			  });
+			});
+			
+			</pre><br />
+				
+			<p>html</p>
+			<pre>
+			
+			&lttable style="width:100%">&lttbody style="background-color:#ff816f">
+				&lttr>&lttd style="width:20%">ホスト名&lt/td>&lttd>：&lt/td>&lttd style="widht:70%">&ltinput type="text" id="host_id" value="http://localhost:2368/" />&lt/td>&lt/tr>
+				&lttr>&lttd>ASP.NETファイルアップロードaspx&lt/td>&lttd>：&lt/td>&lttd>&ltinput type="text" id="aspx_id" value="FileUploader.aspx" />&lt/td>&lt/tr>
+			&lt/tbody>&lt/table>
+			&ltform id="form1" method="post" action="" enctype="multipart/form-data">
+			  &ltdiv>&ltinput id="upload_file" type="file" name="upload_file">&lt/div>
+			  &ltinput id="submit1" type="submit" value="アップロード">
+			&lt/form>
+			&ltimg id="img1" src="" />
+			</pre><br />
+			
+			
+			<p>FileUploader.aspx</p>
+			<pre>
+			
+			protected void Page_Load(object sender, EventArgs e)
+			{
+			    Response.AppendHeader("Access-Control-Allow-Origin", "*");//クロスドメイン通信を許可する。
+			
+			    HttpPostedFile f = Request.Files["upload_file"];//アップロードファイルオブジェクトを取得。
+			    string path = Server.MapPath("/")+"uploads/";//パスを取得。
+			
+			    if (f != null)
+			    {
+			        Debug.WriteLine(f.FileName);//デバッグ
+			        string fileUrl = path + f.FileName;//パス付ファイル名を組み立て。
+			        f.SaveAs(fileUrl);//保存する。
+			        Response.Write(f.FileName);//ajaxのレスポンス用のファイル名を書き出す。ここで書き出した文字はajaxのコールバック関数の引数になる。
+			    }
+			}
+			</pre><br />
+	
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27</div>
+		</div><!-- page1 -->
+	</body>
+</html>

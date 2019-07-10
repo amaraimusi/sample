@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>アンドゥ機能 | Undo,Redo</title>
+
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="undo_a.js"></script>
+
+
+		<script>
+		$( function() {
+
+			var params = {
+				'ta_slt':'#ta1',
+				'undo_btn_slt':'#undo1',
+				'redo_btn_slt':'#redo1',
+			};
+				
+			var undoA = new UndoA(params);
+
+			
+		});
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>アンドゥ機能 | Undo,Redo</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		
+		<button type="button" id="undo1">UNDO</button><button type="button" id="redo1">REDO</button><br>
+		<textarea id="ta1" style="width:500px;height:200px">いろは</textarea>
+
+	</div>
+
+
+
+	<br><br>
+	<a href="http://amaraimusi.sakura.ne.jp/" class="btn btn-link btn-xs">ホーム</a>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-3-31</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

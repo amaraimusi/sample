@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>SimpleAjaxFormK.js | Ajax簡易入力フォーム</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="SimpleAjaxFormK.js"></script>
+
+
+		<style>
+
+		</style>
+		
+		<script>
+		$(function(){
+			
+		});
+		
+		function test1(){
+			simpleAjaxFormK({
+				'range':'#dummy',
+				'url':'test.php',
+				'msg_slt':'#msg',
+				'callback':function(res){
+					
+					var data = JSON.parse(res);
+
+					$('#msg').html('Ajaxレスポンス<br>');
+					$('#msg').append(res);
+					
+					console.log(res);
+				}
+			});
+		}
+		
+		
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>SimpleAjaxFormK.js | Ajax簡易入力フォーム</h1>
+	</div>
+
+	<h2>サンプル</h2>
+	
+	<div id="msg" style="color:#1de4a4;"></div>
+	<div id="dummy">
+	
+		<input id="neko_text" type="text" value = "ネコ" />
+		<br><br>
+		
+		<textarea id="yagi_ta">黒い&#13;ヤギ</textarea>
+		<br><br>
+		
+		<select  id="kani_select">
+			<option value="1">モズクガニ</option>
+			<option value="2" selected>サワガニ</option>
+			<option value="3">ヤシガニ</option>
+		</select>
+		<br><br>
+		
+		<input type="radio" name="same_radio" value="1" checked="checked" />アオザメ
+		<input type="radio" name="same_radio" value="2" />ラブカ
+		<br><br>
+		
+		<input type="checkbox" name="wasi_check" value="1" checked="checked" />ワシ
+		<br><br>
+		
+		<input id="gori_text.0" type="text" value = "ゴリラ" />
+		<input id="gori_text.1" type="text" value = "チンパンジー" />
+		<br><br>
+
+	
+	</div>
+
+	<input type="button" value="Ajax送信テスト" onclick="test1()" class="btn btn-success" />
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-9 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

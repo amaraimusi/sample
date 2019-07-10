@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>URLクエリを取得する | GETパラメータ</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="url_query.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>URLクエリを取得する | GETパラメータ</h1>
+	</div>
+	
+	URLクエリデータ（GETパラメータ）を取得する。
+	
+	<p>javascript</p>
+	<pre>
+	$(function(){
+
+		// URLクエリデータを取得する
+		var querys = <strong>getUrlQuery();</strong>
+		
+		console.log(querys);
+		var json = JSON.stringify(querys);
+		$('#res').html(json);
+		
+	});
+	
+	/**
+	 * URLクエリデータを取得する
+	 * 
+	 * @return object URLクエリデータ
+	 */
+	function getUrlQuery(){
+		query = window.location.search;
+		
+		if(query =='' || query==null){
+			return {};
+		}
+		var query = query.substring(1,query.length);
+		var ary = query.split('&amp;');
+		var data = {};
+		for(var i=0 ; i&lt;ary.length ; i++){
+			var s = ary[i];
+			var prop = s.split('=');
+			
+			data[prop[0]]=prop[1];
+	
+		}	
+		return data;
+	}
+	</pre>
+	
+
+	<h2>検証</h2>
+	<div id="res"></div>
+	
+	<hr>
+
+	<a href="http://qiita.com/ma_me/items/03aaebb5dc440b380244" target="brank" class="btn btn-link btn-xs">参考サイト</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-19 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

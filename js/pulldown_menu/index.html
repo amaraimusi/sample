@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>プルダウンメニュー</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<style>
+			.menu1 li{
+				list-style-type: none;
+
+				float:left;
+				width:50px;
+			}
+
+			.menu1 li ul li{
+				width:100px;
+				position:relative;
+				left:-40px;
+			}
+
+			.pulldown_menu ul{
+				display:none;
+				position:absolute;
+				width:180px;
+				padding-bottom:10px;
+				background-color:#484848;
+				z-index:2;
+			}
+
+			.pulldown_menu ul a{
+
+				color:white;
+			}
+		</style>
+		<script>
+			$( function() {
+
+				//～読込イベント処理～
+				//トップメニューのプルダウン
+				$(".pulldown_menu").hover(function() {
+
+				    $(this).children('ul').show();
+
+				}, function() {
+
+				    $(this).children('ul').hide();
+
+				});
+			});
+		</script>
+	</head>
+
+<body>
+
+<h1 >プルダウンメニュー</h1>
+
+<ul class="menu1">
+	<li>neko</li>
+	<li>yagi</li>
+	<li>kani</li>
+	<li class="pulldown_menu"><a href="#"></a>same
+		<ul >
+			<li><a href="">シュモクザメ</a></li>
+			<li><a href="">ホホジロザメ</a></li>
+			<li><a href="">アオザメ</a></li>
+			<li><a href="">ネコザメ</a></li>
+		</ul>
+	</li>
+
+</ul>
+<div style="clear:both"></div>
+
+
+<div style="background-color:#77a3ea;width:300px;height:100px;">
+</div>
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-07-27</p>
+</body>
+</html>

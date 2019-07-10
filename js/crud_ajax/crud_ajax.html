@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>CRUD | AJAX</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<link rel="stylesheet" type="text/css" href="jquery-ui.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="input_check_a.js"></script>
+		<script src="crud_ajax.js"></script>
+		<script>
+
+
+
+		</script>
+
+		<style type="text/css">
+
+			.cell{
+				width:100px;
+			}
+			.inp_cell{
+				width:96px;
+				background-color:#fefcd3;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">CRUD | AJAX</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+
+				<input id="new_reg_btn" type="button" value="新規" onclick="new_reg()" />
+				<input id="update_btn" type="button" value="更新" onclick="on_update()" style="display:none" />
+				<label><input id="chk_edit_mode" type="checkbox" onclick="on_edit_mode();" />編集モード</label>
+				<table id="tbl1" border="1">
+				<thead><tr><th>id</th><th>name</th><th>num</th><th>double</th><th>date</th></tr></thead>
+				<tbody>
+				</tbody>
+
+				</table>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/7/7</div>
+		</div><!-- page1 -->
+
+
+
+				<!-- ダイアログ部分 -->
+		<div id="new_reg_dlg" title="新規登録">
+			<div id="new_err" style="color:red"></div>
+		    <form>
+		    <fieldset>
+
+		        <p>
+		            <label for="new_test_name">テスト名</label>
+		            <input for type="text" name="new_test_name"  id="new_test_name" value="ダミー" class="text ui-widget-content ui-corner-all" />
+		        </p>
+
+		        <p>
+		            <label for="new_test_num">番号</label>
+		            <input for type="text" name="new_test_num"  id="new_test_num" value='88' class="text ui-widget-content ui-corner-all" />
+		        </p>
+
+		        <p>
+		            <label for="new_test_dbl">小数値</label>
+		            <input for type="text" name="new_test_dbl"  id="new_test_dbl" value='0.12' class="text ui-widget-content ui-corner-all" />
+		        </p>
+
+		        <p>
+		            <label for="new_test_date">日付</label>
+		            <input for type="text" name="new_test_date"  id="new_test_date" value='2012-12-12'  class="text ui-widget-content ui-corner-all" />
+		        </p>
+
+		    </fieldset>
+		    </form>
+		</div>
+
+	</body>
+</html>

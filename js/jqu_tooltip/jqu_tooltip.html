@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JQuery UI　｜　ツールチップ</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css"  />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+		<script>
+
+
+			$(document).ready(function(){
+
+				$(document).tooltip();//JQuery UI tooltipを適用
+
+			});
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JQuery UI　｜　ツールチップ</h1>
+		<div id="content" >
+
+			<div class="sec1">
+				「$(document).tooltip();」実行したあと、ツールチップを出したいエレメントのtitle属性にメッセージを入力するだけ。<br />
+
+				<hr />
+				例：<br />
+				<a href='#' title='hello tooltipe' >hello world!</a>
+
+				<br /><br />
+				<div title='ツールチップのテストです。' style="width:100px;height:30px;background-color:#1e8414">TEST</div><br>
+				<input type="button" title='ボタンのツールチップ' value="ボタン" />
+
+				<br /><br />
+				<hr />
+				<strong>JS ソース</strong><br />
+				<pre>
+	$(document).ready(function(){
+
+		$(document).tooltip();//JQuery UI tooltipを適用
+		//※documentを指定するとページ全体にツールチップを適用。idやclassによるセレクタ式で設定可能。
+
+	});
+				</pre><br /><br />
+
+				<strong>HTML</strong><br />
+				<pre>
+	&lta href='#' title='hello tooltipe' &gthello world!&lt/a&gt
+	&ltdiv title='ツールチップのテストです。' style="width:100px;height:30px;background-color:#1e8414"&gtTEST&lt/div&gt&ltbr&gt
+	&ltinput type="button" title='ボタンのツールチップ' value="ボタン" /&gt
+
+				</pre>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/06</div>
+		</div><!-- page1 -->
+	</body>
+</html>

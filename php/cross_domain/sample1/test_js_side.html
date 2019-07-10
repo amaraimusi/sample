@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>クロスドメインによるAjax</title>
+
+
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+			});
+
+
+			function test(){
+				var data={'id':9,'name':'cat','age':12};
+
+				var json_str = JSON.stringify(data);//データをJSON文字列にする。
+
+				//var url="/sample/php/cross_domain/sample1/test_serv_side.php";
+				//var url = "http://amaraimusi.sakura.ne.jp/sample/php/cross_domain/sample1/test_serv_side.php";
+				var url = "http://localhost/sample/php/cross_domain/sample1/test_serv_side.php";
+				
+				//☆AJAX非同期通信
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: "key1="+json_str,
+					cache: false,
+					dataType: "text",
+					success: function(str_json, type) {
+
+						alert(str_json);//■■■□□□■■■□□□■■■□□□
+
+
+
+					},
+					error: function(xmlHttpRequest, textStatus, errorThrown){
+						alert(textStatus);
+					}
+				});
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >クロスドメインによるAjax</h1>
+
+
+<input type="button" value="TEST" onclick="test()" />
+<div id="xxx"></div>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-10-02</p>
+</body>
+</html>

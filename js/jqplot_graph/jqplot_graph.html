@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JQuery JQPlot | グラフ</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="jquery.jqplot.min.js"></script>
+		<script type="text/javascript" src="jqplot.enhancedLegendRenderer.min.js"></script>
+		<script>
+
+			jQuery( function() {
+			     rec1 =[[1,null],[2,null],[3,null],[4,null],[5,null],[6,null],[7,null],[8,null],[9,null],[10,13],[11,9],[12,15],[13,14],[14,null],[15,null],[16,null],[17,null],[18,null],[19,null],[20,14],[21,10],[22,6],[23,40],[24,7],[25,7],[26,7],[27,40],[28,null],[29,null],[30,null],[31,null],];
+			     rec2 =[[1,5],[2,54],[3,12],[4,52],[5,null],[6,null],[7,null],[8,null],[9,25],[10,23],[11,19],[12,5],[13,4],[14,5],[15,null],[16,null],[17,35],[18,null],[19,null],[20,24],[21,13],[22,16],[23,30],[24,37],[25,27],[26,17],[27,14],[28,null],[29,null],[30,null],[31,8],];
+			jQuery . jqplot(
+			        'tanuki',
+			        [
+			        	rec1,
+			        	rec2
+			        ],
+			        {
+			            series: [
+			                { label: 'gra101-1-3' }
+			            ],
+			            legend: {
+			                show: true,
+			                placement: 'inside',
+			                location: 's',
+			                renderer: jQuery . jqplot . EnhancedLegendRenderer,
+			                rendererOptions: {
+			                    numberRows: 1,
+			                }
+			            },
+			            axes:{
+			                xaxis:{
+			                    label:'日',
+			                    ticks: [
+			                    	'1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31',
+
+			                    ],
+			                },
+			                yaxis:{
+			                	label:'縦軸Y',
+			                    ticks: [
+
+									'50','45','40','35','30','25','20','15','10','5','1',                    ],
+			                }
+			            }
+			        }
+			    );
+			} );
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JQuery JQPlot | グラフ</h1>
+		<div id="content" >
+			<form name="form1"  action="#" method="post" enctype="multipart/form-data" >
+				<div class="sec1">
+						<div id="tanuki" style="height: 400px; width: 100%;"></div>
+
+				</div><!-- sec1 -->
+			</form>
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/04/25</div>
+		</div><!-- page1 -->
+	</body>
+</html>

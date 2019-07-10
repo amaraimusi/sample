@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>子要素を取得する | jQuery</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="jq_children.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>子要素を取得する | jQuery</h1>
+	</div>
+
+	<h2>サンプル</h2>
+	要素オブジェクトから子要素を取得にはfindメソッドを使う。<br>
+	子要素だけでなく、孫要素なども取得できる。<br>
+	<br>
+	
+	html
+	<pre>
+	&lt;div id="animal"&gt;
+		&lt;div id="cat"&gt;
+			&lt;span id="kuro-neko"&gt;黒猫&lt;/span&gt;
+			&lt;aside id="siam-cat"&gt;シャム猫&lt;/aside&gt;
+		&lt;/div&gt;
+		&lt;div class="dog"&gt;犬&lt;/div&gt;
+	&lt;/div&gt;
+	</pre>
+	<br>
+	
+	js source
+	<pre>
+	var elm1 = $('#animal');
+	var siam_cat = elm1.<strong>find</strong>('#siam-cat').html();
+	console.log(siam_cat);
+	</pre>
+	
+	出力
+	<pre id="res" class="output_data">
+	</pre>
+	<br>
+	
+	<p>childrenメソッド</p>
+	childrenメソッドは直下の子要素のみ取得可能。<br>
+	孫要素は取得できない。<br>
+	<br>
+	
+	js source
+	<pre>
+	var elm2 = $('#animal');
+	var dog = elm1.<strong>children</strong>('.dog');// 直下の子要素のみ取得可能
+	console.log(dog);
+	</pre>
+	
+	出力
+	<pre id="res2" class="output_data"></pre>
+	<br>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<hr>
+	<p>検証用のHTMLサンプル </p>
+	<div id="animal">
+		<div id="cat">
+			<span id="kuro-neko">黒猫</span>
+			<aside id="siam-cat">シャム猫</aside>
+		</div>
+		<div class="dog">犬</div>
+	</div>
+	
+	
+	<br>
+
+
+
+
+
+
+	<hr>
+	<div class="yohaku"></div>
+	<ol class="breadcrumb">
+		<li><a href="/">ホーム</a></li>
+		<li><a href="/sample">サンプルソースコード</a></li>
+		<li><a href="/sample/js">JavaScript　｜　サンプル</a></li>
+		<li>子要素を取得する | jQuery</li>
+	</ol>
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-6-17 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

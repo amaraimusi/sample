@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" /><!-- 自動翻訳させない -->
+		<title>JavaScript | 入力チェック</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="input_check_wacg.js"></script>
+
+		<script>
+
+			function test_func1(){
+
+				var v=$('#tanuki').val();
+				var ret=ic_requiredEx(v,$('#tanuki_err'));
+
+
+			}
+
+			function testLen(){
+				var v=$('#txt_len').val();
+				var ret=ic_maxlengthEx(v,4,$('#txt_len_err'));
+				alert(ret);
+			}
+
+			function testNum(){
+				var v=$('#txt_num').val();
+				var ret=ic_numEx(v,$('#txt_num_err'));
+				alert(ret);
+			}
+
+			function testHanAlfNum(){
+				var v=$('#txt_hanAlfNum').val();
+				var ret=ic_hanAlfNumEx(v,$('#txt_hanAlfNum_err'));
+				alert(ret);
+			}
+
+
+			function testEmail(){
+				var v=$('#txt_email').val();
+				var ret=ic_mailEx(v,$('#txt_email_err'));
+				alert(ret);
+			}
+
+			function testMark(){
+				var v=$('#txt_mark').val();
+				var ret=ic_markEx(v,$('#txt_mark_err'));
+				alert(ret);
+			}
+
+			function testDate(){
+				var v=$('#txt_date').val();
+				var ret=isDate(v);
+				alert(ret);
+			}
+		</script>
+
+		<style type="text/css">
+			.sec2{
+				padding:5px;
+				margin:5px;
+				background-color:#ffd5ce;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">JavaScript | 入力チェック</div>
+		<div id="content" >
+
+
+			<div class="sec1">
+
+				<div class="sec2">
+				必須入力テスト<br />
+					<div id="tanuki_err" style="color:red"></div>
+					<input type="text" id="tanuki" />
+					<input type="button" value="run" onclick="test_func1()" />
+				</div>
+
+				<div class="sec2">
+				文字数制限テスト<br />
+					<div id="txt_len_err" style="color:red"></div>
+					<input type="text" id="txt_len" />
+					<input type="button" value="run" onclick="testLen()" />
+				</div>
+
+				<div class="sec2">
+				半角数値入力テスト<br />
+					<div id="txt_num_err" style="color:red"></div>
+					<input type="text" id="txt_num" />
+					<input type="button" value="run" onclick="testNum()" />
+				</div>
+
+				<div class="sec2">
+				半角英数字入力テスト<br />
+					<div id="txt_hanAlfNum_err" style="color:red"></div>
+					<input type="text" id="txt_hanAlfNum" />
+					<input type="button" value="run" onclick="testHanAlfNum()" />
+				</div>
+
+				<div class="sec2">
+					EMailテスト<br />
+					<div id="txt_email_err" style="color:red"></div>
+					<input type="email" id="txt_email"  />
+					<input type="button" value="run" onclick="testEmail()" />
+				</div>
+
+				<div class="sec2">
+					記号入力テスト<br />
+					<div id="txt_mark_err" style="color:red"></div>
+					<input type="text" id="txt_mark"  />
+					<input type="button" value="run" onclick="testMark()" />
+				</div>
+
+				<div class="sec2">
+					日付入力テスト<br />
+					<div id="txt_date_err" style="color:red"></div>
+					<input type="text" id="txt_date"  />
+					<input type="button" value="run" onclick="testDate()" />
+				</div>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27 - 2014/5/21</div>
+		</div><!-- page1 -->
+	</body>
+</html>

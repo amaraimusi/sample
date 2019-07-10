@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>メールアドレスの訂正案を表示</title>
+
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+
+		<script src="mailcheck.min.js"></script>
+
+
+		<style>
+
+		</style>
+
+
+<script>
+$( function() {
+	//　～　読込イベント処理　～
+
+
+    var domains = ["gmail.com","yahoo.co.jp", "ybb.ne.jp","nifty.com","docomo.ne.jp","mopera.net","softbank.ne.jp","disney.ne.jp","i.softbank.jp","ezweb.ne.jp","augps.ezweb.ne.jp","emnet.ne.jp","emobile.ne.jp","emobile-s.ne.jp","pdx.ne.jp","willcom.com","wcm.ne.jp","hotmail.com","hotmail.co.jp","outlook.jp","outlook.com","live.com"];
+    var haveSubDomains = ["ocn.ne.jp","biglobe.ne.jp","so-net.ne.jp","plala.or.jp","eonet.ne.jp","auone-net.jp","nifty.com","vodafone.ne.jp","biz.ezweb.ne.jp","ido.ne.jp","pdx.ne.jp","ne.jp","co.jp","ac.jp","or.jp","com"];
+
+
+
+	$('#email').on('blur', function(event) {
+
+		$(this).mailcheck({
+
+			domains: domains,
+			topLevelDomains: haveSubDomains,
+
+			suggested: function(element, suggestion) {
+
+				$('#suggestion').show();
+
+				$('#suggestion').html("<b><i style='color:#3e7be1'>" + suggestion.full + "</b></i>ではないでしょうか?");
+
+				//メアド訂正案要素をクリックするとinputの値を変更するイベント
+				$("#suggestion").click(function(){
+					$("#email").val(suggestion.full);
+					$(this).hide();
+				});
+
+			},
+
+			empty: function(element) {
+
+				$('#suggestion').hide();
+
+			}
+
+		});
+
+	});
+
+});
+
+
+
+</script>
+	</head>
+
+<body>
+<div class="container">
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>メールアドレスの訂正案を表示</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+
+		<h2>概要</h2>
+		mailcheck.min.jsにより誤ったメールアドレスの訂正案を表示できます。
+		<a href="https://github.com/mailcheck/mailcheck/blob/master/README.md" class="btn btn-link btn-xs">ダウンロード先サイト | GitHub mailcheck</a>
+		<br><br>
+
+		<h2>サンプル</h2>
+		誤ったメールアドレスを入力すると訂正案を表示します。<br>
+		<br>
+		下記は誤ったメールアドレスの例。<br>
+		<div style="padding:4px;color:#596973;font-sise:0.8em">
+			neko@gmail.con<br>
+			nezumi@yahoo.ne<br>
+		</div>
+		<input id="email" name="email" type="email" />
+
+		<input name="Submit" type="submit" />
+
+		<p id="suggestion"></p>
+
+	</div>
+
+
+
+	<br><br>
+	<a href="http://vogel.at.webry.info/201407/article_11.html" class="btn btn-link btn-xs">参考サイト</a>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-03-03</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

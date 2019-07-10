@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>連想配列内のデータをまとめてXSSサニタイズ</title>
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+
+	<script>
+	
+	$(function(){
+		
+		var data={'kani':"<input value='xxx' />",'neko':'ねこ','musi':{'bata':'バッタ','kanabun':"x<input type='button'>x"}};
+		
+
+		
+		var res = getObjDump(data);
+		$('#inp').append(res);
+		
+		console.log(data);//■■■□□□■■■□□□■■■□□□)
+		data = xssSanitaizeAll(data);
+	
+
+		var res = getObjDump(data);
+		$('#res').append(res);
+		
+	});
+	
+	/**
+	* データをXSSサニタイズする
+	* 
+	* Objectや配列型にも対応している。
+	* @param multi サニタイズ前のデータ
+	* @return サイニタイズ後のデータ
+	* 
+	*/
+	function xssSanitaizeAll(data){
+		
+		if(typeof data == 'object'){
+			for(k in data){
+				data[k] = xssSanitaizeAll(data[k]);
+			}
+		}
+		else if (typeof data == 'string'){
+			if(data.indexOf('<') != -1){
+				data = data.replace(/</g, '&lt;'). replace(/>/g,'&gt;');
+				
+			}
+		}
+		
+		return data;
+		
+	}
+	
+	function getObjDump(obj,key,deep){
+		
+		var str ="";
+		if(deep == undefined){
+			deep = 0;
+		}
+
+		if(typeof obj == 'object'){
+			deep++;
+			for(k in obj){
+				
+				str+= getObjDump(obj[k],k,deep);
+			}
+			
+		}else{
+			
+			// 段落用のタブスペースを作成
+			var sp ="";
+			for(var i=0 ; i < deep ; i++){
+				sp += "\t";
+			}
+			
+			// ダンプするデータを食い立
+			if(key==undefined){
+				str = sp + obj + '\n';
+			}else{
+				str = sp + key + ':' + obj + '\n';
+			}
+			
+		}
+		
+		return str;
+	}
+	
+	function space(n){
+		var str ="";
+		for(var i=0 ; i < n ; i++){
+			str += "\t";
+		}
+		return str;
+	}
+	
+	
+	</script>
+</head>
+<body>
+<div id="header" ><h1>連想配列内のデータをまとめてXSSサニタイズ</h1></div>
+<div class="container">
+
+
+
+<h2>説明</h2>
+配列またはオブジェクト型のデータを、まとめてXSSサニタイズする関数
+<pre>
+	/**
+	* データをXSSサニタイズする
+	* 
+	* Objectや配列型にも対応している。
+	* @param multi サニタイズ前のデータ
+	* @return サイニタイズ後のデータ
+	* 
+	*/
+	function <strong>xssSanitaizeAll</strong>(data){
+		
+		if(typeof data == 'object'){
+			for(k in data){
+				data[k] = xssSanitaizeAll(data[k]);
+			}
+		}
+		else if (typeof data == 'string'){
+			if(data.indexOf('&lt;') != -1){
+				data = data.replace(/&lt;/g, '&amp;lt;'). replace(/&gt;/g,'&amp;gt;');
+				
+			}
+		}
+		
+		return data;
+		
+	}
+</pre>
+<br>
+
+使い方
+<pre>
+	var data={'kani':"&lt;input value='xxx' /&gt;",'neko':'ねこ','musi':{'bata':'バッタ','kanabun':"x&lt;input type='button'&gt;x"}};
+	
+	data = <strong>xssSanitaizeAll</strong>(data);
+	console.log(data);
+</pre>
+<br>
+
+
+<p>出力</p>
+サニタイズ前
+<pre id="inp" class="output_data">
+</pre>
+<br>
+
+サニタイズ後
+<pre id="res" class="output_data">
+</pre>
+<br>
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/note_prg">プログラミングの覚書</a></li>
+	<li><a href="/note_prg/JavaScript/">JavaScriptの覚書</a></li>
+	<li>連想配列内のデータをまとめてXSSサニタイズ</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-7-1</div>
+</body>
+</html>

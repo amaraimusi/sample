@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-type-style" content="text/css" />
+<meta http-equiv="content-type-script" content="text/javascript" />
+<title>CSVファイルからテーブルを作成</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.csv2table.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+
+    $('#view1').csv2table('sample02.csv');
+});
+</script>
+</head>
+<body>
+<div>
+<h3>CSVファイルからテーブルを作成</h3>
+<div id="view1"></div>
+<div id="js_test" />
+</div>
+</body>
+</html>

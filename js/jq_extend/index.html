@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>オブジェクトのクローンコピーとマージ | jQuery.extend()</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+/*
+				var obj1={'kani':'かに','neko':{'name':'ライオン','food':'犬のえさ'},'wasi':100};
+
+				var obj2={'neko':{'name':'ライオン','food':'犬のえさ'},'wasi':999,'buta':'ブタ'};
+
+
+
+				dump('obj1',obj1);
+				dump('obj2',obj2);
+
+				var obj3 = $.extend(true, {}, obj1);
+
+				dump('obj3',obj3);
+
+				var settings = $.extend({}, defaults, options);
+
+*/
+
+
+
+
+			});
+
+
+			function test1(){
+				var obj1={'kani':'かに','neko':{'name':'ライオン','food':'犬のえさ'},'wasi':100};
+				dump('test1_1',obj1);
+				var objX = $.extend(true, {}, obj1);
+				objX['kani']='蟹';
+				dump('test1_2',objX);
+				dump('test1_3',obj1);
+
+
+			}
+
+			function test2(){
+				var obj1={'kani':'かに','neko':{'name':'ライオン','food':'犬のえさ'},'wasi':100};
+				var obj2={'neko':{'name':'ネコ','food':'ネコのえさ'},'wasi':999,'buta':'ブタ'};
+				dump('test2_1',obj1);
+				dump('test2_2',obj2);
+				var objX = $.extend(true, {}, obj1,obj2);
+				dump('test2_3',objX);
+				dump('test2_4',obj1);
+				dump('test2_5',obj2);
+			}
+
+
+			function dump(id,obj){
+				var json=JSON.stringify(obj);
+				$("#" + id).html(json);
+			}
+
+
+		</script>
+
+		<style>
+			.test_x{
+
+			}
+		</style>
+	</head>
+
+<body>
+
+<h1 >オブジェクトのクローンコピーとマージ | jQuery.extend()</h1>
+
+
+
+
+
+<div style="margin-top:40px;">
+	<h3>オブジェクトのクローンコピー</h3>
+	ソースコード<br>
+	<pre>
+	var obj1={'kani':'かに','neko':{'name':'ライオン','food':'犬のえさ'},'wasi':100};
+	var objX = $.extend(true, {}, obj1);
+	objX['kani']='蟹';
+	</pre>
+	<br>
+	<input type="button" value="TEST1" onclick="test1()" /><br>
+	<br>
+	結果:<br>
+	obj1→<span id="test1_1"></span><br>
+	objX(obj1のクローンコピー)→<span id="test1_2"></span><br>
+	obj1への影響→<span id="test1_3"></span><br>
+
+
+</div>
+<hr>
+
+<div style="margin-top:40px;">
+	<h3>オブジェクトのマージ</h3>
+	ソースコード<br>
+	<pre>
+	var obj1={'kani':'かに','neko':{'name':'ライオン','food':'犬のえさ'},'wasi':100};
+	var obj2={'neko':{'name':'ネコ','food':'ネコのえさ'},'wasi':999,'buta':'ブタ'};
+	var objX = $.extend(true, {}, obj1,obj2);
+	</pre>
+	<br>
+	<input type="button" value="TEST2" onclick="test2()" /><br>
+	<br>
+	結果:<br>
+	obj1→<span id="test2_1"></span><br>
+	obj2→<span id="test2_2"></span><br>
+	objX→<span id="test2_3"></span><br>
+	obj1への影響→<span id="test2_4"></span><br>
+	obj2への影響→<span id="test2_5"></span><br>
+
+
+</div>
+
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-09-11</p>
+</body>
+</html>

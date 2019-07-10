@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr">
+<head>
+	<link rel="NEXT"  href="../index.htm" />
+	<link rev="made" href="mailto:dummy@xxx_xxxx" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<script type="text/javascript" src="js/jquery.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/resize.js" charset="utf-8"></script>
+
+<title>リサイズ　｜　オリジナルコード
+</title>
+
+
+<style type ="text/css">
+<!--
+
+#contents_height{padding-bottom:350px;height:auto;}
+
+#local_contents{
+	padding-top:80px;
+	padding-left:100px;
+}
+
+#local_sub_contents{width:800px;}
+
+-->
+</style>
+
+<script type="text/javascript">
+
+function load(){
+
+	var rft=new Resize();
+	rft.init('class1');
+
+}
+
+</script>
+	
+</head>
+<body onload="load()" >
+<div id="contents">
+<h1 style="color:green">リサイズ　｜　オリジナルコード</h1>
+<div id="contents_height"><!-- サイドメニューとメインの縦長 -->
+<div id="local_contents"><!-- 当画面専用の設定 -->
+<div id="local_sub_contents"><!-- 幅調整 -->
+
+
+
+
+
+<table  border="1"  style="width:300px;height:150px"  >
+	<tr>
+	<td><img class="class1" src="pic/img1.jpg" draggable="false"  /></td>
+	<td><img class="class1" src="pic/img3.jpg" draggable="false"  /></td>
+	</tr>
+</table>
+<br /><br /><br />
+
+<img class="class1" src="pic/img4.jpg" draggable="false"  />
+<br /><br /><br />
+
+テーブルのサイズも変更できる。<br />
+<table  border="1" class="class1" style="width:200px;height:100px"  >
+	<tr>
+	<td><img class="class1" src="pic/img1.jpg" draggable="false" style="width:100px;height:100px" /></td>
+	<td><img class="class1" src="pic/img2.jpg" draggable="false" style="width:100px;height:100px" /></td>
+	</tr>
+</table>
+<br /><br /><br />
+
+<img class="class1" src="pic/img2.jpg" draggable="false"  />
+<br /><br /><br />
+
+
+</div><!-- local_sub_contents -->
+</div><!-- local_contents -->
+
+
+
+
+
+</div><!-- contents height -->
+
+<div id="footer">
+	(C)sample
+</div>
+
+</div><!-- contents -->
+
+</body>
+</html>

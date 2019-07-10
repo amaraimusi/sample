@@ -1,0 +1,9 @@
+@CHARSET "utf-8";
+
+
+
+.test{
+	width:200px;
+	height:200px;
+	background-color:blue;
+}

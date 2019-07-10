@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>要素の数を取得する</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+	<script>
+	$(function(){
+		
+		var len1 = $('.test1').length;
+		$('#res1').html(len1);
+		
+		var len2 = $('.test2').length;
+		$('#res2').html(len2);
+		
+		var len3 = $('.test3').length;
+		$('#res3').html(len3);
+	});
+	</script>
+</head>
+<body>
+<div id="header" ><h1>要素の数を取得する</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+<p>テスト1 要素数4件</p>
+<div class="test1">オサガメ</div>
+<div class="test1">アカウミガメ</div>
+<div class="test1">タイマイ</div>
+<div class="test1">アオウミガメ</div>
+<div id="res1" class="text-primary"></div>
+<br>
+
+<p>テスト2 要素数1件</p>
+<div class="test2">イルカ</div>
+<div id="res2" class="text-primary"></div>
+<br>
+
+<p>テスト3 要素数0件</p>
+<aside>NONE</aside>
+<div id="res3" class="text-primary"></div>
+<br>
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>要素の数を取得する</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-11-14</div>
+</body>
+</html>

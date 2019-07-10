@@ -1,0 +1,5 @@
+--select * from item_info_tbl where item_reg_agency_id='_s0006';
+delete from item_info_tbl where item_reg_agency_id='_s0006';
+
+--select * from deal_x_tbl where from_agency_id='_s0006';
+delete from deal_x_tbl where from_agency_id='_s0006';

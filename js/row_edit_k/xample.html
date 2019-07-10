@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>一覧用・行編集フォーム | RowEditK.js</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="RowEditK.js"></script>
+
+
+		<style>
+
+		</style>
+		<script>
+		$( function() {
+			
+			// RowEditK.jsの初期化
+			rowEditK_Init({
+				css:{'background-color':'#d6eaed'}
+			});
+			
+		});
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>一覧用・行編集フォーム | RowEditK.js</h1>
+	</div>
+
+	<h2>サンプル1</h2>
+	<table class="table">
+		<thead>
+			<tr><th>id</th><th>val1</th><th>text1</th><th>test_date</th><th></th></tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="id">1</td>
+				<td class="val1">1</td>
+				<td class="text1">neko</td>
+				<td class="test_date">2014/4/1</td>
+				<td> <input type="button" onclick="rowEditK('tr',this)" value="編集" /></td>
+			</tr>
+
+			<tr>
+				<td class="id">2</td>
+				<td class="val1">2</td>
+				<td class="text1">kani</td>
+				<td class="test_date">2014/4/2</td>
+				<td> <input type="button" onclick="rowEditK('tr',this)" value="編集" /></td>
+			</tr>
+
+			<tr>
+				<td class="id">4</td>
+				<td class="val1">4</td>
+				<td class="text1">buta</td>
+				<td class="test_date">2014/4/4</td>
+				<td> <input type="button" onclick="rowEditK('tr',this)" value="編集" /></td>
+			</tr>
+
+			<tr>
+				<td class="id">5</td>
+				<td class="val1">3</td>
+				<td class="text1">yagi</td>
+				<td class="test_date">2014/4/3</td>
+				<td> <input type="button" onclick="rowEditK('tr',this)" value="編集" /></td>
+			</tr>
+
+		</tbody>
+	</table>
+	<br>
+
+	<h2>サンプル2</h2>
+	<div id="sample2">
+		<input type="hidden" class="id" value="99" />
+		<div>
+			<div>
+				<div class="val1">99</div>
+			</div>
+		</div>
+		<span class=text1>aa</span>
+		<div class="test_date">2016-6-16</div>
+		<input type="button" onclick="rowEditK('#sample2',this)" value="編集" />
+		
+	</div>
+	<br>
+	
+	
+	<div id="row_edit_k_form" >
+		ID:<input type="text" class="id xx yy" value="" /><br>
+		値1:
+		<select class="val1">
+			<option value="1">A1</option>
+			<option value="2">A2</option>
+			<option value="3">A3</option>
+			<option value="4">A4</option>
+			<option value="5">A5</option>
+			<option value="99">A99</option>
+		</select><br>
+		<div>テキスト1:<input type="text" class="text1" value="" /></div>
+		
+		テスト日付:<input type="text" class="test_date" value="" /><br>
+	</div>
+	
+	
+	
+	<hr>
+
+
+	<div class="yohaku"></div>
+	<ol class="breadcrumb">
+		<li><a href="/">ホーム</a></li>
+		<li><a href="/sample">サンプルソースコード</a></li>
+		<li><a href="/sample/php">ＰＨＰ　｜　サンプル</a></li>
+		<li>一覧用・行編集フォーム | RowEditK.js</li>
+	</ol>
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-6-13 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

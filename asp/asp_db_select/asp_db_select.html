@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" /><!-- 自動翻訳させない -->
+		<title>ASP ｜ DB接続とSELECT文からDataSetを取得</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script>
+
+			function test_func1(){
+				var x=document.getElementById('xxx1').innerHTML;
+				alert(x);
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">ASP ｜ DB接続とSELECT文からDataSetを取得</div>
+		<div id="content" >
+		
+			<div class="sec1">
+				接続文字列をweb.configから取得して、DBコネクションにセットする。<br />
+				SELECT文を生成と実行を行い、DataSetを取得する。
+				初期化の際、DBからデータを取得するには注意が必要。Page_Loadイベント内でDataTableを取得しようとするとエラーになる。必ず読込み完了後のイベントであるPage_LoadCompleteで行うこと。<br />
+				<strong>aspx.csファイル</strong>
+				<pre>			
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            //▽web.configから接続文字列を取得
+            string cnnStr = ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(cnnStr);//DBコネクションを作成。
+            conn.Open();//コネクションを開く。
+            SqlDataAdapter sda = new SqlDataAdapter("SELECT * FROM TestTbl", conn);//セレクトSQLを生成。
+            DataTable dt = new DataTable();//データセットを生成
+            sda.Fill(dt);//SQL実行
+            conn.Close();//DBコネクションを閉じる。
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Debug.WriteLine(dr["text1"]);
+            }
+
+
+        }
+				</pre>
+				<br />
+				
+				<p>コンソール出力</p>
+				<div class="console">
+					neko <br />    
+					大きな犬      <br />
+					巨大なキツネ  <br />
+				</div>
+				<br />
+				
+				<p>DBのTestTblの内容</p>
+				<table border="1">
+					<thead><tr><th>id</th><th>value1</th><th>text1</th></tr></thead>
+					<tbody>
+						<tr><td>1</td><td>10</td><td>neko</td></tr>
+						<tr><td>2</td><td>11</td><td>大きな犬</td></tr>
+						<tr><td>3</td><td>12</td><td>巨大なキツネ</td></tr>
+					</tbody>
+					</table>
+					<br />
+					
+					<p>web.configのDB接続文字列情報</p>
+					<pre>
+&ltconfiguration>
+	&ltconnectionStrings>
+	  &ltadd name="ApplicationServices" connectionString="data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnetdb.mdf;User Instance=true"
+	    providerName="System.Data.SqlClient" />
+	
+	  &ltadd name="TestConnectionString" connectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;User Instance=True"
+	    providerName="System.Data.SqlClient" />
+	&lt/connectionStrings>
+		・
+		・
+		・
+&lt/configuration>
+					</pre>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27</div>
+		</div><!-- page1 -->
+	</body>
+</html>

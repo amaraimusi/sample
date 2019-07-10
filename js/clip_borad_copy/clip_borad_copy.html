@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+<html lang="ja"> 
+	<head> 
+	<title>zClip | クリップボードコピー</title> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" /><!-- 自動翻訳させない -->
+	<link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery.zclip.js"></script>
+
+	<script type="text/javascript" language="javascript">
+	      
+
+	        //初期化イベント
+	        $(document).bind("pageshow", function(){
+
+						//ボタン1にクリップボードコピーイベントをセットする。
+	        	$("#btn1").zclip({
+	        	    path:"js/ZeroClipboard.swf",
+	        	    copy:function(){
+	        	    		//"#text1"の値をコピーする。
+	        	    		return $("#text1").val();
+	        	    	},
+	        	    beforeCopy:function(){
+	        	        //コピー前に実行する処理
+	        	        
+	        	    },
+	        	    afterCopy:function(){
+	        	        //コピー後に実行する処理。
+	        	        
+	        	        //コピー文字列をアラートで出力。
+	        	        alert($("#text1").val());
+	        	        
+	        	    }
+	        	});
+	        });
+
+	        //ボタン１クリックイベント
+	        $('#btn1').live('click', function() {
+
+	        });
+
+
+
+	</script> 
+
+	<style type="text/css">
+	</style>
+
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header" data-position="inline" data-backbtn="false">
+		<h1>zClip | クリップボードコピー</h1>
+		<a href="#" data-icon=“back” data-rel=“back” class="ui-btn-right">戻る</a>
+	</div>
+	
+
+	<div data-role="content">	
+		
+		<input id="text1" type="text" value="ハローワールド">
+		
+		<p><input type="button" id ="btn1" value="コピー"  /></p>
+
+		<hr />
+		コピー貼付け確認用<br />
+		<textarea style="width:100%;height:200px"></textarea>
+		
+		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>(C)kenji uehara　2013/03/21</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

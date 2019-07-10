@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>:要素のサイズ変更 | jQuery UI Resizable</title>
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+
+
+		<script>
+			$( function() {
+
+				
+				$('#panel1').resizable({
+					maxHeight:700,
+					maxWidth:700,
+					minHeight:40,
+					minWidth:100,
+					stop: function( event, ui ) {
+						//リサイズ操作から手を放した瞬間のイベント
+						var h=ui.size.height;
+						var w=ui.size.width;
+						
+						//サイズ変更したとき、別の要素も連動させてみる。
+						$( "#sub1" ).height(h);
+						$( "#sub1" ).width(w);
+						
+					}
+				});
+			});
+			
+			
+			function resize_disable(){
+				$('#panel1').resizable( "disable" );
+				$('#resize_disable').hide();
+				$('#resize_enable').show();
+			}
+			
+			function resize_enable(){
+				$('#panel1').resizable( "enable" );
+				$('#resize_enable').hide();
+				$('#resize_disable').show();
+			}
+		</script>
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>:要素のサイズ変更 | jQuery UI Resizable</h1>
+			<p></p>
+		</div>
+	</div>
+
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		
+		<div style="margin-bottom:20px">
+			<input id="resize_disable" type="button" value="リサイズ停止" class="btn btn-primary btn-xs" onclick="resize_disable()"/>
+			<input id="resize_enable" type="button" value="リサイズ再開" class="btn btn-primary btn-xs" onclick="resize_enable()" style="display:none"/>
+		</div>
+		
+		<div id="panel1" class="panel panel-primary" style="width:200px;">
+			<div class="panel-heading">
+				いろは歌
+			</div>
+			<div class="panel-body">
+				いろはにほへとちりぬるをわかよたれそつねならむ<br>
+				うゐのおくやまけふこえてあさきゆめみしゑひもせす<br>
+			</div>
+			<div class="panel-footer">
+				フッター
+			</div>
+		</div>
+		
+
+		<div id="sub1" style="background-color:#fcd209">サブ要素</div>
+	
+	
+	</div>
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-12-10</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

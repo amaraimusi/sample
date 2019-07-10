@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>ASP | SESSION</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function test_func1(){
+				var x=document.getElementById('xxx1').innerHTML;
+				alert(x);
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">ASP | SESSION</div>
+		<div id="content" >
+		
+			<div class="sec1">
+					セッションから値を取り出す方法と、セッションへ値をセットする方法です。<br />
+					セッション情報はブラウザに保存されるようなので、実行中のAspをいったん停止して再実行してもセッションの値は保存されたままになっています。<br />
+					<hr />
+				<strong>aspx.cs ソースコード</strong>
+				<pre>			
+protected void Button1_Click(object sender, EventArgs e)
+{
+    //セションから値を取り出す。
+    string v=(string)Session["test_key"];
+    Label1.Text = v;
+}
+
+protected void Button2_Click(object sender, EventArgs e)
+{
+    //セッションへ値を保存する。
+    Session["test_key"] = TextBox2.Text;
+
+}
+				</pre>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/03/20</div>
+		</div><!-- page1 -->
+	</body>
+</html>

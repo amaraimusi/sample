@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JQuery UI | 入力ダイアログ | その2</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.4.custom.min.js"></script>
+		<script>
+
+		jQuery( function() {
+		    jQuery( 'button', '.jquery-ui-button' ) . button();
+
+		    //追加ボタンクリック
+		    jQuery( '#jquery-ui-dialog-opener' ) . click( function() {
+		        jQuery( '#jquery-ui-dialog' ) . dialog( 'open' );//ダイアログオープン
+		    } );
+		    var name = jQuery( '#jquery-ui-dialog-form-name' );//	名前テキストボックスのname属性
+		    var comment = jQuery( '#jquery-ui-dialog-form-comment' );//	コメントテキストボックスのname属性
+		    jQuery( '#jquery-ui-dialog' ) . dialog( {
+		        autoOpen: false,
+		        width: 350,
+		        show: 'explode',
+		        hide: 'explode',
+		        modal: true,
+		        buttons: {
+		            '追加': function() {
+		                if ( name . val() || comment . val() ) {
+		                    jQuery( '#jquery-ui-dialog-table tbody' ) . append(
+		                        '<tr>' +
+		                        '<td>' + name . val() + '</td>' +
+		                        '<td>' + comment . val() + '</td>' +
+		                        '</tr>'
+		                    );
+		                    jQuery( this ).dialog( 'close' );
+		                }
+		                jQuery( this ) . dialog( 'close' );
+		            },
+		            'キャンセル': function() {
+		                jQuery( this ) . dialog( 'close' );
+		            },
+		        }
+		    } );
+		} );
+
+		</script>
+
+		<style type="text/css">
+			#jquery-ui-dialog-table {
+			    font-size: 13px;
+			}
+			#jquery-ui-dialog-table th , #jquery-ui-dialog-table td {
+			    border: 1px solid gray;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JQuery UI | 入力ダイアログ | その2</h1>
+		<div id="content" >
+
+				<div class="sec1">
+					<table id="jquery-ui-dialog-table" class="ui-widget ui-widget-content">
+					    <thead>
+					        <tr class="ui-widget-header ">
+					            <th id="table-th-name">名前</th>
+					            <th id="table-th-comment">コメント</th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					        <tr>
+					            <td>ALPHASIS</td>
+					            <td>Hellow!</td>
+					        </tr>
+					    </tbody>
+					</table>
+					<div class="jquery-ui-button">
+					    <button id="jquery-ui-dialog-opener">追加</button>
+					</div>
+					<div id="jquery-ui-dialog" title="追加">
+					    <form>
+					    <fieldset>
+					        <p>名前とコメントを入力して追加ボタンを押してください。</p>
+					        <p>
+					            <label for="jquery-ui-dialog-form-name">名前</label>
+					            <input type="text" name="jquery-ui-dialog-form-name" id="jquery-ui-dialog-form-name" class="text ui-widget-content ui-corner-all" />
+					        </p>
+					        <p>
+					            <label for="jquery-ui-dialog-form-comment">コメント</label>
+					            <input type="text" name="jquery-ui-dialog-form-comment" id="jquery-ui-dialog-form-comment" class="text ui-widget-content ui-corner-all" />
+					        </p>
+					    </fieldset>
+					    </form>
+					</div>
+				</div><!-- sec1 -->
+				<a href="http://alphasis.info/2011/06/jquery-ui-dialog-form/">参考元</a>
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/12</div>
+		</div><!-- page1 -->
+	</body>
+</html>

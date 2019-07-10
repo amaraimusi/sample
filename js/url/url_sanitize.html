@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>URLのサニタイズ | url sanitize</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="url_sanitize.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+			});
+
+
+			function test(){
+
+
+				test_run();
+
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >URLのサニタイズ | url sanitize</h1>
+a要素のhrefへ、自由にURLを指定できるようなシステムの場合、XSSの危険性がある。<br>
+また、aタグ以外でも、要素の属性を指定できる場合、XSSが起きる。<br>
+該当する属性は、href,srcだけでなく、すべてに注意。<br>
+<br>
+URLのサニタイズの必要性については下記を参考。<br>
+<a href="http://amaraimusi.sakura.ne.jp/note_prg/php/note4.php#sec4-2" target="brank">PHPのURLサニタイズ</a><br>
+<br>
+
+<input type="button" value="test" onclick="test()" /><br>
+<table id="res" border="1">
+	<thead><tr><th>サニタイズ前のURL</th><th>サニタイズ後のURL</th></tr></thead>
+	<tbody></tbody>
+</table>
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-07-28 : 2015-11-16</p>
+</body>
+</html>

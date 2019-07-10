@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>WikipediaのAPIをajaxで利用する | MediaWiki API</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="mediawiki_api.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>WikipediaのAPIをajaxで利用する | MediaWiki API</h1>
+	</div>
+	
+	
+	<h2>MediaWiki APIのサンプル</h2>
+	<input id="text1" type="text" value="山原" />
+	<input id="btn1" type="button" value="テスト1" onclick="test1()" class="btn btn-success" /><br>
+	<pre id="res" class="output_data">出力</pre>
+	<br>
+
+	
+	<hr>
+	
+	<h2>MediaWiki APIの説明</h2>
+	
+	MediaWiki APIを使えば、Wikipedia内のページ情報を取得できる。<br>
+	$.ajaxを通してWikipadiaのページ情報を取得する方法を、下記のサンプルに示す。<br>
+	なお、ページ情報はWiki記法またはマークダウン記法で記載されているので、HTML形式に変換するパース処理が必要になる。<br>
+	当サンプルでは、Wiki記法のパース処理を割愛する。<br>
+	<br>
+	
+	<p>注意</p>
+	Wikipediaサーバーに負担をかけないよう、リクエストは少なめにすること。１分に30リクエストくらいに抑える。<br>
+	<br>
+	
+	<pre>
+	function test1(){
+	
+		var text1 = '山原';
+		
+		var data = {
+				"<strong>titles</strong>":text1,
+				"format":"json",
+			};
+		
+		var url="<strong>http://ja.wikipedia.org/w/api.php?action=query&amp;export</strong>";
+	
+		// AJAX非同期通信
+		$.ajax({
+			url: url,
+			data: data,
+			cache: false,
+			dataType: "jsonp",
+			success: function(json, type) {
+				
+				// JSONレスポンスから、XML形式の文章情報を取得する。
+				var xmlDoc = json['query']['export']['*'];
+	
+				// 文章情報XMLをjQueryで扱えるようにする。
+				var xml = $(xmlDoc);
+	
+				// XMLからtextタグ内テキストをページ情報として取得する。
+				var page = xml.find('text').html();
+	
+				// ページ情報はWiki記法なる方法で記述されている。（もしくはマークダウン記法）
+				console.log(page);
+				
+				// ※ Wiki記法をHTML形式にパースする処理が必要であるが、このソースコードでは割愛する。
+	
+			},
+			error: function(xmlHttpRequest, textStatus, errorThrown){
+				$('#res').html(xmlHttpRequest.responseText);
+				
+			}
+		});
+	}
+	</pre><br><hr>
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<p>参考リンク</p>
+	<a href="https://ja.wikipedia.org/w/api.php" target="brank" class="btn btn-link btn-xs">MediaWiki API ヘルプ</a><br>
+	<a href="https://www.mediawiki.org/wiki/API:Main_page/ja#.E5.8D.98.E7.B4.94.E3.81.AA.E4.BE.8B" target="brank" class="btn btn-link btn-xs">API:メイン ページ</a><br>
+	<br>
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-31 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>パネルをドラッグで動かしたりリサイズする | 埋め込み切替機能付き</title>
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script><!-- スマホでもuiでタッチできるようにする(ドラッグ可能にする) -->
+
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+				
+				//ドラッグ機能を有効化する。
+				onDraggable();
+				
+				$('#panel1').resizable({
+					maxHeight:700,
+					maxWidth:700,
+					minHeight:40,
+					minWidth:100,
+					stop: function( event, ui ) {
+						//リサイズ操作から手を放した瞬間のイベント
+						var h=ui.size.height;
+						var w=ui.size.width;
+						
+						//サイズ変更したとき、別の要素も連動させてみる。
+						$( "#sub1" ).height(h);
+						$( "#sub1" ).width(w);
+						
+					}
+				});
+			});
+			
+			//ドラッグ機能を有効化する。
+			function onDraggable(){
+				var draggableDiv = $('#panel1').draggable();
+				
+				//ドラッグ移動を組み込むとテキスト選択ができなくなるので、パネルボディ部分をテキスト選択可能にする。
+				$('.panel-body',draggableDiv).mousedown(function(ev) {
+					  draggableDiv.draggable('disable');
+					}).mouseup(function(ev) {
+					  draggableDiv.draggable('enable');
+					});
+				
+				$('#panel1').css('top','50px');
+				$('#panel1').css('left','50px');
+				$('#panel1').css('width','200px');
+				$('#panel1').css('height','250px');
+			}
+			
+			
+			function offDraggable(){
+				var draggableDiv = $('#panel1').draggable();
+				draggableDiv.draggable('destroy');
+
+
+				$('#panel1').css('position','none');
+				$('#panel1').css('top','0px');
+				$('#panel1').css('left','0px');
+				$('#panel1').css('width','100%');
+				$('#panel1').css('height','100%');
+	
+				
+				
+				
+			}
+		</script>
+		<style>
+			#panel1_rap{
+				width:500px;
+				height:400px;
+				background-color:#e3b638;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>パネルをドラッグで動かしたりリサイズする | 埋め込み切替機能付き</h1>
+			<p></p>
+		</div>
+	</div>
+
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		<input type="button" value="埋込" onclick="offDraggable()" class="btn btn-success btn-xs" />
+		<input type="button" value="子画面化" onclick="onDraggable()" class="btn btn-success btn-xs" />
+		<hr>
+		
+		<div id="panel1_rap">
+			<div id="panel1" class="panel panel-primary" style="width:200px;">
+				<div class="panel-heading">
+					いろは歌
+				</div>
+				<div class="panel-body">
+					いろはにほへとちりぬるをわかよたれそつねならむ<br>
+					うゐのおくやまけふこえてあさきゆめみしゑひもせす<br>
+				</div>
+				<div class="panel-footer">
+					フッター
+				</div>
+			</div>
+		</div>
+		
+		<div id="sub1" style="background-color:#fcd209">サブ要素</div>
+	
+	
+	</div>
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-10-15</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

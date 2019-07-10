@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LearnCounterK</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/AjaxLoginWithCake.js"></script>
+	
+	<script src="LearnCounterK.js"></script>
+
+	<script>
+	var learnCounterK;
+	
+	$(function(){
+		// CakePHPによるAjax認証
+		var alwc = new AjaxLoginWithCake();
+		var option = {'form_slt':'#ajax_login_with_cake'}
+		alwc.loginCheckEx(callBack1,option);
+		
+	});
+	
+	
+	function callBack1(auth_flg){
+		if(auth_flg==0){
+			return;
+		}
+		
+		// 学習カウンター
+		learnCounterK = new LearnCounterK({'category_code':'test1'});
+		
+	}
+	</script>
+
+</head>
+<body>
+<div id="header" ><h1>LearnCounterK</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+<div id="ajax_login_with_cake"></div>
+<div id="res" ></div><div id="err" class="text-danger"></div>
+<div id="learn_count_k_menu"></div><br>
+<ol class="learn_count_k">
+	<li><a href="#xxx1">タヌキ</a></li>
+	<li><a href="#xxx2">アナグマ</a></li>
+	<li><a href="#xxx3">ムジナ</a></li>
+	<li><a href="#xxx4">ハクビシン</a></li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>LearnCounterK</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-9-30</div>
+</body>
+</html>

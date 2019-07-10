@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>サーバー上のファイルからblobを作成する</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="blob_from_server.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>サーバー上のファイルからblobを作成する</h1>
+		<p>JavaScriptによるファイルとバイナリデータの扱い</p>
+	</div>
+
+	<h2>サンプル</h2>
+	<a href="array_buffer_from_server.html">サーバー上のファイルからarraybuffer</a>を取得し、
+	arraybufferとコンテンツタイプからBlobオブジェクトを生成することができる。<br>
+	BlobオブジェクトはさらにBlob URL Schemeに変換できる。<br>
+	Blob URL SchemeはURLの一種なので、img要素などURL関係の処理に利用できる。<br>
+	<br>
+	
+	<p>javascript</p>
+	<pre>
+	function test1(){
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'smp1.png', true);
+		xhr.responseType = 'arraybuffer';
+		xhr.onload = function(e) {
+			
+			var arrayBuffer = this.response;
+	
+			// Blobを生成する
+			var blob = new <strong>Blob([arrayBuffer], {type: "image/png"})</strong>;
+			console.log(blob);
+			
+			// BlobをBlobURLスキームに変換して、img要素にセットする。
+			var blob_url = window.URL.createObjectURL(blob);
+			$('#img1').attr('src',blob_url);
+		};
+		xhr.send();
+	}
+	</pre>
+	
+	<input type="button" value="TEST1" onclick="test1()" class="btn btn-primary" /><br>
+	<img id="img1" src="" />
+
+
+
+	<hr>
+
+	<br><br>
+	<a href="index.html" class="btn btn-link btn-xs">目次へ戻る</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-20 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

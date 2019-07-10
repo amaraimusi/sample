@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jQuery UI ダイアログ | シンプルひな形</title>
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="jq_ui_dlg_simple.js"></script>
+
+
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>jQuery UI ダイアログ | シンプルひな形</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		
+		<input type="button" value="ダイアログオープン" onclick="nekoDlgOpen()" class="btn btn-primary" />
+		<span id="neko_res"></span>
+
+	</div>
+	
+	
+	<!-- URL・ホストドメイン入力ダイアログ -->
+	<div id="neko_dlg">
+		<input id="neko_text" type="text" class="form-control" placeholder="ネコ名を入力してください" /><br>
+		<input type="button" value="OK" onclick="nekoDlgOk()" class="btn btn-success" />
+		<input type="button" value="閉じる" onclick="nekoDlgClose()" class="btn btn-primary" />
+	</div> 
+	
+
+
+	
+
+
+
+
+
+
+
+
+	<br><br><hr><br><br>
+	
+	<input type="button" value="js source" class="btn btn-info btn-xs" onclick="$('#js_souｒce').toggle()" />
+	<pre id="js_souｒce" style="display:none">
+	$( function() {
+		nekoDlgInit();//ダイアログの初期化
+	});
+	
+	
+	/**
+	 * ネコダイアログの初期化
+	 */
+	function nekoDlgInit(){
+		//ダイアログの初期化
+	    $('#neko_dlg').dialog({
+	    	title:'ネコダイアログ',
+	        autoOpen: false,
+	        width: 400,
+	        modal: true,
+	    });
+	}
+	
+	/**
+	 * ネコダイアログの表示
+	 */
+	function nekoDlgOpen(){
+		$('#neko_dlg').dialog('open');//ダイアログオープン
+	
+	}
+	
+	/**
+	 * ネコダイアログを閉じる
+	 */
+	function nekoDlgClose(){
+		$('#neko_dlg').dialog('close');
+	}
+	
+	/**
+	 * ネコダイアログ、OKボタン押下
+	 */
+	function nekoDlgOk(){
+		//入力フォームからURLを取得する。
+		var neko_text = $('#neko_text').val();
+	
+		//ホスト・ドメイン入力フォームへセットする。
+		$('#neko_res').html(neko_text);
+		$('#neko_dlg').dialog('close');
+	}
+	</pre>
+
+
+
+
+	<br><br>
+	
+	
+	
+	<input type="button" value="html source" class="btn btn-info btn-xs" onclick="$('#html_souｒce').toggle()" />
+	<pre id="html_souｒce" style="display:none">
+	&lt;input type="button" value="ダイアログオープン" onclick="nekoDlgOpen()" class="btn btn-primary" /&gt;
+	&lt;span id="neko_res"&gt;&lt;!-- デバッグ出力 --&gt;&lt;/span&gt;
+	
+	&lt;!-- URL・ホストドメイン入力ダイアログ --&gt;
+	&lt;div id="neko_dlg"&gt;
+		&lt;input id="neko_text" type="text" class="form-control" placeholder="ネコ名を入力してください" /&gt;&lt;br&gt;
+		&lt;input type="button" value="OK" onclick="nekoDlgOk()" class="btn btn-success" /&gt;
+		&lt;input type="button" value="閉じる" onclick="nekoDlgClose()" class="btn btn-primary" /&gt;
+	&lt;/div&gt; 
+	</pre>
+
+
+
+	<br><br>
+	<a href="http://js.studio-kingdom.com/jqueryui/widgets/dialog" target="brank" class="btn btn-link btn-xs">詳細な設定についての説明サイト</a>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-03-20</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

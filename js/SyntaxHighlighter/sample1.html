@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>SyntaxHighlighter | サンプル1</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		
+		<link href="syntaxhighlighter_2.1.382/styles/shCore.css" rel="stylesheet">
+		<link href="syntaxhighlighter_2.1.382/styles/shThemeEclipse.css" rel="stylesheet">
+		
+		<script src="syntaxhighlighter_2.1.382/scripts/shCore.js"></script>
+		<script src="syntaxhighlighter_2.1.382/scripts/shBrushJScript.js"></script>
+		
+
+		<script>
+		
+			SyntaxHighlighter.all();
+			
+			$( function() {
+				//～読込イベント処理～
+			});
+
+			function dump(id,obj){
+				var json=JSON.stringify(obj);
+				$("#" + id).html(json);
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >SyntaxHighlighter | サンプル1</h1>
+
+<pre class="brush:js;highlight: [2]">
+	this.run=function(str){
+		str = '走る：' + str;
+		return str;
+	};</pre>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2016-4-4</p>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>izumi1 | 広域詳細地図を作成するツール</title>
+
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+		<link href="css/index.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-Y_H0SqELBviGTQT9GrbQdiHeVKLwNAo&sensor=false"></script>
+		<script src="js/gmaps.js"></script>
+		<script src="js/izumi1.js"></script>
+
+
+
+
+	</head>
+
+<body>
+<div class="container">
+
+
+
+
+
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>izumi1 | 広域詳細地図を作成するツール</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+
+
+		<input type="button" value="使い方" onclick="$('#help').fadeToggle();" class="btn btn-primary btn-sm"/><br>
+		<div id="help" style="display:none">
+			拡大詳細地図を作成する手順<br>
+			<ol>
+				<li>上段地図から対象の位置をクリックします。</li>
+
+				<li>
+					範囲が小さすぎたり、大きすぎたりする場合は、中段にある基本設定の「横数」と「縦数」のツマミを左右に調整してください。<br>
+					調整後、もう一度、上段地図の位置をクリックします。<br>
+				</li>
+
+				<li>
+					倍率を調整します。<br>
+					0.5にすると拡大詳細地図は半分サイズで作成。<br>
+					1にすると等倍です。<br>
+				</li>
+
+				<li>
+					自動ボタンを押すと、広域詳細地図の自動作成を開始します。<br>
+					自動作成中は地図を動かさないでください。作成される広域詳細地図が乱れます。<br>
+				</li>
+
+				<li>自動作成が止まったら、広域詳細地図の作成は完了です。</li>
+
+				<li>下段に広域詳細地図が作成されてますので、右クリックから画像保存してください。</li>
+
+			</ol>
+		</div>
+
+
+		<h2>Tool</h2>
+
+
+
+		<div id="big_map" style="width:800px; height:600px"></div>
+		<hr>
+		<div id="gmap" style="width:500px; height:500px"></div>
+
+		<div id="loading"><img src="img/loading.gif" /><span>　処理中です。しばらくお待ちください・・・</span></div>
+
+		<fieldset id="base_form">
+			<legend>基本設定</legend>
+			<div class="row">
+				<div class="col-md-2"><label>主地図・横幅:</label><input id="i_mm_width" type="hidden" value="500" /><var id="v_mm_width"></var></div>
+				<div class="col-md-2"><label>主地図・縦幅:</label><input id="i_mm_height" type="hidden" value="500" /><var id="v_mm_height"></var></div>
+				<div class="col-md-3"><label>緯度:</label><var id="v_mm_lat"></var></div>
+				<div class="col-md-3"><label>経度:</label><var id="v_mm_lng"></var></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"><label>横数:</label><var id="v_cc_cnt_x"></var><input id="i_cc_cnt_x" type="range" value="4" min="1" max="10" step="1" onchange="chg_cc_cnt_x()" /></div>
+				<div class="col-md-3"><label>縦数:</label><var id="v_cc_cnt_y"></var><input id="i_cc_cnt_y" type="range" value="4" min="1" max="10" step="1" onchange="chg_cc_cnt_y()" /></div>
+				<div class="col-md-3"><label>倍率:</label><var id="v_cc_rate"></var><input id="i_cc_rate" type="range" value="0.5" min="0.1" max="1" step="0.1"  onchange="chg_cc_rate()"  /></div>
+			</div>
+
+
+		</fieldset>
+		<div style="margin-top:4px">
+			<input type="button" value="設定を記憶" class="btn btn-primary btn-xs" onclick="save_form()" />
+			<input type="button" value="初期に戻す" class="btn btn-primary btn-xs" onclick="default_form()" />
+		</div>
+
+		<div id="funcs" style="float:left">
+			<input id="manual_btn" type="button" value="手動" onclick="manual_btn()" class="btn btn-primary" />
+			<input id="auto_btn" type="button" value="自動" onclick="auto_btn()" class="btn btn-danger" />
+		</div>
+
+		<div style="clear:both"></div>
+
+
+		<div id="manual">
+			<div class="block1">
+				<table>
+					<tr><td></td><td><input type="button" value="↑" id="arrow_top" onclick="top_move()" class="btn btn-primary" /></td><td></td></tr>
+					<tr><td><input type="button" value="←" id="arrow_left" onclick="left_move()" class="btn btn-primary" /></td><td></td><td><input type="button" value="→" id="arrow_right" onclick="right_move()" class="btn btn-primary" value="primary"/></td></tr>
+					<tr><td></td><td><input type="button" value="↓" id="arrow_bottom" onclick="bottom_move()" class="btn btn-primary" /></td><td></td></tr>
+				</table>
+			</div>
+
+			<div  class="block1" style="margin-left:50px;margin-top:30px;">
+				<div class="block1"><input type="button" value="地図写し" onclick="manual_map_copy_btn()" class="btn btn-success"/></div>
+				<div class="block1"><input type="button" value="閉じる" onclick="manual_close()" class="btn btn-primary"/></div>
+			</div>
+		</div>
+
+
+		<div style="clear:both"></div>
+
+
+
+		<hr>
+		<div>
+
+			広域詳細地図。 右クリックで画像を保存してください<br>
+			<canvas id="cvs1" width="800" height="800"></canvas>
+		</div>
+		<div id="gmap_static" style="width:500px; height:500px"></div>
+
+		<div id="res"></div>
+
+	</div>
+
+
+
+
+
+
+</div><!-- container  -->
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>AJAX | JSON</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function test_func1(){
+
+				//PHPに非同期通信で送るJSONデータ。1次元配列しか送れず）
+				var jdata={names: '源頼朝',contry: '鎌倉',year: '1192'};
+
+				$.ajax({
+					type: "POST",
+					url: 'get_json.php',
+					data: jdata,
+					cache: false,
+					async : true,
+					dataType: "json",
+			    success: function( data ) {
+				    	//▼非同期通信成功時の処理。パラメータのdataはjson形式のデータである。
+				    	
+			        $.each(data,function( key, value ) {
+			            $('#xxx1').append(key + '=>' + value.names + ' | '  + value.contry + ' | ' + value.year+'<br />' );
+			        });
+			    },
+			    error: function( data ) {
+			        alert("ajax失敗");
+			    }
+		
+				});
+
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">AJAX | JSON</div>
+		<div id="content" >
+		
+			<div class="sec1">
+				AJAXでJSONデータのやりとりを行うサンプル。<br />
+				サーバー（get_json.php)に送る側のデータ(ソースコード中のjdata)は、1次元のJSONデータである。2次元以上ではだめらしい。<br />
+				サーバー（get_json.php)から送られているデータもJson形式です。こちらは2次元配列からなるJSONデータを受信している。<br />
+				<hr />
+				<strong>テスト実行</strong>
+				<input type="button" value="run" onclick="test_func1()" /><br />
+				<div id="xxx1"></div><br>
+				<hr />
+				
+				<strong>Java Script</strong>
+				<pre>			
+				//PHPに非同期通信で送るJSONデータ。1次元配列しか送れず）
+				var jdata={names: '源頼朝',contry: '鎌倉',year: '1192'};
+
+				$.ajax({
+					type: "POST",
+					url: 'get_json.php',
+					data: jdata,
+					cache: false,
+					async : true,
+					dataType: "json",
+			    success: function( data ) {
+				    	//▼非同期通信成功時の処理。パラメータのdataはjson形式のデータである。
+				    	
+			        $.each(data,function( key, value ) {
+			            $('#xxx1').append(key + '=>' + value.names + ' | '  + value.contry + ' | ' + value.year+'<br />' );
+			        });
+			    },
+			    error: function( data ) {
+			        alert("ajax失敗");
+			    }
+		
+				});
+				</pre><br />
+				
+				<strong>get_json.php</strong>
+				<pre>
+				header("Access-Control-Allow-Origin:*");//クロスドメイン通信を許可する。
+
+				//POSTからいくつかの情報を取得。
+				$names=$_POST["names"];
+				$contry=$_POST["contry"];
+				$year=$_POST["year"];
+				
+				//サンプルデータを作成。
+				for($i=0;$i<4;$i++){
+					$ent["names"]=$names.$i;
+					$ent["contry"]=$contry;
+					$ent["year"]=$year;
+					$data[$i]=$ent;;
+					
+				}
+				
+				//☆JSONエンコードと出力。
+				$jdt=json_encode($data);//PHP配列をJSON形式にエンコードする。
+				echo $jdt;//JSON形式のデータはechoでそのまま出力することが可能。
+				</pre>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>タブ | JQuery UI</title>
+		<link rel="stylesheet" type="text/css" href="jquery-ui.css"  />
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+
+		<script>
+
+			$(document).ready(function(){
+				$('#ui-tab').tabs();
+				$('#tabdemo1').tabs();
+			});
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">タブ | JQuery UI</h1>
+		<div id="content" >
+
+			<div class="sec1">
+<div style='clear:both;' id="tabdemo1">
+  <ul>
+    <li><a href="#tab-google1">Google</a></li>
+    <li><a href="#tab-apple1">Apple</a></li>
+    <li><a href="#tab-ms1">Microsoft</a></li>
+  </ul>
+  <div id="tab-google1">
+    <p>Android, Chromebooks</p>
+  </div>
+  <div id="tab-apple1">
+    <p>iPhone, iPad</p>
+  </div>
+  <div id="tab-ms1">
+    <p>Windows Phone</p>
+  </div>
+</div>
+
+			</div><!-- sec1 -->
+
+							<div id="ui-tab">
+					<ul>
+						<li><a href="#fragment-1"><span>タブ1</span></a></li>
+						<li><a href="#fragment-2"><span>タブ2</span></a></li>
+						<li><a href="#fragment-3"><span>タブ3</span></a></li>
+					</ul>
+					<div id="fragment-1">
+						<p>いろはにほへとちりぬのを</p>
+					</div>
+
+					<div id="fragment-2">
+						わかよたれそつねならむ
+					</div>
+
+					<div id="fragment-3">
+						うゐのおくやま けふこえてあさきゆめみし ゑひもせす
+					</div>
+				</div>
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/06/26</div>
+		</div><!-- page1 -->
+
+
+
+	</body>
+</html>

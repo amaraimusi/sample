@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" /><!-- 閾ｪ蜍慕ｿｻ險ｳ縺輔○縺ｪ縺�-->
+		<title>XXX</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+		$(function(){
+			  $("#hogeForm").submit(function(){
+			    var $form, fd;
+			    $form = $(this);
+			    fd = new FormData($form[0]);
+			    $.ajax($form.attr("action"), {
+			      type: 'post',
+			      processData: false,
+			      contentType: false,
+			      data: fd,
+			      dataType: 'html',
+			      success: function(data){
+			        console.log(data);
+			      }
+			    });
+			    return false;//submitで画面遷移させない。
+			  });
+			});
+		
+	    /*$(function() {$('#upload_file').change(function() {
+		      
+
+
+			
+				    //$form = ("#hogeForm");
+				    //alert($form[0]);
+				    fd = new FormData($("#upload_file"));
+				    //fd=$form[0];
+		      
+			    $.ajax({
+						type: "POST",
+						url: "http://localhost:2368/FileUploader.aspx",
+						data: $("#upload_file"),
+						cache: false,
+						dataType: "html",
+						success: function(data, type) {
+							alert(data);
+							
+						},
+						error: function(xmlHttpRequest, textStatus, errorThrown){
+							alert(textStatus);
+						}
+					});
+
+			    alert("test");
+		        
+	    });*/
+
+	    
+		
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">XXX</div>
+		<div id="content" >
+		
+			<div class="sec1">
+			
+			
+			<form id="hogeForm" method="post" action="http://localhost:2368/FileUploader.aspx" enctype="multipart/form-data">
+			  <div><input id="upload_file" type="file" name="upload_file"></div>
+			  <div>ファイルの説明：<input type="text" name="hogeText"></div>
+			  <input id="hogeSubmit" type="submit" value="うｐする">
+			</form>
+
+<hr />
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				hello world!
+				<div id="xxx1">aaaa</div><br>
+				<input type="button" value="run" onclick="test_func1()" />
+				<pre>			
+				function test_func1(){
+					var x=document.getElementById('xxx1').innerHTML;
+					alert(x);
+				}
+				</pre>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27</div>
+		</div><!-- page1 -->
+	</body>
+</html>

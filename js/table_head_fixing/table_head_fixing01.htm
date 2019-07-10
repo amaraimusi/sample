@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr">
+<head>
+	<link rel="NEXT"  href="mnt_top.php" />
+	<link rev="made" href="mailto:dummy@yoro_yoro" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<script type="text/javascript" src="js/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/jquery.tablefix.js" charset="utf-8"></script>
+	
+	<style type="text/css">
+.tablefix {
+    width: 800px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.tablefix thead th {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+#tablefix1, #tablefix2 {
+    width: 800px;
+}
+#tablefix3 {
+    width: 500px;
+}
+	</style>
+	
+	<script type="text/javascript">
+
+	$(function() {
+	    $('#tablefix1').tablefix({width: 500, height: 200, fixRows:2, fixCols: 3});
+	    $('#tablefix2').tablefix({width: 500, fixCols: 2});
+	    $('#tablefix3').tablefix({height: 200, fixRows: 2});
+
+	    $('#test1').tablefix({height: 200, fixRows: 1});
+	});
+	//$('#test1').tablefix({width: 600, height: 400, fixRows: 1, fixCols: 2});
+		
+
+	</script>
+	<title>テーブルの先頭行固定</title>
+</head>
+<body>
+
+<div style="width:800px" >
+<h3>テーブルの先頭行固定</h3>
+
+
+
+
+<div id="js_test1"></div><br />
+<div id="js_test2"></div><br />
+<div id="js_test3"></div><br />
+<div id="js_test4"></div><br />
+
+
+
+	<br /><br />
+	
+	<table id="test1" border="1">
+	<thead><tr><th>ID</th><th>名前</th><th>値</th></tr></thead>
+	<tbody>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+		<tr><td>1</td><td>test</td><td>1111111111</td></tr>
+	</tbody>
+
+	</table>
+	
+	
+	
+	
+	
+	<br /><br /><br />
+	
+	
+	
+	<p>実行結果</p>
+
+<table id="tablefix1">
+    <thead>
+    <tr>
+        <th rowspan="2">ヘッダA</th>
+        <th rowspan="2">ヘッダB</th>
+        <th colspan="2">ヘッダC</th>
+        <th rowspan="2">ヘッダD</th>
+        <th rowspan="2">ヘッダE</th>
+    </tr>
+    <tr>
+        <th>ヘッダ C-1</th>
+        <th>ヘッダ C-2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    </tbody>
+</table>
+<br />
+<table id="tablefix2">
+    <thead>
+    <tr>
+        <th rowspan="2">ヘッダA</th>
+        <th rowspan="2">ヘッダB</th>
+        <th colspan="2">ヘッダC</th>
+        <th rowspan="2">ヘッダD</th>
+        <th rowspan="2">ヘッダE</th>
+    </tr>
+    <tr>
+        <th>ヘッダ C-1</th>
+        <th>ヘッダ C-2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    </tbody>
+</table>
+<br />
+<table id="tablefix3">
+    <thead>
+    <tr>
+        <th rowspan="2">ヘッダA</th>
+        <th rowspan="2">ヘッダB</th>
+        <th colspan="2">ヘッダC</th>
+        <th rowspan="2">ヘッダD</th>
+        <th rowspan="2">ヘッダE</th>
+    </tr>
+    <tr>
+        <th>ヘッダ C-1</th>
+        <th>ヘッダ C-2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    <tr>
+        <td>データ</td>
+        <td>データ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+        <td>データデータデータデータデータデータデータデータデータデータデータデータ</td>
+    </tr>
+    </tbody>
+</table>
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+	
+
+</div>
+</body>
+</html>

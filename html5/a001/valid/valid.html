@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HTML5のバリデーション</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/jquery.balloon.min.js"></script>
+
+	<script>
+
+	
+	function validation_check(slt){
+
+
+		var elm = $('#' + slt);
+		var label = $("[for='" + slt + "']");
+		
+		
+		try{
+			
+			//var title =  elm[0].validationMessage;
+			
+			var valid=elm[0].checkValidity();
+			
+			
+			if(valid == true){
+				label.attr('class','text-success');
+				label.html('正常です');
+			}else{
+	 
+		    	 var title = elm.attr('title');
+		    	 
+		    	 label.html(title);
+				label.attr('class','text-danger');
+				/* titleが消えるしまう仕様になっている
+		    	 elm.showBalloon();
+		    	 
+			     setTimeout(function(){
+			    	 elm.hideBalloon();
+			     },5000);*/
+			     
+				
+
+			}
+
+		}catch( e ){
+			alert('未対応です');
+			throw e;
+		}
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>HTML5のバリデーション</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+
+
+<h3 id="sample_test1">数値チェック</h3>
+<input type="text" id="test1"  pattern="^[0-9]+$" title="数値で入力してください" value="あ"><br>
+<input type="button" value="test1" onclick="validation_check('test1')" class="btn btn-primary" /><br>
+<label for="test1" ></label>
+<br><hr>
+
+
+<h3 id="sample_test2">必須</h3>
+<input type="text" id="test2"  required title="必須入力です。" value=""><br>
+<input type="button" value="test2" onclick="validation_check('test2')" class="btn btn-primary" /><br>
+<label for="test2" ></label>
+<br><hr>
+
+
+<h3 id="sample_test3">最大文字数制限</h3>
+<input type="text" id="test3"  required maxlength="4"  title="4文字以内の必須入力です。" value=""><br>
+<input type="button" value="test3" onclick="validation_check('test3')" class="btn btn-primary" /><br>
+<label for="test3" ></label>
+<br><hr>
+
+
+<h3 id="sample_test4">半角英数字</h3>
+<input type="text" id="test4" pattern="^[0-9A-Za-z]+$" title="半角英数字で入力してください。" value="abc123XYZ"><br>
+<input type="button" value="test4" onclick="validation_check('test4')" class="btn btn-primary" /><br>
+<label for="test4" ></label>
+<br><hr>
+
+
+<h3 id="sample_test5">日付</h3>
+<input type="text" id="test5" pattern="[0-9]{4}(-|/)[0-9]{1,2}(-|/)[0-9]{1,2}" title="日付(Y-m-d)を入力してください。(例 2012-12-12)" value="2016-10-17"><br>
+<input type="button" value="test5" onclick="validation_check('test5')" class="btn btn-primary" /><br>
+<label for="test5" ></label>
+<br><hr>
+
+
+<h3 id="sample_test6">日時</h3>
+<input type="text" id="test6" pattern="[0-9]{4}(-|/)[0-9]{1,2}(-|/)[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}" title="日時（Y-m-d H:i:s)を入力してください。(例  2012-12-12 12:12:12)" value="2016-10-17 10:16:33"><br>
+<input type="button" value="test6" onclick="validation_check('test6')" class="btn btn-primary" /><br>
+<label for="test6" ></label>
+<br><hr>
+
+
+<h3 id="sample_test7">浮動小数点</h3>
+<input type="text" id="test7" pattern="[+-]?[0-9]+[\.]?[0-9]*([eE][+-])?[0-9]*" title="数値を入力してください。" value="-0.12"><br>
+<input type="button" value="test7" onclick="validation_check('test7')" class="btn btn-primary" /><br>
+<label for="test7" ></label>
+<br><hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="http://qiita.com/ka215/items/795a179041c705bef03b" target="blank">参考</a><br>
+<br>
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/html5">HTML5の サンプル</a></li>
+	<li>HTML5のバリデーション</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-10-12</div>
+</body>
+</html>

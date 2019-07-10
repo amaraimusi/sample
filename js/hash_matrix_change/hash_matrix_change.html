@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>連想配列オブジェクトの行列入替（縦横入替）</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="script.js"></script>
+		<script>
+
+
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">連想配列オブジェクトの行列入替（縦横入替）</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<div id="tbl_div"></div>
+
+				<br><br>
+				行列入替(hashMatrixChange)<br>
+				<div id="tbl_div2"></div>
+
+				<br><br>
+				もう一度、行列入替(hashMatrixChangeRev)<br>
+				<div id="tbl_div3"></div>
+
+				<hr>
+
+関数<br>
+<pre>
+
+/**
+ * 連想配列オブジェクトの行列入替（縦横入替）
+ * @param hash 連想配列オブジェクト
+ * @return 行列が入れ替わった連想配列
+ */
+function hashMatrixChange(hash){
+
+	var obj={};
+
+	for(var k in hash[0]){
+		obj[k]={};
+	}
+
+	for(var i in hash){
+		var ent=hash[i];
+		for(var k in ent){
+			var v=ent[k];
+			obj[k][i]=v;
+		}
+	}
+
+	return obj;
+}
+
+
+/**
+ * 連想配列オブジェクトの行列入替（縦横入替）リバース
+ * @param hash 連想配列オブジェクト
+ * @return 行列が入れ替わった連想配列
+ */
+function hashMatrixChangeRev(hash){
+
+	var obj={};
+
+	var fk='';
+	for(var k in hash){
+		fk=k;
+		break;
+	}
+
+	for(var i in hash[fk]){
+		obj[i]={};
+	}
+
+	for(var k in hash){
+		var list=hash[k];
+		for(var i in list){
+			var v=list[i];
+			obj[i][k]=v;
+		}
+	}
+
+	return obj;
+}
+</pre>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/07/18</div>
+		</div><!-- page1 -->
+	</body>
+</html>

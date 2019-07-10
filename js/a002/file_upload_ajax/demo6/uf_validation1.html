@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ajaxファイルアップロード | バリデーション</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	
+	<script src="UploadFileValidation.js"></script>
+	
+	<script>
+	$( function() {
+		
+		// アップロードファイルのバリデーションクラスを生成する。
+		var upFileValid = new UploadFileValidation();
+		
+		//ファイルアップロードイベント
+		$('#file1').change(function(e) {
+			
+			var files = e.target.files;
+			var oFile = files[0];
+			
+			// アップロードファイルのバリデーション
+			var valid_res = upFileValid.checkFileObject(oFile,['png','jpg','jpeg'],['image/png','image/jpeg']);
+			if(valid_res){
+				alert(valid_res);
+				return;
+			}
+
+			var reader = new FileReader();
+			reader.readAsDataURL(oFile);
+		
+			//ファイル読込成功イベント
+			reader.onload = function(evt) {
+				
+			    var fd = new FormData();
+			    fd.append( "upload_file", $("#file1").prop("files")[0] );
+				
+				$.ajax({
+					type: "POST",
+					url: "upload.php",
+					data: fd,
+					cache: false,
+					dataType: "text",
+					processData : false,
+					contentType : false,
+					success: function(res, type) {
+						
+						$('#res').html(res);
+			
+					},
+					error: function(xmlHttpRequest, textStatus, errorThrown){
+						console.log(xmlHttpRequest.responseText);
+						
+						alert(textStatus);
+					}
+
+				});
+				
+			}
+			
+		});
+		
+		
+	});
+	</script>
+
+</head>
+<body>
+<div id="header" ><h1>File upload in AJAX</h1><p>Ajaxファイルアップロード | バリデーション</p></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+	<input id="file1" type="file" name="file1" multiple /><br>
+	<img  id="img1"  />
+	
+	
+	<p>res</p>
+	<div id="res"></div>
+<br>
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>Ajaxファイルアップロード | バリデーション</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-12-19</div>
+</body>
+</html>

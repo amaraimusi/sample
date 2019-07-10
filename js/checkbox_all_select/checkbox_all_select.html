@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>一覧のチェックボックスをすべて選択</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+			//一覧のすべてのチェックボックスにチェックを入れる。
+			function allChecked(){
+
+				var btnText=$("#btn_all_chk").val();
+				if(btnText=='すべて選択'){
+					$(".chk_sel").prop({'checked':'checked'});
+					$("#btn_all_chk").val('すべてはずす');
+				}else{
+					$(".chk_sel").prop({'checked':false});
+					$("#btn_all_chk").val('すべて選択');
+				}
+			}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">一覧のチェックボックスをすべて選択</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<input id="btn_all_chk" type="button" value="すべて選択" onclick="allChecked()" /><br>
+				<table border="1">
+				<thead>
+					<tr><th>チェック</th><th>ダミー</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="checkbox" class="chk_sel" /></td>
+						<td>ネコ</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="chk_sel" /></td>
+						<td>ネズミ</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="chk_sel" /></td>
+						<td>ウシ</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" class="chk_sel" /></td>
+						<td>トラ</td>
+					</tr>
+				</tbody>
+				</table>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/09/09</div>
+		</div><!-- page1 -->
+	</body>
+</html>

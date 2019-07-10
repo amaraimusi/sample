@@ -1,0 +1,53 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:v="urn:schemas-microsoft-com:vml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Google 地図 JavaScript API 使用例: GeoRSS オーバーレイ</title>
+    <script src="http://maps.google.co.jp/maps?hl=ja&amp;file=api&amp;v=2&amp;key=ABQIAAAAWZfK5yATFwd6lElAdolgrhRdrCFiLDZ8jDvMrt4ZN-nXZDorfxTH_gjnUV5PciAaHIMb4xKz6MbidA"
+      type="text/javascript"></script>
+    <script type="text/javascript"> 
+
+
+    function readRss() {
+        if (GBrowserIsCompatible()) {
+
+  		var rssUrl=document.getElementById('txt_rss').value;
+  		var geoXml = new GGeoXml(rssUrl);
+            
+  		var map = new GMap2(document.getElementById("map_canvas"));
+  		map.setCenter(new GLatLng(35.3083326000,136.5615551000),12); 
+  		        
+
+
+          map.addControl(new GLargeMapControl());
+          map.addControl(new GLargeMapControl());
+          map.addOverlay(geoXml);
+        }
+      } 
+    </script>
+  </head>
+
+
+  
+  <body>
+  <div>
+  	<h1>geoRss読込表示ツール</h1>
+    <br /><br />
+    geoRssファイルへのURLを入力。※相対パスは不可能。<br />
+    <input type="text" id="txt_rss" style="width:500px" value="http://www.geocities.jp/gigitogasu/yoro2_test_data/sample02.xml" />
+	
+    <p><input type="button" value="RSS読込" onclick="readRss();"/></p>
+    <br/>
+	
+    <div id="map_canvas" style="width: 640px; height: 480px; float:left; border: 1px solid black;"></div>
+  
+  	<br />
+
+	</div>
+
+
+  </body>
+</html>

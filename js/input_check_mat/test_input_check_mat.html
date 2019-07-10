@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>随時監視型・入力チェック</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../../../zss_js_lib/common.js"></script>
+		<script type="text/javascript" src="../../../zss_js_lib/input_check_mat.js"></script>
+		<script>
+
+			function test_func1(){
+				var x=document.getElementById('xxx1').innerHTML;
+				alert(x);
+			}
+			
+		</script>
+		
+		<style type="text/css">
+
+			.alert_td{
+				font-size:0.8em;
+			}
+			.err{
+				color:red;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">随時監視型・入力チェック</div>
+		<div id="content" >
+			<form name="form1"  action="#" method="post" enctype="multipart/form-data" >
+				<div class="sec1">
+					
+					<table border="1">
+							<thead><tr><th width="100">名称</th>
+							<th width="250">入力</th>
+							<th  width="300">アラートメッセージ</th></tr></thead>
+					<tbody>
+							<tr>
+								<td  style="width:100px">アカムシ（テキスト）</td>
+								<td>
+									<input type="text" id="akamusi" name="title" value=""
+										onblur="isTextEx(this,'アカムシ（テキスト）',5,'err_akamusi',false);"  />
+								</td>
+								<td class="alert_td"><span id="err_akamusi" class="err"></span></td>
+							</tr>
+							<tr>
+								<td  style="width:100px">イルカ（数値）</td>
+								<td>
+									<input type="text" id="iruka" name="title" value=""
+										onblur="isNumEx(this,'イルカ（数値）',5,'err_iruka',false);"  />
+								</td>
+								<td class="alert_td"><span id="err_iruka" class="err"></span></td>
+							</tr>
+							<tr>
+								<td  style="width:100px">ウシ（整数）</td>
+								<td>
+									<input type="text" id="usi" name="title" value=""
+										onblur="isPNumEx(this,'ウシ（整数）',5,'err_usi',false);"  />
+								</td>
+								<td class="alert_td"><span id="err_usi" class="err"></span></td>
+							</tr>
+							<tr>
+								<td  style="width:100px">エリマキトカゲ（メール）</td>
+								<td>
+									<input type="text" id="erimakitokage" name="title" value=""
+										onblur="isMailEx(this,'エリマキトカゲ（メール）',5,'err_erimakitokage',false);"  />
+								</td>
+								<td class="alert_td"><span id="err_erimakitokage" class="err"></span></td>
+							</tr>
+							<tr>
+								<td  style="width:100px">オオクワガタ（日付）</td>
+								<td>
+									<input type="text" id="ookuwagata" name="title" value=""
+										onblur="isDateEx(this,'オオクワガタ（日付）',5,'err_ookuwagata',false);"  />
+								</td>
+								<td class="alert_td"><span id="err_ookuwagata" class="err"></span></td>
+							</tr>
+					</tbody></table>
+					<br /><hr />
+					
+					<strong>使用例</strong>
+					<pre>
+									
+<strong>文字数チェック</strong>
+&ltinput type="text" id="akamusi" name="title" value="" onblur="isTextEx(this,'アカムシ（テキスト）',5,'err_akamusi',false);"  /&gt
+&ltspan id="err_akamusi" &gt&lt/span&gt
+
+<strong>数値チェック</strong>
+&ltinput type="text" id="iruka" name="title" value="" onblur="isNumEx(this,'イルカ（数値）',5,'err_iruka',false);"  /&gt
+&ltspan id="err_iruka" &gt&lt/span&gt
+
+
+<strong>正数チェック</strong>
+&ltinput type="text" id="usi" name="title" value="" onblur="isPNumEx(this,'ウシ（整数）',5,'err_usi',false);"  /&gt
+&ltspan id="err_usi" &gt&lt/span&gt
+
+<strong>メールチェック</strong>
+&ltinput type="text" id="erimakitokage" name="title" value="" onblur="isMailEx(this,'エリマキトカゲ（メール）',5,'err_erimakitokage',false);"  /&gt
+&ltspan id="err_erimakitokage" &gt&lt/span&gt
+
+<strong>日付チェック</strong>
+&ltinput type="text" id="ookuwagata" name="title" value="" onblur="isDateEx(this,'オオクワガタ（日付）',5,'err_ookuwagata',false);"  /&gt				
+&ltspan id="err_ookuwagata" &gt&lt/span&gt
+					
+					</pre>
+				</div><!-- sec1 -->
+			</form>
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/09/03</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>キーボードのイベント| keydown keypress keyup</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="jq_keydown.js"></script>
+
+
+		<style>
+			#test1{
+				width:300px;
+				height:100px;
+				background-color:#a9f8a5;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>キーボードのイベント| keydown keypress keyup</h1>
+			<p></p>
+		</div>
+	</div>
+
+	
+	<h2>説明</h2>
+	window（画面全体）やテキストエリア、input要素にキーイベントを組み込むことができる。
+	div要素には組み込めないようである。<br>
+	キーイベントにはkeydown,keyup,keypressの3種類が存在する。<br>
+	<br>
+	
+	<table class="tbl2">
+		<thead>
+			<tr><th>イベント</th><th>説明</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>keydown</td><td>キーを押しこんだ時のイベント</td></tr>
+			<tr><td>keyup</td><td>キーを話した時のイベント</td></tr>
+			<tr><td>keypress</td><td>キー押下イベント。keydownとkeyupを併せ持つ。</td></tr>
+	
+		</tbody>
+	</table>
+		
+	イベント発動順はkeydown,keypress,keyupである。<br>
+			
+	<p>ソースコード</p>
+	<pre>
+	～略～
+	&lt;script src="jquery.js"&gt;&lt;/script&gt;
+	
+	&lt;script&gt;
+	$(function(){
+		// キーを離したときのイベント
+		$('#test1').keyup(function(e){
+			var str = 'keyup:' + e.keyCode + '&lt;br&gt;';
+			$('#res').append(str);
+		});
+		
+		// キーを押しこんだときのイベント
+		$('#test1').keydown(function(e){
+			var str = 'keydown:' + e.keyCode + '&lt;br&gt;';
+			$('#res').append(str);
+		});
+		
+		// キーを押下イベント（keydownとkeyupを組み合わせたイベント）
+		$('#test1').keypress(function(e){
+			var str = 'keypress:' + e.keyCode + '&lt;br&gt;';
+			$('#res').append(str);
+		});
+		
+	});
+	&lt;/script&gt;
+	～略～
+	&lt;textarea id="test1"&gt;&lt;/textarea&gt;
+	&lt;div id="res" &gt;
+	～略～
+	</pre>
+	<br>
+	
+	windowにキー押下イベントを組み込む場合、以下のように記述する。<br>
+	<pre>
+	$(window).keypress(function(e){
+		console.log(e.keyCode);
+	});
+	</pre>
+	<br>
+	
+	<hr>
+	
+	
+	<h2>サンプル</h2>
+	<textarea id="test1"></textarea>
+	
+	<p>出力</p>
+	<div id="res" class="output_data">
+	</div>
+
+	
+	<hr>
+
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-4-6</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

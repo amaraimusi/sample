@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ワーカーログクラス | LogForWorker.js</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="LogForWorker.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+				
+				var logW=new LogForWorker();
+				
+				for(var i=0;i<32;i++){
+					logW.log(i);
+				}
+				
+
+				var fLogs=logW.getFirstLogs();
+				$('#res_f').html(fLogs.join(','));
+
+				var lLogs=logW.getLastLogs();
+				$('#res_l').html(lLogs.join(','));
+
+			});
+
+			
+		</script>
+	</head>
+
+<body>
+
+<h1 >ワーカーログクラス | LogForWorker.js</h1>
+
+<div id="res_f" ></div>
+<div id="res_l" ></div>
+
+<br><hr><br>
+
+<a href="LogForWorker.js">LogForWorker.js</a><br>
+<br>
+
+インクルード
+<pre>&lt;script src="LogForWorker.js"&gt;&lt;/script&gt;</pre>
+<br>
+
+ソースコード<br>
+<pre>
+	$( function() {
+		<strong>var logW=new LogForWorker();</strong>
+		for(var i=0;i&lt;32;i++){
+			logW.log(i);
+		}
+		var fLogs=logW.getFirstLogs();
+		$('#res_f').html(fLogs.join(','));
+		var lLogs=logW.getLastLogs();
+		$('#res_l').html(lLogs.join(','));
+
+	});
+</pre>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-10-23</p>
+</body>
+</html>

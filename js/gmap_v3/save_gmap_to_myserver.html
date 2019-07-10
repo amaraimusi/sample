@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>GMapを画像にして自サーバーに保存する</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-Y_H0SqELBviGTQT9GrbQdiHeVKLwNAo&sensor=false"></script>
+		<script src="gmaps.js"></script>
+
+		<script>
+
+
+			$( function() {
+
+				//gmapの静的表示
+				var url = GMaps.staticMapURL({
+					  size: [500, 500],
+					  lat: 26.651139717347082,
+					  lng: 127.94837594032288,
+
+					});
+
+				$('<img/>').attr('src', url).appendTo('#gmap');
+
+
+			});
+
+
+			function test1(){
+
+				var gmap_url = GMaps.staticMapURL({
+					  size: [500, 500],
+					  lat: 26.651139717347082,
+					  lng: 127.94837594032288,
+
+					});
+
+				//サーバーサイドURL
+				var url='php/save_gmap_to_myserver.php';
+
+				//サンプルデータ
+				var ary=new Array();
+				ary[0]=gmap_url;
+
+
+				$.post(
+				url ,
+				{"ary" : ary} ,
+					function(msg){
+						$("#img1").attr('src',"php/img/test.png");
+						alert(msg);
+
+					}
+				).error(function() {//PHP側で何らかのバグ発生。存在しないURLを指定したりすると発生。
+
+					alert('サーバーサイドのエラー');
+				});
+			}
+
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >GMapを画像にして自サーバーに保存する</h1>
+
+
+<div id="gmap"></div>
+
+<div>
+	<input type="button" value="保存実行" onclick="test1()" /><br>
+	<img id="img1" src="" />
+</div>
+
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-06-29</p>
+</body>
+</html>

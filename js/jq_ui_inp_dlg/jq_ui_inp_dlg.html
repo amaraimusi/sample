@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JQuery UI | 入力ダイアログ</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.4.custom.min.js"></script>
+		<script>
+
+		jQuery( function() {
+
+			//ダイアログに関するコード
+		    $( '#dlg1' ) . dialog( {
+		        autoOpen: false,
+		        width: 400,
+		        show: 'explode',
+		        hide: 'explode',
+		        modal: true,
+		        buttons: {
+		            '更新': function() {
+		            	var v = $( '#batta' ).val();
+		            	$("#test_ret").html(v);
+
+		                $( this ) . dialog( 'close' );
+		            },
+		            'キャンセル': function() {
+		                $( this ) . dialog( 'close' );
+		            },
+		        }
+		    } );
+		} );
+
+		//ダイアログを開く
+		function dlgOpen(){
+			$( '#dlg1' ) . dialog( 'open' );//ダイアログオープン
+		}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JQuery UI | 入力ダイアログ</h1>
+		<div id="content" >
+
+				<div class="sec1">
+
+					<div id="test_ret">--  サンプルテキスト --</div>
+					<input type="button" value="ダイアログテスト" onclick="dlgOpen()" />
+
+
+					<!-- ダイアログ部分 -->
+					<div id="dlg1" title="編集">
+					    <form>
+					    <fieldset>
+					        <p>任意の文字列を入力してください</p>
+					        <p>
+					            <label for="batta">テスト</label>
+					            <input type="text" name="batta" id="batta" class="text ui-widget-content ui-corner-all" />
+					        </p>
+					    </fieldset>
+					    </form>
+					</div>
+				</div><!-- sec1 -->
+
+
+
+
+
+
+				<a href="jq_ui_inp_dlg2.html">参考元サイトからのサンプル</a>
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/21</div>
+		</div><!-- page1 -->
+	</body>
+</html>

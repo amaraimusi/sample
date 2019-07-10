@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>PHP | データ管理画面</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function test_func1(){
+				var x=document.getElementById('xxx1').innerHTML;
+				alert(x);
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">PHP | データ管理画面</div>
+		<div id="content" >
+		
+			<div class="sec1">
+				<h3>データ管理関連のPHPファイル　ver1.0</h3>
+				<table border="1">
+					<thead>
+						<tr><th>ファイル名</th><th>mvc</th><th>パッケージ</th><th>説明</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>list.php</td><td>view</td><td></td><td>一覧画面</td></tr>
+						<tr><td>common.php</td><td>model</td><td>zss_lib</td><td>共通。アスペクト。</td></tr>
+						<tr><td>list_control.php</td><td>control</td><td>control</td><td>一覧を制御</td></tr>
+						<tr><td>reload_check.php</td><td>model</td><td>zss_lib</td><td>リロードされたかをチェックする。</td></tr>
+						<tr><td>input_check_ex2.php</td><td>model</td><td>zss_lib</td><td>拡張入力チェック２．データの入力チェック。エンティティ情報インターフェースを利用している。</td></tr>
+						<tr><td>input_check_ex.php</td><td>model</td><td>zss_lib</td><td>拡張入力チェック。</td></tr>
+						<tr><td>input_check.php</td><td>model</td><td>model</td><td>zss_lib</td></tr>
+						<tr><td>i_entity_info.php</td><td>model</td><td>zss_lib</td><td>エンティティ情報のインターフェース。</td></tr>
+						<tr><td>pagenation_creater.php</td><td>model</td><td>zss_lib</td><td>ページネーション用のHTMLコードをお生成する。</td></tr>
+						<tr><td>dao_ex.php</td><td>model</td><td>zss_lib</td><td>拡張DAO。DB接続情報はこのクラスにある。</td></tr>
+						<tr><td>zss_lib/dao_for_mysql.php</td><td>model</td><td>zss_lib</td><td>MySQL用DAO</td></tr>
+						<tr><td>get_his_fig_data.php</td><td>model</td><td>model</td><td>画面独自のデータ取得クラス。自由に作成可能。</td></tr>
+						<tr><td>reg_edit_sub_control.php</td><td>control</td><td>control</td><td>編集画面の登録処理制御クラス。</td></tr>
+						<tr><td>get_request_data.php</td><td>model</td><td>zss_lib</td><td>リクエストからエンティティ情報を取得する。</td></tr>
+						<tr><td>exten_change.php</td><td>model</td><td>zss_lib</td><td>ファイル名の拡張子を変更する。</td></tr>
+						<tr><td>image_magick_ex.php</td><td>model</td><td>zss_lib</td><td>ImageMagickを利用して画像変換を行う。</td></tr>
+						<tr><td>his_fig_entity_info.php</td><td>model</td><td>model</td><td>画面独自のエンティティ情報。</td></tr>
+						<tr><td>upload_file_for_his_fig.php</td><td>model</td><td>model</td><td>ファイル名入力フィールド系の入力チェックやデータ取得、ファイルコピーなどを行う。</td></tr>
+						<tr><td>upload_file_operator.php</td><td>model</td><td>zss_lib</td><td>アップロード関連メソッドを提供</td></tr>
+						<tr><td>copy_ex.php</td><td>model</td><td>zss_lib</td><td>拡張ファイルコピー。ディレクトリごとコピーできる。</td></tr>
+						<tr><td>his_fig_entity_info.php</td><td>model</td><td>model</td><td>独自のエンティティ情報</td></tr>
+						<tr><td>delete_file.php</td><td>model</td><td>model</td><td>ファイルを削除する。DBのデータ削除に合わせてファイル削除を行う。Utilクラス内のメソッドにしたほうが良いかも。</td></tr>
+						<tr><td>delete_list_sub_control.php</td><td>model</td><td>model</td><td>リスト中で、チェックの入った行をまとめて、削除する。</td></tr>
+						<tr><td>detail.php</td><td>view</td><td></td><td>詳細画面</td></tr>
+						<tr><td>detail_control.php</td><td>control</td><td>control</td><td>詳細画面制御</td></tr>
+						<tr><td>exten_change.php</td><td>model</td><td>zss_lib</td><td>拡張子変更</td></tr>
+						<tr><td>edit.php</td><td>view</td><td></td><td>編集画面</td></tr>
+						<tr><td>edit_control.php</td><td>control</td><td>control</td><td>編集画面制御</td></tr>
+	
+					</tbody>
+				</table>
+
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/03/20</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>スライドアニメーションによる画面要素の切替 | SlideK.js</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="SlideK.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script>
+	var slideK;
+	$(function(){
+		slideK = new SlideK();
+	});
+	
+	</script>
+
+</head>
+<body>
+<div id="header" ><h1>スライドアニメーションによる画面要素の切替</h1></div>
+<div class="container">
+
+
+<div class="sec4">
+	<input type="button" class="btn btn-primary" value="戻りスライド" onclick="slideK.rotationPrev()" />
+	<input type="button" class="btn btn-primary" value="次へスライド" onclick="slideK.rotationNext()" />
+</div>
+
+
+
+
+
+	<div id="s1" class="slide_k" >
+		<h3>ページA</h3>
+		いろはにほへとちりぬる<br>
+		をわかよたれそつねならむ<br>
+
+		
+		
+	</div>
+	
+	
+
+	<div id="s2" class="slide_k">
+		<h3>ページB</h3>
+		うゐのおくやまけふこえてあさきゆめみしゑひもせす
+		<br>
+		
+	</div>
+	
+	
+
+	<div id="s3" class="slide_k">
+		<h3>ページC</h3>
+		山のあなたの空遠く
+		幸い住むと人のいう。
+		<br>
+		
+	</div>
+	
+	
+
+	<div id="s4" class="slide_k">
+		<h3>ページD</h3>
+		ああ、われひとゝ尋（と）めゆきて、
+		涙さしぐみ、かへりきぬ。<br>
+		山のあなたになほ遠く
+		<br>
+		
+	</div>
+
+
+
+<!-- サンプルはここまで -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<hr>
+
+<p>ダウンロード</p>
+<a href="SlideK.js" class="btn btn-success btn-lg" >SlideK.js</a><br>
+<br>
+
+
+
+<p>ソースコード</p>
+<input type="button" value="HTML(実装)" class="btn btn-default" onclick="$('#html_source').toggle(300)" />
+<pre id="html_source" style="display:none"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet"&gt;
+	&lt;script src="/note_prg/js/jquery-1.11.1.min.js"&gt;&lt;/script&gt;
+	&lt;script src="/note_prg/js/jquery-ui.min.js"&gt;&lt;/script&gt;
+	&lt;script src="SlideK.js"&gt;&lt;/script&gt;
+	
+	&lt;script&gt;
+	var slideK;
+	$(function(){
+		slideK = new <strong>SlideK</strong>();
+	});
+	&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+	&lt;div class="sec4"&gt;
+		&lt;input type="button" class="btn btn-success" value="戻りスライド" onclick="slideK.rotationPrev()" /&gt;
+		&lt;input type="button" class="btn btn-success" value="次へスライド" onclick="slideK.rotationNext()" /&gt;
+	&lt;/div&gt;
+
+	&lt;div id="s1" class="slide_k" &gt;
+		&lt;h3&gt;ページA&lt;/h3&gt;
+		いろはにほへとちりぬる&lt;br&gt;
+		をわかよたれそつねならむ&lt;br&gt;
+	&lt;/div&gt;
+
+	&lt;div id="s2" class="slide_k"&gt;
+		&lt;h3&gt;ページB&lt;/h3&gt;
+		うゐのおくやまけふこえてあさきゆめみしゑひもせす
+		&lt;br&gt;
+		
+	&lt;/div&gt;
+
+	&lt;div id="s3" class="slide_k"&gt;
+		&lt;h3&gt;ページC&lt;/h3&gt;
+		山のあなたの空遠く
+		幸い住むと人のいう。
+		&lt;br&gt;
+		
+	&lt;/div&gt;
+
+	&lt;div id="s4" class="slide_k"&gt;
+		&lt;h3&gt;ページD&lt;/h3&gt;
+		ああ、われひとゝ尋（と）めゆきて、
+		涙さしぐみ、かへりきぬ。&lt;br&gt;
+		山のあなたになほ遠く
+		&lt;br&gt;
+		
+	&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript　｜　サンプル</a></li>
+	<li>スライドアニメーションによる画面要素の切替</li>
+</ol>
+
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-8-8</div>
+</body>
+</html>

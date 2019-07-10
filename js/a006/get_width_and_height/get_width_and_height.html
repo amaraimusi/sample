@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>要素の縦幅と横幅の取得検証</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+	<script src="get_width_and_height.js"></script>
+
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>要素の縦幅と横幅の取得検証</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+	#rect1 {
+		width:100px;
+		height:100px;
+		margin:5px;
+		border: solid 1px Crimson;
+		padding:5px;
+		overflow:auto;
+		background-color:LightCoral;
+	}
+	#rect2 {
+		width:160px;
+		height:160px;
+		padding:4px;
+		margin-left:3px;
+		margin-right:4px;
+		margin-top:6px;
+		margin-bottome:7px;
+		border: solid 1px LimeGreen;
+		overflow:auto;
+		background-color:LightGreen;
+	}
+</style>
+
+<div id="rect1">
+	<div id="rect2"></div>
+</div>
+
+
+<p>HTML</p>
+<pre><code>
+	&lt;div id="rect1"&gt;
+		&lt;div id="rect2"&gt;&lt;/div&gt;
+	&lt;/div&gt;
+</code></pre>
+
+<p>CSS</p>
+<pre><code>
+&lt;style&gt;
+	#rect1 {
+		width:100px;
+		height:100px;
+		margin:5px;
+		border: solid 1px Crimson;
+		padding:5px;
+		overflow:auto;
+		background-color:LightCoral;
+	}
+	#rect2 {
+		width:160px;
+		height:160px;
+		padding:4px;
+		margin-left:3px;
+		margin-right:4px;
+		margin-top:6px;
+		margin-bottome:7px;
+		border: solid 1px LimeGreen;
+		overflow:auto;
+		background-color:LightGreen;
+	}
+&lt;/style&gt;
+</code></pre>
+
+<p>rect1</p>
+<table class="table">
+	<thead><tr><th>メソッド</th><th>記述例</th><th>値</th><th>説明</th></tr></thead>
+	<tbody>
+		<tr>
+			<td>width()</td>
+			<td>$('#rect1').width();</td>
+			<td id='res1-1'></td>
+			<td>
+				jQueryの関数。jQueryの関数。paddingとborderの幅を除外した幅を取得する。<br>
+				<pre>幅＝width(100px) - padding(5px × 2) - border(1px × 2)</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>height()</td>
+			<td>$('#rect1').height();</td>
+			<td id='res1-2'></td>
+			<td>
+				上記と同様<br>
+				<pre>幅＝height(100px) - padding(5px × 2) - border(1px × 2)</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>outerWidth()</td>
+			<td>$('#rect1').outerWidth();</td>
+			<td id='res1-3'></td>
+			<td>jQueryの関数。paddingとborderを含めた横幅を取得。marginは無視。位置や幅の計算処理を行いたい場合、この関数を使うことが多い。</td>
+		</tr>
+		<tr>
+			<td>outerHeight()</td>
+			<td>$('#rect1').outerHeight();</td>
+			<td id='res1-4'></td>
+			<td>上記と同様</td>
+		</tr>
+		<tr>
+			<td>clientWidth</td>
+			<td>$('#rect1')[0].clientWidth;</td>
+			<td id='res1-5'></td>
+			<td>
+				標準関数。スクロールバーの太さを含めた幅を取得する。スクロールバーの太さはブラウザごとに異なるので注意する。<br>
+				<br>
+				<pre>幅 = width(100px) - スクロールバーの太さ（<strong>17</strong>px※)  - border(1px × 2)</pre>
+				※スクロールバーの太さはChrome,FireFoxの場合17px、Operaは15px,Edgeは16pxである。<br>
+			</td>
+		</tr>
+		<tr>
+			<td>clientHeight</td>
+			<td>$('#rect1')[0].clientHeight;</td>
+			<td id='res1-6'></td>
+			<td>上記と同様</td>
+		</tr>
+		<tr>
+			<td>scrollWidth</td>
+			<td>$('#rect1')[0].scrollWidth;</td>
+			<td id='res1-7'></td>
+			<td>
+				標準関数。基本的に子要素の幅を取得する。スクロール制御を行いたいときに利用する関数。<br>
+				<pre>幅 ＝ rect2のouterWidth(160px) + rect2のmargin-left(3px) + padding(5px) </pre>
+			</td>
+		</tr>
+		<tr>
+			<td>scrollHeight</td>
+			<td>$('#rect1')[0].scrollHeight;</td>
+			<td id='res1-8'></td>
+			<td>
+				標準関数。基本的に子要素の幅を取得する。ブラウザごとに異なるので注意。<br>
+				<br>
+				
+				ChromeとOperaの場合
+				<pre>幅＝rect2のouterWidth(160px) + rect2のmargin-top(6px) + padding(5px × <strong>2</strong>) </pre>
+				<br>
+				
+				FireFoxとEdgeの場合
+				<pre>幅＝rect2のouterWidth(160px) + rect2のmargin-top(6px) + padding(5px) </pre>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>rect2</p>
+<table class="table">
+	<thead><tr><th>メソッド</th><th>記述例</th><th>値</th><th>検証</th></tr></thead>
+	<tbody>
+		<tr>
+			<td>width()</td>
+			<td>$('#rect2').width();</td>
+			<td id='res2-1'></td>
+			<td>width(160x) - padding(4px × 2) - border(1px × 2)</td>
+		</tr>
+		<tr>
+			<td>height()</td>
+			<td>$('#rect2').height();</td>
+			<td id='res2-2'></td>
+			<td>height(160px) - padding(4px × 2) - border(1px × 2)</td>
+		</tr>
+		<tr>
+			<td>outerWidth()</td>
+			<td>$('#rect2').outerWidth();</td>
+			<td id='res2-3'></td>
+			<td>width(160px)</td>
+		</tr>
+		<tr>
+			<td>outerHeight()</td>
+			<td>$('#rect2').outerHeight();</td>
+			<td id='res2-4'></td>
+			<td>height(160px)</td>
+		</tr>
+		<tr>
+			<td>clientWidth</td>
+			<td>$('#rect2')[0].clientWidth;</td>
+			<td id='res2-5'></td>
+			<td>width(160x) - border(1px × 2)</td>
+		</tr>
+		<tr>
+			<td>clientHeight</td>
+			<td>$('#rect2')[0].clientHeight;</td>
+			<td id='res2-6'></td>
+			<td>width(160x) - border(1px × 2)</td>
+		</tr>
+		<tr>
+			<td>scrollWidth</td>
+			<td>$('#rect2')[0].scrollWidth;</td>
+			<td id='res2-7'></td>
+			<td>width(160x) - border(1px × 2) </td>
+		</tr>
+		<tr>
+			<td>scrollHeight</td>
+			<td>$('#rect2')[0].scrollHeight;</td>
+			<td id='res2-8'></td>
+			<td>width(160x) - border(1px × 2) </td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>要素の縦幅と横幅の取得検証</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-1-30</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>指定文字列を一部でも含むすべての要素を選択する | :contains | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+	<script src="jq_contains.js"></script>
+	
+</head>
+<body>
+<div id="header" ><h1>指定文字列を一部でも含むすべての要素を選択する | :contains ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>デモ</h2>
+「contains」は指定した文字列を一部でも含むならその要素を選択する。<br>
+親要素、先祖要素も選択範囲に含まれるので注意する。<br>
+<br>
+
+<pre><code>	$("li:contains('ねこ')").css('color', 'red');</code></pre>
+<div>ねこ</div>
+<div><span>グローリーキャット</span></div>
+<ol>
+	<li>catdog</li>
+	<li>ねこ</li>
+	<li>いぬ</li>
+	<li><strong>大ねこ</strong>は逃げない</li>
+</ol>
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>指定文字列を一部でも含むすべての要素を選択する | :contains</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-3-8</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<title>サンプル</title>
+
+
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="jquery.upload-1.0.2.min.js"></script>
+
+		<script>
+
+		//ファイルアップロードされたときのイベント。
+	    $(function() {
+	        $('#medaka').change(function() {
+
+	        	//ファイル名
+	        	var fn="test.php";
+
+
+		     	//☆非同期通信で画像ファイルをアップロードする。
+	            $(this).upload(fn, function(res) {
+					//▽以下はファイルアップロードに成功したときの処理。
+
+					$("#res").html(res);
+
+	            }, 'html');
+	        });
+	    });
+
+		</script>
+	</head>
+
+	<body>
+
+		<h2>サンプル</h2>
+		<input type="file" name="upload_file" id="medaka"><br />
+		<hr>
+
+		<h3>結果</h3>
+		<div id="res" style="color:red"></div>
+
+	</body>
+</html>

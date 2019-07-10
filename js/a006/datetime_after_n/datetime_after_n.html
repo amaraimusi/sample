@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>日時のn秒後であるかチェックする</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+	
+	<script src="datetime_after_n.js"></script>
+
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>日時のn秒後であるかチェックする</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>デモ</h2>
+<input type="button" value="TEST1" onclick="test1()" class="btn btn-success" /><br>
+<div id="res1" class="text-success"></div>
+
+<input type="button" value="ソースコード" class="btn btn-default btn-xs" onclick="$('#source1').toggle(300);" />
+<pre id="source1" style="display:none"><code>
+	function test1(){
+		
+		// 現在日時が「2017-10-23 11:55:00」の30秒後であるかチェックする
+		var flg = checkAfterSeconds('2017-10-23 11:55:00',30);
+		$('#res1').append(flg + '&lt;br&gt;');
+	
+	}
+	
+	/**
+	 * 現在日時が指定日時のn秒後であるかチェックする
+	 * 
+	 * @note
+	 * 文字列型日付、日付オブジェクトの両方に対応
+	 * 
+	 * @param d1 指定日時
+	 * @param n n秒後
+	 * @returns 結果 0:n秒前  ,  1:n秒後
+	 * 
+	 */
+	function checkAfterSeconds(d1,n){
+		
+		// 引数が文字列型の日付なら日付オブジェクトに変換
+		if(typeof d1 == "string"){
+			if(d1.indexOf('-') &gt; -1){
+				d1 = d1.replace('-','/');// IEは「-」の区分に対応していないので「/」に置換
+			}
+			d1 = new Date(d1);
+		}
+		var d_u = Math.floor(d1);
+		
+		var now_u =  Math.floor(new Date());
+	
+		if(now_u &gt; d_u + n * 1000){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+</code></pre>
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>日時のn秒後であるかチェックする</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-10-23</div>
+</body>
+</html>

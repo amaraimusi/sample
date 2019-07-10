@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>数値範囲入力チェックのバリデーション</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+
+			function test(){
+				var v=$('#xxx').val();
+				if(isRange(v,-9,20,true)==false){
+					alert('-9～20で入力してください。必須です。');
+				}
+			}
+			
+			function isRange(v,range1,range2,req){
+
+
+				//必須入力チェック
+				if(req==true){
+					if(v == null || v === '' || v === false){
+						return false;
+					}
+				}
+
+
+				//数値チェックをする。
+				if(isNaN(v)){
+					return false;
+				}
+
+				//数値範囲チェックをする。
+				if(range1 <= v && range2 >= v){
+					return true;
+				}else{
+					return false;
+				}
+
+
+			}
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >数値範囲入力チェックのバリデーション</h1>
+
+<input id="xxx" type="text" value="" />
+<input type="button" value="test" onclick="test()" />
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-09-29</p>
+</body>
+</html>

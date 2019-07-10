@@ -1,0 +1,93 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr">
+<head>
+	<link rel="NEXT"  href="mnt_top.php" />
+	<link rev="made" href="mailto:amaraimusi@yahoo.co.jp" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<script type="text/javascript" src="jquery.js" charset="utf-8"></script>
+	<script type="text/javascript" src="auto_inp_form2.js" charset="utf-8"></script>
+	<script type="text/javascript" src="jquery.cookie.js" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+
+//		$('body').onload(function(event){
+//			alert('test');
+//		}
+/*
+		$(document).onload(function(){
+			// OnLoadイベントより前に実行される
+			alert("DOMContentLoaded");	 //1番目に呼ばれる
+		});*/
+/*
+		$(window).load(function(){
+		    // ページの読み込みが完了した後に実行するコード
+			alert('test');
+		});
+	
+*/
+	</script>
+
+	<title>自動入力ツール Ver2</title>
+</head>
+<body>
+<div>
+
+<h1>自動入力ツール Ver2サンプル</h1>
+
+Ctrl + F2キーで入力値を保存。<br />
+F2で保存した入力値をフォームに反映。
+
+<div id="test"></div><br />
+<div id="test1"></div><br />
+<div id="test2"></div><br />
+<div id="test3"></div><br />
+<div id="test4"></div><br />
+<div id="test5"></div><br />
+
+<br /><br />
+<input type="text" id="neko" name="neko" value="ネコ" />
+
+<br /><br />
+<input type="radio" id="nezumi" name="nezumi" value="ネズミ1" />
+<input type="radio" id="nezumi" name="nezumi" value="ネズミ2" checked="checked"" />
+
+
+<br /><br />
+<input type="checkbox" id="usi" name="usi" value="牛" />牛
+<input type="checkbox" id="usi2" name="usi2" checked="checked" />牛2
+
+<br /><br />
+<select id='category' name='category' >
+<option value='0' selected='selected'>おすすめ</option>
+<option value='1' >文化遺産</option>
+<option value='2' >自然</option>
+<option value='3' >観光スポット</option>
+<option value='4' >交通機関</option>
+<option value='5' >公共施設</option>
+<option value='6' >イベント</option>
+<option value='9' >ランドマーク</option>
+<option value='-1' >未設定</option>
+<option value='-2' >すべて</option>
+</select>
+	
+
+<br /><br />鵜（hidden)
+<input type="hidden" id="u" name="u" value="鵜" />
+
+<br /><br />
+<input type="text" id="saru[0]" name="saru[0]" value="リストテスト1" /><br />
+<input type="text" id="saru[1]" name="saru[1]" value="リストテスト2" /><br />
+<input type="text" id="saru[2]" name="saru[2]" value="リストテスト3" /><br />
+<input type="text" id="saru[3]" name="saru[3]" value="リストテスト4" /><br />
+
+<br /><br />
+<textarea id="ninjin">
+ニンジンテキストエリアサンプル
+</textarea>
+</div>
+</body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>マルチセレクト（jQuery UI MultiSelect Widget）</title>
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="jquery.multiselect.js"></script>
+		<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
+		<link rel="stylesheet" type="text/css" href="jquery.multiselect.css">
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+
+		<script>
+
+			$(document).ready(function(){
+			    $("#xxx").multiselect({
+			    	minWidth:300,
+			        selectedList: 50,
+			        checkAllText: "全選択",
+			        uncheckAllText: "選択解除",
+			        noneSelectedText: "未選択",
+			    });
+
+			    $("#xxx").multiselect();
+			});
+
+
+			function test(){
+
+				var str='';;
+				$("#xxx option:selected").each(function(){
+					//console.log($(this).val());
+					str+=$(this).val() + ",";
+				});
+
+				alert(str);
+
+			}
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">マルチセレクト（jQuery UI MultiSelect Widget）</h1>
+		<div id="content" >
+
+
+			<div class="sec1">
+
+				<select id="xxx" multiple="multiple" size="8">
+				  <option value="neko">ネコ</option>
+				  <option value="nezumi">ネズミ</option>
+				  <option value="usi" selected>ウシ</option>
+				  <option value="tora">トラ</option>
+				  <option value="u" selected>ウ</option>
+				  <option value="saru">サル</option>
+				  <option value="niwatori">ニワトリ</option>
+				  <option value="yagi">ヤギ</option>
+				  <option value="buta">ブタ</option>
+				  <option value="tokage">トカゲ</option>
+				  <option value="habu">ハブ</option>
+				  <option value="kani">カニ</option>
+				  <option value="roba">ロバ</option>
+				</select>
+
+
+				<br>
+				<input type="button" value="セレクト値取得" onclick="test()" />
+				<br>
+				<hr>
+				<a class="ref_link" href="http://www.erichynds.com/blog/jquery-ui-multiselect-widget/">開発者サイト(ライブラリ等のダウンロード元)</a><br>
+				<a class="ref_link" href="http://write-remember.com/program/jquery/multiselect/">参考サイト2</a>
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/04</div>
+		</div><!-- page1 -->
+	</body>
+</html>

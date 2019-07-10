@@ -1,0 +1,91 @@
+<!DOCTYPE html> 
+<html lang="ja"> 
+	<head> 
+	<title>jQuery.mobile | リストビュー</title> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" /><!-- 自動翻訳させない -->
+	<link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
+
+	<script type="text/javascript" language="javascript">
+	      
+
+	      	//一覧選択表示ボタンクリックイベント
+	        $('#list_show_btn').live('click', function() {
+						//alert("選択項目一覧を表示します。");
+	        });
+
+					//一覧から任意の項目を選択したときのイベント。
+			    $('#list_a li').live('click', function() {
+			    	
+			    	var v=$(this).text();//選択値を取得。
+			    	$('#list_res').html(v);
+			    	location.href='#page1';
+			    });
+			    
+
+	</script> 
+
+	<style type="text/css">
+	</style>
+
+</head> 
+<body> 
+
+<div id="page1" data-role="page">
+
+	<div data-role="header" data-position="inline" data-backbtn="false">
+		<h1>jQuery.mobile | リストビュー</h1>
+		<a href="#" data-icon=“back” data-rel=“back” class="ui-btn-right">戻る</a>
+	</div>
+	
+
+	<div data-role="content">	
+		
+		
+		<label for="list_show_btn">選択</label>
+    <a href="#page2" id="list_show_btn" name="list_show_btn" data-icon="check" autofocas data-theme="a" data-role="button">
+    	<span id="list_res">所属選択</span>
+    </a>
+   			
+						
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>(C)kenji uehara　2013/03/21</h4>
+	</div><!-- /footer -->
+</div><!-- /page1 -->
+
+
+
+
+<!-- 一覧ページ -->
+<div id="page2" data-role="page"  >
+	<div data-role="header" data-position="fixed" ><h1 id="title">一覧選択</h1></div>
+	
+	<div data-role="content">
+		
+	  <p>一覧から項目を選択して下さい。</p><br>
+     <ul data-role="listview" data-inset="true" data-theme="c" id="list_a" >
+			<li>徳川家康</li>
+			<li>チンギスハーン</li>
+			<li>スレイマン</li>
+			<li>チャガタイ</li>
+			<li>バイバルス</li>
+			<li>ジョチ</li>
+			<li>ネブカドネザル</li>
+			<li>キュロス</li>
+			<li>クセルクセス</li>
+			<li>ジャラールッディーン</li>
+     </ul>
+				 
+  </div><!-- /content -->
+</div><!-- /page2 -->
+
+
+</body>
+</html>

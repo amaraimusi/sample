@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss">
+<title>GeoRSSのテスト</title>
+<subtitle>GeoRSSの表示テスト</subtitle>
+<link href="http://www.yaskey.cside.tv/mapserver/"/>
+<updated>2007-7-2T23:30:02Z</updated>
+<author>
+<name>Yaskey</name>
+</author>
+<entry>
+<title>GeoRSSのテスト札幌駅</title>
+<link href="http://www.yaskey.cside.tv/mapserver/"/>
+<updated>2007-7-2T23:30:02Z</updated>
+<summary>GeoRSSのテストを行っています。ここは北海道の札幌駅です</summary>
+<georss:point>43.06869966738 141.35095596313477</georss:point>
+</entry>
+<entry>
+<title>GeoRSSのテスト桜島</title>
+<link href="http://www.yaskey.cside.tv/mapserver/"/>
+<updated>2007-7-2T23:30:02Z</updated>
+<summary>GeoRSSのテストです。ここは鹿児島県の桜島です</summary>
+<georss:point>31.60193125799097 130.65902709960938</georss:point>
+</entry>
+</feed>

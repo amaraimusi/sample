@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>複数ファイルダウンロード</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+	<script src="multiple_file_download.js"></script>
+	
+
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>複数ファイルダウンロード</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>デモ</h2>
+<div>
+	<a id="link1" href="sample/smp1.zip" download="smp1.zip">smp1.zip</a><br>
+	<a id="link2" href="sample/smp2.zip" download="smp2.zip">smp2.zip</a><br>
+	<a id="link3" href="sample/smp3.png" download="smp3.png">smp3.png</a><br>
+	<a id="link4" href="sample/smp4.txt" download="smp4.txt">smp4.txt</a><br>
+</div>
+<input type="button" value="複数ファイルダウンロード" onclick="test1()" class="btn btn-success btn-sm" /><br>
+<br>
+
+<h3>ソースコード</h3>
+<p>HTML</p>
+<pre><code>
+	&lt;a id="link1" href="sample/smp1.zip" download="smp1.zip"&gt;smp1.zip&lt;/a&gt;
+	&lt;a id="link2" href="sample/smp2.zip" download="smp2.zip"&gt;smp2.zip&lt;/a&gt;
+	&lt;a id="link3" href="sample/smp3.png" download="smp3.png"&gt;smp3.png&lt;/a&gt;
+	&lt;a id="link4" href="sample/smp4.txt" download="smp4.txt"&gt;smp4.txt&lt;/a&gt;
+	
+	&lt;input type="button" value="複数ファイルダウンロード" onclick="test1()" class="btn btn-success btn-sm" /&gt;
+</code></pre><br>
+
+<p>JavaScript</p>
+<pre><code>
+	function test1(){
+		$('#link1')[0].click();
+		$('#link2')[0].click();
+		$('#link3')[0].click();
+		$('#link4')[0].click();
+	}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>複数ファイルダウンロード</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-10-4</div>
+</body>
+</html>

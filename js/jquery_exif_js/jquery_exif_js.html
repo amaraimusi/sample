@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jpegからExif情報を取得する | jquery.exif.js</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		
+		<script src="jquery.exif.js"></script>
+		<script src="jquery_exif_js.js"></script>
+
+
+		<style>
+			.box1{
+				float:left;
+				width:200px;
+				height:200px;
+			}
+			.box1 img{
+				width:100%;
+				height:100%;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>jpegからExif情報を取得する | jquery.exif.js</h1>
+	</div>
+	
+	<strong>jquery.exif.js</strong>(jQuery fileEXIF)は、jpeg画像からExif情報を取得するライブラリ。<br>
+	phpなどのサーバー側に依存せず、javascriptだけでExif情報を取得できる。<br>
+	<br>
+	
+	やや重たい処理であるため、多用は禁物である。<br>
+	<br>
+	
+	<a href="http://plugins.jquery.com/file-exif/" target="brank" class="btn btn-info">公式サイト</a><br>
+	<br>
+	
+	
+	<h3>アップロードファイルからExifを取得</h3>
+	ファイル送信要素(&lt;input type="file" /&gt;)によるアップロードファイルからExif情報を取得できる。<br>
+	<br>
+	
+	html
+	<pre>
+		&lt;script src="<strong>jquery.exif.js</strong>"&gt;&lt;/script&gt;
+		～略～
+		&lt;input type="file" id="file1" /&gt;
+	</pre>
+	<br>
+	
+	javascript
+	<pre>
+	$('#file1').change(function() {
+		// アップロードファイルからExif情報を抜出す。
+		$(this).<strong>fileExif</strong>(function(exif) {
+			console.log(exif);
+		});
+	});
+	</pre>
+	<br>
+	
+	<p>サンプル1</p>
+	<input type="file" id="file1" />
+	<aside>※ コンソールにExif情報を出力</aside>
+	<br>
+	
+	<hr>
+	
+	
+
+	<h3 id="sample2">サーバー上のjpegからExif情報を取得</h3>
+	
+	サーバー上のjpegからAjaxを通して、バイトデータ（バイナリ情報）を取得し、バイトデータからBlobを作成する。<br>
+	そのBlobをjquery.exif.jsの関数fileExifに渡して、Exif情報を取得できる。<br>
+	<br>
+
+
+	html
+	<pre>	&lt;script src="jquery.exif.js"&gt;&lt;/script&gt;</pre>
+	<br>
+	
+	javascript
+	<pre>
+	function test(){
+		// サーバー上の画像ファイルから、Ajaxを利用してバイトデータを取得する
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'img/test4.jpg', true);
+		xhr.responseType = 'arraybuffer';
+		xhr.onload = function(e) {
+			
+			// 画像ファイルのバイトデータを取得する
+			var arrayBuffer = this.response;
+	
+			// バイトデータとコンテンツタイプからBlobを生成する
+			var blob = new Blob([arrayBuffer], {type: "image/jpeg"});
+			
+			// BlobからExif情報を取得する
+			<strong>$.fileExif(blob,function(exif)</strong>{
+				console.log(exif);
+			});
+		};
+		xhr.send();
+	}
+	</pre>
+	<br>
+
+	<p>サンプル2</p>
+	<div class="box1">
+		<img id="test4" src="img/test4.jpg" /><br>
+		<input type="button" value="TEST" onclick="test()" class="btn btn-success"/><br>
+	</div>
+	<div style="clear:both"></div>
+	<br>
+	
+	
+	<p>Exif出力</p>
+	<div id="res" class="output_data"></div>
+	
+
+
+	
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-16
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

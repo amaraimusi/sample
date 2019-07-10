@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+	<title>JQuery 非同期通信・POSTで配列データを送信</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+	<script type="text/javascript" language="javascript">
+
+
+		//▼ページ初期化イベント
+		$(document).bind("pageinit", function(){
+
+		});
+
+		//ボタン１をクリック
+		$('#btn1').live('click', function() {
+
+			//サーバーサイドURL
+			var url='sample1.php';
+			//var id = [1,2,3,'test.jpg'];
+
+			//サンプルデータ
+			var ary=new Array();
+			ary[0]="a";
+			ary[1]="b";
+			ary[2]=5;
+			ary[3]="hello world";
+
+			$.post(
+			url ,
+			{"ary" : ary} ,
+				function(msg){
+					alert(msg);
+				}
+			).error(function() {//PHP側で何らかのバグ発生。存在しないURLを指定したりすると発生。
+
+				alert('サーバーサイドのエラー');
+			});
+
+
+		});
+	</script>
+
+
+
+</head>
+<body>
+
+<div data-role="page">
+
+
+	<div data-role="header" data-position="inline" data-backbtn="false">
+		<h1>JQuery 非同期通信・POSTで配列データを送信</h1>
+
+	</div>
+
+
+	<div data-role="content">
+
+		<div>配列やArrayを非同期通信POSTで送ることができます。</div>
+
+		<h3>★サンプル1</h3>
+		Arrayを非同期通信POSで送ります。
+		<p><input type="button" id ="btn1" value="テスト実行"  /></p>
+
+
+		<h3>★サンプル1のソースコード</h3>
+		<div style="background-color:#ddf4dd">
+			<strong>JavaScript側ソースコード。主要部分を抜粋。</strong>
+			<pre>
+	var url='sample1.php';
+
+	//サンプルデータ
+	var ary=new Array();
+	ary[0]="a";
+	ary[1]="b";
+	ary[2]=5;
+	ary[3]="hello world";
+
+	//★Arrayを非同期通信POSTで送る。
+	$.post(
+	url ,
+	{"ary" : ary} ,
+		function(msg){
+			alert(msg);
+		}
+	).error(
+		function() {//PHP側で何らかのバグ発生。存在しないURLを指定したりすると発生。
+
+		alert('サーバーサイドのエラー');
+	});
+			</pre>
+		</div>
+		<div style="background-color:#ddf4dd">
+			<strong>sample1.phpの全ソースコード</strong>
+			<pre>
+
+	header("Access-Control-Allow-Origin:*");//クロスドメイン通信を許可する。
+
+	$ids=$_POST['ary'];
+	$ret=join("/",$ids);
+	echo $ret;
+
+			</pre>
+		</div>
+
+
+		<div style="background-color:#ddf4dd">
+		<h4>補足：Arrayだけでなく配列も可能。</h4>
+		<div>
+		※多次元配列やツリー構造のデータを送る場合、オブジェクト型に変換しないといけない。<br>
+		配列では一次元までしか送れないようである。<br>
+		</div>
+			<pre>
+	var url='sample1.php';
+
+	//サンプルデータ
+	var id = [1,2,3,'test.jpg'];
+
+	//★配列を非同期通信POSTで送る。
+	$.post(
+	url ,
+	{"id[]" : id} ,
+		function(msg){
+			alert(msg);
+		}
+	).error(
+		function() {//PHP側で何らかのバグ発生。存在しないURLを指定したりすると発生。
+
+			alert('サーバーサイドのエラー');
+		});
+			</pre>
+		</div>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>(C)kenji uehara</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

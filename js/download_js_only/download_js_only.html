@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>JavaScriptだけで文字列をファイルダウンロードする</title>
+
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+
+		<script>
+
+			$( function() {
+				onblur_textarea1();
+
+			});
+
+			function setDownloadData(text,fn){
+				$("#sample1").attr('download',fn);
+				href='data:application/octet-stream;charset=utf-8,'+encodeURIComponent(text);
+				//href='data:application/text;charset=utf-8,'+encodeURIComponent(text);
+				$("#sample1").attr('href',href);
+
+			}
+
+			function onblur_textarea1(){
+
+				var text = $('#textarea1').val();
+				var fn="sample1.txt";
+
+
+				setDownloadData(text,fn);
+			}
+
+
+
+/*
+			function downloadX(fileName, content){
+				  var blob = new Blob([content]);
+				  var url = window.URL || window.webkitURL;
+				  var blobURL = url.createObjectURL(blob);
+				  var a = document.createElement('a');
+				  a.download = fileName;
+				  a.href = blobURL;
+				  return a;
+
+			}
+
+		     jQuery(function ($) {
+		          $(document).on('click', '.download', function (e) {
+		              var text = $('#downloadText').val();
+		              location.href = 'data:application/octet-stream,'+encodeURIComponent(text);
+		          });
+		      });*/
+
+		</script>
+		<style>
+
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>JavaScriptだけで文字列をファイルダウンロードする</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>サンプル1</h2>
+
+	  <textarea id="textarea1" name="content" cols="100" rows="10" onblur="onblur_textarea1()">
+いろはにほへとちりぬのをわかよたれそつねならむ
+うゐのおくやま けふこえてあさきゆめみし ゑひもせす
+	  	</textarea><br>
+	  	<a id="sample1" href="" download="" >ダウンロード1</a>
+	</div>
+
+
+
+
+
+	<div class="sec3">
+		<h2>サンプル2</h2>
+		<pre>
+&lta id="sample2"
+	href="data:application/csv;charset=utf-8,Col1%2CCol2%2CCol3%0AVal1%2CVal2%2CVal3%0AVal11%2CVal22%2CVal33%0AVal111%2CVal222%2CVal333"
+	download="sample2.csv">ダウンロード2&lt/a>
+		</pre>
+		<a id="sample2"
+			href="data:application/csv;charset=utf-8,Col1%2CCol2%2CCol3%0AVal1%2CVal2%2CVal3%0AVal11%2CVal22%2CVal33%0AVal111%2CVal222%2CVal333"
+			download="sample2.csv">ダウンロード2</a><br>
+	</div>
+
+
+	<br><br>
+	<a href="http://stackoverflow.com/questions/6955860/filename-of-downloaded-file-in-dataapplication-octet-stream" class="btn btn-link btn-xs">参考サイト</a>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2014-12-24</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

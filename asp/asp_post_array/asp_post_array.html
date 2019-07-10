@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>ASP | 配列をPOST</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function test_func1(){
+
+					var url=$('#text1').val();//Ajax送信先サーバーURL
+
+					//サンプル配列データ
+					var ary = new Array("Sun", "Mon", "Tue", "水曜日");
+					
+					//☆AJAX非同期通信
+					$.ajax({
+						type: "POST",
+						url: url,
+						data: {"ary" : ary},
+						cache: false,
+						dataType: "text",
+						success: function(data, type) {
+							
+							$('#res').html(data);
+							
+						},
+						error: function(xmlHttpRequest, textStatus, errorThrown){
+							alert(textStatus);
+						}
+					});	
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			.a1{
+				color:red;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">ASP | 配列をPOST</div>
+		<div id="content" >
+		
+			<div class="sec1">
+				
+				配列をPOSTでサーバーへ転送するサンプルです。<br />
+				<hr />
+				
+				<label for="text1">aspx url:</label>
+				<input type="text" id="text1" name="text1" style="width:300px" 
+					value="http://localhost:4236/test/PostByPost.aspx" />
+					
+				<input type="button" value="run" onclick="test_func1()" />
+				<div id="res" style="background-color:#fbe1ce"></div>
+				<hr />
+				
+				<strong>JavaScript:</strong>
+				<pre>			
+var url=$('#text1').val();//Ajax送信先サーバーURL
+
+//サンプル配列データ
+var ary = new Array("Sun", "Mon", "Tue", "水曜日");
+
+//☆AJAX非同期通信
+$.ajax({
+	type: "POST",
+	url: url,
+	<span class="a1">data: {"ary" : ary}</span>,
+	cache: false,
+	dataType: "text",
+	success: function(data, type) {
+		
+		$('#res').html(data);
+		
+	},
+	error: function(xmlHttpRequest, textStatus, errorThrown){
+		alert(textStatus);
+	}
+});	
+				</pre><br />
+				
+				<strong>HTML:</strong>
+				<pre>			
+&ltlabel for="text1">aspx url:&lt/label>
+&ltinput type="text" id="text1" name="text1" style="width:300px" 
+	value="http://localhost:4236/test/PostByPost.aspx" />
+	
+&ltinput type="button" value="run" onclick="test_func1()" />
+&ltdiv id="res" style="background-color:#fbe1ce">&lt/div>
+				</pre><br />
+				
+				<strong>ASP:</strong>
+				<pre>			
+protected void Page_Load(object sender, EventArgs e)
+{
+	//☆POSTから配列データを取得する。
+	&ltspan class="a1">string[] ary = Request.Form.GetValues("ary[]");&lt/span>
+
+	//▽出力
+	Response.Clear();
+	Response.AppendHeader("Access-Control-Allow-Origin", "*");//クロスドメイン通信を許可する。
+	if (ary != null)
+	{
+		foreach (string s in ary)
+		{
+			Response.Write("☆" + s + "&ltbr>");
+		}
+	}
+	else
+	{
+		Response.Write("nullです。&ltbr>");
+	}
+	Response.End();
+}
+				</pre><br />
+				
+				
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/03/20</div>
+		</div><!-- page1 -->
+	</body>
+</html>

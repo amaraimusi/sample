@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>移動パネル ＆ Canvas</title>
+
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/open_src.js"></script>
+	<script src="PanelXCanvas.js"></script>
+
+
+		<script>
+			var panelXCanvas;
+			$( function() {
+				// 移動パネル ＆ Canvas
+				panelXCanvas = new PanelXCanvas({
+					'frame_div_slt':'#box_a'
+				});
+			});
+			
+
+		</script>
+		<style>
+			#panel1_rap{
+				width:500px;
+				height:400px;
+				background-color:#e3b638;
+			}
+			
+			.pnl_head1{
+				width:40%;
+				display:inline-block;
+			}
+			
+			.pnl_head2{
+				width:40%;
+				display:inline-block;
+			}
+			
+			.pnl_head3{
+				width:15%;
+				margin-left:auto;
+				display:inline-block;
+				text-align:right;
+			}
+			
+			#pnl1_window{
+				display:none;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>移動パネル ＆ Canvas</h1>
+			<p></p>
+		</div>
+	</div>
+
+<!-- パネル -->
+<div id="box_a">
+
+	<div id="game_preview_panel" class="panel panel-primary" style="width:200px;">
+		<div id="game_preview_panel_head" class="panel-heading">
+			
+			<div class="pnl_head1">いろはにほ</div>
+			<div class="pnl_head2">
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-xs">H1</button>
+					<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-leaf"></span></button>
+					<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-tree-deciduous"></span></button>
+					
+				</div>
+			</div>
+			<div class="pnl_head3">
+			
+				<button id="pnl1_fullscreen" type="button" class="btn btn-primary btn-xs" onclick="offDraggable()">
+					<span class="glyphicon glyphicon-magnet"></span>
+				</button>
+				
+				<button id="pnl1_window" type="button" class="btn btn-primary btn-xs" onclick="onDraggable()">
+					<span class="glyphicon glyphicon-new-window"></span>
+				</button>
+				
+				<button type="button" class="btn btn-primary btn-xs" onclick="closePanel()">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</div>
+		</div>
+		<div id="game_preview_panel_body" class="panel-body" style="height:80%">
+			
+			<canvas id="game_preview_canvas"></canvas>
+			
+		</div>
+
+	</div>
+	
+</div><!-- box_a_left -->
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-12-2</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

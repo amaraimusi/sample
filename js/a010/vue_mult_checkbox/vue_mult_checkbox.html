@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+	 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>vue.js | 複数チェックボックス | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="vue_mult_checkbox.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>vue.js | 複数チェックボックス | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>DEMO</h2>
+<div id="app1">
+	<input type="checkbox" id="aka_neko" value="1" v-model="cats">
+	<label for="aka_neko">赤猫</label>
+	<input type="checkbox" id="siro_neko" value="2" v-model="cats">
+	<label for="siro_neko">白猫</label>
+	<input type="checkbox" id="mike_neko" value="3" v-model="cats">
+	<label for="mike_neko">三毛猫</label>
+	<br>
+	<span>選択: {{ cats }}</span>
+</div>
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>vue.js | 複数チェックボックス</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-3-12</div>
+</body>
+</html>

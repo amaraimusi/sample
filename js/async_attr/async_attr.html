@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js" async></script>
+		<script src="../../style2/js/bootstrap.min.js" async></script>
+		<script src="elephant.js" async></script>
+		<script src="neko.js" async></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>async属性の挙動 | &ltscript async&gt</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>実験</h2>
+
+			async属性を指定して読込順の実験。
+		<pre>
+	&ltscript src="../../style2/js/jquery-1.11.1.min.js" <strong>async</strong>&gt&lt/script&gt
+	&ltscript src="../../style2/js/bootstrap.min.js" <strong>async</strong>&gt&lt/script&gt
+	&ltscript src="elephant.js" <strong>async</strong>&gt&lt/script&gt
+	&ltscript src="neko.js" <strong>async</strong>&gt&lt/script&gt
+		</pre>
+
+		<h3>ファイル内容</h3>
+		<label>elephant.js</label>
+		<pre>
+	console.log('elephant.js');
+
+	var a=0;
+	a=a+1;
+	a=a+1;
+	a=a+1;
+	～ 略 ～
+	a=a+1;
+	a=a+1;
+	console.log('Elephant='+a);//←16388行目
+		</pre>
+		<label>elephant.js</label>
+		<pre>
+	console.log('neko.js');
+		</pre>
+
+
+		<h3>ファイルの大きさ</h3>
+		<table border="1"><thead>
+			<tr>
+				<th>JSファイル名</th>
+				<th>サイズ(Byte)</th>
+			</tr></thead>
+			<tbody>
+				<tr>
+					<td>jquery-1.11.1.min.js</td>
+					<td>95788</td>
+				</tr>
+				<tr>
+					<td>bootstrap.min.js</td>
+					<td>31819</td>
+				</tr>
+				<tr>
+					<td>elephant.js</td>
+					<td>130000</td>
+				</tr>
+				<tr>
+					<td>neko.js</td>
+					<td>100</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+	<h3>結果</h3>
+	F5キーなどでリロードを繰り返すと、コンソールで出力される値の順番が変わることがある。<br>
+	先にjqueryよりもbootstrap.min.jsが先に読み込まれエラーになることもあった。<br>
+	<br>
+	以下は出力の例。F5を何度か押すと出力パターンが変化する。<br><br>
+	出力パターン1<br>
+	<img src="img/a1.png" /><br>
+
+	出力パターン2<br>
+	<img src="img/a2.png" /><br>
+
+	出力パターン3<br>
+	<img src="img/a3.png" /><br>
+
+
+	<br>
+	Chromeで検証<br>
+	F12 → consoleタブ<br>
+
+
+
+
+	</div>
+
+
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2014-11-21</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

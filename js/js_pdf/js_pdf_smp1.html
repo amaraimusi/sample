@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jsPDF サンプル1</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="jspdf.min.js"></script>
+		<script src="html2canvas.js"></script>
+		
+		
+		<script src="js_pdf_smp1.js"></script>
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>jsPDF サンプル1</h1>
+	</div>
+	<br>
+
+	jsPDF.jsを使って、要素内の画像や文章などのコンテンツをPDF化できます。<br>
+	スマホ環境にも対応しています。<br>
+	<a href="https://parall.ax/products/jspdf" target="brank">公式サイト</a><br>
+	<br>
+	
+	<h2>ソースコード</h2>
+	html2canvas.jsでコンテンツを画像化し、その画像をjsPDF.jsでPDF化します。
+	
+	<p>html</p>
+	<pre>
+	&lt;script src="jquery.js"&gt;&lt;/script&gt;
+	&lt;script src="html2canvas.js"&gt;&lt;/script&gt;
+	&lt;script src="<strong>jspdf.min.js</strong>"&gt;&lt;/script&gt;
+	～略～
+	&lt;div id = "test1" style="background-color:white"&gt;
+		うゐのおくやまけふこえてあさきゆめみしゑひもせす&lt;br&gt;
+		&lt;input type="button" value="PDFダウンロード" onclick="test1()" class="btn btn-success" /&gt;&lt;br&gt;
+		&lt;img id = "img1" src="imori.jpg" /&gt;&lt;br&gt;
+	&lt;/div&gt;
+	
+	<strong>&lt;iframe id="renderSpace" frameborder="0" width="450" height="450"&gt;&lt;/iframe&gt;</strong>
+	</pre>
+	<br>
+	
+	<p>js</p>
+	<pre>
+	function test1(){
+		// コンテンツ化を画像化します。
+		html2canvas(document.getElementById("test1"), {
+	        onrendered: function (canvas) {
+	        	// コンテンツの画像化が完了したら以下の処理を行います。
+	        	
+	        	// コンテンツの画像データを取得します。
+	            var dataURI = canvas.toDataURL("image/jpeg");
+	            
+	            // ｊｓPDFを生成し、画像データを渡します。
+	            var pdf = new jsPDF();
+	            pdf.addImage(dataURI, 'JPEG', 0, 0);
+	            
+	            // とりこんだ画像データからレンダリングデータを作成し、PDFプレビュー画面を表示します。
+	            var renderString = pdf.output("datauristring");
+	            $("iframe").attr("src", renderString);
+	        }
+	    });   
+	}
+	</pre>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<hr>
+	
+	
+	<h2>検証</h2>
+
+	
+	<div id = "test1" style="background-color:white">
+		PDFダウンロードボタンでPDFをダウンロードできます。<br>
+		PC環境であればPDFプレビュー画面が表示され、この画面からダウンロードできます。<br>
+		スマホ環境であればすぐにPDFダウンロードが開始されます。<br>
+		<input type="button" value="PDFダウンロード" onclick="test1()" class="btn btn-success" /><br>
+		<img id = "img1" src="imori.jpg" /><br>
+	</div>
+	
+	<iframe id="renderSpace" frameborder="0" width="450" height="450"></iframe>
+
+
+
+
+	
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-7 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

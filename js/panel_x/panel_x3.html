@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>メニュー付きパネル</title>
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script><!-- スマホでもuiでタッチできるようにする(ドラッグ可能にする) -->
+
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+				
+				//ドラッグ機能を有効化する。
+				onDraggable();
+				
+				$('#panel1').resizable({
+					maxHeight:2500,
+					maxWidth:2500,
+					minHeight:40,
+					minWidth:250,
+					stop: function( event, ui ) {
+						//リサイズ操作から手を放した瞬間のイベント
+						var h=ui.size.height;
+						var w=ui.size.width;
+						
+						//サイズ変更したとき、別の要素も連動させてみる。
+						$( "#sub1" ).height(h);
+						$( "#sub1" ).width(w);
+						
+					}
+				});
+			});
+			
+			//ドラッグ機能を有効化する。
+			function onDraggable(){
+				var draggableDiv = $('#panel1').draggable();
+				
+				//ドラッグ移動を組み込むとテキスト選択ができなくなるので、パネルボディ部分をテキスト選択可能にする。
+				$('.panel-body',draggableDiv).mousedown(function(ev) {
+					  draggableDiv.draggable('disable');
+					}).mouseup(function(ev) {
+					  draggableDiv.draggable('enable');
+					});
+				
+
+				
+				$('#panel1').css({
+					'top':'50px',
+					'left':'50px',
+					'width':'500px',
+					'height':'250px',
+				});
+				
+
+				$('#pnl1_fullscreen').show();
+				$('#pnl1_window').hide();
+			}
+			
+			
+			function offDraggable(){
+				var draggableDiv = $('#panel1').draggable();
+				draggableDiv.draggable('destroy');
+
+				$('#panel1').css({
+					'position':'none',
+					'top':'0px',
+					'left':'0px',
+					'width':'100%',
+					'height':'100%',
+					'z-index':10,
+				});
+
+				$('#pnl1_fullscreen').hide();
+				$('#pnl1_window').show();
+
+			}
+			
+			// パネルを閉じる
+			function closePanel(){
+				$('#panel1').hide();
+			}
+			
+			// パネルを表示する
+			function showPanel(){
+				$('#panel1').show();
+			}
+			
+			// 元の空間を消す
+			function lostSpace(){
+				$('#panel1_rap').css('height','0px')
+			}
+		</script>
+		<style>
+			#panel1_rap{
+				width:500px;
+				height:300px;
+				background-color:#e3b638;
+			}
+			
+			.pnl_head1{
+				width:40%;
+				display:inline-block;
+				cursor:move;
+			}
+			
+			.pnl_head2{
+				width:40%;
+				display:inline-block;
+			}
+			
+			.pnl_head3{
+				width:15%;
+				margin-left:auto;
+				display:inline-block;
+				text-align:right;
+			}
+			
+			#pnl1_window{
+				display:none;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>メニュー付きパネル</h1>
+			<p></p>
+		</div>
+	</div>
+
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		<input type="button" value="表示" onclick="showPanel()" class="btn btn-success btn-xs" />
+		<input type="button" value="元位置の空間を消す" onclick="lostSpace()" class="btn btn-success btn-xs" />
+		<hr>
+			<div id="panel1_rap">
+			<div id="panel1" class="panel panel-primary" style="width:200px;">
+				<div class="panel-heading">
+					
+					<div class="pnl_head1">いろは歌</div>
+					<div class="pnl_head2">
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary btn-xs">H1</button>
+							<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-leaf"></span></button>
+							<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-tree-deciduous"></span></button>
+							
+	
+						</div>
+					</div>
+					<div class="pnl_head3">
+						<button id="pnl1_fullscreen" type="button" class="btn btn-primary btn-xs" onclick="offDraggable()">
+							<span class="glyphicon glyphicon-magnet"></span>
+						</button>
+						
+						<button id="pnl1_window" type="button" class="btn btn-primary btn-xs" onclick="onDraggable()">
+							<span class="glyphicon glyphicon-new-window"></span>
+						</button>
+						
+						<button type="button" class="btn btn-primary btn-sm" onclick="closePanel()">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</div>
+				</div>
+				<div class="panel-body">
+					いろはにほへとちりぬるをわかよたれそつねならむ<br>
+					うゐのおくやまけふこえてあさきゆめみしゑひもせす<br>
+				</div>
+				<div class="panel-footer">
+					フッター
+				</div>
+			</div>
+		</div>
+		<div id="sub1" style="background-color:#fcd209">サブ要素</div>
+	
+	
+	</div>
+
+
+	
+	<div class="row" style="margin-top:400px">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-3-29 | 2019-6-7</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

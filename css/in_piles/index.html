@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>要素を重ねる</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+			});
+		</script>
+
+		<style>
+			#box_a1{
+				width:500px;height:50px;
+				background-color:#fe3932;
+			}
+			#box_a2{
+				width:500px;height:25px;
+				background-color:#4a88e3;
+			}
+			#box_a3{
+				width:500px;height:50px;
+				background-color:#399f26;
+			}
+			#box_a4{
+				width:500px;height:50px;
+				background-color:#f3c756;
+			}
+
+
+			#box_b1{
+				width:500px;height:50px;
+				background-color:#fe3932;
+			}
+			#box_b2{
+				width:500px;height:25px;
+				background-color:#4a88e3;
+				position:relative;
+				top:20px;
+				left:30px;
+			}
+			#box_b3{
+				width:500px;height:50px;
+				background-color:#399f26;
+				position:absolute;
+			}
+			#box_b4{
+				width:500px;height:50px;
+				background-color:#f3c756;
+			}
+		</style>
+	</head>
+
+<body>
+
+<h1 >要素を重ねる</h1>
+
+<strong>重ね前</strong>
+<div id="box_a1">box_a1</div>
+<div id="box_a2"><div id="box_a3">box_a3</div></div>
+
+<div id="box_a4">box_a4</div>
+
+<hr>
+<strong>重ね後</strong>
+<div id="box_b1">box_b1</div>
+<div id="box_b2"><div id="box_b3">box_b3</div></div>
+
+<div id="box_b4">box_b4</div>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-06-12</p>
+</body>
+</html>

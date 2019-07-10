@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>画像ファイルアップロード | 画像サイズ(width,height)を取得する</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	
+	<script src="img_fu_p_d_a.js"></script>
+
+	<style>
+		#test1{
+			padding:1px;
+			width:400px;
+			height:250px;
+			background-color:#d6e2f8;
+		}
+		
+		#test1_init{
+			width:300px;
+			margin-top:70px;
+			margin-left:50px;
+		}
+	</style>
+
+</head>
+<body>
+<div id="header" ><h1>画像ファイルアップロード | 画像サイズ(width,height)を取得する</h1></div>
+<div class="container">
+
+
+
+
+
+
+画像用ファイルアップロードのサンプル。<br>
+<br>
+
+<p>機能</p>
+<ol>
+<li>プレビュー：画像をIMG要素へセットしてプレビュー表示する。(JavaScriptのみで実現)</li>
+<li>DnD:任意領域へのドラッグ＆ドロップでファイルアップロードできる。</li>
+<li>Ajax:サーバーへのファイル転送をAjaxで行う。</li>
+</ol>
+
+
+
+
+<h2>サンプル</h2>
+<div id="test1">
+	<div id="test1_init">
+		ファイルをドラッグ＆ドロップしてください。
+		（複数ファイルも可）
+		<input type="file" id="file1" />
+	</div>
+	<img id="img1" src="" alt="" />
+</div>
+<input type="button" value="アップロード" onclick="upload1()" class="btn btn-primary" />	
+<div id="res"></div>
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>画像ファイルアップロード | 画像サイズ(width,height)を取得する</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-1-30</div>
+</body>
+</html>

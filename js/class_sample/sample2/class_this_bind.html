@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JSクラスのthisをコールバックでも使えるようにする</title>
+
+
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="class_this_bind.js"></script>
+
+		<script>
+
+			function test(){
+				var c1=new Class1();
+				c1.init(c1);
+				c1.execution();
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >JSクラスのthisをコールバックでも使えるようにする</h1>
+JSクラスのコールバック関数内ではthisを使うことはできなかった。そのため代替手段で実装してみた。<br>
+
+<input type="button" value="TEST" onclick="test()" />
+<div id="res" style="color:red"></div>
+
+<p>ソースコード</p>
+<pre>
+	function test(){
+		var c1=new Class1();
+		c1.init(c1);
+		c1.execution();
+	}
+</pre>
+<p>クラス</p>
+<pre>
+	var class1;//自分自身のインスタンス。コールバック関数内で使用する。
+	var Class1 =function(){
+		this.m_test='hello world';
+		this.init=function(instanse){
+			class1=instanse;
+		}
+		this.execution=function(){
+			//一秒後に関数をコールバックする。
+			setTimeout(function(){
+				//コールバック関数内
+				var test=class1.m_test;// × this.m_testを指定すると値が取れない。
+				alert(test);
+			}, 1000);
+		};
+	};
+	</pre>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-10-22</p>
+</body>
+</html>

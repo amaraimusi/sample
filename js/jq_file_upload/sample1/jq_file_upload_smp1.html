@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>jQuery File Upload | サンプル1</title>
+
+
+		<link href="jquery.fileupload.css" rel="stylesheet">
+		
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		
+		<script src="jquery.ui.widget.js"></script>
+		<script src="jquery.fileupload.js"></script>
+		<script src="jq_file_upload_smp1.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+			});
+
+			function dump(id,obj){
+				var json=JSON.stringify(obj);
+				$("#" + id).html(json);
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >jQuery File Upload | サンプル1</h1>
+
+
+
+
+
+
+
+<span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Select files...</span>
+        <!-- The file input field used as target for the file upload widget -->
+        <input id="fileupload" type="file" name="files[]" multiple>
+    </span>
+<br>
+<br>
+<!-- The global progress bar -->
+<div id="progress" class="progress">
+    <div class="progress-bar progress-bar-success"></div>
+</div>
+
+<hr>
+<p>出力</p>
+<div id="res">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-06-12</p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>複数選択SELECTと選択順の取得</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	
+	
+	<script>
+	var vals = [];
+	
+	function chg_test(){
+
+		for(var i=0; i <$('#animals option').length; i++) {
+			if ($($('#animals option')[i]).prop('selected') ) {
+				if (!vals.includes(i)) {
+					vals.push(i);
+				}
+			} else {
+				if (vals.includes(i)) {
+					vals.splice(vals.indexOf(i), 1);
+				}
+			}
+		}
+		  
+		printVals(vals);
+		  
+	}
+
+	function printVals(vals){
+
+		var str = "";
+		
+		for(var i in vals){
+			var v = vals[i];
+			str = str + v + '<br>';
+		}
+		
+		$('#res').html(str);
+	}
+	</script>
+
+</head>
+<body>
+<div id="header" ><h1>複数選択SELECTと選択順の取得</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>デモ</h2>
+<select id="animals" size="4" multiple onchange="chg_test()" >
+	<option value="0">0 ヤンバルテナガコガネ</option>
+	<option value="1">1 ケナガネズミ</option>
+	<option value="2">2 ヤシガニ</option>
+	<option value="3">3 オオサンショウウオ</option>
+	<option value="4">4 タヌキ</option>
+	<option value="5">5 アカネコ</option>
+	<option value="6">6クロイヌ</option>
+	<option value="7">7 シマドジョウ</option>
+</select>
+<br>
+<div id="res" class="output_data"></div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>複数選択SELECTと選択順の取得</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-3-22</div>
+</body>
+</html>

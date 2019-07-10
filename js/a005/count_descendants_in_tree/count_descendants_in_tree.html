@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ツリーデータの各ノードへ、それぞれの子孫数を数えてセットする</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	
+
+
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script src="count_descendants_in_tree.js"></script>
+</head>
+<body>
+<div id="header" >
+	<h1>ツリーデータの各ノードへ、それぞれの子孫数を数えてセットする</h1>
+	<p>Count descendants in tree data</p>
+</div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>デモ</h2>
+ツリーデータの各ノードごとに子孫数を数えてセットする。
+<pre><code>
+
+	$(function(){
+	
+		var tree = 
+			{'x':1,'y':1,'childs':[
+				{'x':2,'y':1,'childs':[
+					{'x':3,'y':1,'childs':[]},
+				]},
+				{'x':2,'y':2,'childs':[
+					{'x':3,'y':1,'childs':[]},
+					{'x':3,'y':2,'childs':[]},
+					{'x':3,'y':3,'childs':[
+						{'x':4,'y':1,'childs':[]},
+					]},
+				]},
+			]};
+		
+		// ツリーデータの各ノードの子孫数を数えて、ツリーデータにセットする。
+		<strong>_countDescendantsOfEachNode</strong>(tree);
+		
+		$('#res1').html(JSON.stringify(tree));// ダンプ出力
+	
+	});
+	
+	
+	/**
+	 * ツリーデータの各ノードの子孫数を数えて、ツリーデータにセットする。
+	 * 
+	 * @param ツリーデータ（ノード） 参照型引数であり返り値も兼ねる。
+	 * @returns 内部で使うので実装側は仕様禁止
+	 */
+	function <strong>_countDescendantsOfEachNode</strong>(node){
+		var childs = node['childs'];
+		
+		if (childs.length == 0){
+			node['descend'] = 0;
+			return 1;
+		}else{
+			var descend = 1;
+			for (var i in childs){
+				var cNode = childs[i];
+				var c_descend = _countDescendantsOfEachNode(cNode);
+				descend += c_descend;
+				
+			}
+			node['descend'] = descend - 1;
+			return descend;
+		}
+	}
+</code></pre>
+<br>
+
+<p>出力</p>
+<div id="res1" class="text-success">
+</div>
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>ツリーデータの各ノードへ、それぞれの子孫数を数えてセットする</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-8-10</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>兄弟要素を取得する | jQuery</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	
+	<script src="jq_sibling_element.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>兄弟要素を取得する | jQuery</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>検証</h2>
+サンプルHTML
+<pre>
+&lt;div&gt;
+	&lt;div&gt;ネコ&lt;/div&gt;
+	&lt;label&gt;ヤギ&lt;/label&gt;
+	&lt;div id="test1"&gt;ヤモリ&lt;/div&gt;
+	&lt;div&gt;サメ&lt;/div&gt;
+	&lt;div&gt;&lt;span class="text-success"&gt;奈良&lt;/span&gt;シカ&lt;/div&gt;
+	&lt;span&gt;たぬき&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+
+<div>
+	<div>ネコ</div>
+	<label>ヤギ</label>
+	<div id="test1">ヤモリ</div>
+	<div>サメ</div>
+	<div><span class="text-success">奈良</span>シカ</div>
+	<span>たぬき</span>
+</div>
+
+
+
+<div class="sec4">
+	<h4>TEST1:</h4>
+	自分以外の兄弟要素を取得する。<br>
+	<pre><code>
+	var elms = $('#test1').<strong>siblings</strong>();
+	elms.each(function(){
+		var str = $(this).html() + '&lt;br&gt;';
+		$('#res').append(str);
+	});
+	</code></pre>	
+	<input type="button" value="TEST" onclick="test1()" class="btn btn-primary" />
+	<pre id="res1" class="output_data"></pre>
+</div>
+
+
+<div class="sec4">
+	<h4>TEST2:</h4>
+	条件を指定して兄弟要素を取得する。<br>
+	下記の例では条件にDIV要素を指定している。
+	<pre><code>
+	var elms = $('#test1').siblings('<strong>div</strong>');
+	elms.each(function(){
+		var str = $(this).html() + '&lt;br&gt;';
+		$('#res2').append(str);
+	});
+	</code></pre>
+	<input type="button" value="TEST" onclick="test2()" class="btn btn-primary" />
+	<pre id="res2" class="output_data"></pre>
+</div>
+
+
+
+
+
+<div class="sec4">
+	<h4>TEST3:</h4>
+	自分から下の弟要素だけ取得する。（自分自身は含めず）
+	<pre><code>
+	function test3(){
+		var elms = $('#test1').<strong>nextAll</strong>();
+		elms.each(function(){
+			var str = $(this).html() + '&lt;br&gt;';
+			$('#res3').append(str);
+		});
+	}
+	</code></pre>
+	<input type="button" value="TEST" onclick="test3()" class="btn btn-primary" />
+	<pre id="res3" class="output_data"></pre>
+</div>
+
+
+
+<div class="sec4">
+	<h4>TEST4:</h4>
+	自分自身も含めてすべての兄弟要素を取得する。
+	<pre><code>
+	function test4(){
+		var elms = $('#test1').<strong>parent().children()</strong>;
+		elms.each(function(){
+			var str = $(this).html() + '&lt;br&gt;';
+			$('#res4').append(str);
+		});
+	}
+	</code></pre>
+	<input type="button" value="TEST" onclick="test4()" class="btn btn-primary" />
+	<pre id="res4" class="output_data"></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>兄弟要素を取得する | jQuery</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-6-22</div>
+</body>
+</html>

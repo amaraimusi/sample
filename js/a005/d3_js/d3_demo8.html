@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+	 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>D3.jsのデモ | v4</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	
+	
+	<script src="d3/d3.min.js"></script>
+	<script src="d3_demo8.js"></script>
+
+
+</head>
+<body>
+<div id="header" ><h1>D3.jsのデモ | v4</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>ベジエ曲線</h2>
+
+
+<div id="demo">
+</div>
+
+<hr>
+d3.line()のcurveで指定できる曲線の種類
+<table class="tbl2">
+	<thead>
+		<tr><th>d3.line().curve(〇〇〇)</th><th>説明</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>d3.curveLinear</td><td>デフォルト（ただの直線の組み合わせ）</td></tr>
+		<tr><td>d3.curveStep</td><td>ステップ関数（垂直の線）</td></tr>
+		<tr><td>d3.curveStepBefore</td><td>ステップ関数（曲がり箇所がそろっている）</td></tr>
+		<tr><td>d3.curveStepAfter</td><td>ステップ関数（d3.curveStepBeforeの逆曲がり）</td></tr>
+		<tr><td>d3.curveBasis</td><td>ベジエ曲線</td></tr>
+		<tr><td>d3.curveCardinal</td><td>なめらかな急カーブ</td></tr>
+		<tr><td>d3.curveMonotoneX</td><td>ベジエより山なりのカーブになる(d3.curveCardinalよりは緩やか)</td></tr>
+		<tr><td>d3.curveCatmullRom</td><td>d3.curveCardinalとよく似ているが、検証不足のため違いは分からず。</td></tr>
+
+	</tbody>
+</table>
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>D3.jsのデモ | v4</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-7-21</div>
+</body>
+</html>

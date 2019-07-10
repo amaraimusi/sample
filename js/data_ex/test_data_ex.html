@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>日付関連の拡張関数</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../../../zss_js_lib/date_ex.js"></script>
+		<script>
+
+		
+			function load(){
+				//▽DateFormat
+				var dt=new Date();
+				var x=DateFormat(dt,'yyyymmdd(ddd) hh:ii:ss:fff');
+				$("#ret1").html(x);
+
+				//▽DateParse
+				var str_dt='2012/12/13 11:11:11';
+				var x2=DateParse(str_dt,'yyyy/mm/dd hh:ii:ss');
+				$("#ret2").html(x2.toString());
+	
+				var str_dt='2012-12-13 11:11:11';
+				var x3=DateParse(str_dt,'yyyy-mm-dd hh:ii:ss');
+				$("#ret3").html(x3.toString());
+			}
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body onload="load()">
+		<div id="page1">
+		<div id="header">日付関連の拡張関数</div>
+		<div id="content" >
+			<form name="form1"  action="#" method="post" enctype="multipart/form-data" >
+				<div class="sec1">
+				
+					<h3>DateFormat関数</h3>
+					<table border="1"><thead><tr><th>元値</th><th>フォーマット</th><th width="200">値</th></tr></thead>
+						<tbody>
+							<tr><td>本日（date型)</td><td>yyyymmdd(ddd) hh:ii:ss:fff</td><td><span id="ret1"></span></td></tr>
+						</tbody>
+					</table>
+
+					<pre>			
+var dt=new Date();
+var x=DateFormat(dt,'yyyymmdd(ddd) hh:ii:ss:fff');
+					
+					</pre>
+					
+				</div><!-- sec1 -->
+				
+				<div class="sec1">
+				
+					<h3>DateParse関数</h3>
+					<table border="1"><thead><tr><th>元値（文字列型）</th><th>フォーマット</th><th width="400">値（date型）</th></tr></thead>
+						<tbody>
+							<tr><td>2012/12/13 11:11:11</td><td>yyyy/mm/dd hh:ii:ss</td><td><span id="ret2"></span></td></tr>
+							<tr><td>2012-12-13 11:11:11</td><td>yyyy-mm-dd hh:ii:ss</td><td><span id="ret3"></span></td></tr>
+						</tbody>
+					</table>
+
+					<pre>			
+var str_dt='2012/12/13 11:11:11';
+var x2=DateParse(str_dt,'yyyy/mm/dd hh:ii:ss');
+					
+					</pre>
+					
+				</div><!-- sec1 -->				
+				
+			</form>
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/09/03</div>
+		</div><!-- page1 -->
+	</body>
+</html>

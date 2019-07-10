@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>C#によるJSONの取り扱い</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script>
+
+
+		</script>
+		
+		<style type="text/css">
+			.tejun{
+				padding-top:5px;
+				padding-bottom:5px;
+				font-size:0.9em;
+				background-color:#ffded9;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">C#によるJSONの取り扱い</h1>
+		<div id="content" >
+			<form name="form1"  action="#" method="post" enctype="multipart/form-data" >
+				<div class="sec1">
+
+
+
+					JSONを解析してデータを取得する時、DynamicJsonを使うと便利である。<br />
+					DynamicJsonはサードパーティ製であり,「DynamicJson.dll」として提供されている。<br />
+					DynamicJson.dllは
+					<a href="http://dynamicjson.codeplex.com/">CodePlex</a>のサイトからダウンロードできる。<br />
+				
+					利用する前にDynamicJson.dllの参照設定をする必要がある。<br />
+					参照設定の手順を以下に示す。<br />
+					<ol class="tejun">
+					<li>DynamicJson.dllをまず、bin配下のdebugおよびreleaceフォルダ内に配置する。</li>
+					<li>ソリューションエクスプローラーの参照を右クリックして「参照の追加」をクリック。</li>
+					<li>「参照」タブをクリックする。</li>
+					<li>先ほどコピーしたDynamicJson.dllを選択する。</li>
+					</ol>
+				
+					<br /><br />
+					また、DynamicJsonの返り値はvar型なので、var型を使えるようにする参照設定する必要がある。<br />
+					Microsoft.CSharpを参照設定しておく。<br />
+					<ol class="tejun">
+						<li>ソリューションエクスプローラーの参照を右クリックして「参照の追加」をクリック。</li>
+						<li>「.NET」タブをクリックする。</li>
+						<li>「Microsoft.CSharp」を選択する。</li>
+					</ol>
+					
+					<br />
+					<strong>サンプルコード</strong>
+					<pre>			
+var json = DynamicJson.Parse(@"{""foo"":""json"", ""bar"":100, ""nest"":{ ""foobar"":true } }");
+				
+String r1 = json.foo; 
+String r2 = json.bar + ""; 
+String r3 = json.nest.foobar +""; 
+String r4 = json["nest"]["foobar"] +""; 
+Debug.WriteLine(r1);
+Debug.WriteLine(r2);
+Debug.WriteLine(r3);
+Debug.WriteLine(r4);
+					</pre>
+				
+					var型は値を指定した時点で型が決まっているため、空文字を付け足して強制的に文字列に変換している。<br />
+					JSONデータにデータを追加することも可能のようである。<br />
+
+		
+				</div><!-- sec1 -->
+			</form>
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/09/19</div>
+		</div><!-- page1 -->
+	</body>
+</html>

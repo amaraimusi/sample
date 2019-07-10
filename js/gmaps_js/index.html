@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>gmaps.jsの基本</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-Y_H0SqELBviGTQT9GrbQdiHeVKLwNAo&sensor=false"></script>
+		<script src="gmaps.js"></script>
+
+		<script>
+
+
+			$( function() {
+
+				new GMaps({
+					  div: '#gmap',
+					  lat: 26.651139717347082,
+					  lng: 127.94837594032288
+					});
+
+
+			});
+
+
+
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >gmaps.jsの基本</h1>
+
+
+<div id="gmap" style="width:500px; height:500px"></div>
+
+<div id="res"></div>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-06-24</p>
+</body>
+</html>

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <title>Google Maps サンプル</title>
+
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-Y_H0SqELBviGTQT9GrbQdiHeVKLwNAo&sensor=false">
+    </script>
+
+    <script type="text/javascript">
+	$( function() {
+
+		var latlng = new google.maps.LatLng(36.709984,139.810703);
+		var opts = {
+			zoom: 15,//ズーム
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scaleControl: true,//スケール表示
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), opts);
+	});
+
+    </script>
+
+  </head>
+  <body onload="initialize()">
+    <p>作成中</p>
+
+    <div id="map_canvas" style="width:500px; height:300px"></div>
+
+  </body>
+</html>

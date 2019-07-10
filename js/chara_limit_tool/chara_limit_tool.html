@@ -1,0 +1,119 @@
+<!DOCTYPE html> 
+<html lang="ja"> 
+	<head> 
+	<title>制限文字テストツール</title> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" /><!-- 自動翻訳させない -->
+	<link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.1.0.min.js"></script>
+
+	<script type="text/javascript" language="javascript">
+	      
+
+	        //初期化イベント
+	        $(document).bind("pageshow", function(){
+		        //各テキストから値を取得する。
+		        var chrCnt=localStorage['chara_limit_tool_chrCnt'];
+		        var chrHead=localStorage['chara_limit_tool_chrHead'];
+		        var chrBody=localStorage['chara_limit_tool_chrBody'];
+		        var chrLast=localStorage['chara_limit_tool_chrLast'];
+		        var chrOver=localStorage['chara_limit_tool_chrOver'];
+		        
+		        //nullの場合、デフォルト値をセット。
+		        chrCnt=getDefault(chrCnt,16);
+		        chrHead=getDefault(chrHead,'a');
+		        chrBody=getDefault(chrBody,'b');
+		        chrLast=getDefault(chrLast,'c');
+		        chrOver=getDefault(chrOver,'x');
+
+	        
+		        $('#txt_chr_cnt').val(chrCnt);
+		        $('#txt_head').val(chrHead);
+		        $('#txt_body').val(chrBody);
+		        $('#txt_last').val(chrLast);
+		        $('#txt_over').val(chrOver);
+	        });
+
+	        //テスト文字生成
+	        function run(){
+		        //各テキストから値を取得する。
+		        var chrCnt=$('#txt_chr_cnt').val();
+		        var chrHead=$('#txt_head').val();
+		        var chrBody=$('#txt_body').val();
+		        var chrLast=$('#txt_last').val();
+		        var chrOver=$('#txt_over').val();
+
+		        //中間文字を作成する。
+						var bodyCnt=chrCnt-chrHead.length-chrLast.length-chrOver.length;
+						var strBody="";
+						for(var i=0; i<bodyCnt;i++){
+							strBody=strBody+chrBody;
+						}
+					
+		        //テスト文字を組み立てる。
+		        var testStr=chrHead+strBody +chrLast +chrOver;
+
+		        //テスト文字を出力する。
+		        $('#res').html(testStr);
+
+		        localStorage['chara_limit_tool_chrCnt']=chrCnt;
+		        localStorage['chara_limit_tool_chrHead']=chrHead;
+		        localStorage['chara_limit_tool_chrBody']=chrBody;
+		        localStorage['chara_limit_tool_chrLast']=chrLast;
+		        localStorage['chara_limit_tool_chrOver']=chrOver;
+	        }
+	        
+	        function getDefault(v,iniV){
+	        	if(v==null || v=='undefined'){
+		        	v=iniV;
+		        };
+		        return v;
+	        }
+
+	</script> 
+
+	<style type="text/css">
+	</style>
+
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header" data-position="inline" data-backbtn="false">
+		<h1>制限文字テストツール</h1>
+		<a href="#" data-icon=“back” data-rel=“back” class="ui-btn-right">戻る</a>
+	</div>
+	
+
+	<div data-role="content">	
+		
+		
+		作成文字数：<input type="number" id="txt_chr_cnt"  value="51"></input><br />
+		<input type="button" value="テスト文字生成" onclick="run()" /><br />
+		<hr />
+		<div style="padding:5px;color:red">
+			<div id="res"></div>
+		</div>
+		
+		<hr />
+		<p>設定</p>
+		先頭文字：<input type="text" id="txt_head"  value="a"></input><br />
+		中間文字：<input type="text" id="txt_body" maxlength="b"  value="b"></input><br />
+		最終文字：<input type="text" id="txt_last"   value="c"></input><br />
+		オーバー文字：<input type="text" id="txt_over"   value="x"></input><br />
+
+		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>(C)kenji uehara　2013/03/21</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

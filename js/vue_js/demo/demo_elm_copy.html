@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+	 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>要素を複製してもvueのデータバインドは引き継がれるか？</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="../js/vue.min.js"></script>
+	<script src="demo_elm_copy.js"></script>
+
+</head>
+<body>
+
+<div id="header" ><h1>要素を複製してもvueのデータバインドは引き継がれるか？</h1></div>
+<div class="container">
+
+
+データバインドは複製されず。<br>
+複製要素には値の変更が反映されない。<br>
+方法もないこともないが、オーバーヘッドもありそう。<br>
+
+<a href="https://qiita.com/nekobato/items/0af6ae58bf9d523893b1" class="btn btn-link btn-xs" target="blank">
+	Vueで後から読み込んだHTMLをコンポーネントにしたい</a><br>
+<br>
+
+<p>検証</p>
+<div id="app-2">
+	<input type="text" v-model="animals[2].name" placeholder="TEST" >
+
+	<div id="elphant1" ><span style="color:SeaGreen">{{animals[2].name}}</span></div>
+	<div id="elphant2" ><span style="color:SeaGreen">{{animals[2].name}}</span></div>
+	
+	<input type="button" value="要素を複製" onclick="test1()" class="btn btn-success" />
+</div>
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li><a href="../">Vue.jsのデモ | 目次</a></li>
+	<li>要素を複製してもvueのデータバインドは引き継がれるか？</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-2-9</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>SHCH デモD</title>
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+		<link href="shch_guest_chat.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="shch_guest_chat.js"></script>
+
+
+		<script>
+			$( function() {
+				var info_room_id=1;//案内ルームID
+				var hash='da113b4ea0456a659580eccef0885c8c29fe438f655841cca7a651608b004eb1';//ハッシュキー
+				var host='http://192.168.11.199/shch/';//ホスト
+				var debug_mode=2;//0:OFF 1:リロード数などを表示   2:システムエラーのダンプを表示
+				var debug_slc='#shch_debug_print';//デバッグ出力要素名
+				/*
+				var info_room_id=2;//案内ルームID
+				var hash='fccf2ad6961b668c9b0b70dc80a6548f4d797738634a1043dc860217dba38f46';//ハッシュキー
+				var host='/shch/';//ホスト
+				var debug_mode=$('#debug_mode').val();//0:OFF 1:リロード数などを表示   2:システムエラーのダンプを表示
+				var debug_slc='#shch_debug_print';//デバッグ出力要素名
+				shchGuestChat(info_room_id,hash,host,debug_mode,debug_slc);//ゲストチャット画面を起動
+				*/
+				//■■■□□□■■■□□□■■■□□□一時停止
+				shchGuestChat(info_room_id,hash,host,debug_mode,debug_slc);//ゲストチャット画面を起動
+			});
+		</script>
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>SHCH デモD</h1>
+			
+			<p></p>
+		</div>
+	</div>
+
+
+	<h3 style="color:red">動作中・・・</h3>
+	
+	<div class="sec3">
+		<h2>説明</h2>
+		うゐのおくやま けふこえてあさきゆめみし ゑひもせす<br>
+		
+		<div id='shch_guest_chat' class="panel panel-primary" ></div>
+		<div id="shch_debug_print"></div>
+
+	</div>
+
+
+
+	<br><br>
+	<a href="http://amaraimusi.sakura.ne.jp/" class="btn btn-link btn-xs">参考サイト</a>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-03-20</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

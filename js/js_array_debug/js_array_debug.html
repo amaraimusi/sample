@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" /><!-- 自動翻訳させない -->
+		<title>JavaScript | 2次元配列のデバッグとコンソールログについて</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script>
+
+			function test_func1(){
+				console.log("デバッグ出力のテスト");//コンソール出力
+				var ary=[
+				         [1,2,3],
+				         [4,5,6],
+				         [7,8,9,"neko"]
+				       ];
+				debugData(ary);
+			}
+
+			function debugData(data){
+				
+				if(data==null){
+					debug('データはnullです');
+				}else{
+					for (var i=0;i<data.length;i++){
+						var ent=data[i];
+						if(ent==null){
+							console.log('エンティティはnull');
+						}else{
+							msg=ent.join(',');
+							console.log(msg);
+						}
+					}
+				}
+			}
+
+
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">JavaScript | 2次元配列のデバッグとコンソールログについて</div>
+		<div id="content" >
+		
+			<div class="sec1">
+			
+				2次元配列のデバッグとコンソールログへの出力。<br />
+				
+				<input type="button" value="Test実行" onclick="test_func1()" />
+				<pre>		
+					
+			function test_func1(){
+				console.log("デバッグ出力のテスト");//コンソール出力
+				var ary=[
+				         [1,2,3],
+				         [4,5,6],
+				         [7,8,9,"neko"]
+				       ];
+				debugData(ary);
+			}
+
+			function debugData(data){
+				
+				if(data==null){
+					debug('データはnullです');
+				}else{
+					for (var i=0;i&ltdata.length;i++){
+						var ent=data[i];
+						if(ent==null){
+							console.log('エンティティはnull');
+						}else{
+							msg=ent.join(',');
+							console.log(msg);
+						}
+					}
+				}
+			}				
+
+				</pre>
+				
+				<br />
+				<p>コンソールログの出力の確認方法。</p>
+				<table border="1">
+					<thead><tr><th>ブラウザ</th><th>コンソールの確認手順</th></tr></thead>
+					<tbody>
+						<tr><td>chrome</td><td>F12キー ⇒ 「Console」タブ</td></tr>
+						<tr><td>FireFox</td><td>	「ツール」メニュー ⇒　WEB開発　⇒　WEBコンソール</td></tr>
+					</tbody>
+				</table>
+				
+				<br />
+				<p>コンソールへの出力結果（chrome)</p>
+				<img src="consol.png" />
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27</div>
+		</div><!-- page1 -->
+	</body>
+</html>

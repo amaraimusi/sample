@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SVGのクリック位置を取得</title>
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+
+	<style>
+		#svg1{
+			background-color:#ceffce;
+		}
+	</style>
+	<script>
+	$(function(){
+		
+		$('#svg1').click(function(e){
+
+			// 絶対座標系のSVG要素位置
+			var offset =$(this).offset();
+
+			// 相対位置 = 絶対座標系のクリック位置 - 絶対座標系のSVG要素位置
+			var x = e.pageX - offset.left;
+			var y = e.pageY - offset.top;
+			console.log(x);
+			console.log(y);
+			
+			// 矩形へ相対位置をセット
+			var rect = $('#rect4');
+			rect.attr('x',x);
+			rect.attr('y',y);
+			
+		});
+	});
+	</script>
+	
+</head>
+<body>
+<div id="header" ><h1>SVGのクリック位置を取得</h1></div>
+<div class="container">
+
+
+
+
+<h2>サンプル</h2>
+
+SVG要素内をクリックすると、クリック位置を取得し、矩形へセットする。<br>
+<br>
+
+
+<p>サンプル4:SVG要素</p>
+<svg id="svg1" width="200" height="240" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<rect id="rect4" x="20" y="20" width="100" height="50" rx="5"
+		 fill="none" stroke="#8ca934" stroke-width="4" />
+</svg>
+<br>
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/svg">SVG | サンプル</a></li>
+	<li>SVGのクリック位置を取得</a></li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-9-6</div>
+</body>
+</html>

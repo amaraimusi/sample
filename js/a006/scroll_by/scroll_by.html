@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>スクロールを相対的に移動させる | scrollBy</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+
+	<script src="scroll_by.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>スクロールを相対的に移動させる | scrollBy</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>デモ | SELECT</h2>
+<select  id="test1" size="5">
+	<option value="1">ゴリラ</option>
+	<option value="2">チンパンジー</option>
+	<option value="3">オランウータン</option>
+	<option value="4">スローロリス</option>
+	<option value="5">ワタボウシタマリン</option>
+	<option value="6">アジアゾウ</option>
+	<option value="7">アフリカゾウ</option>
+	<option value="8">インドゾウ</option>
+	<option value="9">マルミミゾウ</option>
+	<option value="10">モンゴルマーモット</option>
+	<option value="11">フサオネズミカンガルー</option>
+	<option value="12">フサオ</option>
+	<option value="13">ネズミカンガルー</option>
+</select><br>
+<input type="button" value="上スクロール" onclick="test1('#test1',-30)" class="btn btn-success" />
+<input type="button" value="下スクロール" onclick="test1('#test1',30)" class="btn btn-success" />
+
+<br><hr>
+
+
+<h2>デモ | DIV</h2>
+<div id="test2" style="width:200px;height:100px;overflow-y:scroll;">
+	ゴリラ<br>
+	チンパンジー<br>
+	オランウータン<br>
+	スローロリス<br>
+	ワタボウシタマリン<br>
+	アジアゾウ<br>
+	アフリカゾウ<br>
+	インドゾウ<br>
+	マルミミゾウ<br>
+	モンゴルマーモット<br>
+	フサオネズミカンガルー<br>
+	フサオ<br>
+	ネズミカンガルー<br>
+</div>
+<input type="button" value="上スクロール" onclick="test1('#test2',-30)" class="btn btn-success" />
+<input type="button" value="下スクロール" onclick="test1('#test2',30)" class="btn btn-success" />
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>スクロールを相対的に移動させる | scrollBy</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-10-24</div>
+</body>
+</html>

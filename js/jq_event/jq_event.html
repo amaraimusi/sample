@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JQuery | イベントを追加</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+
+			$(document).ready(function(){
+
+				$("#test1").click(function(event){
+					alert(event.type);
+				});
+
+				$("#test2").change(function(event){
+
+					var v=$('#test2').val();
+					alert(v);
+				});
+
+
+
+				$(".aaa").click(function(event){
+
+					alert($(this).html());
+				});
+
+
+				var kappa=  function(event){
+					var old=$(this).html();
+					$(".ccc").each(function(){
+						if(old==$(this).html()){
+							$(this).html('xxx');
+						}
+
+					 });
+				}
+
+
+				$(".ccc").click(function(event){
+					chgMatome(this);//まとめ変更
+
+				});
+
+
+			});
+
+			function chgMatome(elm){
+				
+				var old=$(elm).html();
+				$(".ccc").each(function(){
+					if(old==$(this).html()){
+						$(this).html('xxx');
+					}
+
+				 });
+			}
+
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JQuery | イベントを追加</h1>
+		<div id="content" >
+
+				<div class="sec1">
+					<div id="test1" style="width:100px;height:100px;background-color:blue;color:white">Click</div>
+
+
+				</div><!-- sec1 -->
+
+
+
+				<div class="sec1">
+					<select  id="test2">
+						<option value="">-- 計算方法 --</option>
+						<option value="1">ダミー計算A</option>
+						<option value="2">ダミー計算B</option>
+						<option value="3">ダミー計算C</option>
+					</select>
+
+				</div><!-- sec1 -->
+
+
+				<div class="sec1">
+					<table border="1">
+						<tbody>
+							<tr><td><div class='aaa'>aaa</div></td></tr>
+							<tr><td><div class='aaa'>aaa</div></td></tr>
+							<tr><td><div class='aaa'>aaa</div></td></tr>
+							<tr><td><div class='aaa'>aaa</div></td></tr>
+							<tr><td><div class='aaa'>bbb</div></td></tr>
+						</tbody>
+					</table>
+				</div><!-- sec1 -->
+
+
+
+
+
+				<div class="sec1">
+					<table border="1">
+						<tbody>
+							<tr><td><div class='ccc'>aaa</div></td></tr>
+							<tr><td><div class='ccc'>aaa</div></td></tr>
+							<tr><td><div class='ccc'>aaa</div></td></tr>
+							<tr><td><div class='ccc'>aaa</div></td></tr>
+							<tr><td><div class='ccc'>bbb</div></td></tr>
+							<tr><td><div class='ccc'>bbb</div></td></tr>
+							<tr><td><div class='ccc'>bbb</div></td></tr>
+							<tr><td><div class='ccc'>bbb</div></td></tr>
+						</tbody>
+					</table>
+				</div><!-- sec1 -->
+
+
+
+
+
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/12</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>連想配列からHTMLテーブル生成</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="script.js"></script>
+		<script>
+
+
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">連想配列からHTMLテーブル生成</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<div id="tbl_div"></div>
+
+				<hr>
+
+ソース<br>
+<pre>
+
+$(document).ready(function(){
+
+	var keys=['id','name','value1','value2'];
+
+	var ary=[
+	          [1,'neko',101,1001],
+	          [2,'nezumi',202,2002],
+	          [3,'usi',303,3003],
+	          [4,'tora',404,4004],
+	          [5,'u',505,5005],
+	          ];
+
+	//2次元配列とキー配列から連想配列オブジェクト（エンティティリスト）を作成する。
+	var hash=createHashFromAry(keys,ary);
+
+	//★連想配列オブジェクトからテーブルHTMLを生成する。
+	var html=createTbl_hash(hash);
+
+	$("#tbl_div").html(html);
+
+
+});
+
+
+/**
+ * 2次元配列とキー配列から連想配列オブジェクト（エンティティリスト）を作成する。
+ * @param keys キー配列
+ * @param ary  2次元配列
+ * @returns 連想配列オブジェクト
+ */
+function createHashFromAry(keys,ary){
+	var obj={};
+	var x_cnt=ary[0].length;
+	for(var y=0;y&ltary.length;y++){
+		var ent={};
+		for(var x=0;x&ltx_cnt;x++){
+
+			ent[keys[x]]=ary[y][x];
+		}
+		obj[y]=ent;
+	}
+
+	return obj;
+}
+
+
+/**
+ * 連想配列オブジェクトからテーブルHTMLを生成する。
+ * キーをヘッダーの名前に利用する。
+ * @param hash 連想配列オブジェクト
+ * @return テーブルHTML
+ */
+function createTbl_hash(hash){
+
+
+	//1行目のエンティティからヘッダー部分を組み立て
+	var html="&lttable border='1'>&ltthead>&lttr>"
+	for(var k in hash[0]){
+		html+="&ltth>" + k + "&lt/th>";
+	}
+	html+="&lt/th>&lt/thead>\n";
+	html+="&lttbody>\n";
+
+
+
+	//連想配列をループ。
+	for(var i in hash){
+		html+="&lttr>";
+		var ent=hash[i];
+		for(var k in ent){
+			var v=ent[k];
+			html+="&lttd>" + v + "&lt/td>";
+		}
+		html+="&lt/tr>\n";
+	}
+
+	html+="&lt/tbody>&lt/table>\n";
+
+	return html;
+}
+
+
+
+</pre>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/07/18</div>
+		</div><!-- page1 -->
+	</body>
+</html>

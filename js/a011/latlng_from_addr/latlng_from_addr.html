@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>住所からの緯度経度 | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+	<script src="latlng_from_addr.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+<div id="header" ><h1>住所からの緯度経度 | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>検証</h2>
+テストデータ：
+<select id="test_data_select" onchange="changeTestDataSelect()">
+	<option value="東京都千代田区平河町２丁目７−１">正常版</option>
+	<option value="沖縄県名護市字源河１３０５ 内 源河地区会館">Googleでは見つかるがYahooでは見つからない</option>
+	<option value="新潟県佐渡市八幡町 340" selected>バッチ処理の時のみ見つからない</option>
+	<option value="沖縄県国頭郡本部町石川 988">バッチ処理の時のみ見つからない２</option>
+</select>
+<input type="text" id="addr1" value="新潟県佐渡市新穂瓜生屋３３９−２" style="width:100%"/>
+<input type="button" value="検証1" onclick="test1()" class="btn btn-success"/>
+<input type="button" value="検証2" onclick="test2()" class="btn btn-success"/>
+<pre><code id="err"></code></pre>
+<div id="res" class="text-success"></div>
+
+
+<h3>参考リンク</h3>
+<ol>
+	<li><a href="https://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/geocoder.html" target="blank">Yahoo!ジオコーダAPI（公式）</a></li>
+	<li><a href="https://developer.yahoo.co.jp/appendix/rate.html" target="blank">Yahoo APIの利用制限について</a></li>
+	<li><a href="https://www.nanchatte.com/ymap/getLatLngByAddress.html" target="blank">地名や住所から緯度・経度を取得する（参考ツール）</a></li>
+	<li><a href="https://qiita.com/TakeshiNickOsanai/items/5d364c8540ff8bfb4b34" target="blank">住所が含まれた連想配列から緯度経度を取得して、多次元連想配列を生成する</a></li>
+	<li><a href="https://qiita.com/shinkuFencer/items/d7546c8cbf3bbe86dab8" target="blank">APIなどにfile_get_contents()を使うのはオススメしない理由と代替案</a></li>
+	<li><a href="https://qiita.com/Tamagoham119/items/0862d12743ddd8175d6d" target="blank">phpでfile_get_contentsからcurlに移行する</a></li>
+</ol>
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>住所からの緯度経度</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-4-28</div>
+</body>
+</html>

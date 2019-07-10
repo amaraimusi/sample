@@ -1,0 +1,215 @@
+
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <title>Google Maps サンプル</title>
+
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-Y_H0SqELBviGTQT9GrbQdiHeVKLwNAo&sensor=false">
+    </script>
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="FileSaver.js"></script>
+		<script src="html2canvas.js"></script>
+
+
+    <script type="text/javascript">
+    function initialize() {
+      var latlng = new google.maps.LatLng(36.709984,139.810703);
+      var opts = {
+        zoom: 17,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true,//コントロールセットを隠す
+      };
+      var map1 = new google.maps.Map(document.getElementById("map1"), opts);
+    }
+/*
+    function screenshot()
+    {
+        var canvas = document.getElementById("map1");
+        var base64 = canvas.toDataURL();    // firfoxならtoblobで直接blobにして保存できます。
+        var blob = Base64toBlob(base64);
+        saveBlob(blob,"default.png");
+    }
+*/
+
+/*
+    var onload = function()
+    {
+        // 描画 好きなもの書いて～
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext('2d');
+        context.fillRect(0,0,50,50);
+        context.fillRect(0,250,50,50);
+        context.fillRect(250,0,50,50);
+        context.fillRect(250,250,50,50);
+    }();*/
+
+
+
+	function test3(){
+    	var type = 'image/jpeg';
+    	// canvas から DataURL で画像を出力
+    	var dataurl = canvas.toDataURL(type);
+    	// DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+    	var bin = atob(dataurl.split(',')[1]);
+    	// 空の Uint8Array ビューを作る
+    	var buffer = new Uint8Array(bin.length);
+    	// Uint8Array ビューに 1 バイトずつ値を埋める
+    	for (var i = 0; i < bin.length; i++) {
+    	  buffer[i] = bin.charCodeAt(i);
+    	}
+    	// Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+    	var blob = new Blob([buffer.buffer], {type: type});
+
+
+    }
+
+    function test4(){
+
+
+    	//var canvas = HTMLCanvasElement && HTMLCanvasElement.prototype
+    	var canvas = document.getElementById('map1');
+    	var ctx = canvas.getContext('2d');
+    	//var blob=canvas.toBlob();
+
+/*
+    	var type = 'image/jpeg';
+    	// canvas から DataURL で画像を出力
+    	var dataurl = canvas.toDataURL(type);
+    	// DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+    	var bin = atob(dataurl.split(',')[1]);
+    	// 空の Uint8Array ビューを作る
+    	var buffer = new Uint8Array(bin.length);
+    	// Uint8Array ビューに 1 バイトずつ値を埋める
+    	for (var i = 0; i < bin.length; i++) {
+    	  buffer[i] = bin.charCodeAt(i);
+    	}
+    	// Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+    	var blob = new Blob([buffer.buffer], {type: type});
+
+	      var blobData = new Blob([$('#map1')],{type:'image/jpeg'});
+	      saveAs(blobData, "test.jpeg");
+	      console.log("OK");
+
+
+	  /*    canvas = $("#map1");
+	  	canvas.toBlob(function(blob) {
+	  		saveAs(
+	  			  blob
+	  			, "test.png"
+	  		);
+	  	}, "image/png");*/
+
+	  	alert('test');//■■■□□□■■■□□□■■■□□□)
+    }
+
+    function screenshot( selector) {
+        var element = $(selector)[0];
+        //DOM要素をcanvasに変換する。
+        html2canvas(element, { proxy: 'html2canvasproxy.php',
+            useCORS: false,onrendered: function(canvas) {
+
+        	//var ctx = canvas.getContext('2d');
+			//var cc = canvas.getContext('2d');
+			//cc.save();
+			//cc.stroke();
+			//cc.save();
+			//cc.closePath();
+			//canvas.setContext(cc);
+
+        	var type = 'image/jpeg';
+        	// canvas から DataURL で画像を出力
+        	var dataurl = canvas.toDataURL(type);
+        	// DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+        	var bin = atob(dataurl.split(',')[1]);
+        	// 空の Uint8Array ビューを作る
+        	var buffer = new Uint8Array(bin.length);
+        	// Uint8Array ビューに 1 バイトずつ値を埋める
+        	for (var i = 0; i < bin.length; i++) {
+        	  buffer[i] = bin.charCodeAt(i);
+        	}
+        	// Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+        	var blob = new Blob([buffer.buffer], {type: type});
+
+        	//画像ダウンロード
+        	/*
+        	saveAs(
+  	  			  blob
+  	  			, "test.jpeg"
+  	  		);
+        	*/
+    	  	/*canvas.toBlob(function(blob) {
+    	  		saveAs(
+    	  			  blob
+    	  			, "test.png"
+    	  		);
+    	  	});*/
+    	  	//画像表示
+    	  	//var imgData= canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    	  	//window.location.href = imgData;
+
+    	  	var imgData = canvas.toDataURL('image/png;');
+			//alert(imgData);//■■■□□□■■■□□□■■■□□□)
+
+            $('#screen_image')[0].src = imgData;
+
+
+
+            /*var imgData = canvas.toDataURL();
+
+            $('#screen_image')[0].src = imgData;
+            $('#download')[0].href = imgData;
+            $('#download')[0].innerHTML = "Download";*/
+        }});
+    }
+    //DOMを画像に書き出す方法　参考
+    //http://ja.stackoverflow.com/questions/5851/dom%E3%82%92%E7%94%BB%E5%83%8F%E3%81%AB%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95
+    </script>
+
+  </head>
+  <body onload="initialize()">
+    <p>作成中</p>
+
+<div id="map1_rap">
+    <div id="map1" style="width:500px; height:300px"></div>
+</div>
+
+	<div>
+		<input type="button" value="TEST" onclick="test4()" />
+		<button onclick="screenshot('#map1')">Take a shot</button><br>
+		<button onclick="screenshot('#map1_rap')">Take a shot2</button>
+
+<a id="download" href="#" download="test.png">AAAA</a>
+	</div>
+	<div>
+	    <canvas id="canvas" style="width: 300px; height: 300px;" width="300" height="300"></canvas>
+	</div>
+	<a href="#" onclick="screenshot();">screenshot</a>
+
+
+
+<hr />
+<b>Image:</b>
+<div id="output_screen">
+  <img id="screen_image">
+</div>
+<hr />
+
+
+
+
+    <div id="map2" style="width:500px; height:300px;background-color:green">Hello</div>
+
+		<button onclick="screenshot('#map2')">Take a shot2</button>
+
+
+
+
+  </body>
+</html>

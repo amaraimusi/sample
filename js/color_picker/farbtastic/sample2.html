@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>カラーピッカー | farbtastic | サンプル2・コールバック</title>
+
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="farbtastic.js"></script>
+		<link rel="stylesheet" type="text/css" href="farbtastic.css" />
+
+		<script>
+			$( function() {
+
+				$('#smp_picker1').farbtastic(function(color){
+					$('#xxx').css('background-color',color);
+				});
+			});
+
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >カラーピッカー | farbtastic | サンプル2・コールバック</h1>
+
+
+
+	<div id="smp_picker1"></div>
+
+	<div id="xxx">XXX</div>
+
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-9-1</p>
+
+</body>
+</html>

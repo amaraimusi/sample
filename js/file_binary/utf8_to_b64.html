@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>UTF-8文字列からbase64に変換する</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="utf8_to_b64.js"></script>
+
+
+		<style>
+			.res{
+				font-weight:bold;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>UTF-8文字列からbase64に変換する</h1>
+		<p>JavaScriptによるファイルとバイナリデータの扱い</p>
+	</div>
+
+	UTF8文字列からBASE64文字列に変換することができる。<br>
+	BASE64に変換することにより、WEB上の文字列を
+	.txt、.csvなどのテキストファイルとしてダウンロードする、といったことができるようになる。<br>
+	<br>
+
+	javascript
+	<pre>
+	function test1(){
+		var text1 = 'いろは';
+		var b64 = utf8_to_b64(text1);// utf8からbase64に変換する
+		var text2 = b64_to_utf8(b64);// base64からutf8に変換する
+		
+		console.log(b64);
+		console.log(text2);
+	}
+	
+	// utf8からbase64に変換する
+	function utf8_to_b64(str) {
+		return <strong>window.btoa( unescape(encodeURIComponent(str)))</strong>;
+	}
+	
+	// base64からutf8に変換する
+	function b64_to_utf8(str) {
+		return <strong>decodeURIComponent( escape(window.atob(str)))</strong>;
+	}
+	</pre>
+	<br>
+	<hr>
+
+	<h2>サンプル</h2>
+	<input id="text1" type="text" value="いろは"/>
+	<input type="button" value="TEST1" onclick="test1()" class="btn btn-primary" /><br>
+	
+	<p>検証</p>
+	UTF8文字列からbase64に変換 → <span class="res" id="test3-1"></span><br>
+	base64をUTF8文字列に戻す → <span class="res" id="test3-2"></span><br>
+	<br>
+	
+	
+	<p>エスケープ系関数の検証出力</p>
+	<table class="tbl2">
+		<thead>
+			<tr>
+				<th>エスケープ系関数</th>
+				<th>エスケープ後</th>
+				<th>エスケープ後さらにbase64に変換</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>unescape( str )</td>
+				<td><span id="test1-1"></span></td>
+				<td><span id="test2-1"></span></td>
+			</tr>
+			<tr>
+				<td>encodeURIComponent( str )</td>
+				<td><span id="test1-2"></span></td>
+				<td><span id="test2-2"></span></td>
+			</tr>
+			<tr>
+				<td>unescape(encodeURIComponent( str ))</td>
+				<td><span id="test1-3"></span></td>
+				<td><span id="test2-3"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="res">出力</div>
+
+
+
+	<hr>
+
+	<br><br>
+	<a href="index.html" class="btn btn-link btn-xs">目次へ戻る</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-31 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+	 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>vue.js | セレクトボックス SELECT | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="vue_select.js"></script>
+	
+	<style>
+		#app1 div{
+			margin-bottom:20px;
+		}
+	</style>
+
+</head>
+<body>
+<div id="header" ><h1>vue.js | セレクトボックス SELECT | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>DEMO</h2>
+<div id="app1">
+	<div>
+		<p>普通のセレクトボックス</p>
+		「option value」の値を取得して表示
+		<select v-model="fish_type">
+			<option disabled value="">-- 魚選択 --</option>
+			<option value="1">ガーラ</option>
+			<option value="2">ミーバイ</option>
+			<option value="3">アーガイ</option>
+		</select>
+		<span>Selected: {{ fish_type }}</span>
+	</div>
+	
+	<div>
+		<p>テキスト部分を取得して表示</p>
+		<select v-model="fish_type2">
+			<option disabled value="">-- 魚選択2 --</option>
+			<option>ガーラ</option>
+			<option>ミーバイ</option>
+			<option>アーガイ</option>
+		</select>
+		<span>Selected: {{ fish_type2 }}</span>
+	</div>
+	
+	<div>
+		<p>動的にセレクトボックスを生成</p>
+		<select v-model="amphibian_type">
+			<option v-for="option in amphibianOptions" v-bind:value="option.value">
+				{{ option.text }}
+			</option>
+		</select>
+		<span>Selected: {{ amphibian_type }}</span>
+	</div>
+	
+</div>
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>vue.js | セレクトボックス SELECT</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-3-12</div>
+</body>
+</html>

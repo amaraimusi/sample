@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>要素に設定されているすべてのCSSプロパティを取得する | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+
+	<script>
+	function test1(){
+		var elm = document.getElementById('test1');
+		var props = elm.currentStyle || document.defaultView.getComputedStyle( elm, '' );
+		
+		//var props = window.getComputedStyle(elm,'');
+		
+		var json_str = JSON.stringify(props);
+		$('#res').html(json_str);
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>要素に設定されているすべてのCSSプロパティを取得する | ワクガンス</h1></div>
+<div class="container">
+
+
+
+
+<h2>検証</h2>
+
+<style>
+	#test1{
+		color:red;
+		width:300px;
+		height:100px;
+	}
+</style>
+<div id="test1" style="background-color:Plum">
+	うゐのおくやまけふこえてあさきゆめみしゑひもせすん
+</div>
+<input type="button" value="すべてのCSSプロパティを取得する" onclick="test1()" class="btn btn-success btn-xs" /><br>
+<p>出力</p>
+<div id="res" style="width:100%;height:auto"></div>
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>要素に設定されているすべてのCSSプロパティを取得する</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-6-25</div>
+</body>
+</html>

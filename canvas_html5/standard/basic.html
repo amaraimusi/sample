@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>canvasの基本</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+
+	<style>
+
+	</style>
+	
+	<script>
+	
+	// デモ1
+	$(function(){
+		// キャンバスの要素オブジェクトとコンテキストを取得する。
+		var cvs = $('#canvas1');
+		var ctx = cvs[0].getContext('2d');
+
+		// 描画開始
+		ctx.beginPath();
+		
+		// 三角形の情報
+		ctx.moveTo(100,20);
+		ctx.lineTo(160,100);
+		ctx.lineTo(40,100);
+		ctx.closePath();
+		
+	 	// 三角形を描画する
+		ctx.stroke(); 
+		
+	});
+	
+	
+	// デモ2
+	$(function(){
+		// キャンバスの要素オブジェクトとコンテキストを取得する。
+		var cvs = $('#canvas2');
+		var ctx = cvs[0].getContext('2d');
+
+		// 描画1
+		ctx.beginPath();
+		ctx.moveTo(70,20);
+		ctx.lineTo(160,100);
+		ctx.lineTo(40,100);
+		ctx.lineTo(40,50);
+		ctx.closePath();
+		ctx.stroke(); 
+	 	
+		// 描画2→描画1を一度クリアしてから別の図形を描画する。
+		ctx.beginPath();
+		ctx.clearRect(0,0,300,400);//一度canvasをクリア
+		ctx.moveTo(70,20);
+		ctx.lineTo(160,100);
+		ctx.lineTo(40,100);
+		ctx.closePath();
+		ctx.stroke(); 
+
+	});
+	
+	// デモ3
+	$(function(){
+		// キャンバスの要素オブジェクトとコンテキストを取得する。
+		var cvs = $('#canvas3');
+		var ctx = cvs[0].getContext('2d');
+
+		ctx.beginPath(); // 描画開始
+		
+		// 半透明の円を描く（青円）
+		ctx.globalAlpha = 0.5; // 半透明を指定  0～1 :透明 ～ 不透明
+		ctx.beginPath();
+		ctx.fillStyle = 'blue';
+		ctx.arc(100, 80, 50, 0, Math.PI*2, false);
+		ctx.fill();
+		
+		// 半透明の円を描く(赤円)
+		ctx.globalAlpha = 0.5; // 半透明を指定  0～1 :透明 ～ 不透明
+		ctx.beginPath();
+		ctx.fillStyle = 'red';
+		ctx.arc(120, 100, 50, 0, Math.PI*2, false);
+		ctx.fill();
+
+		ctx.stroke(); // 描画
+		
+	});
+	
+	</script>
+</head>
+<body>
+<div id="header" ><h1>canvasの基本</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="demo1">デモ1</h2>
+Canvasの基本
+<div>
+	<canvas id="canvas1"></canvas>
+</div>
+
+
+
+<div class="sep_lg"></div>
+
+
+
+
+<h2 id="demo2">デモ2</h2>
+背景をクリア<br>
+<div>
+	<canvas id="canvas2"></canvas>
+</div>
+
+
+
+<div class="sep_lg"></div>
+
+
+
+
+<h2 id="demo3">デモ3</h2>
+半透明図形を描画<br>
+<div>
+	<canvas id="canvas3"></canvas>
+</div>
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/note_prg">プログラミングの覚書</a></li>
+	<li><a href="/sample/canvas_html5/">HTML5 canvasの覚書</a></li>
+	<li>canvasの基本</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-12-6</div>
+</body>
+</html>

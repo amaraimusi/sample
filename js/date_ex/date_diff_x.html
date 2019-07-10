@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>日数差を適切な単位（年月日時分秒のいずれか）で返す</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="date_diff_x.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>日数差を適切な単位（年月日時分秒のいずれか）で返す</h1>
+	</div>
+
+	 日付差を求める時、特定単位で出力すると小数や大きな値で出力される。<br>
+	例えば、日にち単位で出力すると0.12日だとか48315日など分かりづらい表記になってしまう。<br>
+ 	日付差を分かりやすい表記にするために、単位（年月日時分秒のいずれか）を、付加して出力する。<br>
+ 	単位は日付差の大きさにより、適切なものが選ばれる。<br>
+ 	<br>
+	
+	
+	<h4>diffDateX関数</h4>
+	<pre>
+	/**
+	 * 日数差を適切な単位（年月日時分秒のいずれか）で返す
+	 * 
+	 * 文字列型日付、日付オブジェクトの両方に対応
+	 * 
+	 * @param date1 比較日付1
+	 * @param date2 比較日付2
+	 * @returns number 日数
+	 */
+	function diffDateX(date1,date2){
+		var d1 = date1;
+		var d2 = date2;
+		
+		// 引数が文字列型の日付なら日付オブジェクトに変換
+		if(typeof String(d1) === "string"){
+			var d1 = new Date(d1);
+		}
+		if(typeof String(d2) === "string"){
+			var d2 = new Date(d2);
+		}
+		
+		var u1 = Math.floor(d1);// UNIXタイムスタンプに変換
+		var u2 = Math.floor(d2);
+		
+		// 日数差を適切な単位（年月日時分秒のいずれか）で返すを算出
+		var diff_u = u1 - u2;
+		var date_str = '';
+		var v = 0;
+		if(diff_u &gt;= 31556952000){
+			v = Math.round(diff_u / 31556952000);
+			date_str = '約' + v + '年間';
+		}else if(diff_u &gt;= 2629746000){
+			v = Math.round(diff_u / 2629746000);
+			date_str = '約' + v + 'ヶ月間';
+		}else if(diff_u &gt;= 86400000){
+			v = Math.round(diff_u / 86400000);
+			date_str = '約' + v + '日間';
+		}else if(diff_u &gt;= 3600000){
+			v = Math.round(diff_u / 3600000);
+			date_str = '約' + v + '時間';
+		}else if(diff_u &gt;= 60000){
+			v = Math.round(diff_u / 60000);
+			date_str = '約' + v + '分間';
+		}else if(diff_u &gt;= 1000){
+			v = Math.round(diff_u / 1000);
+			date_str = '約' + v + '秒';
+		}else{
+			date_str = '約' + v + 'ミリ秒';
+		}
+		return date_str;
+	}
+	</pre><br>
+	<br>
+	
+	
+	<hr>
+	
+	<h2>サンプル</h2>
+
+	
+	<input type="button" value="実装例" onclick="$('#source8-4-2').toggle()" class="btn btn-primary btn-xs" />
+
+	<div id="source8-4-2" style="display:none">
+	<pre>
+	$(function(){
+		var str_date1 = '2016/4/18 00:00:00';
+		var str_date2 = '2016/4/15 00:00:00';
+		var data = [
+			{'d1':'2016/4/18','d2':'2014/5/18'},
+			{'d1':'2016/4/18','d2':'2016/2/20'},
+			{'d1':'2016/4/18 00:00:00','d2':'2016/4/15 10:30:00'},
+			
+			{'d1':'2016/4/18 16:00:00','d2':'2016/4/18 10:40:00'},
+			{'d1':'2016/4/18 16:00:00','d2':'2016/4/18 15:25:00'},
+			{'d1':'2016/4/18 16:00:00','d2':'2016/4/18 15:59:20'},
+		];
+		for(var i=0 ; i &lt; data.length ; i++){
+			var ent = data[i];
+			var d1 = ent.d1;
+			var d2 = ent.d2;
+			var date_str = <strong>diffDateX(d1,d2);</strong>
+			
+			var str = '&lt;tr&gt;&lt;td&gt;' + d1 + '&lt;/td&gt;&lt;td&gt;' + d2 + '&lt;/td&gt;&lt;td&gt;' + date_str + '&lt;/td&gt;&lt;/tr&gt;'
+			$('#res tbody').append(str);
+		}
+	});
+
+	</pre>
+	</div>
+	<br>
+	
+	<p>出力</p>
+	<table id="res" class="tbl2 output_data">
+		<thead><tr><th>日付1</th><th>日付2</th><th>日付差</th></tr></thead>
+		<tbody></tbody>
+	</table>
+
+	
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-20 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

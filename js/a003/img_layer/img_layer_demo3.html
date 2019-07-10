@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>画像を重ねて、1枚の画像としてIMG要素に表示</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="html2canvas.js"></script>
+	
+
+
+	<style>
+		#img_div{
+			width:200px;
+			height:200px;
+		}
+		.test1{
+			position:absolute;
+		}
+	</style>
+	
+	<script>
+	function test2(){
+		
+		// 画像を重ねて表示しているDIV要素を取得する。
+		var element = $('#img_div')[0];
+  
+		//DOM要素を画像のバイナリデータに変換する。
+		html2canvas(element, { onrendered: function(canvas) {
+			// 変換後に呼び出されるコールバック
+		
+			// 変換後、バイナリデータをデータURLスキームとして取得する。
+			var data_url_scheme= canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+			
+			// IMG要素へデータURLスキームをセットして画像表示する。
+			$('#img2')[0].src = data_url_scheme;
+
+		}});
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>画像を重ねて、1枚の画像としてIMG要素に表示</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+
+html2canvas.jsを読み込む必要がある。<br>
+<br>
+
+<input type="button" class="btn btn-success btn-xs" value="テスト" onclick="test2()" /><br>
+<div  style="width:200px;height:200px;background-color:#cdebd9">
+	<div id="img_div2">いろは</div>
+	<div id="img_div">
+		<img src="toumei1.png" class="test1" />
+		<img src="toumei2.png" class="test1" />
+		<img src="toumei3.png" class="test1" />
+		<img src="toumei4.png" class="test1" />
+	</div>
+</div>
+
+<hr>
+<p>IMG要素</p>
+<img id="img2" src="" alt="" /><br>
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>画像を重ねて、1枚の画像としてIMG要素に表示</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-11-2</div>
+</body>
+</html>

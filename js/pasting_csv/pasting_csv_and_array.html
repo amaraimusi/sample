@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CSV貼付から行列データを作成する</title>
+
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="pasting_csv_and_array.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>CSV貼付から行列データ（JSON）を作成する</h1>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		<textarea id="pasting_csv" class="form-control" rows="10" placeholder="CSVを貼り付けてください">1&#x0009;neko&#x0009;猫&#13;2&#x0009;yagi&#x0009;山羊&#13;3&#x0009;same&#x0009;鮫&#13;4&#x0009;wasi&#x0009;鷲&#13;5&#x0009;goki&#x0009;御器</textarea>
+		<br>
+		<input type="button" value="行列データ（JSON)に変換" onclick="execution1()" class="btn btn-primary" />
+		<div id="res" style="margin:20px;color:#dd4f43;"></div>
+	</div>
+
+
+	
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-11-20</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

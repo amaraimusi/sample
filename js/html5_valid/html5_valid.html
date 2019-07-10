@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>HTML5のpetten属性によるバリデーションとJavaScriptでの検知</title>
+
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>HTML5のpetten属性によるバリデーションとJavaScriptでの検知</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+
+		<form>
+			<div id="errorMessage"></div>
+			<input type="text" id="neko" name="neko" pattern="^[ァ-ンー]+$" title="カタカナ入力デス" value="あ" placeholder="カタカナ"><br>
+			<input type="text" id="yagi" name="yagi" pattern="^[0-9]+$" title="数値（自然数）のみ" value="" placeholder="自然数"><br>
+			<br><br>
+		
+		  	<input type="submit" value="サブミットでバリデーションを検知する"><br>
+		  	<input type="button" value="サブミットせずバリデーションを検知する" onclick="testValidByHtml5()" /><br>
+		</form>
+		
+
+
+		<script>
+
+			function testValidByHtml5(){
+				var errMsg=validByHtml5();
+				if(errMsg!=null){
+					alert(errMsg);
+				}else{
+					alert('正常');
+				}
+			}
+			
+			/**
+			* HTML5・pattern属性のバリデーションを検知し、title属性で指定したメッセージを表示する。
+			* @return 正常:null,   異常:エラーメッセージ（title属性の文字列）
+			*/
+			function validByHtml5(){
+				var form = document.forms[0];
+
+				for (i in form) {
+
+					try{
+						
+						var v=form[i].validity.valid;
+
+						if(v==false){
+							var errMsg = form[i].title;
+							return errMsg;
+						}
+					}catch( e ){
+
+					}
+
+				}
+
+				return null;
+			}
+			
+		</script>
+
+
+	</div>
+
+
+
+	<br><br>
+	<a href="http://www.html5.jp/tag/elements/forms-constraints.html" class="btn btn-link btn-xs">参考サイト1</a>
+	<a href="http://www.atmarkit.co.jp/ait/articles/1104/25/news137_3.html" class="btn btn-link btn-xs">参考サイト2</a>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-02-24</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

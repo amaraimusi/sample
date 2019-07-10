@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>Nexus7を開発デバイスにするためのドライバインストール</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script>
+
+
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">nexus7を開発デバイスにするためのドライバインストール</h1>
+		<div id="content" >
+			
+			<div class="sec1">
+			
+				<h2>Nexus7を開発デバイスとして使用するには</h2>
+					EclipseでAndroid開発をする際、Nexus7を開発デバイスとして使う場合、
+				 	Nexus7をUSBでPCにつないだだけでは、開発デバイスとして使用できない。<br />
+				 	Nexus7をまず開発モードし、さらにドライバをインストールする必要がある。開発モードにする方法は「
+				 	<a href="http://androidlover.net/smartphone/galaxynexus/android-4-2-developer-options.html" >
+Nexus 7 Android 4.2で消えた開発者向けオプションを表示させる方法</a>」を参照。<br />
+					ここでは、Nexus7のドライバをインストールする手順を示す。
+					
+				<br />
+				<hr />
+				
+				
+				<h3>Nexus7ドライバのインストール手順(XPの場合）</h3>
+				<dl>
+					<dt>1.PCとNexus7をUSBでつなぐ</dt>
+					<dt>2.デバイスマネージャを開く</dt>
+						<dd>デバイスマネージャ画面ははマイコンピュータを右クリックし、プロパティ→「ハードウェア」タブ→「デバイスマネージャ」ボタンを押すと開く</dd>
+					<dt>3.その他から「？Nexus7」となっている部分を右クリックし、「ドライバの更新」を選択。</dt>
+					<dt>4.「一覧または特定の場所からインストールする」を選択してから「次へ」ボタンを押す。</dt>
+					<dt>5.「検索しないで、インストールするドライバを選択する」を選択してから「次へ」ボタンを押す。</dt>
+					<dt>6.一覧で「すべてのデバイスを表示」を選択してから「次へ」ボタンを押す。</dt>
+					<dt>7.「ディスク使用」ボタンを押す。</dt>
+					<dt>8.「製造元のファイルのコピー元」にAndroid SDKをインストールしたフォルダにある「android-sdk-windows\extras\google\usb_driver\android_winusb.inf」ファイルを参照する。</dt>
+						<dd>（例）C:\Program Files\Android\android-sdk\extras\google\usb_driver\android_winusb.inf</dd>
+					<dt>9.OKボタンを押す。</dt>
+					<dt>10.「Android ADB Interface」を選んで「次へ」ボタンを押す。</dt>
+					<dt>11.インストールが始まり、警告画面等がでるがOKしておく。更新完了が表示されたらインスール終了。</dt>
+					<dt>12.デバイスマネージャで「Android ADB Interface」が表示されていればドライバインストール成功です。</dt>
+				</dl>
+				
+					<br />
+					参考資料<br />
+					<a href="http://androidlover.net/smartphone/galaxynexus/installandroid-composite-adb-interface.html">
+						Galaxy Nexus(SC-04D)をデバッグモードにした時にPCに認識させる方法。(Android ADB Interfaceのインストール方法)。</a>
+					
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/09/03</div>
+		</div><!-- page1 -->
+	</body>
+</html>

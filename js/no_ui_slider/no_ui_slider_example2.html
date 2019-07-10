@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>noUiSlider | テキストボックスとの連動</title>
+
+
+		<link href="noUiSlider/nouislider.min.css" rel="stylesheet">
+		
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="noUiSlider/nouislider.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+				
+				var slider = $('#slider').get(0);
+
+				//noUiSliderスライダーの生成と設定をする。
+				noUiSlider.create(slider, {
+					start: [20, 80],//初期値
+					step:10,//ステップ：スライダー一切りの間隔値
+					connect: true,
+					tooltips: false,// true:スライダーにツールチップを表示
+					range: {//入力できる数値の範囲
+						'min': 0,
+						'max': 100
+					}
+				});
+				
+				//スライダーを動かしたときのイベント
+				slider.noUiSlider.on('update', function ( values, handle ) {
+					var v1=values[0];
+					var v1=Math.round(v1);
+					$('#test_v1').val(v1);
+				
+					var v2=values[1];
+					var v2=Math.round(v2);
+					$('#test_v2').val(v2);
+				});
+				
+				//テキストボックスの値を変更したときに、スライダーにも反映させる。
+				$('#test_v1').blur(function(e){
+					var v1=$('#test_v1').val();
+					var v2=$('#test_v2').val();
+					
+					slider.noUiSlider.set([v1,v2]);
+				});
+				
+				//テキストボックスの値を変更したときに、スライダーにも反映させる。（右の値）
+				$('#test_v2').blur(function(e){
+					var v1=$('#test_v1').val();
+					var v2=$('#test_v2').val();
+					
+					slider.noUiSlider.set([v1,v2]);
+				});
+				
+
+			});
+
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >noUiSlider | テキストボックスとの連動</h1>
+
+<div id="slider" style="width:350px;"></div>
+<input id="test_v1" type="number" value="0" />
+<input id="test_v2" type="number" value="0" />
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-11-25</p>
+</body>
+</html>

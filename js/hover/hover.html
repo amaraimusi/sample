@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>マウスオーバーイベント | jQuery hoverート</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+				
+				$('#test1').hover(
+					function(){
+						console.log('over');
+						$('#res1').html('over');
+					},
+					function(){
+						console.log('out');
+						$('#res1').html('out');
+					}
+				);
+				
+				
+				$('#test2').hover(
+					function(){
+						console.log('over');
+						$('#res2').html('over');
+					},
+					function(){
+						console.log('out');
+						$('#res2').html('out');
+					}
+				);
+				
+				
+			});
+
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >マウスオーバーイベント | jQuery hoverート</h1>
+
+<div id="test1" style="width:50px;height:50px;background-color:#dff0cb"></div>
+<div id="res1"></div>
+
+<hr>
+
+<a id="test2" href="#">テスト2</a><br>
+<div id="res2"></div>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-12-21</p>
+</body>
+</html>

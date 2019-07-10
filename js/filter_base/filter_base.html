@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>filter（フィルター）の使い方</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+
+			$(document).ready(function(){
+
+				var ary=[1,2,3,4,5,6,7,8,9,10];
+
+				//★5以上を抽出するフィルター
+				var ary2=ary.filter(function(value, index, ar){
+					return (value >= 5);
+				});
+
+
+				$("#a1").html(ary.join(","));
+				$("#a2").html(ary2.join(","));
+
+			});
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">filter（フィルター）の使い方</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<div>フィルター前</div>
+				<div id="a1"></div>
+				<hr>
+				<div>フィルター後(5以上でフィルターをかける)</div>
+				<div id="a2"></div>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/05</div>
+		</div><!-- page1 -->
+	</body>
+</html>

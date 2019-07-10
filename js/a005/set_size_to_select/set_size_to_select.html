@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SELECTにサイズ(size属性)をセットしたとき、スクロールを選択中の位置へ</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+
+	<script>
+
+	function test1(){
+		
+		var elm = $('#select1');
+		elm.attr('size',5);
+		
+	}
+	
+	function test2(){
+		var select1 = $('#select1');
+		_setSizeToSelect(select1,5)
+	}
+	
+	
+	/**
+	 * セレクトボックスにサイズをセット
+	 * 
+	 * @note
+	 * スクロールの位置調整も行う
+	 * 
+	 * @param selElm セレクトボックス
+	 * @param select_size セレクトのサイズ
+	 */
+	function _setSizeToSelect(selElm,select_size){
+		selElm.attr('size',select_size);
+	
+		// 現在の選択位置へスクロールする
+		selElm.each(function(){
+			var elm = jQuery(this);
+			elm[0].selectedIndex = elm[0].selectedIndex;
+
+		});
+
+	}
+	</script>
+	
+	
+</head>
+<body>
+<div id="header" ><h1>SELECTにサイズ(size属性)をセットしたとき、スクロールを選択中の位置へ</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+<h2>検証</h2>
+<select  id="select1" >
+	<option value="1">ニッポンマイマイ</option>
+	<option value="2">カワザンショウガイ</option>
+	<option value="3">バカガイ</option>
+	<option value="4">トウガタカワニナ</option>
+	<option value="5">サワガニ</option>
+	<option value="6">キヌタアゲマキ</option>
+	<option value="7">ニッコウガイ</option>
+	<option value="8">ムシオイガイ</option>
+	<option value="9">オオノガイ</option>
+	<option value="10">カワザンショウガイ</option>
+	<option value="11">オキナガイ</option>
+	<option value="12">スナガニ</option>
+	<option value="13">サワガニ</option>
+	<option value="14" selected>マテガイ</option>
+	<option value="15">チトセノハナガイ</option>
+	<option value="16">マルスダレガイ</option>
+	<option value="17">カワザンショウガイ</option>
+	<option value="18">オカミミガイ</option>
+	<option value="19">アサジガイ</option>
+	<option value="20">トウガタガイ</option>
+	<option value="21">イタヤガイ</option>
+	<option value="22">サワガニ</option>
+	<option value="23">ベッコウマイマイ</option>
+	<option value="24">サワガニ</option>
+	<option value="25">ニッコウガイ</option>
+	<option value="26">ゴマガイ</option>
+	<option value="27">シオサザナミ</option>
+	<option value="28">ヌマエビ</option>
+</select>
+
+<div>
+	<input type="button" value="スクロール制御なし" onclick="test1()" class="btn btn-warning" />
+	<input type="button" value="スクロール制御あり" onclick="test2()" class="btn btn-success" />
+</div>
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>SELECTにサイズ(size属性)をセットしたとき、スクロールを選択中の位置へ</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-7-26</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>半角英数字チェック</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+			$(document).ready(function(){
+
+				var tbody=$("#tbl1 tbody");
+
+				var ary=['123','abc','ABC','あいう','',0,null,undefined,' ','-','aka_neko'];
+
+				for(var i=0;i<ary.length;i++){
+					var s=ary[i];
+					var flg=is_alpha_numeric(s);
+					tr="<tr><td>"+ s +"</td><td>" + flg + "</td></tr>";
+					tbody.append(tr)
+
+				}
+			});
+
+
+			function is_alpha_numeric(str)
+			{
+				return /^[a-zA-Z0-9]+$/.test(str);
+			}
+
+			function is_alpha_numeric2(str)
+			{
+				return /^[a-zA-Z0-9_\-]+$/.test(str);
+			}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">半角英数字チェック</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+<strong>半角英数字チェック</strong><br>
+<pre>
+	function is_alpha_numeric(str)
+	{
+		return /^[a-zA-Z0-9]+$/.test(str);
+	}
+</pre><br>
+
+
+				<table id="tbl1" border="1">
+				<thead><tr><th>値</th><th>チェック</th></tr><thead>
+				<tbody>
+				</tbody>
+
+				</table>
+※空値はfalseと判定
+<br><br>
+<strong>半角英数字チェック。ハイフンやアンダースコア記号もOK</strong><br>
+<pre>
+
+	function is_alpha_numeric2(str)
+	{
+		return /^[a-zA-Z0-9_\-]+$/.test(str);
+	}
+</pre>
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/07/25</div>
+		</div><!-- page1 -->
+	</body>
+</html>

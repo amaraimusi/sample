@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate" />
+<title>Infinityの取り扱い</title>
+<link rel="stylesheet" type="text/css" href="common1.css" />
+<script src="jquery-1.11.1.min.js"></script><!-- 最新版読込 -->
+<!-- 最新版読込 -->
+<script>
+	$(document).ready(function() {
+
+		var v1 = 1 / 0;
+		$("#v1").html(v1);
+
+		var v2 = v1 - 1;
+		$("#v2").html(v2);
+
+		var v3 = Infinity.length;
+		$("#v3").html(v3);
+
+		var v4=false;
+		if(v1==Infinity){
+			v4=true;
+		}
+		$("#v4").html(v4);
+
+		var v5=Infinity-Infinity;
+		$("#v5").html(v5);
+
+		var v6=Infinity+Infinity;
+		$("#v6").html(v6);
+
+		var v7=Infinity/Infinity;
+		$("#v7").html(v7);
+
+		var v8=Infinity*Infinity;
+		$("#v8").html(v8);
+
+		var v9=0 / 0;
+		$("#v9").html(v9);
+
+		var val = Math.atan(Infinity);
+		$("#v10").html(val);
+
+
+
+
+
+
+	});
+</script>
+
+<style type="text/css">
+</style>
+
+</head>
+<body>
+	<div id="page1">
+		<h1 id="header">Infinityの取り扱い</h1>
+		<div id="content">
+
+			<div class="sec1">
+
+				Infinityは「1/0」とすると出力される特別な値。<br>
+				Infinityは文字列ではない。Infinityを判定するときは「if(v1==Infinity){...}」とすれば良い。<br>
+				「Infinity-1」とした場合、エラーとならずInfinityの答えが返ってくる。
+				これにより計算中にInfinityが発生してもエラーで止まることがないことがわかる。<br>
+				Infinity同士の計算では、減算と除算の場合、答えは空になるので注意。<br>
+				<br><br>
+				<hr>
+				<h3>検証</h3>
+				<table border="1">
+					<thead>
+						<tr>
+							<th>項目</th>
+							<th>値</th>
+							<th>説明</th>
+					</thead>
+					<tbody>
+
+						<tr>
+							<td>infinityの値</td>
+							<td><div id="v1"></div></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Infinity-1</td>
+							<td><div id="v2"></div></td>
+							<td>Infinityからいくら数値を引いてもInfinityのまま</td>
+						</tr>
+						<tr>
+							<td>Infinityの文字数</td>
+							<td><div id="v3"></div></td>
+							<td>Infinityは文字列として扱われていない。</td>
+						</tr>
+						<tr>
+							<td>if(v1==Infinity)</td>
+							<td><div id="v4"></div></td>
+							<td>判定できる。</td>
+						</tr>
+						<tr>
+							<td>Infinity-Infinity</td>
+							<td><div id="v5"></div></td>
+							<td>0ではなく空になる。</td>
+						</tr>
+						<tr>
+							<td>Infinity+Infinity</td>
+							<td><div id="v6"></div></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Infinity/Infinity</td>
+							<td><div id="v7"></div></td>
+							<td>1ではなく空になる。</td>
+						</tr>
+						<tr>
+							<td>Infinity*Infinity</td>
+							<td><div id="v8"></div></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>0/0</td>
+							<td><div id="v9"></div></td>
+							<td>Infinityにはならず、空。代数学的な答えは不定値（すべの数字）</td>
+						</tr>
+						<tr>
+							<td>ATAN</td>
+							<td><div id="v10"></div></td>
+							<td>Infinityのアークタンジェント</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+
+
+			</div>
+			<!-- sec1 -->
+
+		</div>
+		<!-- content -->
+		<div id="footer">(C) kenji uehara 2014/06/26</div>
+	</div>
+	<!-- page1 -->
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="bpgdec8b.js"></script>
+</head>
+<body>
+<h1>BPG Demo</h1>
+
+<img src="ike.bpg">
+<img src="0.bpg">
+<p>
+Dynamic loading in a canvas:<br>
+<canvas id="mycanvas" width="512" height="512"></canvas>
+<script>
+/*
+(function ()
+{
+    var img, canvas, ctx;
+
+    canvas = document.getElementById("mycanvas");
+    ctx = canvas.getContext("2d");
+
+    img = new BPGDecoder(ctx);
+    img.onload = function() {
+        // draw the image to the canvas
+        ctx.putImageData(this.imageData, 0, 0);
+    };
+
+
+    //動的画像設定の例
+    img.load("ike.bpg");
+})();
+*/
+</script>
+</body>
+</html>

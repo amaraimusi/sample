@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>jQuery.upload | 非同期通信・画像アップロードその２</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="jquery.upload-1.0.2.min.js"></script>
+		
+		<script>
+
+			//ファイルアップロードされたときのイベント。
+	    $(function() {
+	        $('#medaka').change(function() {
+		
+		        	//ファイル名
+		        	var fn="upload_img.php?fn=img/big_cat2.jpg";
+		        	fn=encodeURI(fn);//URLエンコード
+		        	
+		     			//☆非同期通信で画像ファイルをアップロードする。
+	            $(this).upload(fn, function(res) {
+									//▽以下はファイルアップロードに成功したときの処理。
+		            	alert(res);
+		            	$("#kaeru").attr("src",res);//imgタグに画像URLをセット。
+	            }, 'html');
+	        });
+	    });
+	   
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">jQuery.upload | 非同期通信・画像アップロードその２</div>
+		<div id="content" >
+		
+			<div class="sec1">
+			
+			jQueryUploadによる画像アップロードサンプル。<br />
+			<a href="http://lagoscript.org/jquery/upload/documentation">ドキュメント</a><br />
+			
+			<hr />
+				<input type="file" name="upload_file" id="medaka"><br />
+				<img id="kaeru" src="" />
+			<hr /><br />
+				
+			<p>JavaScript</p>
+			<pre>
+			
+			//ファイルアップロードされたときのイベント。
+			$(function() {
+				$('#medaka').change(function() {
+					//☆非同期通信で画像ファイルをアップロードする。
+					$(this).upload('upload.php', function(res) {
+						//▽以下はファイルアップロードに成功したときの処理。
+						alert(res);
+						$("#kaeru").attr("src",res);//imgエレメントのsrc属性に画像URLをセット。
+					}, 'html');
+				});
+			});
+			</pre><br />
+				
+			<p>html</p>
+			<pre>
+			
+			&ltinput type="file" name="upload_file" id="medaka">
+			&ltimg id="kaeru" src="" />
+			</pre><br />
+			
+			
+			<p>upload.php</p>
+			<pre>
+			
+			&lt?php
+			    move_uploaded_file($_FILES["upload_file"]["tmp_name"], "img/" . $_FILES["upload_file"]["name"]);//画像を保存。
+			    echo "img/" .$_FILES["upload_file"]["name"];//保存先のURLを出力。
+			?>			
+			</pre><br />
+	
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,533 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr">
+<head>
+	<link rel="NEXT"  href="mnt_top.php" />
+	<link rev="made" href="mailto:amaraimusi@yahoo.co.jp" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAWZfK5yATFwd6lElAdolgrhRdrCFiLDZ8jDvMrt4ZN-nXZDorfxTH_gjnUV5PciAaHIMb4xKz6MbidA" type="text/javascript"></script>
+	<link href="css/common.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript">
+	
+
+
+
+	//▼ロードイベント
+	var map;//google mapオブジェクト
+	var m_mainMarker;//メインアイコン
+	var m_markerList;
+	var m_iconData;//アイコンデータ
+	var m_mode10sin;//表記モード
+	var m_objs;//フォームオブジェクトリスト
+	function load(){
+		m_mode10sin=true;//最初は10進表記モード
+		m_iconData=getIconData();
+
+			//35.205963,137.166939
+		
+		//▼▼▼Google　Map　地図表示
+		var lat=35.1322248;	
+		var lon=136.8980779;
+
+		//var map = new google.maps.Map2(document.getElementById("map"));
+		map = new GMap(document.getElementById("map"));
+	    map.clearOverlays();        	// マーカー, 吹き出し の削除
+		map.addControl(new GLargeMapControl());
+		map.addControl(new GMapTypeControl());
+		map.centerAndZoom(new GPoint(140, 25), 4);
+		map.centerAtLatLng(new GPoint(lon,lat));
+
+		//マーカーをセットする。
+		m_mainMarker = new GMarker(new GLatLng(lat,lon));
+	    map.addOverlay(m_mainMarker);
+
+		//マウスクリックイベント
+		GEvent.addListener(map, 'click', function(overlay, point) {
+			  if (overlay) {
+
+			  } else if (point) {
+				//▼テキストボックスに座標を出力
+				var txtLat=document.getElementById("lat");
+				var txtLon=document.getElementById("lon");
+				setLatLon(0,point.y,point.x);
+				//txtLat.value=point.y;
+				//txtLon.value=point.x;
+				
+				map.removeOverlay(m_mainMarker); //いったんマーカーを削除する。
+				
+				m_mainMarker = new GMarker(new GLatLng(point.y,point.x));//クリックした位置にマーカーを追加
+			    map.addOverlay(m_mainMarker);
+
+				//inputCheckPage1();//Page1のフォームの入力チェックを行う。
+			  }
+			});
+
+
+
+	}
+
+
+
+
+	//マーカーをセットします。
+	function setMarker(index){
+		//マーカーリストが空であれば新規作成する。
+		if(!m_markerList){
+			objs=getFormObjects();
+			m_markerList=new Array(objs.length);
+		}
+		
+		//▽マーカーをいったん削除します。
+		var marker=m_markerList[index];
+		if(marker){
+			map.removeOverlay(marker); //いったんマーカーを削除する。
+		}
+
+		//▽座標を取得します。
+		var ary=getLatLon(index);
+		var lat=ary['lat'];
+		var lon=ary['lon'];
+
+		//▽マーカーを地図にセットします。
+		marker = new GMarker(new GLatLng(lat,lon),m_iconData[index]);//クリックした位置にマーカーを追加
+	    map.addOverlay(marker);
+		m_markerList[index]=marker;
+		
+	}
+
+	//すべてのマーカーをセット。
+	function allSetMarker(){
+/*
+		var objs=getFormObjects();
+		var cnt=objs.length/2;
+		alert(cnt);
+		for(i=0;i<cnt;i++){
+			setMarker(i);
+		}*/
+
+		setMarker(0);
+		setMarker(1);
+		setMarker(2);
+		setMarker(3);
+		setMarker(4);
+		setMarker(5);
+	}
+
+	//マーカーをクリア
+	function clearMarker(index){
+		//マーカーリストが空であれば新規作成する。
+		if(m_markerList){
+			var marker=m_markerList[index];
+			if(marker){
+				map.removeOverlay(marker); //いったんマーカーを削除する。
+			}
+		}
+	}
+	
+	//全マーカーをクリア
+	function allClearMarker(index){
+		if(m_markerList){
+			for(i=0;i<m_markerList.length;i++){
+				var marker=m_markerList[i];
+				if(marker){
+					map.removeOverlay(marker); //いったんマーカーを削除する。
+				}
+			}
+		}
+	}
+
+
+	
+
+	//移動します。
+	function moveCenter(index){
+		var ary=getLatLon(index);
+		var lat=ary['lat'];
+		var lon=ary['lon'];
+		if(lat && lon){
+			map.centerAtLatLng(new GPoint(lon,lat));
+		}
+	}
+
+
+	//フォームオブジェクトからデータを取得します。
+	function getLatLon(index){
+		var i=index * 2;
+		var objs=getFormObjects();
+		var lat=objs[i].value;
+		var lon=objs[i+1].value;
+
+		//数値でない場合10進表記にする。
+		if(lat != '' && isNaN(lat)==true){
+			lat=convertTo10sin(lat);
+		}
+		if(lon != '' && isNaN(lon)==true){
+			lon=convertTo10sin(lon);
+		}
+		var ary=new Array();
+		ary['lat']=lat;
+		ary['lon']=lon;
+		return ary;
+	}
+
+
+
+	//フォームオブジェクトにデータをセットします。
+	function setLatLon(index,lat,lon){
+		var i=index * 2;
+		var objs=getFormObjects();
+		objs[i].value=lat;
+		objs[i+1].value=lon;
+		
+		for(k=0;k<2;k++){
+			i=i+k;
+			if(m_mode10sin==true){
+				//数値でない場合10進表記にする。
+				if(objs[i].value != '' && isNaN(objs[i].value)==true){
+					objs[i].value=convertTo10sin(objs[i].value);
+				}
+			}else{
+				//数値である場合、度分秒表記にする。
+				if(objs[i].value != '' && isNaN(objs[i].value)==false){
+					objs[i].value=convertToDohunbyo(objs[i].value);
+				}
+			}
+		}
+
+
+	}
+	//アイコンデータ一覧を取得する
+	function getIconData(){
+		var iconUrl=new Array();
+		 iconUrl[0]="http://maps.google.co.jp/mapfiles/ms/icons/red-dot.png";
+		 iconUrl[1]="http://maps.google.co.jp/mapfiles/ms/icons/green-dot.png";
+		 iconUrl[2]="http://maps.google.co.jp/mapfiles/ms/icons/ltblue-dot.png";
+		 iconUrl[3]="http://maps.google.co.jp/mapfiles/ms/icons/blue-dot.png";
+		 iconUrl[4]="http://maps.google.co.jp/mapfiles/ms/icons/yellow-dot.png";
+		 iconUrl[5]="http://maps.google.co.jp/mapfiles/ms/icons/purple-dot.png";
+		 iconUrl[6]="http://maps.google.co.jp/mapfiles/ms/icons/pink-dot.png";
+
+		var iconSadowUrl="http://maps.google.co.jp/mapfiles/ms/icons/msmarker.shadow.png";
+		var icons=new Array(iconUrl.length);
+		for(i=0;i<iconUrl.length;i++){
+				
+		var icon = new GIcon();
+
+		icon.image = iconUrl[i];
+		icon.shadow = iconSadowUrl;
+		//icon.iconSize = new GSize(24, 40);
+		//icon.shadowSize = new GSize(22, 20);
+		icon.iconAnchor = new GPoint(15, 32);
+		//icon.infoWindowAnchor = new GPoint(5, 1);
+		icons[i]=icon;
+		}
+
+
+		return icons;
+	}
+	
+	//座標表示モードを切り替える。
+	function modeChangeLatLonType(){
+		
+		var objs=getFormObjects();
+		if(m_mode10sin==true){
+			document.getElementById("mode10sin").innerHTML="度分秒表記モード";
+			m_mode10sin=false;
+			//▽度分秒表記に切り替える。
+			
+			for(i=0;i<objs.length;i++){
+				//数値であることをチェック。
+				if(objs[i].value != '' && isNaN(objs[i].value)==false){
+					objs[i].value=convertToDohunbyo(objs[i].value);
+				}	
+			}
+		}else{
+			
+			document.getElementById("mode10sin").innerHTML="１０進表記モード";
+			m_mode10sin=true;
+			//▽10秦表記にする。
+			//数値でないことをチェック
+			for(i=0;i<objs.length;i++){
+
+				if(objs[i].value != '' && isNaN(objs[i].value)==true){
+					
+					objs[i].value=convertTo10sin(objs[i].value);
+				}
+			}
+		}
+
+	
+
+	}
+	//フォームのオブジェクトリストを取得する。
+	function getFormObjects(){
+		if(m_objs){
+			objs=m_objs;
+		}else{
+
+			var ary=new Array();
+			ary[0]='lat';
+			ary[1]='lon';
+			ary[2]='lat1';
+			ary[3]='lon1';
+			ary[4]='lat2';
+			ary[5]='lon2';
+			ary[6]='lat3';
+			ary[7]='lon3';
+			ary[8]='lat4';
+			ary[9]='lon4';
+			ary[10]='lat5';
+			ary[11]='lon5';
+			var objs=new Array();
+			for(i=0;i<ary.length;i++){
+				objs[i]=document.getElementById(ary[i]);
+				
+			}
+		}
+		return objs;
+	}
+
+	//10進表記にする。
+	function convertTo10sin(str){
+		str=str.replace('E','');
+		str=str.replace('W','');
+		str=str.replace('S','');
+		str=str.replace('N','');
+		str=str.replace('°',',');
+		str=str.replace('′',',');
+		str=str.replace("'",",");
+		str=str.replace('″','');
+		str=str.replace('"','');
+		var ary = str.split(",");
+		
+		var xdo=parseFloat(ary[0]);
+		var xhun=parseFloat(ary[1]);
+		var xbyo=parseFloat(ary[2]);
+		var val=xdo+xhun/60+xbyo/3600;
+		return val;
+
+		return val;
+	}
+	
+	//緯度経度を度分秒表記にする。l
+	function convertToDohunbyo(val){
+		var xdo=Math.floor(val);
+		var xhun=Math.floor((val-xdo)*60);
+		var xbyo=(val-xdo-xhun/60)*3600;
+		
+		var str=xdo + "°" + xhun + "′" + xbyo + "″";
+		return str;
+		
+	}
+
+
+
+	//経度テキスト、緯度テキスト、ズームレベルテキストからフォーカスが離れた場合、それぞれの値の場所に地図移動する。
+	function setMapXYZ(){
+
+		var txtLat=document.getElementById("lat");
+		var txtLon=document.getElementById("lon");
+		var lon=txtLon.value;
+		var lat=txtLat.value;
+		if(inputCheckXY(lon,lat)){
+			
+			map.centerAtLatLng(new GPoint(lon,lat));
+			
+		}
+	}
+
+	//メイン入力項目から指定したIndexの入力項目にコピーする。
+	function dataCopy(index){
+		var ary=getLatLon(0);
+		var lat=ary['lat'];
+		var lon=ary['lon'];
+		setLatLon(index,lat,lon);
+	}
+	
+	//住所から緯度経度を取得します。またその場所へいどうする。
+	function setAddress(){
+		var obj=document.getElementById("address");
+		mapMoveTo(obj.value);
+	}
+
+	//住所から地図を表示する。引数は住所。
+	function mapMoveTo(place) {
+	  var geocoder = new GClientGeocoder();
+	
+	  geocoder.getLatLng(place, function(point) {
+	    if (point) {
+			
+			setLatLon(0,point.y,point.x);//メイン入力項目に座標を表示させる。
+			map.centerAtLatLng(new GPoint(point.x,point.y));//中心位置へ移動
+/*
+	      map.clearOverlays();        	// マーカー, 吹き出し の削除
+			map.addControl(new GLargeMapControl());
+			map.addControl(new GMapTypeControl());
+	      map.setCenter(point,15);       // 地図表示 ２番目の引数は倍率
+*/
+
+		map.removeOverlay(m_mainMarker); //いったんマーカーを削除する。
+	      m_mainMarker = new GMarker(point);
+	
+	      map.addOverlay(m_mainMarker);
+	      m_mainMarker.openInfoWindowHtml(place);
+	    } else {
+	      alert("見つかりません：" + place);
+	    }
+	  });
+	}
+	
+	//CSVデータ出力
+	function outputData(){
+		var objs=getFormObjects();
+		var ary =new Array();
+		for(i=0;i<objs.length;i++){
+			ary[i]=objs[i].value;
+		}
+		var str=ary.join();
+		document.getElementById("csv_text").value=str;
+		
+	}
+	
+	//CSVデータ入力
+	function inputData(){
+		var str=document.getElementById("csv_text").value;
+		var ary=str.split(",");
+		
+		var objs=getFormObjects();
+		for(i=0;i<objs.length;i++){
+			objs[i].value=ary[i];
+		}
+	}
+
+	var nav = null;  
+	function requestPosition() { 
+		  if (nav == null) { 
+			  
+		      nav = window.navigator; 
+		  } 
+		  if (nav != null) { 
+		      var geoloc = nav.geolocation; 
+		      if (geoloc != null) { 
+		          geoloc.getCurrentPosition(successCallback); 
+		      } 
+		      else { 
+		          alert("geolocation not supported"); 
+		      } 
+		  } 
+		  else { 
+		      alert("Navigator not found"); 
+		  } 
+		} 
+		 
+		function successCallback(position) 
+		{ 
+			document.getElementById('lat').value=position.coords.latitude;
+			document.getElementById('lon').value=position.coords.longitude;
+		 //  setText(position.coords.latitude, "latitude"); 
+		  // setText(position.coords.longitude, "longitude"); 
+		} 
+	</script>
+
+	<title>google map テストツール</title>
+</head>
+<body onload="load()">
+<div id="header">
+	
+	<div style="text-align:center"><h1>google map テストツール</h1></div>
+</div>
+<div id="contents"><div id="contents1">
+
+<div class="contents3">
+		<!-- 位置情報 -->
+		<div id="map" style="width:720px; height:720px;">map</div>
+		<div id="mode10sin" >10進表記モード</div>
+
+<input type="button" value="表記切り替え" onclick="modeChangeLatLonType()" />
+<input type="button" value="現在位置" onclick="requestPosition()" />
+
+<br>
+	  <table border="0" style="width:95%" summary="緯度、経度"><tr>
+		<td style="color:#fd7567">●<div>
+	  	<td>緯度：<input id="lat" name="lat" type="text" maxlength="30" value=""  /></td>
+	  	<td>経度：<input id="lon" name="lon" type="text" maxlength="30"  value=""   /></td>
+		<td><input type="button" value="移動" onclick="moveCenter(0)" /></td>
+		<td><input type="button" value="マーカー" onclick="setMarker(0)" /></td>
+		<td><input type="button" value="マーカークリア" onclick="clearMarker(0)" /></td>
+	  
+	  </tr>
+	  </table>
+	  
+	<br><br>
+	  <table border="0" style="width:95%" summary="緯度、経度">
+		<tr>
+			<td style="color:#00e64d">●<div>
+		  	<td >緯度：<input id="lat1" name="lat1" type="text" maxlength="30" value=""  /></td>
+		  	<td >経度：<input id="lon1" name="lon1" type="text" maxlength="30"  value=""   /></td>
+			<td><input type="button" value="移動" onclick="moveCenter(1)" /></td>
+			<td><input type="button" value="マーカー" onclick="setMarker(1)" /></td>
+			<td><input type="button" value="マーカークリア" onclick="clearMarker(1)" /></td>
+			<td><input type="button" value="↓" onclick="dataCopy(1)" /></td>
+	  	</tr>
+		<tr>
+			<td style="color:#68e0e0">●<div>
+		  	<td >緯度：<input id="lat2" name="lat2" type="text" maxlength="30" value=""  /></td>
+		  	<td >経度：<input id="lon2" name="lon2" type="text" maxlength="30"  value=""   /></td>
+			<td><input type="button" value="移動" onclick="moveCenter(2)" /></td>
+			<td><input type="button" value="マーカー" onclick="setMarker(2)" /></td>
+			<td><input type="button" value="マーカークリア" onclick="clearMarker(2)" /></td>
+			<td><input type="button" value="↓" onclick="dataCopy(2)" /></td>
+	  	</tr>
+		<tr>
+			<td style="color:#6991fd">●<div>
+		  	<td >緯度：<input id="lat3" name="lat3" type="text" maxlength="30" value=""  /></td>
+		  	<td >経度：<input id="lon3" name="lon3" type="text" maxlength="30"  value=""   /></td>
+			<td><input type="button" value="移動" onclick="moveCenter(3)" /></td>
+			<td><input type="button" value="マーカー" onclick="setMarker(3)" /></td>
+			<td><input type="button" value="マーカークリア" onclick="clearMarker(3)" /></td>
+			<td><input type="button" value="↓" onclick="dataCopy(3)" /></td>
+	  	</tr>
+		<tr>
+			<td style="color:#fdf569">●<div>
+		  	<td >緯度：<input id="lat4" name="lat4" type="text" maxlength="30" value=""  /></td>
+		  	<td >経度：<input id="lon4" name="lon4" type="text" maxlength="30"  value=""   /></td>
+			<td><input type="button" value="移動" onclick="moveCenter(4)" /></td>
+			<td><input type="button" value="マーカー" onclick="setMarker(4)" /></td>
+			<td><input type="button" value="マーカークリア" onclick="clearMarker(4)" /></td>
+			<td><input type="button" value="↓" onclick="dataCopy(4)" /></td>
+	  	</tr>
+		<tr>
+			<td style="color:#8e67fd">●<div>
+		  	<td >緯度：<input id="lat5" name="lat5" type="text" maxlength="30" value=""  /></td>
+		  	<td >経度：<input id="lon5" name="lon5" type="text" maxlength="30"  value=""   /></td>
+			<td><input type="button" value="移動" onclick="moveCenter(5)" /></td>
+			<td><input type="button" value="マーカー" onclick="setMarker(5)" /></td>
+			<td><input type="button" value="マーカークリア" onclick="clearMarker(5)" /></td>
+			<td><input type="button" value="↓" onclick="dataCopy(5)" /></td>
+	  	</tr>
+	  </table>
+	
+
+	<input type="button" value="全マーカーセット" onclick="allSetMarker()" />
+	<input type="button" value="全マーカークリア" onclick="allClearMarker()" />
+
+<br><br>
+住所入力：<input type = "text" id="address" size="80" /><input type = "button" id="addressBtn" value="住所入力" onclick="setAddress()" />
+
+<br><br>
+CSVデータ：<br>
+<TEXTAREA cols="80" rows="1" id="csv_text">
+</TEXTAREA>
+<br>
+<input type = "button" id="outputBtn" value="出力" onclick="outputData()" />
+<input type = "button" id="inputBnn" value="入力" onclick="inputData()" />
+
+</div>
+</div></div><!-- contents -->
+<div id="footer">Copyright kenji uehara</div>
+</body></html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>特定の属性値を持つエレメントにアクセス</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+			$(document).ready(function(){
+
+			});
+
+			function test(){
+
+				var v=$("div[animal ^= 'yagi']").html();
+				alert(v);
+
+			}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">特定の属性値を持つエレメントにアクセス</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+
+				<div animal='neko'>猫</div>
+				<div animal='inu'>犬</div>
+				<div animal='yagi'>ヤギ</div>
+				<input type="button" value="test" onclick="test()" />
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/08</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>入力チェックA | HTMLテーブル</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="http://code.jquery.com/jquery-latest.js"></script><!-- 最新版読込 -->
+		<script src="input_check_a.js"></script><!-- 入力チェックA -->
+
+		<script>
+
+			function test_func1(){
+
+
+
+				//テーブルからデータを取得
+				var data=getDataFromTbl();
+
+				var ic=new InputCheckA();
+
+				var vlds={
+					0 :{//列番号ID。※番号に変数や定数を使わないように＞
+						'notEmpty':{
+							'msg':'IDは必須入力です。'},
+						'maxLength':{
+							'maxLen':4,
+							'req':true,
+							'msg':'IDは4文字以内で入力してください。'}
+						},
+
+
+					1 :{//列番号:名
+						'maxLength':{
+							'maxLen':7,
+							'req':false,
+							'msg':'名は7文字以内で入力してください。'}
+						},
+
+
+					3 :{//列番号:生年
+						'numeric':{
+							'req':false,
+							'msg':'生年は数値を入力してください。'},
+						'range':{
+							'range1':800,
+							'range2':1800,
+							'req':true,
+							'msg':'生年は800から1800の間で入力してください。'}
+						},
+
+
+					5 :{//列番号:活躍年
+						'naturalNumber':{
+							'req':false,
+							'msg':'活躍年は自然数を入力してください。'}
+						},
+
+
+					6 :{//列番号:更新日
+						'date':{
+							'req':false,
+							'msg':'更新日は日付で入力してください。'}
+						},
+
+
+					7 :{//列番号:コード
+						'alphaNumeric':{
+							'req':false,
+							'symbol':true,//ハイフン、アンダースコアを許可する場合true
+							'msg':'コードは半角英数字で入力してください。'}
+						}
+
+
+				};
+
+
+
+
+
+				var ret=ic.checkData(data,vlds);
+
+
+				var err='';
+				if(ret!=undefined){
+					err=ret.join(':');
+				}
+
+				$("#err").html(err);
+
+
+
+			}
+
+			$(document).ready(function(){
+
+				//テーブルを入力チェック可能にする。
+				$("#tbl1 td").attr('contenteditable','true');
+
+			});
+
+			function getDataFromTbl(){
+				//alert('TEST');
+			    var data = [];
+			    $('#tbl1 tbody tr').each(function(i) {
+
+			        data[i] = [];
+			        $('td', $(this)).each(function(j) {
+			            data[i][j] = $(this).text();
+			        });
+			    });
+
+			    return data;
+
+			}
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">入力チェックA | HTMLテーブル</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+
+				<input type="button" value="run" onclick="test_func1()" />
+				<div id="err" style="color:red"></div>
+				<table id="tbl1" border="1"><thead>
+					<tr>
+						<th>Id</th>
+						<th>名</th>
+						<th>国</th>
+						<th>生年</th>
+						<th>没年</th>
+						<th>活躍年</th>
+						<th>更新日</th>
+						<th>コード</th>
+					</tr></thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>ナポレオン</td>
+							<td>フランス</td>
+							<td>1769</td>
+							<td>1821</td>
+							<td>1798</td>
+							<td>2012/2/29</td>
+							<td>napo</td>
+							</tr>
+						<tr>
+							<td>2</td>
+							<td>マリア・テレジア</td>
+							<td>リトアニア</td>
+							<td>1717</td>
+							<td>1780</td>
+							<td>1740</td>
+							<td>1/1/1</td>
+							<td>あ</td>
+							</tr>
+						<tr>
+							<td>3</td>
+							<td>エリザベス1世</td>
+							<td>イギリス</td>
+							<td>1533</td>
+							<td>1603</td>
+							<td>1560</td>
+							<td>2014/7/1</td>
+							<td>555_1-2</td>
+							</tr>
+						<tr>
+							<td>4</td>
+							<td>アールパード</td>
+							<td>ハンガリー</td>
+							<td>845</td>
+							<td>907</td>
+							<td>896</td>
+							<td>2038/12/31</td>
+							<td>aa123</td>
+							</tr>
+
+					</tbody>
+				</table>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/06</div>
+		</div><!-- page1 -->
+	</body>
+</html>

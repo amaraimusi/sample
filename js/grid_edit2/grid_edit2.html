@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>グリッド編集と取得 | その２</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="a_debug.js"></script>
+		<script>
+
+			function getDataFromTbl(){
+				//alert('TEST');
+			    var data = [];
+			    $('#tbl1 tbody tr').each(function(i) {
+
+			        data[i] = [];
+			        $('td', $(this)).each(function(j) {
+			            data[i][j] = $(this).text();
+			        });
+			    });
+
+				a_debugData(data);
+
+			}
+
+			$(document).ready(function(){
+
+
+				$('.h_name').attr('contentEditable', true);//h_name列を編集可能にする。
+
+				//contenteditable="true"
+			});
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">グリッド編集と取得 | その２</h1>
+		<div id="content" >
+
+			<div id="js_test"></div>
+
+			<input type="button" value="テーブルデータ取得" onclick="getDataFromTbl()" />
+
+			<table id="tbl1" border="1"><thead>
+				<tr>
+					<th>Id</th>
+					<th>名</th>
+					<th>国</th>
+					<th>生年</th>
+					<th>没年</th>
+					<th>活躍年</th>
+				</tr></thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td><div contenteditable="true" >ナポレオン</div></td>
+						<td><div contenteditable="true" >フランス</div></td>
+						<td>1769</td>
+						<td>1821</td>
+						<td>1798</td>
+						</tr>
+					<tr>
+						<td>2</td>
+						<td class="h_name">マリア・テレジア</td>
+						<td><div style="width:100%" contenteditable="true" >リトアニア</div></td>
+						<td>1717</td>
+						<td>1780</td>
+						<td>1740</td>
+						</tr>
+					<tr>
+						<td>3</td>
+						<td class="h_name">エリザベス1世</td>
+						<td>イギリス</td>
+						<td>1533</td>
+						<td>1603</td>
+						<td>1560</td>
+						</tr>
+					<tr>
+						<td>4</td>
+						<td class="h_name">アールパード</td>
+						<td>ハンガリー</td>
+						<td>845</td>
+						<td>907</td>
+						<td>896</td>
+						</tr>
+
+				</tbody>
+			</table>
+
+
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/12</div>
+		</div><!-- page1 -->
+	</body>
+</html>

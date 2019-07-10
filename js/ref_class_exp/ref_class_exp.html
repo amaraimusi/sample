@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>クラスオブジェクトの参照渡し実験</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<script>
+
+			function test_func1(){
+				var x=document.getElementById('xxx1').innerHTML;
+				alert(x);
+			}
+
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">クラスオブジェクトの参照渡し実験</h1>
+		<div id="content" >
+			<form name="form1"  action="#" method="post" enctype="multipart/form-data" >
+				<div class="sec1">
+
+					JavaScriptのクラスオブジェクトの受け渡しは、参照渡しである。<br /><br />
+
+					<p>実験コード</p>
+					<pre>
+$(document).ready(function(){
+
+	//読込イベント処理を書く
+	var act=new Actor();
+	act.x=5;
+
+	console.log("前act："+act.x);
+
+	act2=func1(act);//★クラスの参照渡し実験
+
+
+	console.log("後act："+act.x);
+	console.log("後act2："+act2.x);
+
+
+});
+
+
+//サンプルクラス
+var Actor =function(){
+
+	this.x;
+	this.y;
+	this.width;
+	this.height;
+	this.ang;
+
+
+};
+
+function func1(act){
+	act.x=6;
+	return act;
+}
+
+</pre>
+
+コンソール出力<br />
+<pre>
+前act：5
+後act：6
+後act2：6
+</pre>
+				</div><!-- sec1 -->
+			</form>
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/12</div>
+		</div><!-- page1 -->
+	</body>
+</html>

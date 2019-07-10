@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>メールアドレスからドメインを採取するサンプル</title>
+
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+
+
+		<script>
+
+		/*
+			var samples = [
+			            'xsrhapieqd@docomo.ne.jp'
+			            ,'neko.xs-_rhapieqd@docomo.ne.jp'
+			            ,'xsrhapieqd@ezweb.ne.jp'
+			            ,'xsrhapieqd@i.softbank.jp'
+			            ,'xsrhapieqd@softbank.ne.jp'
+			            ,'xsrhapieqd@x.vodafone.ne.jp'
+			            ,'xsrhapieqd@gmail.com'
+			            ,'xsrhapieqd@yahoo.co.jp'
+			            ,'xsrhapieqd@hotmail.com'
+			            ,'xsrhapieqd@hotmail.co.jp'
+			            ,'*!#$%8&9*+/=?^`{|}@gmail.com'
+			            ,'xxxxxx'
+			            ,''
+			            ,'@'
+			            ,null
+			            ];
+
+
+
+			for(var i=0;i < samples.length;i++){
+				var sample=samples[i];
+
+				console.log(sample);
+				var domain=extractEmailDomain(sample);
+				console.log('domain=' + domain);
+				console.log('---------');
+
+
+			}
+*/
+
+			function test(){
+
+				var mail=$("#smp_text").val();
+				var domain = extractEmailDomain(mail);
+				$("#output").html(domain);
+			}
+
+
+			/**
+			* メールアドレスからドメイン部分を取り出す。
+			* 例）xsrhapieqd@docomo.ne.jp → docomo.ne.jp
+			* 空文字やメール形式でない場合は空文字を返す。
+			*/
+			function extractEmailDomain(mail){
+
+				if(mail =='' || mail==null){
+					return '';
+				}
+
+				var a=mail.indexOf('@');
+
+				if(a == -1){
+					return '';
+				}
+
+				var domain=mail.substr(a + 1);
+
+				return domain;
+			}
+
+
+		</script>
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>メールアドレスからドメインを採取するサンプル</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+
+		<input id="smp_text" type="text" value="xsrhapieqd@yahoo.co.jp" />
+		<input class="btn btn-primary" type = "button" onclick= "test()" value="テスト"/>
+		<div id="output" style="background-color:#bfd3f4"></div>
+
+
+		<br><br><br><br>
+
+		ソースコード
+		<pre>
+		function test(){
+
+			var mail=$("#smp_text").val();
+			var domain = extractEmailDomain(mail);
+			$("#output").html(domain);
+		}
+
+
+		/**
+		* メールアドレスからドメイン部分を取り出す。
+		* 例）xsrhapieqd@docomo.ne.jp → docomo.ne.jp
+		* 空文字やメール形式でない場合は空文字を返す。
+		*/
+		function extractEmailDomain(mail){
+
+			if(mail =='' || mail==null){
+				return '';
+			}
+
+			var a=mail.indexOf('@');
+
+			if(a == -1){
+				return '';
+			}
+
+			var domain=mail.substr(a + 1);
+
+			return domain;
+		}
+		</pre>
+	</div>
+
+
+
+	<br><br>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2015-02-04</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

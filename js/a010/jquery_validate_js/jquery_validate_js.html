@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>バリデーション | jquery.validate.js | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+	
+	<script src="jquery.validate.min.js"></script>
+	<script src="jquery_validate_js.js"></script>
+	
+	<style>
+	
+		#form1 .inp_w{
+			margin-bottom:10px;
+		}
+		#form1 label{
+			display:inline-block;
+			width:170px;
+		}
+		#form1 label.error{
+			color:red;
+			font-size:0.8em;
+			width:auto;
+		}
+		#form1.hosoku{
+			color:#636363;
+			font-size:0.75em;
+		}
+		
+		
+	</style>
+	
+</head>
+<body>
+<div id="header" ><h1>バリデーション | jquery.validate.js | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>Demo</h2>
+<form id="form1">
+
+	<div class="inp_w">
+		<label for="last_name">氏名</label>
+		<input name="last_name" type="text" value="" placeholder="山田" />
+		<input name="first_name" type="text" value="" placeholder="太郎" />
+	</div>
+	
+	<div class="inp_w">
+		<label for="last_name_kana">カタカナ氏名</label>
+		<input name="last_name_kana" type="text" value="" placeholder="ヤマダ" />
+		<input name="first_name_kana" type="text" value="" placeholder="タロウ" />
+	</div>
+	
+	<div class="inp_w">
+		<label for="email">Eメール</label>
+		<input name="email" type="text" value="" placeholder="example@example.com" />
+	</div>
+	
+	<div class="inp_w">
+		<label for="password" style="vertical-align:top">パスワード</label>
+		<div style="display:inline-block">
+			<input type="password" name="password" class="password" placeholder="パスワード"/><br>
+			<input type="password" name="password_confirm" class="password"  placeholder="パスワード(もう一度)" />
+		</div>
+		<br>
+	</div>
+	
+	<div class="inp_w">
+		<label for="tel">電話番号</label>
+		<input name="tel" type="text" value="" placeholder="090-0123-4567" />
+		<span class="hosoku"> 国際電話番号形式の入力可 +81-90-0123-4567</span>
+	</div>
+	
+	<div class="inp_w">
+		<label for="post_code">郵便番号</label>
+		<input name="post_code" type="text" value="" placeholder="123-4567" style="width:8em"/>
+	</div>
+	
+	<div class="inp_w">
+		<label for="address">住所</label>
+		<input name="address" type="text" value="" placeholder="東京都千代田区千代田〇〇1-2-3" style="width:50%"/>
+	</div>
+	
+	<div class="inp_w">
+		<label for="gender">性別</label>
+		<div style='display:inline-block'>
+			<input name="gender" type="radio" value="man" />男姓
+			<input name="gender" type="radio" value="woman" />女姓
+		</div>
+	</div>
+	
+	<div class="inp_w">
+		<label for="birthday">生年月日</label>
+		<input type="date"  name="birthday" value="1970-1-1" min="1900-1-1" max="2100-12-31">
+	</div>
+	
+	<div class="inp_w">
+		<label for="interests[]">興味あるもの</label>
+		<div style='display:inline-block'>
+			<input type="checkbox" name="interests[]" value="fishing">釣り
+			<input type="checkbox" name="interests[]" value="climbing">登山
+			<input type="checkbox" name="interests[]" value="cook">料理
+			<input type="checkbox" name="interests[]" value="game">ゲーム
+			<input type="checkbox" name="interests[]" value="other">その他
+		</div>
+	</div>
+	
+	<div class="inp_w">
+		<label for="plan">プラン</label>
+		<select name="plan">
+			<option value=""> -- プランを選択 -- </option>
+			<option value="1">猫観光ツアープラン</option>
+			<option value="2">登山ガイド</option>
+			<option value="3">遺跡ツアー</option>
+			<option value="4">食べ歩きツアー</option>
+		</select>
+	</div>
+		
+		
+
+	<input type="button" value="入力チェック" onclick="checkValid()" class="btn btn-success"/>
+</form>
+
+
+<p>参考サイト</p>
+<ol>
+	<li><a href="http://yu-ya4.hatenablog.com/entry/2015/07/04/130627" class="btn btn-link btn-xs" target="blank">
+		駆け出しプログラマの備忘録そのまんま。</a></li>
+	<li><a href="http://blog.livedoor.jp/k_shin_pro/archives/45235160.html" class="btn btn-link btn-xs" target="blank">
+		日本関連のオリジナルバリデーション jquery.validateの使い方</a></li>
+	<li><a href="http://mori-coding.blog.jp/archives/7645314.html" class="btn btn-link btn-xs" target="blank">
+		jquery.validate.jsでチェックボックスを必須化して、最低ひとつはチェックしないとエラーがでるようにする</a></li>
+	<li><a href="https://qiita.com/youichiro/items/c291354978530581cc13" class="btn btn-link btn-xs" target="blank">
+		Qiita:正規表現</a></li>
+	<li><a href="https://teratail.com/questions/41344" class="btn btn-link btn-xs" target="blank">
+		国際電話番号を含めた電話番号の正規表現がわからない</a></li>
+		
+		
+</ol>
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>バリデーション | jquery.validate.js</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-3-8</div>
+</body>
+</html>

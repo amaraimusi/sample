@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Vue.js | クリック編集要素</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="../js/vue.min.js"></script>
+	<script src="demo2.js"></script>
+	<script src="EditFocus.js"></script>
+</head>
+<body >
+
+<div id="header" ><h1>Vue.js | クリック編集要素</h1></div>
+<div class="container">
+
+
+要素をクリックすると編集可能になる。しかしこの機能はVue.jsのものではない。<br>
+表示と入力の間で値が連動している箇所がvue.jsの機能である。<br>
+</aside>
+<br>
+<hr>
+
+<div id="app-2">
+
+	<label class="edit_focus" for="test_a" >{{ neko }}</label>
+	<input class="edit_focus" type="text" name="test_a" v-model="neko">
+	<br>
+	
+	<label class="edit_focus" for="test_b" >{{ animals[0].name }}</label>
+	<input class="edit_focus" type="text" name="test_b" v-model="animals[0].name">
+	<br>
+	
+	<label class="edit_focus" for="test_c" >{{ animals[1].name }}</label>
+	<input class="edit_focus" type="text" name="test_c" v-model="animals[1].name">
+	<br>
+	
+	<label class="edit_focus" for="test_d" >{{ animals[2].name }}</label>
+	<input class="edit_focus" type="text" name="test_d" v-model="animals[2].name">
+	<br>
+	
+	<label class="edit_focus" for="test_e" >{{ animals[3].name }}</label>
+	<input class="edit_focus" type="text" name="test_e" v-model="animals[3].name">
+	<br>
+
+</div>
+
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li><a href="../">Vue.jsのデモ | 目次</a></li>
+	<li>Vue.js | クリック編集要素</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-12-15</div>
+</body>
+</html>

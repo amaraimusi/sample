@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>認証キー付のクロスドメイン</title>
+
+
+
+		<link href="/sample_and_quality/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample_and_quality/css/common.css" rel="stylesheet">
+	
+		<script src="/sample_and_quality/js/jquery.min.js"></script>
+		<script src="/sample_and_quality/js/bootstrap.min.js"></script>
+		<script src="/sample_and_quality/js/livipage.js"></script>
+		<script src="/sample_and_quality/js/ImgCompactK.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+			});
+
+
+			function test(){
+				
+				
+				
+				
+				// 認証キー（ハッシュキー）
+				var hash = "0b2e19657d39ba7f56908491c97f175b7b73719c4136b6cfbbca9e745bf29094";
+				
+				// 社内サーバーであるなら、社内サーバー用の認証キーをセット
+				var domain=location.href.split('/')[2];
+				console.log('domain=' + domain);
+				if(domain == '192.168.11.199'){
+					hash = "33495237fbd2b4ff07196d11be06e9178f290589da5586453b5cb8cbcc0722b7";
+				}
+				
+				
+				var data={'id':9,'name':'cat','age':12,'hash':hash};
+
+				var json_str = JSON.stringify(data);//データをJSON文字列にする。
+
+				var url = "http://sendgrid.churakami-okinawa.jp/cross_domain_b/smp_with_auth/server_side.php";
+			
+				//☆AJAX非同期通信
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: "key1="+json_str,
+					cache: false,
+					dataType: "text",
+					success: function(json, type) {
+
+						try{
+
+							var data = JSON.parse(json);
+							output_data(data);//結果を画面に出力
+						}catch(e){
+							var msg = "<div style='color:red'>エラー<br>" + json + "</div>";
+							$('#res').html(msg);
+						}
+
+					},
+					error: function(xmlHttpRequest, textStatus, errorThrown){
+						alert(textStatus);
+					}
+				});
+			}
+			
+			//結果を画面に出力
+			function output_data(data){
+				var res = "";
+				for(field in data){
+					res+= "<tr><td>" + field + "</td><td>" + data[field] + "</td></tr>\n"
+				}
+				
+				res = "<table border='1'>" + res + "</table>";
+				$('#res').html(res);
+				
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >認証キー付のクロスドメイン</h1>
+
+
+<input type="button" value="TEST" onclick="test()" /><br>
+<br>
+
+出力
+<div id="res"></div>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)SEEC 2016-7-1</p>
+</body>
+</html>

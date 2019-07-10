@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+	 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Vue.jsのCRUD</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="../js/vue.min.js"></script>
+	<script src="demo4.js"></script>
+
+</head>
+<body>
+
+<div id="header" ><h1>Vue.jsのCRUD</h1></div>
+<div class="container">
+
+CRUDのサンプル。ソートと簡易検索も可。<br>
+現在、簡易検索と編集の組み合わせでバグ発生中。
+<br>
+
+
+<div id="app-2">
+
+	<input type="text" v-model="search_word" placeholder="簡易検索"><br><br>
+	<input type="button" value="追加" @click="showAdd($event)" class="btn btn-success" title="testX"/>
+
+
+	
+	<table class="table">
+		<thead>
+			<tr>
+				<th v-for="(value, key) in clms" @click="sort(key)">
+					{{value}}
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr v-for="(citie,i) in filteredData"  >
+			<td>{{citie['id']}}</td>
+			<td>{{citie['name']}}</td>
+			<td>{{citie['code']}}</td>
+			<td>
+				<input type="button" value="編集" @click="editShow($event,i)" class="btn btn-warning btn-sm" />
+				<input type="button" value="削除" @click="deleteAction(i)" class="btn btn-danger btn-sm" />
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	
+	
+	<div id="add_box" style="border:solid 4px #3eb6e4;background-color:white;padding:10px;display:none">
+		<p>新規追加</p>
+		<div>動物名：<input v-model="addData.name"></div>
+		<div>コード：<input v-model="addData.code"></div>
+		<button type="button" class="btn btn-success" @click="addReg()" >OK</button>
+	</div>
+	
+	
+	<div id="edit_box" style="border:solid 4px #3eb6e4;background-color:white;padding:10px;display:none">
+		<p>編集ウィンドウ</p>
+		<div>ID:{{cities[edit_index].id }}</div>
+		<div>動物名：<input v-model="cities[edit_index].name"></div>
+		<div>コード：<input v-model="cities[edit_index].code"></div>
+	</div>
+	
+	
+</div>
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li><a href="../">Vue.jsのデモ | 目次</a></li>
+	<li>CRUD</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-12-14</div>
+</body>
+</html>

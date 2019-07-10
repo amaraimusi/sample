@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>UNIXタイムスタンプと日時を相互変換</title>
+
+	
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		
+		<style>
+			pre {
+				padding:10px;
+				border-radius:5px;
+				background-color:#123369;
+				color:white;
+			}
+		</style>
+
+		<script>
+			$( function() {
+				
+				var u1 = Math.floor(new Date().getTime() / 1000);
+				$('#res1').html(u1);
+				
+
+				var u2 = Math.floor($.now() / 1000);
+				$('#res2').html(u2);
+				
+				
+				var d3 = new Date();
+				$('#res3').append('デフォルト日時 → ' + d3 + '<br>');
+				var d3_ymd = d3.toLocaleString();
+				$('#res3').append('YMD日時 → ' + d3_ymd + '<br>');
+				var d3_u = Math.floor(d3);
+				$('#res3').append('UNITタイムスタンプ → ' + d3_u + '<br>');
+				var d3_rev = new Date(d3_u);
+				$('#res3').append('UNITタイムスタンプを日時に戻す  → ' + d3_rev + '<br>');
+				
+			});
+
+
+		</script>
+	</head>
+
+<body>
+
+<h1 >UNIXタイムスタンプと日時を相互変換</h1>
+
+<h3>検証1:jquery版</h3>
+<pre>
+var u1 = Math.floor(new Date().getTime() / 1000);
+$('#res1').html(u1);		
+</pre>
+<div id="res1"></div>
+
+<hr>
+
+
+
+
+<h3>検証2:jquery版</h3>
+<pre>
+var u2 = Math.floor($.now() / 1000);
+$('#res2').html(u2);	
+</pre>
+<div id="res2"></div>
+<hr>
+
+
+
+
+<h3>検証3</h3>
+<pre>
+var d3 = new Date();
+$('#res3').append('デフォルト日時 → ' + d3 + '&lt;br&gt;');
+var d3_ymd = d3.toLocaleString();
+$('#res3').append('YMD日時 → ' + d3_ymd + '&lt;br&gt;');
+var d3_u = Math.floor(d3);
+$('#res3').append('UNITタイムスタンプ → ' + d3_u + '&lt;br&gt;');
+var d3_rev = new Date(d3_u);
+$('#res3').append('UNITタイムスタンプを日時に戻す  → ' + d3_rev + '&lt;br&gt;');
+</pre>
+<div id="res3"></div>
+
+
+
+
+
+<hr>
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-10-07</p>
+</body>
+</html>

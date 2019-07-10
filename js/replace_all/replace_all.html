@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>replaceAll | 全置換関数</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script><!-- 最新版読込 -->
+		<script>
+
+			function test_func1(){
+				var x=document.getElementById('xxx1').innerHTML;
+				alert(x);
+			}
+
+			$(document).ready(function(){
+
+				var test='ダミーいろダミーはにほへとちりぬのをダミーわかとたれとつねならむダミー'
+				$("#v1").html(test);
+				test=replaceAll(test,'ダミー','a');
+				$("#v2").html(test);
+
+			});
+
+
+			/**
+			 * 全置換
+			 *
+			 * @param str	対象文字列
+			 * @param s1	検索文字
+			 * @param s2	置き換える新しい文字
+			 * @return str
+			 *
+			 **/
+			function replaceAll(str, s1, s2){
+				str= str.split(s1).join(s2);
+				return str.trim();
+			}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">replaceAll | 全置換関数</h1>
+		<div id="content" >
+			<div class="sec1">
+<pre>
+	var test='ダミーいろダミーはにほへとちりぬのをダミーわかとたれとつねならむダミー'
+	test=replaceAll(test,'ダミー','a');
+
+	function replaceAll(str, s1, s2){
+		str= str.split(s1).join(s2);
+		return str.trim();
+	}
+</pre>
+
+				<strong>結果出力</strong><br>
+				<div id="v1"></div>
+				<div id="v2"></div>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/7/1</div>
+		</div><!-- page1 -->
+	</body>
+</html>

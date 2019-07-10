@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>URLからホスト・ドメインを取得する</title>
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="url_host_domain.js"></script>
+	</head>
+<body>
+
+<h1 >URLからホスト・ドメインを取得する</h1>
+
+
+<div style="margin-bottom:40px">
+	<h2>取得方法その1 | 正規表現を使う方法</h2>
+	ソースコード<br>
+	<pre>
+		var url="http://www.example.com:8080/animals/";//例
+		var host_domain = url.match(/^[httpsfile]+:\/{2,3}([0-9a-z\.\-:]+?):?[0-9]*?\//i)[1];
+	</pre>
+	<table id="res_tbl1" border="1">
+		<caption>正規表現を使った方法の検証</caption>
+		<thead><tr><th>URL</th><th>抽出ホスト・ドメイン</th></tr></thead>
+		<tbody></tbody>
+	</table>
+	<a href="http://tenderfeel.xsrv.jp/javascript/484/" target="brank" >サンプル元</a>
+</div>
+<hr>
+
+
+<div style="margin-bottom:40px">
+	<h2>取得方法その2 | URLからホスト・ドメインを取得する関数</h2>
+	<p>extractHostDomain関数</p>
+	<pre>
+	/**
+	 * URLからホスト・ドメインを取得する。
+	 * @param url URL
+	 * @returns ホスト・ドメイン（例：www.example.com）
+	 * @link http://stackoverflow.com/questions/8498592/extract-root-domain-name-from-string
+	 */
+	function extractHostDomain(url) {
+	    var host_domain;
+	    
+	    if (url.indexOf("://") > -1) {
+	        host_domain = url.split('/')[2];
+	    }
+	    else {
+	        host_domain = url.split('/')[0];
+	    }
+
+	    host_domain = host_domain.split(':')[0];
+
+	    return host_domain;
+	}
+	</pre>
+	<table id="res_tbl2" border="1">
+		<caption>extractHostDomain関数の検証</caption>
+		<thead><tr><th>URL</th><th>抽出ホスト・ドメイン</th></tr></thead>
+		<tbody></tbody>
+	</table>
+	<a href="http://stackoverflow.com/questions/8498592/extract-root-domain-name-from-string" target="brank" >サンプル元</a>
+</div>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-11-17</p>
+</body>
+</html>

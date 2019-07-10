@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>要素を別の処理で書き換えたら、参照先の要素オブジェクトにも反映されるか？ | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="ref_test_of_elm_obj.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>要素を別の処理で書き換えたら、参照先の要素オブジェクトにも反映されるか？ | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>実験</h2>
+
+<div id="test1">
+	<div>猫の要素</div>
+</div>
+<input type="button" value="追加" onclick="addTest()" />
+<input type="button" value="出力" onclick="output()" />
+
+<p>出力</p>
+<div id="res"></div>
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>要素を別の処理で書き換えたら、参照先の要素オブジェクトにも反映されるか？</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-6-18</div>
+</body>
+</html>

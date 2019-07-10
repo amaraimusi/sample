@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Google Mapのダウンロード</title>
+
+
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD-Y_H0SqELBviGTQT9GrbQdiHeVKLwNAo&sensor=false"></script>
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="FileSaver.js"></script>
+		<script type="text/javascript" src="html2canvas.js"></script>
+
+		<script>
+
+			$( function() {
+				var latlng = new google.maps.LatLng(25.838933,131.247344);
+				var opts = {
+					zoom: 17,
+					center: latlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					disableDefaultUI: true,//コントロールセットを隠す
+				};
+				var map1 = new google.maps.Map(document.getElementById("gmap_div"), opts);
+
+			});
+
+
+
+			//GMapをimg要素へ表示する。
+			function test_show_img(){
+
+
+		        var element = $('#gmap_div')[0];
+
+		        //DOM要素をcanvasに変換する。html2canvas.jsの機能
+				html2canvas(element, {
+					proxy: 'html2canvasproxy.php',
+            		useCORS: false,
+            		onrendered: function(canvas) {
+
+		    	  	var imgData = canvas.toDataURL('image/png');
+		            $('#img1')[0].src = imgData;
+
+		        }});
+
+			}
+
+
+			//GMapダウンロード(シンプルコード版)
+			function test_graph_download_smp(){
+		        var element = $('#gmap_div')[0];
+
+		        //DOM要素をcanvasに変換してからダウンロード
+				html2canvas(element, {
+					proxy: 'html2canvasproxy.php',
+            		useCORS: false,
+            		onrendered: function(canvas) {
+
+		    	  	var imgData= canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+
+		            window.location.href = imgData;
+
+		    	  	//window.open(imgData, 'save');//←こちらの方法でもダウンロードできる
+
+		        }});
+			}
+
+
+			//GMapダウンロード
+			function test_graph_download(){
+
+				var element = $('#gmap_div')[0];
+
+		        //DOM要素をcanvasに変換する。html2canvas.jsの機能
+				html2canvas(element, {
+					proxy: 'html2canvasproxy.php',
+            		useCORS: true,
+            		onrendered: function(canvas) {
+
+					//canvas.toBlob()が実装されていないブラウザに対応。
+		        	var type = 'image/jpeg';
+		        	// canvas から DataURL で画像を出力
+		        	var dataurl = canvas.toDataURL(type);
+		        	// DataURL のデータ部分を抜き出し、Base64からバイナリに変換
+		        	var bin = atob(dataurl.split(',')[1]);
+		        	// 空の Uint8Array ビューを作る
+		        	var buffer = new Uint8Array(bin.length);
+		        	// Uint8Array ビューに 1 バイトずつ値を埋める
+		        	for (var i = 0; i < bin.length; i++) {
+		        	  buffer[i] = bin.charCodeAt(i);
+		        	}
+		        	// Uint8Array ビューのバッファーを抜き出し、それを元に Blob を作る
+		        	var blob = new Blob([buffer.buffer], {type: type});
+
+
+		        	//★FileSaver.jsによるファイルダウンロード
+			  		saveAs(
+		    	  			  blob
+		    	  			, "test.png"
+		    	  		);
+
+			  		/*
+		    	  	canvas.toBlob(function(blob) {
+		    	  		saveAs(
+		    	  			  blob
+		    	  			, "test.png"
+		    	  		);
+	    	  		});*/
+
+
+		        }});
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >Google Mapのダウンロード</h1>
+<div style="color:red">注意。サーバー上で動かない問題あり。ローカルでのみ動く。</div>
+
+<div id="gmap_div" style="width:500px; height:300px"></div>
+<input type="button" value="img要素に表示" onclick="test_show_img()" />
+<input type="button" value="GMapダウンロード(シンプル版)" onclick="test_graph_download_smp()" />
+<input type="button" value="GMapダウンロード(ファイル名指定可)" onclick="test_graph_download()" />
+
+
+<hr>
+<p>img要素</p>
+<img id="img1" src=""  />
+※img要素なので右クリックによる画像ダウンロードができる。<br>
+
+
+
+
+
+
+<hr>
+
+	<p>参考</p>
+
+	<a class="ref_link" href="https://github.com/brcontainer/html2canvas-php-proxy#using-web-console">html2canvas-php-proxy</a><br>
+	<a class="ref_link" href="http://stackoverflow.com/questions/25373830/html2canvas-google-map-is-not-rendering">Html2Canvas …Google Map is not rendering</a><br>
+	<a class="ref_link" href="https://github.com/brcontainer/html2canvas-php-proxy/blob/master/html2canvasproxy.php">GitHub:brcontainer/html2canvas-php-proxy</a><br>
+	<a class="ref_link" href="http://html2canvas.hertzen.com/">html2canvas</a><br>
+	<a class="ref_link" href="https://github.com/eligrey/FileSaver.js/">GitHub:eligrey/FileSaver.js</a><br>
+	<a class="ref_link" href="http://blog.zaq.ne.jp/oboe2uran/article/1030/">Oboe吹きプログラマの黙示録：FileSaver.js を使ってみる</a><br>
+	<a class="ref_link" href="https://blog.agektmr.com/2013/09/canvas-png-blob.html">Canvas に描いた画像を png などの形式の Blob に変換する方法</a><br>
+	<a class="ref_link" href="http://localhost/sample/js/jqplot_graph/jqplot_graph.html">グラフサンプル</a><br>
+
+
+
+
+<div>
+</div>
+
+<hr>
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-06-12</p>
+</body>
+</html>

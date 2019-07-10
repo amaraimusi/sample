@@ -1,0 +1,114 @@
+<!DOCTYPE html> 
+<html lang="ja"> 
+	<head> 
+	<title>HTML5入力チェック</title> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+	<script type="text/javascript" language="javascript">
+	      
+	        //▼ページ初期化イベント
+	        $(document).bind("pageinit", function(){
+	        	
+	        });
+	        
+	        //ボタン追加をクリック
+	        $('#btn_test').live('click', function() {
+
+	        });
+	        
+	</script> 
+
+	<style type="text/css">
+		table{
+			border-collapse:collapse;
+			border-color:#b7badb;
+		
+		}
+		table thead{
+			background-color:#cccee6;
+		}
+		table tbody{
+			background-color:#f5f9fe;
+		}
+	
+		pre{
+			background-color:#ffded9;
+		}
+		.sec1{
+			background-color:#ffaa9d;
+			border-style:solid;
+			border-width:2px;
+			border-color:#db2617;
+			padding:10px;
+			margin-bottom:50px;
+		}
+		
+		.demo{
+			background-color:#c5d3f5;
+		}
+		
+
+		
+		
+	</style>
+
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header" data-position="inline" data-backbtn="false">
+		<h1>HTML5入力チェック</h1>
+		
+	</div>
+	
+
+	<div data-role="content">	
+		
+		<form action="html5_inp_chk.html" method="post">
+		
+
+			
+			<label for="test1">英数字:
+				<input type="text" name="test1" id="test1" autofocus required pattern="^[0-9a-zA-Z]+$" 
+					placeholder="英数字を入力しよう。" title="半角英数字で入力シナサイ">
+			</label>
+			
+			<label for="test2">メールアドレス:
+				<input type="email" name="mailad" id="test2" placeholder="メールアドレスを入力しなさい。">
+			</label>
+			
+			<label for="test3">テキストエリア：
+				<textarea id="test3" name="test3" placeholder="テキストエリアです。"></textarea>
+			</label>
+			
+			<label for="test4">メールアドレス:
+				<input type="date" name="test4" id="test4" placeholder="日付を入力しなさい">
+			</label>
+			
+			
+			<input type="submit" name="submit" value="submit">
+	    <input type="reset" name="reset" value="リセット">
+		</form>
+		
+
+
+		
+	
+		
+		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>(C)kenji uehara　2013/2/23</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

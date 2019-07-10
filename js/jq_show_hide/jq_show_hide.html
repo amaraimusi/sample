@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>エレメントの表示切替</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+			$(document).ready(function(){
+
+			});
+
+			function on_show(){
+				$("#test").show();//★表示
+				//$("#test").show(500);//ゆっくり表示
+			}
+
+			function on_hide(){
+				$("#test").hide();//★非表示
+			}
+
+			function on_change(){
+				$("#test").toggle();//★表示切替
+			}
+
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">エレメントの表示切替</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+
+				<div id="test">
+					いろはにほへとちりぬのをわかよたれそつねならむ
+					うゐのおくやま けふこえてあさきゆめみし ゑひもせす
+				</div>
+
+				<div>
+					<input type="button" value="表示" onclick="on_show()" />
+					<input type="button" value="非表示" onclick="on_hide()" />
+					<input type="button" value="切替" onclick="on_change()" />
+				</div>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/07/23</div>
+		</div><!-- page1 -->
+	</body>
+</html>

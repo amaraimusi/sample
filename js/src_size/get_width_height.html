@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>要素の縦横サイズを取得</title>
+
+		
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				
+				var w=0;
+				var h=0;
+				
+
+				
+				for(var i=1;i<100;i++){
+					var test="#test" + i;
+					if($(test)[0]){
+						var res="#res" + i;
+						w=$(test).width();
+						h=$(test).height();
+						
+						var ow=$(test).outerWidth();
+						var oh=$(test).outerHeight();
+						
+						var msg=
+							"width:" + w + "<br>" +
+							"height:" + h + "<br>" +
+							"outerWidth:" + ow + "<br>" +
+							"outerHeight:" + oh + "<br>";
+							
+						$(res).html(msg);
+						
+						
+					}else{
+						break;
+					}
+				}
+				
+				
+				
+			});
+
+			function dump(id,obj){
+				var json=JSON.stringify(obj);
+				$("#" + id).html(json);
+			}
+		</script>
+		
+		<style>
+			.test{
+				background-color:#b7dcee;
+				color:#567887;
+			}
+			.res{
+				color:#de5145;
+			}
+		</style>
+	</head>
+
+<body>
+
+<h1 >要素の縦横サイズを取得</h1>
+
+jqueryのメソッドwidth(),height()とouterWidth(),outerHeight()の実験
+
+
+<p>先に実験結果</p>
+width(),height()はCSSのwidth,heightと同じ。<br>
+<br>
+
+outerWidth()はwidthにpaddingとborderを加算した幅。
+marginは無視。outerHeight()も同様である。<br>
+<br>
+
+<hr>
+<h2>実験1:プレーン</h2>
+<pre>
+&lt;div id="test1" &gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test1" class="test">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<div id="res1" class="res"></div>
+<hr><br><br>
+
+
+
+
+
+<hr>
+<h2>実験2:inline-block</h2>
+<pre>
+&lt;div id="test2" style="<strong>display:inline-block</strong>" &gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test2" style="display:inline-block" class="test">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<br>
+<div id="res2" class="res"></div>
+<hr><br><br>
+
+
+
+
+
+<hr>
+<h2>実験3:margin</h2>
+<pre>
+&lt;div id="test3" style="<strong>margin:5px</strong>" &gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test3" style="margin:5px" class="test">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<div id="res3" class="res"></div>
+<hr><br><br>
+
+
+
+
+<hr>
+<h2>実験4:margin + inline-block</h2>
+<pre>
+&lt;div id="test4" style="margin:5px;display:inline-block"&gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test4" class="test" style="margin:5px;display:inline-block">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<div id="res4" class="res"></div>
+<hr><br><br>
+
+
+
+
+<hr>
+<h2>実験5:padding + inline-block</h2>
+<pre>
+&lt;div id="test5" style="padding:5px;display:inline-block"&gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test5" class="test" style="padding:5px;display:inline-block">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<div id="res5" class="res"></div>
+<hr><br><br>
+
+
+
+
+<hr>
+<h2>実験6:width + height</h2>
+<pre>
+&lt;div id="test6" style="width:200px;height:50px;"&gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test6" class="test" style="width:200px;height:50px;">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<div id="res6" class="res"></div>
+<hr><br><br>
+
+
+
+
+<hr>
+<h2>実験7:width + height + padding</h2>
+<pre>
+&lt;div id="test7" style="width:200px;height:50px;padding:5px"&gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test7" class="test" style="width:200px;height:50px;padding:5px">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<div id="res7" class="res"></div>
+<hr><br><br>
+
+
+
+
+<hr>
+<h2>実験8:border</h2>
+<pre>
+&lt;div id="test8" style="width:200px;height:50px;border:5px #88ff88 solid"&gt;
+	いろはにほへとちりぬるを&lt;br&gt;
+	わかよたれそつねならむ
+&lt;/div&gt;
+</pre>
+<div id="test8" class="test" style="width:200px;height:50px;border:5px #88ff88 solid">
+	いろはにほへとちりぬるを<br>
+	わかよたれそつねならむ
+</div>
+<div id="res8" class="res"></div>
+<hr><br><br>
+
+
+
+
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-12-17</p>
+</body>
+</html>

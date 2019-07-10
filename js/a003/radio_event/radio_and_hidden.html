@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ラジオボタンをhidden要素と連動する</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+	<script>
+	/**
+	* ラジオボタンの選択値を指定したhidden要素にセットする
+	* @param e ラジオボタン要素
+	* @param hdd_slt hidden要素のセレクタ
+	*/
+	function setHidden(e,hdd_slt){
+		
+		var radio = $(e);
+		var v = radio.attr('value');
+		$(hdd_slt).val(v);
+		
+		$('#res1').html(v);
+		
+	}
+	
+
+	</script>
+</head>
+<body>
+<div id="header" ><h1>ラジオボタンをhidden要素と連動する</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+<input id="animal1" type="hidden" value="2" />
+<label class="animal_label"><input type="radio" name="animal1" value="1" onclick="setHidden(this,'#animal1')" />ネコ</label>
+<label class="animal_label"><input type="radio" name="animal1" value="2" checked onclick="setHidden(this,'#animal1')" />ヤギ</label>
+<label class="animal_label"><input type="radio" name="animal1" value="3" onclick="setHidden(this,'#animal1')" />カニ</label>
+<div id="res1"></div>
+<hr>
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>ラジオボタンをhidden要素と連動する</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-11-15</div>
+</body>
+</html>

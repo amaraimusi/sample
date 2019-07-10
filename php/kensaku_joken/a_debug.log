@@ -1,0 +1,29 @@
+■2013-08-07 01:15:52
+■createHtml2
+dataの中身
+◇kuwagata
+field=kuwagata,wamei=クワガタ,kind=text,cnd_ope=2,value=ヒラタクワガタ,value2=ヒラタクワガタ2,visible=1,txtFormType=text
+◇kani
+field=kani,wamei=カニ,kind=int,cnd_ope=3,value=100,value2=200,visible=1,txtFormType=number
+◇akamusi
+field=akamusi,wamei=アカムシ【float】,kind=float,cnd_ope=0,value=99,value2=199,visible=1,txtFormType=number
+◇iruka
+field=iruka,wamei=イルカ【double】,kind=double,cnd_ope=0,value=99,value2=199,visible=1,txtFormType=number
+◇usi
+field=usi,wamei=牛【long】,kind=long,cnd_ope=0,value=99,value2=199,visible=1,txtFormType=number
+◇ebi
+field=ebi,wamei=エビ【decimal】,kind=decimal,cnd_ope=0,value=99,value2=199,visible=1,txtFormType=number
+◇kabuto
+field=kabuto,wamei=カブトムシ【comb】,kind=comb,cnd_ope=0,value=2,value2=,visible=1,txtFormType=text,selectData=Array
+◇ookami
+field=ookami,wamei=オオカミ【radio】,kind=radio,cnd_ope=0,value=2,value2=,visible=1,txtFormType=,selectData=Array
+◇kitune
+field=kitune,wamei=キツネ【chk】,kind=chk,cnd_ope=0,value=1,value2=,visible=1,txtFormType=
+◇kuma
+field=kuma,wamei=クマ【bool】,kind=bool,cnd_ope=0,value=1,value2=,visible=1,txtFormType=
+◇kemusi
+field=kemusi,wamei=ケムシ【date】,kind=date,cnd_ope=0,value=2012/12/12,value2=2012/12/15,visible=1,txtFormType=text
+◇korogi
+field=korogi,wamei=コオロギ【time】,kind=time,cnd_ope=0,value=12:12:12,value2=,visible=1,txtFormType=text
+◇sasori
+field=sasori,wamei=サソリ【datetime】,kind=datetime,cnd_ope=0,value=2012/12/12 12:12:12,value2=2012/12/12 12:12:59,visible=1,txtFormType=datetime

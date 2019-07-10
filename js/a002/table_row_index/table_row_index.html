@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>テーブルから対象要素の行番（インデックス）を取得する</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+	<script>
+	function edit(elm){
+		// 先祖をさかのぼりtr要素を取得する
+		var tr=$(elm).parents('tr');
+		
+		// 行番（インデックス）を取得する
+		var index = tr.index();
+		
+		alert('行番:' + index);
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>テーブルから対象要素の行番（インデックス）を取得する</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+<table id="sample_tbl1" class="table">
+	<thead>
+		<tr><th>ID</th><th>天然記念物名</th><th>ボタン</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>1</td><td>ムラサキオカヤドカリ</td><td><input type="button" onclick="edit(this)" value="edit" /></td></tr>
+		<tr><td>2</td><td>オカヤドカリ</td><td><input type="button" onclick="edit(this)" value="edit" /></td></tr>
+		<tr><td>3</td><td>ナキオカヤドカリ</td><td><input type="button" onclick="edit(this)" value="edit" /></td></tr>
+		<tr><td>4</td><td>サキシマオカヤドカリ</td><td><input type="button" onclick="edit(this)" value="edit" /></td></tr>
+		<tr><td>5</td><td>オオナキオカヤドカリ</td><td><input type="button" onclick="edit(this)" value="edit" /></td></tr>
+		<tr><td>6</td><td>コムラサキオカヤドカリ</td><td><input type="button" onclick="edit(this)" value="edit" /></td></tr>
+		<tr><td>7</td><td>ヤンバルクイナ</td><td><span style="color:red"><input type="button" onclick="edit(this)" value="edit" /></span></td></tr>
+
+	</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>テーブルから対象要素の行番（インデックス）を取得する</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-9-21</div>
+</body>
+</html>

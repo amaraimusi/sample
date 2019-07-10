@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-type-style" content="text/css" />
+<meta http-equiv="content-type-script" content="text/javascript" />
+<title>ＣＳＶファイルから配列に変換</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/csv_to_data.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+$(function(){
+
+    $.ajax({
+        url : "sample02.csv",
+        success: function(text) {
+        		//コールバック。外部ファイルの読込完了時に実行する処理。（非同期）
+        		
+        		//★CSVテキストをデータに変換する
+        		var data=convertCsvToData(text);
+
+        		var code="<table>"
+        		for (var i=0;i<data.length;i++){
+            		code+="<tr>";
+            		var ent=data[i];
+            		for (var j=0;j<ent.length;j++){
+            			code+="<td>" + ent[j] +"</td>";
+            		}
+
+            		code+="</tr>";
+        		}
+        		code +="</table>";
+				
+          	$('#view1').html(code);
+        }
+    });
+/*
+		var s= '"test,yagi",neko,inu,"kani,buta"';
+
+		//function escapeStrComma(col_sep,row_sep,oj,removeDoubleQuote){
+		var ary=escapeStrComma(',',null,s,true);
+		alert(ary[0][0]);
+    //$('#view1').csv2table('sample02.csv');
+    debug("tset");*/
+});
+</script>
+</head>
+<body>
+<div>
+ＣＳＶファイルから配列に変換<br />
+テスト<br />
+<div id="view1"></div>
+<di id="js_test" />
+</div>
+</body>
+</html>

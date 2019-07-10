@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>スレッドやタイマーのように間隔をあけて定期的に処理を行う | setInterval</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+
+			
+			var m_index=0;
+			var m_handlers=new Array();//setIntervalのハンドラリスト。スレッド停止に使用。
+			
+			//setIntervalによるスレッドを開始する。
+			function start(){
+				var h=setInterval("thread()",100);//スレッド開始。スレッドにする関数と間隔（ミリ秒）を指定する。
+				m_handlers.push(h);//ハンドラをリストに追加
+			}
+			
+			//スレッド。定期的に呼び出される関数
+			function thread(){
+				m_index++;
+				$('#res').html(m_index);
+			}
+			
+			//スレッドを停止する。
+			function stop(){
+				for(var i=0;i<m_handlers.length;i++){
+					var h=m_handlers[i];//ハンドラを指定してスレッドを停止する。
+					clearInterval(h);
+				}
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >スレッドやタイマーのように間隔をあけて定期的に処理を行う | setInterval</h1>
+
+
+
+<input type="button" value="start" onclick="start()" />
+<input type="button" value="stop" onclick="stop()" />
+→<span id="res"></span><br>
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-09-25</p>
+</body>
+</html>

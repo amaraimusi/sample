@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate" />
+<title>数値の桁数を取得</title>
+<link rel="stylesheet" type="text/css" href="common1.css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- 最新版読込 -->
+<script>
+	$(document).ready(function() {
+
+		//読込イベント処理を書く
+
+		var num = -123456.789;
+		$("#v1").html(num);
+
+		var s = num.toString();
+		$("#v2").html(s.length);
+
+		var a = s.indexOf('-');
+		$("#v3").html(a);
+
+		var keta_dez = getDezKeta(num);
+		$("#v4").html(keta_dez);
+
+		var keta_n = getNKeta(num);
+		$("#v5").html(keta_n);
+
+		var keta_all = getKetaAll(num);
+		$("#v6").html(keta_all);
+
+	});
+
+	//小数値の桁数を取得する。
+	function getDezKeta(num) {
+		var s = num.toString();
+		var a = s.lastIndexOf('.');
+		if (a == -1) {
+			return 0;
+		}
+		var keta = s.length - a - 1;
+		return keta;
+
+	}
+
+	//自然数部分（正数部分）の桁数を取得する。
+	function getNKeta(num) {
+		var s = num.toString();
+		var a = s.indexOf('.');
+
+		if (a == -1) {
+			a = s.length;
+		}
+		var keta = a;
+
+		if (s.indexOf('-') == 0) {
+			keta = keta - 1;
+		}
+
+		return keta;
+
+	}
+
+	//数値の全体桁数を取得。（小数部分も含める）
+	function getKetaAll(num) {
+		var s = num.toString();
+		var keta = s.length;
+		var a = s.lastIndexOf('.');
+		if (s.lastIndexOf('.') != -1) {
+			keta = keta - 1;
+		}
+		if (s.lastIndexOf('-') != -1) {
+			keta = keta - 1;
+		}
+
+		return keta;
+
+	}
+</script>
+
+<style>
+</style>
+
+</head>
+<body>
+	<div id="page1">
+		<h1 id="header">数値の桁数を取得</h1>
+		<div id="content">
+
+			<div class="sec1">
+				数値の桁数を取得する関数群。 <br>
+				小数値の桁数だけを取得するもの、自然数の部分のみ、全体の桁数を取得するものがある。
+				<pre>
+	//小数値の桁数を取得する。
+	function getDezKeta(num){
+		var s=num.toString();
+		var a=s.lastIndexOf('.');
+		if(a==-1){
+			return 0;
+		}
+		var keta=s.length-a-1;
+		return keta;
+
+	}
+
+	//自然数部分（正数部分）の桁数を取得する。
+	function getNKeta(num){
+		var s=num.toString();
+		var a=s.indexOf('.');
+
+		if(a==-1){
+			a=s.length;
+		}
+		var keta=a;
+
+		if(s.indexOf('-')==0){
+			keta=keta-1;
+		}
+
+		return keta;
+
+	}
+
+
+
+	//数値の全体桁数を取得。（小数部分も含める）
+	function getKetaAll(num){
+		var s=num.toString();
+		var keta=s.length;
+		var a=s.lastIndexOf('.');
+		if(s.lastIndexOf('.')!=-1){
+			keta=keta-1;
+		}
+		if(s.lastIndexOf('-')!=-1){
+			keta=keta-1;
+		}
+
+		return keta;
+
+	}
+</pre>
+			</div>
+
+			<div class="sec1">
+
+
+				<div>
+					<label>サンプル数値：</label><span id="v1"></span>
+				</div>
+				<div>
+					<label>文字数：</label><span id="v2"></span>
+				</div>
+				<div>
+					<label>負号の位置：</label><span id="v3"></span>
+				</div>
+				<div>
+					<label>小数部分の桁数：</label><span id="v4"></span>
+				</div>
+				<div>
+					<label>正数部分の桁数：</label><span id="v5"></span>
+				</div>
+				<div>
+					<label>桁数：</label><span id="v6"></span>
+				</div>
+
+
+			</div>
+			<!-- sec1 -->
+
+		</div>
+		<!-- content -->
+		<div id="footer">(C) kenji uehara 2014/06/25</div>
+	</div>
+	<!-- page1 -->
+</body>
+</html>

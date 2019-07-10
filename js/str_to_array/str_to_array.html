@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>文字列を配列化する</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+			$(document).ready(function(){
+				var s="うゐのおくやま けふこえてあさきゆめみし ゑひもせす";
+				var ary=s.split('') ;
+
+
+				var j=ary.join(',');
+				$("#a1").html(s);
+				$("#a2").html(j);
+			});
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">文字列を配列化する</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+
+				<div id="a1"></div>
+				<div id="a2"></div>
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/19</div>
+		</div><!-- page1 -->
+	</body>
+</html>

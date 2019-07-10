@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HTML5のバリデーション</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/jquery.balloon.min.js"></script>
+
+	<script>
+	function valid_func_a(){
+		
+		//$('#test_a').open();
+		var form = document.forms[0];
+		var name=form.test_a.name;
+
+
+
+		try{
+			//var valid=form.test_a.validity.valid;
+			var valid=form.test_a.checkValidity();
+			var title = form.test_a.title;
+			if(valid == true){
+				alert(name + ' ' + valid + '  ' + '正常です。');
+			}else{
+				form.test_a.setCustomValidity('"' + form.test_a.value + '" は気持ちではありません。');// サブミット時のバリデーションのメッセージを変更
+				
+				
+				//form.test_a . validationMessage;
+				//alert(name + ' ' + valid + '  ' + title);
+				return title;
+			}
+
+		}catch( e ){
+			alert('未対応です');
+		}
+
+	}
+	
+	function validByHtml5(){
+		
+		var form = document.forms[0];
+		for (i in form) {
+			try{
+				var v=form[i].validity.valid;
+				if(v==false){
+					var errMsg = form[i].title;
+					return errMsg;
+				}
+			}catch( e ){
+			}
+		}
+		return null;
+	}		
+	
+	
+	function test_c(){
+		$( '#test_a' ).tooltip( "widget" );
+//		var x = $('#test_a').tooltip();
+	//	x.open();
+	}
+	
+	function test_d(){
+		//$('#test_a').open();
+//		var form = document.forms[0];
+//		var name=form.test_a.name;
+
+
+		var elm = $('#test_d');
+
+		try{
+			//var valid=form.test_a.validity.valid;
+			var valid=elm[0].checkValidity();
+			var title = elm.attr('title');
+			if(valid == true){
+				alert( valid + '  ' + '正常です。');
+			}else{
+				//form.test_a.setCustomValidity('"' + form.test_a.value + '" は気持ちではありません。');// サブミット時のバリデーションのメッセージを変更
+				
+				//elm[0].willValidate;
+				 $('#test_d').showBalloon();
+		
+						 
+			     setTimeout(function(){
+			    	 $('#test_d').hideBalloon();
+			     },5000);
+						
+				
+				//form.test_a . validationMessage;
+				console.log(valid + '  ' + title);//■■■□□□■■■□□□■■■□□□)
+				//alert(valid + '  ' + title);
+				return false;
+			}
+
+		}catch( e ){
+			alert('未対応です');
+		}
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>HTML5のバリデーション</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+
+数値：
+	<form>
+	  <input type="text" id="test_a" name="test_a" pattern="^[0-9]+$" title="数値で入力してください" value="あ">
+	  <input type="button" value="入力チェックA" onclick="valid_func_a()" />
+	  <input type="button" value="入力チェックB" onclick="validByHtml5()" />
+	  <input type="button" value="TESTC" onclick="test_c()" />
+
+	  <input type="submit" value="サブミット">
+	</form>
+<hr>
+
+<input type="text" id="test_d"  pattern="^[0-9]+$" title="数値で入力してくださいD" value="い"><br>
+<input type="button" value="TEST D" onclick="test_d()" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/html5">HTML5の サンプル</a></li>
+	<li>HTML5のバリデーション</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-10-12</div>
+</body>
+</html>

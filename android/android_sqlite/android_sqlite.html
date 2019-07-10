@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>ANDROID | SQLiteについて</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+		
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">ANDROID | SQLiteについて</div>
+		<div id="content" >
+		
+			<div class="sec1">
+				
+				<h3>AndroidでSQLLiteを使う。</h3>
+				<ul>
+					<li>カラム「_id」を主キーとして各テーブルに追加すること。【絶対に必要なわけではない）</li>
+					<li>アプリケーションの終了時にDBをクローズしたほうが良い。クローズは省略しても、一応大丈夫ではある。</li>
+					<li>エミュレータで実行した場合にdbファイルはPC側に作成される。端末の場合は当然端末側にしかdbファイルは作成されないので注意。</li>
+					<li>ヘルパークラスのonCreateメソッド内で、テーブル生成とデータ投入を行う必要がある。</li>
+					<li>データ投入は、小規模であれば、ソースコードにそのまま記述したほうが早い。一応、dbファイルをコピーしたり、dumpコピーという方法もある。</li>
+					<li>アップグレードの処理でテーブルの作り直しが可能。テーブルの削除、新規作成、データ投入のコードを、onUpgradeメソッド内に記述。</li>
+					<li>dbファイルを削除するには、アンインストールすること。EclipseのDDMSパースペクティブから削除しないように注意。</li>
+				</ul>
+
+				<h4>SQLiteの型</h4>
+				<table border="1">
+					<thead><tr><th>型</th><th>説明</th></tr></thead>
+					<tbody>
+						<tr><td>INTEGER</td><td>整数（8Byte)</td></tr>
+						<tr><td>REAL</td><td>浮動小数点（8Byte)</td></tr>
+						<tr><td>TEXT</td><td>テキスト。文字コードはUTF8</td></tr>
+						<tr><td>BLOB</td><td>バイナリ</td></tr>
+						<tr><td>NULL</td><td>NULL</td></tr>
+					</tbody>
+				</table><br />
+				
+				<div>
+				<strong>テーブル生成SQLの例</strong><br />
+				create table TestTbl(Id INTEGER not null primary key ,TestName TEXT,TestValue INTEGER,TestFloat REAL);
+				<br /><br />
+				
+				<strong>SELECTの例</strong><br />
+				SELECT Id,TestName FROM TestTbl WHERE Id=1;
+				<br /><br />
+				
+				<strong>INSERTの例</strong><br />
+				INSERT INTO TestTbl VALUES(1, 'neko',100,3.14);
+				<br /><br />
+				
+				<strong>UPDATEの例</strong><br />
+				UPDATE TestTbl SET TestName = 'yagi', TestValue= 200,TestFloat=1.7320508 WHERE Id=1;
+				<br /><br />
+				
+				<strong>DELETEの例</strong><br />
+				DELETE FROM  TestTbl WHERE Id=2;
+				<br /><br />
+				
+				<strong>内部結合の例</strong><br />
+				select * from PetTbl inner join TestTbl on PetTbl.PetId = TestTbl.Id;
+				<br /><br />
+				
+				<strong>外部結合の例(左部結合）</strong><br />
+				select * from PetTbl left outer join TestTbl on PetTbl.PetId = TestTbl.Id;
+				<br />※右外部結合、Full外部結合は現在サポートされておらず　2013年
+				<br /><br />
+				
+				<strong>テーブル存在チェック</strong><br />
+				SELECT COUNT(*) AS Pre FROM sqlite_master WHERE type='table' AND name='テーブル名';
+				<br /><br />
+
+				</div>
+				
+				<hr /><br /><br />
+				
+				<h3>dbファイルの場所</h3>
+				以下の手順でsqliteファイルを取得可能。（エミュレータのみ）<br />
+				<ol>
+				<li>Eclipseおよび、Androidエミュレータを起動しておく。</li>
+				<li>EclipseのDDMSパースペクティブを開く。（DDMSは画面右上にある）</li>
+				<li>File Explorerタブからdata→data→アプリ名→databaseとたどるとdbファイルを確認できる。</li>
+				<li>dbファイルはそのままでは開けないが、右上の「左矢印アイコン」でdbファイルをダウンロードできる。</li>
+				<li>ダウンロードしたdbファイルは、フリーツールやODBCを通して確認可能。</li>
+				</ol>
+				
+				<hr /><br /><br />
+				
+				<h3>参考リンク</h3>
+				<div class="sec2">
+				<a href="http://www.atmarkit.co.jp/ait/articles/0905/20/news111_2.html">参考サイト１</a>
+				<ul>
+					<li>データベース操作サンプルの画面構成とスキーマ</li>
+					<li>Androidのデータベースを作成するには？</li>
+					<li>トランザクションとプリコンパイルステートメントとは？（効率のよいINSERT）</li>
+					<li>ロールバック</li>
+					<li>データベースの保存場所はメモリ？ ストレージ？</li>
+					<li>データベースの保存場所を指定するには？</li>
+				</ul>
+				</div><br />
+				
+				<div class="sec2">
+				<a href="http://www.atmarkit.co.jp/ait/articles/0905/20/news111_3.html">参考サイト2</a>
+				<ul>
+					<li>データベースの削除はエミュレータのManage Applicationsから行おう</li>
+					<li>検索はSQL文でも繰り返しバインドでも</li>
+				</ul>
+				</div><br />
+
+
+				
+				<pre>			
+	
+				</pre>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/03/20</div>
+		</div><!-- page1 -->
+	</body>
+</html>

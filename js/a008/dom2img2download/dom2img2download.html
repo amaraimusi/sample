@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DOM要素をIMG画像として書き出し、さらに画像ダウンロードする | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="html2canvas.js"></script>
+	<script src="FileSaver.js"></script>
+	<script src="dom2img2download.js"></script>
+</head>
+<body>
+<div id="header" ><h1>DOM要素をCanvasに画像として書き出し、さらに画像ダウンロードする | ワクガンス</h1></div>
+<div class="container">
+
+
+
+
+<h2>デモ</h2>
+<div id="div1" style="width:182px;height:110px;background-color:#e8f2fe">
+	いろはにほへとちりぬるをわかよたれそつねならむ<br>
+</div>
+<input type="button" value="Dom to img" onclick="dom2img()" class="btn btn btn-primary btn-xs"/><br>
+<img id="img1" src="" style="width:182px;height:110px" /><br>
+<input type="button" value="Img download" onclick="img2download()" class="btn btn btn-primary btn-xs"/><br>
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>DOM要素をIMG画像として書き出し、さらに画像ダウンロードする</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-11-19</div>
+</body>
+</html>

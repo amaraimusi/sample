@@ -1,0 +1,130 @@
+﻿@CHARSET "UTF-8";
+
+	
+body{
+	background-color:#6aaaff;
+	margin:0px;
+	color:#440a04;
+	font-size:12px;
+}
+
+#header{
+	padding:5px;
+	height:80px;
+	color:white;
+	}
+	
+#contents{
+	margin:0px;
+	width:100%;
+	background-color:#ecf4ff;
+	padding:2px;
+	text-align:center;
+	
+	}
+	
+#contents1{
+	margin-left : auto ; 
+	margin-right : auto ;
+	width:720px	;
+	}
+	
+.contents2{
+	padding-left:2px;
+	padding-right:2px;
+	padding-top:10px;
+	padding-bottom:10px;
+
+	border-width:2px;
+	border-color:#6aaaff;
+	border-style:solid;
+	text-align : left ;
+	
+}
+.contents3{
+	padding:2px;
+	
+	margin-left : 0px ; 
+	margin-right : auto ;
+	text-align : left ;
+	
+
+}
+
+.left_{
+	margin-left : 0px ; 
+	margin-right : auto ;
+	text-align : left ;
+	}
+	
+.center2{
+	text-align : center ;
+	margin-left : auto ; 
+	margin-right : auto ;
+	}
+
+#pankuzu{
+	text-align:left;
+	height:30px;
+	}
+.button_size{
+	width:80px;
+}
+input{
+	font-size:12px;
+	}
+	
+table{
+	border-collapse:collapse;
+	border-color:#b7badb;
+	font-size:12px;
+}
+table thead{
+	background-color:#cccee6;
+}
+table tbody{
+	
+	
+}
+
+table.mainlist td {
+   border-width: 1px 1px; 
+   border-color: #b7badb; /* 線色：緑 */
+   border-style: solid; /* 線種：実線 */
+}
+table.mainlist th {
+   border-width: 1px 1px; 
+   border-color: #b7badb; /* 線色：緑 */
+   border-style: solid; /* 線種：実線 */
+ 
+}
+
+.wnd05{
+	background-color:#cccee6;
+	}
+#footer{
+	text-align:center;
+
+	width:100%;
+	height:30px;
+	color:white;
+}
+
+#top_table{
+	background-color:#ecf4ff;
+}
+
+#top_table td{
+    
+    padding:1em 1em;
+	
+}
+
+.err{
+	color:#fc500e;
+	}
+
+
+
+	
+

@@ -1,0 +1,120 @@
+@CHARSET "UTF-8";
+
+#shch_guest_chat{
+	width:320px;
+	
+	position:fixed;
+	bottom:4px; 
+	right:4px;
+	z-index:2;
+	
+}
+
+#shch_header{
+
+	text-align:center;
+}
+
+#shch_compact_btn{
+	display:none;
+}
+
+#shch_config_toggle_btn{
+	display:none;
+}
+
+#shch_compact{
+	height:40px;
+	padding-left:10px;
+	padding-right:10px;
+	border-bottom:solid 1px #cccccc;
+	overflow:hidden;
+	
+}
+
+#shch_new_icon{
+	color:red;
+	display:none;
+}
+
+#shch_guest_chat_msg_sends{
+	/*display:none;*/
+}
+
+#shch_guest_chat_send_btn{
+	
+}
+
+#shch_btns1{
+	padding-top:2px;
+	height:28px;
+	
+}
+
+#shch_guest_chat_send_btn_rap{
+	width:28px;
+	height:24px;
+	margin-right:2px;
+	float:left;
+}
+
+#shch_guest_config_btn_rap{
+	width:28px;
+	height:24px;
+	margin-right:2px;
+	float:left;
+}
+
+#shch_body{
+	
+	display:none;
+}
+
+
+#shch_chat_div{
+	margin:10px;
+	overflow-y:auto;
+}
+
+.shch_chat_header{
+	border-bottom:solid 1px #808080;
+	margin-bottom:5px;
+}
+
+.shch_chat_name_guest{
+	color:#4db849;
+}
+
+
+.shch_chat_name_ope{
+	color:#16477d;
+}
+
+.shch_chat_name_system{
+	color:#eb3c3f;
+}
+
+.shch_li_dt{
+	font-size:0.8em;
+	color:#636363;
+	display:none;
+}
+
+#shch_config{
+	
+	height:350px;
+	display:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

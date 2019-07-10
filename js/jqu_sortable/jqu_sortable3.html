@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>タイトル 並べ替え with boostrap | jquery-ui-sortable</title>
+
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="jqu_sortable3.js"></script>
+
+
+		<style>
+			#xxx li{
+				font-size:24px;
+				display:block;
+				margin:5px;
+				width:200px;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>タイトル 並べ替え with boostrap | jquery-ui-sortable</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		リストをドラッグで並べ替えられる。
+
+		<ul id="xxx">
+			<li class="label label-primary">Item 1</li>
+			<li class="label label-primary">Item 2</li>
+			<li class="label label-primary">Item 3</li>
+			<li class="label label-primary">Item 4</li>
+			<li class="label label-primary">Item 5</li>
+			<li class="label label-primary">Item 6</li>
+			<li class="label label-primary">Item 7</li>
+		</ul>
+		<br>
+		<input type="button" value="値取得" onclick="getList()" />
+		
+		<hr>
+		<h3>値取得の結果</h3>
+		<div id="res"></div>
+
+	</div>
+
+
+
+	<br><br>
+	<a href="http://amaraimusi.sakura.ne.jp/" class="btn btn-link btn-xs">ホーム</a>
+	<br><br>
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-1-20</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

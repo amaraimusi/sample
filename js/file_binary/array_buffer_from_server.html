@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>サーバー上のファイルからarraybufferを取得する</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="array_buffer_from_server.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>サーバー上のファイルからarraybufferを取得する</h1>
+		<p>JavaScriptによるファイルとバイナリデータの扱い</p>
+	</div>
+
+	<h2>サンプル</h2>
+	サーバー上のファイルからバイナリデータを取得するには、AJAXを使う。<br>
+	バイナリデータはarraybuffer形式で取得である。<br>
+	jQueryのAjaxである「$.ajax」では取得できないようなので、XMLHttpRequestを使う。<br>
+	<br>
+	
+	下記のサンプルソースコードは、smp1.pngからバイナリデータを取得する例である。<br>
+	<br>
+	
+	<p>javascript</p>
+	<pre>
+	function test1(){
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', '<strong>smp1.png</strong>', true);
+		xhr.responseType = '<strong>arraybuffer</strong>';
+		xhr.onload = function(e) {
+			var arrayBuffer = this.response;
+			if (arrayBuffer) {
+				var i8ary = new Uint8Array(arrayBuffer);
+				console.log(i8ary);
+			}
+		};
+		xhr.send();
+	}
+	</pre>
+	
+	<input type="button" value="TEST1" onclick="test1()" class="btn btn-primary" /><br>
+
+
+
+
+	<hr>
+	<p>参考リンク</p>
+	<a href="http://qiita.com/tom_konda/items/484955b8332e0305ebc4" target="brank" class="btn btn-link btn-sm">バイナリファイルをAjaxで取得する際に注意する点</a><br>
+	<a href="https://developer.mozilla.org/ja/docs/XMLHttpRequest/Sending_and_Receiving_Binary_Data" target="brank" class="btn btn-link btn-sm">JavaScript typed arrays を使ったバイナリデータの受信</a><br>
+	
+	
+	<br><br>
+	<a href="index.html" class="btn btn-link btn-xs">目次へ戻る</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-20 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

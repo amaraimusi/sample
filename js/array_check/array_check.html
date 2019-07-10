@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>配列チェック</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="http://code.jquery.com/jquery-latest.js"></script><!-- 最新版読込 -->
+		<script>
+
+
+
+			$(document).ready(function(){
+
+				var val;
+
+				//テスト0
+				if(val instanceof Array){
+					console.log('テスト0は配列です。');
+				}else{
+					console.log('テスト0は配列ではありません。');
+				}
+
+				//テスト1
+				val=new Array();
+				if(val instanceof Array){
+					console.log('テスト1は配列です。');
+				}else{
+					console.log('テスト1は配列ではありません。');
+				}
+
+				//テスト2
+				val=[0,1,2,3,4];
+				if(val instanceof Array){
+					console.log('テスト2は配列です。');
+				}else{
+					console.log('テスト2は配列ではありません。');
+				}
+
+				//テスト3
+				val=123;
+				if(val instanceof Array){
+					console.log('テスト3は配列です。');
+				}else{
+					console.log('テスト3は配列ではありません。');
+				}
+
+				//テスト4
+				val='a';
+				if(val instanceof Array){
+					console.log('テスト4は配列です。');
+				}else{
+					console.log('テスト4は配列ではありません。');
+				}
+
+				//テスト5
+				val=Date();
+				if(val instanceof Array){
+					console.log('テスト5は配列です。');
+				}else{
+					console.log('テスト5は配列ではありません。');
+				}
+
+				//テスト6
+				val=null;
+				if(val instanceof Array){
+					console.log('テスト6は配列です。');
+				}else{
+					console.log('テスト6は配列ではありません。');
+				}
+
+
+
+			});
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">配列チェック</h1>
+		<div id="content" >
+
+
+
+				<div class="sec1">
+					配列判定は「変数 instanceof Array」で行う。<br>
+
+					<div class="hosoku">※instanceof関数は配列だけなくオブジェクトに対しても判定できる。自作オブジェクトにも対応してくれるようである。</div>
+
+					<hr>
+
+					ソースコード<br />
+					<pre>
+
+	$(document).ready(function(){
+
+		var val;
+
+		//テスト0
+		if(val instanceof Array){
+			console.log('テスト0は配列です。');
+		}else{
+			console.log('テスト0は配列ではありません。');
+		}
+
+		//テスト1
+		val=new Array();
+		if(val instanceof Array){
+			console.log('テスト1は配列です。');
+		}else{
+			console.log('テスト1は配列ではありません。');
+		}
+
+		//テスト2
+		val=[0,1,2,3,4];
+		if(val instanceof Array){
+			console.log('テスト2は配列です。');
+		}else{
+			console.log('テスト2は配列ではありません。');
+		}
+
+		//テスト3
+		val=123;
+		if(val instanceof Array){
+			console.log('テスト3は配列です。');
+		}else{
+			console.log('テスト3は配列ではありません。');
+		}
+
+		//テスト4
+		val='a';
+		if(val instanceof Array){
+			console.log('テスト4は配列です。');
+		}else{
+			console.log('テスト4は配列ではありません。');
+		}
+
+		//テスト5
+		val=Date();
+		if(val instanceof Array){
+			console.log('テスト5は配列です。');
+		}else{
+			console.log('テスト5は配列ではありません。');
+		}
+
+		//テスト6
+		val=null;
+		if(val instanceof Array){
+			console.log('テスト6は配列です。');
+		}else{
+			console.log('テスト6は配列ではありません。');
+		}
+
+
+
+	});
+					</pre>
+
+					<br><br>
+					出力<br>
+					<img src="output.png" />
+				</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/06/02</div>
+		</div><!-- page1 -->
+	</body>
+</html>

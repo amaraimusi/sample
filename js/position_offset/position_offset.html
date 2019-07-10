@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>要素の位置を取得 | position,offset</title>
+
+
+		
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+				
+				$( 'input[name="test_no"]:radio' ).change( function() {  
+					//alert( $( this ).val()); // valueを表示  
+					var no=$( this ).val();
+					
+					test_a(no);
+				});
+
+				
+				
+			});
+
+			function test_a(no){
+				
+				var class_name='test' + no;
+				$('#test1').attr('class',class_name);
+
+				var offset=$('#test1').offset();
+				var o_top=offset.top;
+				var o_left=offset.left;
+			
+				var pos=$('#test1').position();
+				var p_top=pos.top;
+				var p_left=pos.left;
+	
+				
+				console.log($('#test0').position());
+				console.log($('#test0').offset());
+				
+				var msg=
+					"position().top:" + p_top + "<br>" +
+					"position().left:" + p_left + "<br>" +
+					"offset().top:" + o_top + "<br>" +
+					"offset().left:" + o_left + "<br>";
+					
+				$('#res1').html(msg);
+			}
+
+		</script>
+		
+		<style>
+			.test1{
+				position:relative;
+				top:250px;
+				left:270px;
+				background-color:#b7dcee;
+				color:#567887;
+			}
+			.test2{
+				position:static;
+				top:250px;
+				left:270px;
+				background-color:#bebb83;
+				color:#567887;
+			}
+			.test3{
+				position:absolute;
+				top:250px;
+				left:270px;
+				background-color:#be839c;
+				color:#567887;
+			}
+			.test4{
+				position:fixed;
+				top:250px;
+				left:270px;
+				background-color:#85bc94;
+				color:#567887;
+			}
+			.res{
+				color:#de5145;
+			}
+			
+			.
+		</style>
+	</head>
+
+<body>
+
+<h1 >要素の位置を取得 | position,offset</h1>
+
+
+<pre>
+	//絶対位置を取得（HTMLドキュメントの右端からの位置）
+	var offset=$('#test1').offset();
+	var o_top=offset.top;
+	var o_left=offset.left;
+
+	//親要素からの相対位置を取得。（親要素にrelative等が指定されていない場合は絶対座標）
+	var pos=$('#test1').position();
+	var p_top=pos.top;
+	var p_left=pos.left;
+</pre>
+
+
+位置情報を得るにはoffsetメソッドを使うこと。<br>
+<br>
+positionメソッドは親要素からの相対座標と言われているが、正確には誤りである。<br>
+親要素のCSSにposition:relative(もしくはabsolute,fixed)が指定されている場合のみ相対座標である。
+指定していない場合は絶対座標となる。
+
+
+
+<hr>
+<h2>実験1:position:relative</h2>
+<input type="radio" name="test_no" value="1" />position:relative
+<input type="radio" name="test_no" value="2" />position:static
+<input type="radio" name="test_no" value="3" />position:absolute
+<input type="radio" name="test_no" value="4" />position:fixed
+<pre>
+</pre>
+<div id="test0" style="position:relative;background-color:#dfdafe;padding:10px">
+	<div id="test1" class="test1">
+		いろはにほへとちりぬるを<br>
+		わかよたれそつねならむ
+	</div>
+</div>
+<div id="res1" class="res"></div>
+<hr><br><br>
+
+
+
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-12-18</p>
+</body>
+</html>

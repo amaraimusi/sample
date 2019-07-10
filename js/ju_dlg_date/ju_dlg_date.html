@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JQuery UI ダイアログ | 日付入力とチェック</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.4.custom.min.js"></script>
+		<script>
+
+		jQuery( function() {
+
+			//ダイアログに関するコード
+		    $( '#dlg1' ) . dialog( {
+		        autoOpen: false,
+		        width: 400,
+		        show: 'explode',
+		        hide: 'explode',
+		        modal: true,
+		        buttons: {
+		            '更新': function() {
+		            	var v = $( '#batta' ).val();
+		            	if(is_date(v)){
+			            	$("#test_ret").html(v);
+			            	$("#dlg1_err").html("");
+			                $( this ) . dialog( 'close' );
+		            	}else{
+		            		$("#dlg1_err").html("日付を入力してください");
+		            	}
+
+		            },
+		            'キャンセル': function() {
+		                $( this ) . dialog( 'close' );
+		            },
+		        }
+		    } );
+		} );
+
+		//ダイアログを開く
+		function dlgOpen(){
+			$( '#dlg1' ) . dialog( 'open' );//ダイアログオープン
+		}
+
+		//日付チェック
+		function is_date(test){
+			var sp="/";
+			if(test.split("/").length != 3){
+				if(test.split("-").length != 3){
+					return false;
+				}else{
+					sp="-";
+				}
+			}
+			var date = new Date(test);
+			if(test == (date.getFullYear() + sp + (date.getMonth() + 1) + sp + date.getDate())){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JQuery UI ダイアログ | 日付入力とチェック</h1>
+		<div id="content" >
+
+				<div class="sec1">
+
+					<div id="test_ret">--  サンプル日付 --</div>
+					<input type="button" value="日付入力" onclick="dlgOpen()" />
+
+
+					<!-- ダイアログ部分 -->
+					<div id="dlg1" title="編集">
+					    <form>
+
+					    <fieldset>
+					        <p>日付を入力してください（例：2014/5/21）</p>
+					        <p>
+					        	<div id="dlg1_err" style="color:red"></div>
+					            <label for="batta">テスト</label>
+					            <input type="text" name="batta" id="batta"  />
+					        </p>
+					    </fieldset>
+					    </form>
+					</div>
+				</div><!-- sec1 -->
+
+
+
+
+
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/21</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>メンバー登録フォーム | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="jquery.validate.min.js"></script>
+	<script src="vue.min.js"></script>
+	<script src="member_reg_form.js"></script>
+	
+	<style>
+		form .inp_w{
+			margin-bottom:10px;
+		}
+		form label{
+			display:inline-block;
+			width:170px;
+		}
+		form label.error{
+			color:red;
+			font-size:0.8em;
+			width:auto;
+		}
+		form.hosoku{
+			color:#636363;
+			font-size:0.75em;
+		}
+		#step4 label{
+			display:inline-block;
+			width:170px;
+		}
+		.checkboxs_w{
+			display:inline-block
+		}
+		.checkboxs_w label{
+			width:50px
+		}
+	</style>
+	
+
+</head>
+<body>
+<div id="header" ><h1>メンバー登録フォーム | ワクガンス</h1></div>
+<div class="container">
+
+
+<input type="button" value="テストデータを入力" class="btn btn-default" onclick="testDataInput()" /><br>
+<br>
+<div id="err" style="color:red"></div>
+
+<div id="app1">
+<div id="step1">
+	
+	
+	<form id="form_step1">
+		<div class="inp_w">
+			<label for="email">Eメール</label>
+			<input name="email" type="text" value="" v-model="email" placeholder="example@example.com" style="width:70%"/>
+		</div>
+	
+		<div class="inp_w">
+			<label for="password" style="vertical-align:top">パスワード</label>
+			<div style="display:inline-block">
+				<input type="password" name="password" v-model="password" class="password" placeholder="パスワード"/><br>
+				<input type="password" name="password_confirm" class="password"  placeholder="パスワード(もう一度)" />
+			</div>
+			<br>
+		</div>
+		<div style="color:red">デモですので実際に登録されることはありません。</div>
+	</form>
+	
+	<div id="err_step1" class="text-danger" style="display:none"></div>
+
+	<button onclick="nextBtnForStep1()" class="btn btn-primary">次へ</button>
+</div>
+
+
+<div id="step2">
+
+	<form id="form_step2">
+		<div class="inp_w">
+			<label for="last_name">氏名</label>
+			<input name="last_name" type="text" v-model="last_name" value="" placeholder="山田" />
+			<input name="first_name" type="text" v-model="first_name" value="" placeholder="太郎" />
+		</div>
+		
+		<div class="inp_w">
+			<label for="last_name_kana">カタカナ氏名</label>
+			<input name="last_name_kana" type="text" v-model="last_name_kana" value="" placeholder="ヤマダ" />
+			<input name="first_name_kana" type="text" v-model="first_name_kana" value="" placeholder="タロウ" />
+		</div>
+		
+			<div class="inp_w">
+			<label for="tel">電話番号</label>
+			<input name="tel" type="text" v-model="tel" value="" placeholder="090-0123-4567" />
+			<span class="hosoku"> 国際電話番号形式の入力可 +81-90-0123-4567</span>
+		</div>
+		
+		<div class="inp_w">
+			<label for="post_code">郵便番号</label>
+			<input name="post_code" type="text" v-model="post_code" value="" placeholder="123-4567" style="width:8em"/>
+		</div>
+		
+		<div class="inp_w">
+			<label for="address">住所</label>
+			<input name="address" type="text" v-model="address" value="" placeholder="東京都千代田区千代田〇〇1-2-3" style="width:50%"/>
+		</div>
+		
+		<div class="inp_w">
+			<label for="gender">性別</label>
+			<div style='display:inline-block'>
+				<input name="gender" type="radio" value="man" checked />男姓
+				<input name="gender" type="radio" value="woman" />女姓
+			</div>
+		</div>
+		
+		<div class="inp_w">
+			<label for="birthday">生年月日</label>
+			<input type="date"  name="birthday" v-model="birthday"  value="1970-1-1" min="1900-1-1" max="2100-12-31">
+		</div>
+	</form>
+	
+	<button onclick="returnBtnForStep2()" class="btn btn-default">戻る</button>
+	<button onclick="nextBtnForStep2()" class="btn btn-primary">次へ</button>
+</div>
+
+
+<div id="step3">
+
+	<form id="form_step3">
+		<div class="inp_w">
+			<label>興味あるもの</label>
+
+			<div class="checkboxs_w">
+				 <div v-for="(ent, key) in interestData" v-bind:value="ent.value" style="display:inline-block;margin-right:10px">
+					<input type="checkbox" id="{{ent.xid}}" value="ent.value" v-model="interests[key]">
+					<label v-bind:for="ent.xid">{{ent.text}}</label>
+				</div>
+			</div>
+
+		</div>
+		
+		<div class="inp_w">
+			<label for="plan">プラン</label>
+			<select name="plan" v-model="plan">
+				<option value=""> -- プランを選択 -- </option>
+				<option v-for="(plan_text, plan_id) in planList" v-bind:value="plan_id">{{plan_text}}</option>
+			</select>
+
+		</div>
+	</form>
+	
+	<button onclick="returnBtnForStep3()" class="btn btn-default">戻る</button>
+	<button onclick="nextBtnForStep3()" class="btn btn-success">次へ</button>
+</div>
+
+
+<div id="step4">
+
+	<div>
+		<label>Eメール</label>
+		<span>{{email}}</span>
+	</div>
+	
+	<div>
+		<label>氏名</label>
+		<span>{{last_name}}</span>&nbsp;<span>{{first_name}}</span><br>
+	</div>
+	
+	<div>
+		<label>氏名(カタカナ)</label>
+		<span>{{last_name_kana}}</span>&nbsp;<span>{{first_name_kana}}</span>
+	</div>
+	
+	<div>
+		<label>電話番号</label>
+		<span>{{tel}}</span>
+	</div>
+	
+	<div>
+		<label>郵便番号</label>
+		<span>{{post_code}}</span>
+	</div>
+	
+	<div>
+		<label>住所</label>
+		<span>{{address}}</span>
+	</div>
+	
+	<div>
+		<label>誕生日</label>
+		<span>{{birthday}}</span>
+	</div>
+	
+	<div>
+		<label>興味あるもの</label>
+		<div v-for="(flg, i) in interests" style="display:inline-block;margin-right:5px">
+			<span v-if="flg">{{interestData[i].text}}</span>
+			
+		</div>
+	</div>
+	
+	<div>
+		<label>プラン</label>
+		<span>{{planList[plan]}}</span>
+	</div>
+	
+	<div id="err_step4" class="text-danger" style="display:none"></div>
+	
+	<button onclick="returnBtnForStep4()" class="btn btn-default">戻る</button>
+	<button onclick="reg()" class="btn btn-success">登録</button>
+	
+	
+</div>
+
+
+<div id="step5">
+	<div style="width:100%;text-align:center">
+		<span style="color:#218716;font-size:2em;">登録完了しました。</span>
+		<div style="color:red">デモですので実際には登録されていません。</div>
+	</div>
+</div>
+</div><!-- app1 -->
+
+
+
+
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>メンバー登録フォーム</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-3-7</div>
+</body>
+</html>

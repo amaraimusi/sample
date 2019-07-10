@@ -1,0 +1,6 @@
+<Files ~ "^\.ht">
+deny from all
+</Files>
+
+# Redirect
+Redirect permanent / http://amaraimusi.sakura.ne.jp/sample/js/jq_file_upload/index.html

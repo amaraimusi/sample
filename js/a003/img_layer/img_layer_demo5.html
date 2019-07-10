@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>画像を重ねて、1枚の画像としてダウンロードする | ファイル名指定可能</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="html2canvas.js"></script>
+	<script src="FileSaver.js"></script>
+	
+
+
+	<style>
+		#img_div{
+			width:200px;
+			height:200px;
+		}
+		.test1{
+			position:absolute;
+		}
+	</style>
+	
+	<script>
+	function test2(){
+		// 画像を重ねて表示しているDIV要素を取得する。
+		var element = $('#img_div')[0];
+  
+		//DOM要素を画像のバイナリデータに変換する。
+		html2canvas(element, { onrendered: function(canvas) {
+			// 変換後に呼び出されるコールバック
+		
+			// MIMEタイプ
+			var type = 'image/png';
+			
+			/// 変換後、バイナリデータをデータURLスキームとして取得する。
+		  	var data_url_scheme= canvas.toDataURL(type).replace("image/png", "image/octet-stream");
+
+			// データURLスキームのデータ部分をバイナリデータとして抜き出す。
+			var bin = atob(data_url_scheme.split(',')[1]);
+			
+			// 空の Uint8Arrayビューを作る
+			var buffer = new Uint8Array(bin.length);
+			
+			// バイナリデータの値をUint8Arrayビューに 1 バイトずつ値を埋めいく。
+			for (var i = 0; i < bin.length; i++) {
+			  buffer[i] = bin.charCodeAt(i);
+			}
+			
+			// Uint8Arrayビューのバッファーを抜き出し、それを元に Blob を作る
+			var blob = new Blob([buffer.buffer], {type: type});
+
+			// FileSaver.jsの機能を利用し、Blob化したデータをファイルダウンロードする。（ここでファイル名を指定できる）
+	  		saveAs(
+		  			  blob
+		  			, "test_usagi.png"
+		  		);
+
+		}});
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>画像を重ねて、1枚の画像としてダウンロードする | ファイル名指定可能</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+
+複数の画像を重ねて1枚画像に変換する。<br>
+さらに、変換した一枚画像を、ファイル名指定してファイルダウンロードをする。<br>
+<br>
+
+html2canvas.jsを読み込む必要がある。<br>
+また、ダウンロードファイルにファイル名を指定可能にするため、FileSaver.jsを読み込む。<br>
+<br>
+
+<input type="button" class="btn btn-success btn-xs" value="ダウンロード" onclick="test2()" /><br>
+<div  style="width:200px;height:200px;background-color:#cdebd9">
+	<div id="img_div2">いろは</div>
+	<div id="img_div">
+		<img src="toumei1.png" class="test1" />
+		<img src="toumei2.png" class="test1" />
+		<img src="toumei3.png" class="test1" />
+		<img src="toumei4.png" class="test1" />
+	</div>
+</div>
+
+<hr>
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>画像を重ねて、1枚の画像としてダウンロードする | ファイル名指定可能</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-11-4</div>
+</body>
+</html>

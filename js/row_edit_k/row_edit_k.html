@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>一覧用・行編集フォーム | RowEditK.js</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="/note_prg/js/livipage.js"></script>
+		<script src="/note_prg/js/ImgCompactK.js"></script>
+		
+		<script src="RowEditK.js"></script>
+
+
+		<style>
+			.sub_marker{
+				color:#2a3aff;
+			}
+			.midasi1{
+				font-size:20px;
+				color:#85aa04;
+			}
+		</style>
+		<script>
+		$( function() {
+			
+			// RowEditK.jsの初期化
+			rowEditK_Init({
+				css:{'background-color':'#d6eaed'}
+			});
+			
+		});
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>一覧用・行編集フォーム | RowEditK.js</h1>
+	</div>
+	
+	
+	RowEditK.jsを使うとテーブル行の値を、入力フォームに表示できる。<br>
+	入力フォームは子画面方式である。<br>
+	テーブル行だけとかぎらず、データ構造がエンティティであれば、入力フォームの表示が可能である。<br>
+	<a href="RowEditK.js" download class="btn btn-success btn-lg">RowEditK.js</a>
+	<br><hr>
+
+	<h2>サンプル1</h2>
+	<table class="tbl2">
+		<thead>
+			<tr><th>id</th><th>val1</th><th>text1</th><th></th></tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="id">1</td>
+				<td class="val1">1</td>
+				<td class="text1">ライオン</td>
+				<td> <input type="button" onclick="rowEditK('tr',this)" value="編集" /></td>
+			</tr>
+
+			<tr>
+				<td class="id">2</td>
+				<td class="val1">2</td>
+				<td class="text1">シマウマ</td>
+				<td> <input type="button" onclick="rowEditK('tr',this)" value="編集" /></td>
+			</tr>
+
+		</tbody>
+	</table>
+	<br>
+	
+	<p>HTML</p>
+	<pre>
+	&lt;div id="<strong>row_edit_k_form</strong>" &gt;
+		ID:&lt;input type="text" class="<span class="sub_marker">id</span>" value="" /&gt;&lt;br&gt;
+		値1:
+		&lt;select class="<span class="sub_marker">val1</span>"&gt;
+			&lt;option value="1"&gt;A1&lt;/option&gt;
+			&lt;option value="2"&gt;A2&lt;/option&gt;
+		&lt;/select&gt;&lt;br&gt;
+		&lt;div&gt;テキスト1:&lt;input type="text" class="<span class="sub_marker">text1</span>" value="" /&gt;&lt;/div&gt;
+	&lt;/div&gt;
+	
+	&lt;table &gt;
+		&lt;thead&gt;
+			&lt;tr&gt;&lt;th&gt;id&lt;/th&gt;&lt;th&gt;val1&lt;/th&gt;&lt;th&gt;text1&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody&gt;
+			&lt;tr&gt;
+				&lt;td class="<span class="sub_marker">id</span>"&gt;1&lt;/td&gt;
+				&lt;td class="<span class="sub_marker">val1</span>"&gt;1&lt;/td&gt;
+				&lt;td class="<span class="sub_marker">text1</span>"&gt;neko&lt;/td&gt;
+				&lt;td&gt; &lt;input type="button" onclick="<strong>rowEditK('tr',this)</strong>" value="編集" /&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+
+			&lt;tr&gt;
+				&lt;td class="id"&gt;2&lt;/td&gt;
+				&lt;td class="val1"&gt;2&lt;/td&gt;
+				&lt;td class="text1"&gt;kani&lt;/td&gt;
+				&lt;td&gt; &lt;input type="button" onclick="rowEditK('tr',this)" value="編集" /&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+
+		&lt;/tbody&gt;
+	&lt;/table&gt;
+	</pre>
+	<br>
+	
+	JavaScript
+	<pre>rowEditK_Init();</pre>
+	<br>
+	
+	
+
+	
+	<input type="button" value="使い方" onclick="$('#usage1').toggle(500)" class="btn btn-info" />
+	<div id="usage1" style="display:none">
+	
+	<h3>使い方</h3>
+	
+	<p class="midasi1">JavaScript</p>
+	RowEditK.jsを読み込み、rowEditK_Init()を実行するだけです。
+	<pre>&lt;script src="<strong>RowEditK.js</strong>"&gt;&lt;/script&gt;</pre>
+	<pre>
+	$( function() {
+		
+		<span class="sub_marker">rowEditK_Init();</span>
+		
+	});
+	</pre>
+	
+	入力フォームに独自のCSSを適用することができます。
+	<pre>
+	rowEditK_Init({
+		<span class="sub_marker">css:{'background-color':'#d6eaed';'font-size':'16px'}</span>
+	});
+	</pre>
+	<br>
+	
+	
+	
+	
+	<p class="midasi1">HTML</p>
+	
+	HTMLの構造は「入力フォーム要素」と「データ要素」からなります。<br>
+	<br>
+
+	<p>入力フォーム要素</p>
+	入力フォーム要素は入力項目からなる子画面です。<br>
+	<img src="img/usage1a1.png" class="img_compact_k" /><br>
+	<br>
+	
+	入力フォーム要素には「id="row_edit_k_form"」属性を追加します。
+	<pre>
+	&lt;div id="<strong>row_edit_k_form</strong>" &gt;
+		&lt;input type="text" class="text1" value="" /&gt;
+		&lt;select class="val1"&gt;
+			&lt;option value="1"&gt;A1&lt;/option&gt;
+			&lt;option value="2"&gt;A2&lt;/option&gt;
+		&lt;/select&gt;&lt;br&gt;
+	&lt;/div&gt;
+	</pre>
+	<br>
+	
+	<p>データ要素</p>
+	データ要素はエンティティ型の構造をしている必要があります。<br>
+	例えば、テーブル要素&lt;table&gt;の行要素&lt;tr&gt;などです。<br>
+	（他の例はサンプル2を参考にしてください）<br>
+	<br>
+	
+	<p>入力フォームとデータ要素の関連付け</p>
+	入力フォームとデータ要素はclass属性名で関連付けられています。<br>
+	下記のサンプルの場合、class属性名「text1」を入力フォーム要素とデータ要素の両方に記述することにより、２つを関連づけています。<br>
+	編集ボタンを押すと、データ要素のtext1が入力フォームのtext1に表示されます。<br>
+	<br>
+	
+	入力フォーム要素
+	<pre>
+	&lt;div id="row_edit_k_form" &gt;
+		&lt;input type="text" class="<strong>text1</strong>" value="" /&gt;
+	&lt;/div&gt;
+	</pre>
+	
+	データ要素
+	<pre>
+	&lt;table&gt;
+			&lt;tr&gt;
+				&lt;td class="<strong>text1</strong>"&gt;ライオン&lt;/td&gt;
+				・・・略・・・
+				
+				&lt;td&gt;&lt;input type="button" onclick="rowEditK('tr',this)" value="編集" /&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
+	</pre>
+	<img src="img/usage1a2.png" class="img_compact_k" /><br>
+	<br>
+	
+	<p>class属性に複数のセレクタを定義している場合</p>
+	class属性に複数のセレクタが定義されいる場合、先頭のセレクタが関連づけに利用されます。<br>
+	下記のようにclass属性にtext1,hoge,xxxが定義されている場合、先頭のtext1が関連づけの対象になります。<br>
+	<pre>&lt;input type="text" class="<strong>text1</strong> hoge xxx" value="" /&gt;</pre>
+	<br>
+	
+	<p>入力フォームを表示するボタン</p>
+	データ要素内に入力フォームを表示するボタンが必要です。<br>
+	ボタンにはrowEditK関数の呼び出しを記述します。<br>
+	rowEditK関数の第一引数には、データ部分をまとめる親要素セレクタを指定します。&lt;table&gt;系のデータ要素なら「tr」が該当します。
+	<aside>（第一引数の他の例はサンプル2を参考にしてください）</aside>
+	第二引数は「this」を指定します。<br>
+	<pre>
+	&lt;table&gt;
+			&lt;tr&gt;
+				&lt;td class="text1"&gt;ライオン&lt;/td&gt;
+				・・・略・・・
+				
+				&lt;td&gt;&lt;input type="button" onclick="<strong>rowEditK('tr',this)</strong>" value="編集" /&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/table&gt;
+	</pre>
+	
+	
+	
+	</div>
+	
+	
+	
+	
+	<hr><hr>
+
+	<h2>サンプル2</h2>
+	<div id="sample2">
+		<input type="hidden" class="id" value="99" />
+		<div>
+			<div>
+				<div class="val1">99</div>
+			</div>
+		</div>
+		<span class=text1>aa</span>
+		<div class="test_date">2016-6-16</div>
+		<input type="button" onclick="rowEditK('#sample2',this)" value="編集" />
+		
+	</div>
+	<br>
+	
+	
+	<div id="row_edit_k_form" >
+		ID:<input type="text" class="id xx yy" value="" /><br>
+		値1:
+		<select class="val1">
+			<option value="1">A1</option>
+			<option value="2">A2</option>
+		</select><br>
+		<div>テキスト1:<input type="text" class="text1" value="" /></div>
+	</div>
+	
+	
+	<p>HTML</p>
+	<pre>
+	&lt;!-- 入力フォーム要素 --&gt;
+	&lt;div id="row_edit_k_form" &gt;
+		ID:&lt;input type="text" class="<span class="sub_marker">id</span> xx yy" value="" /&gt;&lt;br&gt;
+		値1:
+		&lt;select class="<span class="sub_marker">val1</span>"&gt;
+			&lt;option value="1"&gt;A1&lt;/option&gt;
+			&lt;option value="2"&gt;A2&lt;/option&gt;
+		&lt;/select&gt;&lt;br&gt;
+		&lt;div&gt;テキスト1:&lt;input type="text" class="<span class="sub_marker">text1</span>" value="" /&gt;&lt;/div&gt;
+	&lt;/div&gt;
+	
+	&lt;!-- データ要素 --&gt;
+	&lt;div id="<strong>sample2</strong>"&gt;
+		&lt;input type="hidden" class="<span class="sub_marker">id</span>" value="99" /&gt;
+		&lt;div&gt;
+			&lt;div&gt;
+				&lt;div class="<span class="sub_marker">val1</span>"&gt;99&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;span class=<span class="sub_marker">text1</span>&gt;aa&lt;/span&gt;
+		&lt;div class="test_date"&gt;2016-6-16&lt;/div&gt;
+		&lt;input type="button" onclick="rowEditK('<strong>#sample2</strong>',this)" value="編集" /&gt;
+		
+	&lt;/div&gt;
+	&lt;br&gt;
+	</pre>
+	サンプル1ではデータ要素にtableを使用していましたが、サンプル2ではdiv要素を使用してます。<br>
+	この場合、編集ボタンのrowEditK関数はサンプル1と異なる使い方になります。<br>
+	rowEditK関数の第一引き数にデータ要素のセレクタを親要素として指定しています。<br>
+	<br>
+	
+	<hr><hr>
+	<a href="xample.html">他のサンプル</a>
+
+
+	<div class="yohaku"></div>
+	<ol class="breadcrumb">
+		<li><a href="/">ホーム</a></li>
+		<li><a href="/sample">サンプルソースコード</a></li>
+		<li><a href="/sample/php">ＰＨＰ　｜　サンプル</a></li>
+		<li>一覧用・行編集フォーム | RowEditK.js</li>
+	</ol>
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-6-13 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

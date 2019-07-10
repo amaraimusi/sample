@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jsPDF サンプル2</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="jspdf.min.js"></script>
+		<script src="html2canvas.js"></script>
+		
+		
+		<script src="js_pdf_smp2.js"></script>
+
+		<style>
+			#ta1{
+				width:500px;
+				height:500px;
+				background-color:#e6fbf1;
+			}
+			
+			#preview1{
+				background-color:white;
+				display:none;
+			}
+			
+			#edit_btn{
+				display:none;
+			}
+			
+			#pdf_btn{
+				display:none;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>jsPDF サンプル2</h1>
+	</div>
+
+	<h2>検証</h2>
+	
+	
+	<button id="prv_btn" type="button" class = "btn btn-primary" onclick="showPreview()" >プレビュー</button>
+	<button id="edit_btn" type="button" class = "btn btn-primary" onclick="showEditor()" >エディタ</button>
+	<button id="pdf_btn" type="button" class = "btn btn-success" onclick="showPdf()" >PDF</button>
+	
+	<div id="edit1">
+		<textarea id="ta1">いろはにほへと&#13;ちりぬるをわかよたれそ&#13;つねならむ</textarea>
+	</div>
+	<div id="preview1">
+	</div>
+	
+
+	
+	<iframe id="renderSpace" frameborder="0" width="450" height="450"></iframe>
+
+
+
+
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-7 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

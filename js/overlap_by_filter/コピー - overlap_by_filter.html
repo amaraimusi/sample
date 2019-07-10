@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>重複チェックをfilterで行う</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+
+			$(document).ready(function(){
+
+				var ary1 = [4,2,3,3,2,2,7,8,88,88];
+
+				// 重複を削除したリスト
+				var ary2 = ary1.filter(function (v, i, ary) {
+				            return ary.indexOf(v) === i;
+				        });
+
+				// 重複値（同値あり）のリストを取得
+				var ary3 = ary1.filter(function (v, i, ary) {
+				            return ary.indexOf(v) !== ary.lastIndexOf(v);
+				        });
+
+				// 重複値のリスト
+				var ary4 = ary1.filter(function (v, i, ary) {
+				            return ary.indexOf(v) === i && i !== ary.lastIndexOf(v);
+				        });
+
+				// 重複要素番号のリスト
+				var indexs5=[];
+				var ary5 = ary1.filter(function (v, i, ary) {
+							if(ary.indexOf(v) !== ary.lastIndexOf(v)){
+								indexs5.push(i);
+								return true;
+							}else{
+								return false;
+							}
+				        });
+
+
+
+
+
+
+				$("#ary1").html(ary1.join(","));
+				$("#ary2").html(ary2.join(","));
+				$("#ary3").html(ary3.join(","));
+				$("#ary4").html(ary4.join(","));
+				$("#ary5").html(ary5.join(","));
+				$("#indexs5").html(indexs5.join(","));
+
+
+
+				var b=[[1,'neko',99],[2,'nezumi',99],[3,'usi',20],[3,'usi',99],[4,'tora',20],];
+
+
+				var b_ary2=transpose(b);//行列変換
+
+				var clm_no=0;
+				var b_ary3=b_ary2[clm_no];
+
+/*
+				// 重複のみをリスト
+				var clm_no=0;
+				var b_ary3 = b.filter(function (ent, i, ary) {
+				            return ary.indexOf(ent[clm_no]) !== ary.lastIndexOf(ent[clm_no]);
+				        });*/
+
+				console.dir(b);//■■■□□□■■■□□□■■■□□□)
+				console.dir(b_ary2);//■■■□□□■■■□□□■■■□□□)
+
+
+			});
+
+			//2次元配列の行列入替(nullはエラーになるので注意)
+			function transpose(a) {
+			    return Object.keys(a[0]).map(function (c) {
+			        return a.map(function (r) {
+			            return r[c];
+			        });
+			    });
+			}
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">重複チェックをfilterで行う</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<div>フィルター前</div>
+				<div id="ary1"></div>
+				<hr>
+				<div>重複を削除したリスト</div>
+				<div id="ary2"></div><br>
+				<div>重複値（同値あり）のリストを取得</div>
+				<div id="ary3"></div><br>
+				<div>重複値のリスト</div>
+				<div id="ary4"></div><br>
+				<div>重複値（同値あり）と
+				重複要素番号</div>
+				<div id="ary5"></div>
+				<div id="indexs5"></div>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/05</div>
+		</div><!-- page1 -->
+	</body>
+</html>

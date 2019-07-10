@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ディレクトリとファイル名を連結してファイルパスを作成 | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="join_dp_fn.js"></script>
+</head>
+<body>
+<div id="header" ><h1>ディレクトリとファイル名を連結してファイルパスを作成 | ワクガンス</h1></div>
+<div class="container">
+
+
+
+<h2>デモ</h2>
+
+<p>結果</p>
+<table id="res_tbl" class="tbl2">
+	<thead><tr><th>ディレクトリパス</th><th>ファイル名</th><th>ファイルパス</th></tr></thead>
+	<tbody></tbody>
+</table><br>
+
+<p>ソースコード</p>
+<pre>
+$(()=&gt;{
+
+	var data = [
+		{'dp':'/animal/neko' , 'fn':'mike.jpg'},
+		{'dp':'/animal/neko/' , 'fn':'kiji-tora.jpg'},
+		{'dp':'&yen;&yen;animal&yen;&yen;neko' , 'fn':'kuro.jpg'},
+		{'dp':'animal&yen;&yen;neko&yen;&yen;' , 'fn':'kiji-siro-tora.jpg'},
+		{'dp':'/' , 'fn':'shamu.jpg'},
+		{'dp':'&yen;&yen;' , 'fn':'shamu.jpg'},
+		{'dp':'' , 'fn':'buti.jpg'},
+		{'dp':null , 'fn':'aka-neko.jpg'},
+		{'dp':0 , 'fn':'shamu-tora.jpg'},
+		{'dp':'0' , 'fn':'cha-tora.jpg'},
+		{'dp':'/animal&yen;&yen;neko&yen;&yen;' , 'fn':'bengal.jpg'},
+		{'dp':'/animal&yen;&yen;neko' , 'fn':'bengal.jpg'},
+	];
+	
+	
+	var tbody_html = '';
+	for(var i in data){
+		var ent = data[i];
+		var fp = joinDpFn(ent.dp , ent.fn); // ディレクトリとファイル名を連結してファイルパスを作成
+		tbody_html += '&lt;tr&gt;&lt;td&gt;' + ent.dp + '&lt;/td&gt;&lt;td&gt;' + ent.fn + '&lt;/td&gt;&lt;td&gt;' + fp + '&lt;/td&gt;&lt;tr&gt;';
+	}
+	
+
+	var tbody = $('#res_tbl tbody').html(tbody_html);
+		
+	
+});
+
+
+/**
+ * ディレクトリとファイル名を連結してファイルパスを作成
+ * @param dp ディレクトリパス
+ * @param fn ファイル名
+ * @returns string ファイルパス
+ */
+function joinDpFn(dp,fn){
+	
+	var fp = ''; // ファイルパス
+	
+	// ディレクトリパスが空であるならファイル名をファイルパスとして返す。
+	if(dp == null || dp == '' || dp == 0) return fn;
+
+	var end_str = dp.slice(-1); // ディレクトリパスから末尾の一文字を取得する。
+	
+	// 末尾の一文字がセパレータである場合
+	if(end_str == '/' || end_str == '&yen;&yen;'){
+		fp = dp + fn;
+	}
+	
+	// 末尾の一文字がセパレータでない場合
+	else{
+		
+		// セパレータを取得
+		var sep = '/';
+		var i = dp.lastIndexOf('&yen;&yen;');
+		if(i &gt;= 0) sep = '&yen;&yen;';
+		
+		fp = dp + sep + fn;
+	}
+	
+
+	return fp;
+}
+
+
+</pre>
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>ディレクトリとファイル名を連結してファイルパスを作成</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-8-27</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>スマホ（端末）とPCを判別</title>
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="mobile_or_pc.js"></script>
+
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>スマホ（端末）とPCを判別</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>デモ</h2>
+
+
+
+<div class="sec1">
+	画面サイズによる識別方法
+	<pre><code>
+	var device = 'pc';
+	if (screen.width &lt;= 480) {
+		device = 'mobile';
+	}
+	$('#res2').html(device);
+	</code></pre>
+	判別→
+	<span id="res2"></span>
+</div>
+
+<div class="sec1">
+	ユーザーエージェントによる識別方法
+	<pre><code>
+	var device = 'pc';
+	if ((navigator.userAgent.indexOf('iPhone') &gt; 0 &amp;&amp; navigator.userAgent.indexOf('iPad') == -1) || navigator.userAgent.indexOf('iPod') &gt; 0 || navigator.userAgent.indexOf('Android') &gt; 0) {
+		device = 'mobile';
+	}
+	$('#res1').html(device);
+	</code></pre>
+	判別→
+	<span id="res1"></span>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>スマホ（端末）とPCを判別</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2017-9-14</div>
+</body>
+</html>

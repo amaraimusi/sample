@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+	RewriteCond %{REQUEST_URI} /sample/apache/htaccess_redirect/a/animal/fish/sakana.html
+	RewriteRule ^(.*)$ http://example.com/ [R=301,L]
+	
+</IfModule>
+

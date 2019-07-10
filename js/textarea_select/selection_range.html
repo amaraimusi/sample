@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>テキストエリアの部分範囲選択</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="selection_range.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>テキストエリアの部分範囲選択</h1>
+	</div>
+	
+	<br>
+	テキストエリア内のテキストを部分範囲選択する<br>
+	部分範囲は数値で指定する。<br>
+	<br>
+	
+	JS<br>
+	<pre>$('#ta1')[0].setSelectionRange(3, 9);</pre>
+	
+	htm<br>
+	<pre>&lt;textarea id="ta1"&gt;&lt;/textarea&gt;</pre>
+	<br>
+	
+	<h2>サンプル</h2>
+
+	<input type="button" value="部分選択" onclick="selectionRange()" class="btn btn-success" />
+	<br>
+	<textarea id="ta1" style="width:400px;height:100px">いろはにほへと&#13;ちりぬるをわかよたれそ&#13;つねならむ</textarea>
+
+
+
+	
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-11
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

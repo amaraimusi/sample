@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>画像連結</title>
+
+
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+
+		<script>
+			$( function() {
+				//～読込イベント処理～
+			});
+
+			var m_cnt_x=0;
+			var m_cnt_y=0;
+
+			function test1(){
+
+				var cvs = $('#cvs1')[0];
+				var ctx = cvs.getContext('2d');
+
+
+				var img1 = new Image();
+				img1.src=$("#img1").attr('src');
+
+				var x=m_cnt_x * 200;
+
+				ctx.drawImage(img1, x, 0);
+
+				m_cnt_x++;
+			}
+
+
+
+			function test2(){
+
+				var cvs = $('#cvs1')[0];
+				var ctx = cvs.getContext('2d');
+
+
+				var img2 = new Image();
+				img2.src=$("#img2").attr('src');
+
+				var y=m_cnt_y * 200;
+
+				ctx.drawImage(img2, 0,y);
+
+				m_cnt_y++;
+			}
+		</script>
+	</head>
+
+<body>
+
+<h1 >画像連結</h1>
+
+<div style="float:left">
+	<img id="img1" src="kisuji_hamusi.jpg" width="200" height="200" /><br>
+	<input type="button" value="右に連結" onclick="test1()" />
+</div>
+<div style="float:left">
+	<img id="img2" src="kirigirisu.jpg" width="200" height="200"  /><br>
+	<input type="button" value="下に連結" onclick="test2()" />
+</div>
+<div style="clear:both"></div>
+<hr>
+<canvas id="cvs1" width="800" height="800"></canvas>
+
+<p style="font-size:0.8em;color:#bc99fd">(c)wacgance 2015-06-29</p>
+</body>
+</html>

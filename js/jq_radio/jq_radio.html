@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>JQuery | ラジオボタン</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+
+			//チェック項目のvalue属性の値を取得
+			function getCheck(){
+				var rs = $('input[name="animal"]:checked').val();
+				alert(rs);
+			}
+
+			//ネズミにチェックを入れる。
+			function putCheck(){
+				allClear();//すべて解除
+				//$('#animal2').prop('checked', true);
+				$("[name='animal']").val(['nezumi']);
+
+			}
+
+			//すべてのチェックを解除する。
+			function allClear(){
+				$('input[name="animal"]:checked').prop('checked', false);
+			}
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">JQuery | ラジオボタン</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+			<input id="animal1" type="radio" name="animal" value="neko"><label>猫</label>
+			<input id="animal2" type="radio" name="animal" value="nezumi"><label>ネズミ</label>
+			<input id="animal3" type="radio" name="animal" value="usi"><label>ウシ</label>
+			<input id="animal4" type="radio" name="animal" value="tora"><label>トラ</label>
+			<br>
+			<input id="kusa1" type="radio" name="kusa" value="sendan"><label>ダミー</label>
+			<br>
+			<br>
+			<input type="button" value="チェック値取得" onclick="getCheck()" />
+			<input type="button" value="ネズミにチェック" onclick="putCheck()" />
+			<input type="button" value="すべて解除" onclick="allClear()" />
+			</div><!-- sec1 -->
+
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/07/16</div>
+		</div><!-- page1 -->
+	</body>
+</html>

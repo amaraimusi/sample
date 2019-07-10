@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>外部スクリプトのソースコードを表示する</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+	<script>
+	function test1(){
+		
+		var script_src = "/livipage_js/livipage.js";
+
+		scriptPreview("#test1",script_src);
+	}
+	
+	
+	/**
+	 * preview a outside script
+	 * 
+	 * @note 
+	 * Get a Source code such as HTML and JavaScript.
+	 * Then, view the got source code.
+	 * 
+	 * @param slt  jQuery's selector
+	 * @param src  script path
+	 */
+	function scriptPreview(slt,src){
+
+		$.ajax({
+			url: src,
+			cache: false,
+			dataType: "text",
+			success: function(text, type) {
+				text=text.replace(/</g,'&lt;');
+				text=text.replace(/>/g,'&gt;');
+				$(slt).html(text);
+
+			},
+			error: function(xmlHttpRequest, textStatus, errorThrown){
+				throw new Error(xmlHttpRequest.responseText);
+				alert(textStatus);
+			}
+		});
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>外部スクリプトのソースコードを表示する</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル</h2>
+livipage.jsのソースコードを取得して表示する<br>
+<br>
+
+<input type="button" class="btn btn-primary" value="スクリプトを表示" onclick="test1()" /><br>
+<br>
+
+<pre><code id="test1">
+</code></pre>
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>外部スクリプトのソースコードを表示する</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-9-15</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HTMLテーブルに行を追加（挿入）</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/PanelX.js"></script>
+	<script src="/note_prg/js/img_panel_x.js"></script>
+	<script src="tr_add_insert.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>HTMLテーブルに行を追加（挿入）</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>デモ</h2>
+<table id="tbl1" class="table">
+	<thead>
+		<tr><th>id</th><th>コード</th><th>名前</th><th>備考</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>0</td><td>neko</td><td>猫</td></tr>
+		<tr><td>1</td><td>yagi</td><td>山羊</td><td>草食</td></tr>
+		<tr><td>2</td><td>same</td><td>鮫</td></tr>
+		<tr><td>3</td><td>wasi</td><td>鷲</td></tr>
+		<tr><td>4</td><td>goki</td><td>御器</td></tr>
+	</tbody>
+</table>
+
+
+<input type="text" id="row_index" value=0 ><input type="button" value="ADD/INSERT" class="btn btn-success" onclick="test1()" >
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>HTMLテーブルに行を追加（挿入）</li>
+</ol>
+</div><!-- content -->-
+<div id="footer">(C) ke-nji uehara 2018-2-14</div>
+</body>
+</html>

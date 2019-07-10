@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <title>start tmlib.js</title>
+
+        <script src="tmlib0_3_0.js"></script>
+        <script>
+            // TODO: ここにコードを書いていく
+            tm.main(function() {
+                // アプリケーションクラスを生成
+                var app = tm.display.CanvasApp("#world");
+
+                // スターを生成してシーンに追加
+                var star = tm.display.StarShape().addChildTo(app.currentScene);
+                // 位置をセット
+                star.setPosition(150, 75);
+                // 更新処理を登録
+                star.update = function() {
+                    // 回転
+                    this.rotation += 8;
+                };
+
+                // 実行
+                app.run();
+            });
+        </script>
+    </head>
+    <body>
+        <canvas id="world"></canvas>
+    </body>
+</html>

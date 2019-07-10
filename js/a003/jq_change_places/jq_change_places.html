@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQueryで表示順を入れ替える</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+	<script>
+	function test1(){
+		
+		var target_slt = $('#animal_select').val(); // 対象要素のセレクタ
+		var index2 = $('#sort_no_select').val(); // 移動先のインデックス
+
+		
+		var target = $('#' + target_slt);
+		var index1 = $("#animals div").index(target);// 移動元のインデックス
+		
+		var neighbor = $('#animals div').eq(index2);// 移動先の隣り要素
+		
+		// 移動先隣り要素の前後に対象要素を移動する
+		if(index1>index2){
+			neighbor.before(target);
+		}else if(index1<index2){
+			neighbor.after(target);
+		}
+
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>jQueryで表示順を入れ替える</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル1</h2>
+<select  id="animal_select">
+	<option value="animal1">イリオモテヤマネコ</option>
+	<option value="animal2">ヤンバルクイナ</option>
+	<option value="animal3">イボイモリ</option>
+	<option value="animal4">リュウキュウヤマガメ</option>
+</select>
+<select  id="sort_no_select">
+	<option value="0">1番目へ移動</option>
+	<option value="1">2番目へ移動</option>
+	<option value="2">3番目へ移動</option>
+	<option value="3">4番目へ移動</option>
+</select>
+<input type="button" class="btn btn-success" value="test1" onclick="test1()" />
+<hr>
+<div id="animals">
+	<div id="animal1">0 イリオモテヤマネコ</div>
+	<div id="animal2">1 ヤンバルクイナ</div>
+	<div id="animal3">2 イボイモリ</div>
+	<div id="animal4">3 リュウキュウヤマガメ</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>jQueryで表示順を入れ替える</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-11-7</div>
+</body>
+</html>

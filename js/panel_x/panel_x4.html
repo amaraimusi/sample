@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>テキストエリア付パネル</title>
+
+		<link href="../../style2/css/jquery-ui.min.css" rel="stylesheet">
+		<link href="../../style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../style2/css/common2.css" rel="stylesheet">
+
+		<script src="../../style2/js/jquery-1.11.1.min.js"></script>
+		<script src="../../style2/js/bootstrap.min.js"></script>
+		<script src="../../style2/js/jquery-ui.min.js"></script>
+		<script src="jquery.ui.touch-punch.min.js"></script><!-- スマホでもuiでタッチできるようにする(ドラッグ可能にする) -->
+		<script src="panel_x4.js"></script>
+
+
+		<script>
+
+		</script>
+		<style>
+			#panel1_rap{
+				width:500px;
+				height:400px;
+				background-color:#e3b638;
+			}
+			
+			#panel1{
+				z-index:10;
+			}
+			
+			.pnl_head1{
+				width:40%;
+				display:inline-block;
+			}
+			
+			.pnl_head2{
+				width:40%;
+				display:inline-block;
+			}
+			
+			.pnl_head3{
+				width:15%;
+				margin-left:auto;
+				display:inline-block;
+				text-align:right;
+			}
+			
+			#pnl1_window{
+				display:none;
+			}
+			
+			#pnl1_ta{
+				width:100%;
+				height:100%;
+			}
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>テキストエリア付パネル</h1>
+			<p></p>
+		</div>
+	</div>
+
+
+
+	<div class="sec3">
+		<h2>サンプル</h2>
+		パネルのサイズをドラッグで変更すると、内部のテキストエリアも追従して変更される。<br>
+		<br>
+	
+		<input type="button" value="表示" onclick="showPanel()" class="btn btn-success btn-xs" />
+		<hr>
+		
+		<div id="panel1_rap">
+			<div id="panel1" class="panel panel-primary" style="width:200px;">
+				<div class="panel-heading">
+					
+					<div class="pnl_head1">いろは歌</div>
+					<div class="pnl_head2">
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary btn-xs">H1</button>
+							<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-leaf"></span></button>
+							<button type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-tree-deciduous"></span></button>
+							
+							
+						</div>
+					</div>
+					<div class="pnl_head3">
+						<button id="pnl1_fullscreen" type="button" class="btn btn-primary btn-xs" onclick="offDraggable()">
+							<span class="glyphicon glyphicon-magnet"></span>
+						</button>
+						
+						<button id="pnl1_window" type="button" class="btn btn-primary btn-xs" onclick="onDraggable()">
+							<span class="glyphicon glyphicon-new-window"></span>
+						</button>
+						
+						<button type="button" class="btn btn-primary btn-sm" onclick="closePanel()">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</div>
+				</div>
+				<div class="panel-body">
+					<textarea id="pnl1_ta">いろはにほへとちりぬるをわかよたれそつねならむ</textarea>
+					
+				</div>
+				<div class="panel-footer">
+					フッター
+				</div>
+			</div>
+		</div>
+		
+	
+	
+	</div>
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-3-29</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

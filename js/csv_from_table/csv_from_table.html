@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>CSVファイルをHTMLテーブルからダウンロード</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+
+			function csv_download(){
+
+
+				//document.frm_out2csv.submit();
+
+				var data=getDataFromTbl();//HTMLからデータを取得。
+
+				var url='set_csv_data.php';
+
+
+
+				$.post(
+				url ,
+				{"data" : data} ,
+					function(msg){
+
+						location.href="make_csv.php";
+
+
+
+					}
+				);
+			}
+
+
+			/**
+			 *テーブル（id='tbl1')の表を2次元配列データとして取得する。
+			 */
+			function getDataFromTbl(){
+
+			    var data = [];
+
+
+			    $('#tbl1 tbody tr').each(function(i) {
+
+			        data[i] = [];
+			        $('td', $(this)).each(function(j) {
+			            data[i][j] = $(this).text();
+			        });
+			    });
+
+			    return data;
+
+
+			}
+
+
+// 		       // CSV出力
+// 		        $("#out2csv").click(function() {
+// 		            // 選択項目の確認
+// 		            var rowIds = jQuery('#list').getGridParam('selarrrow');
+
+// 		            if (rowIds.length == 0) {
+// 		                msg = "出力するデータ行を選択してください。";
+// 		                alert(msg);
+// 		                return false;
+// 		            }
+
+// 		            // 選択したデータを隠しタグに出力してポストする
+// 		            $('#mybuffer').html("");    // 送信用バッファーをクリア
+// 		            // 列見出しの取得
+// 		            var dataIds = jQuery('#list').getDataIDs();
+// 		            var rowHead = jQuery('#list').getRowData(dataIds[0]);
+// 		            var colNames = new Array();
+// 		            var i = 0;
+// 		            for (var col in rowHead) {
+// 		                colNames[i++] = col;
+// 		            }
+// 		            // 列見出し部をinput.hiddenタグへ出力
+// 		            for (var j = 0; j < colNames.length; j++) {
+// 		                $('<input type="hidden" name="data[0]['+j+']" value="'+htmlEscape(colNames[j])+'" />').appendTo("#mybuffer");
+// 		            }
+
+// 		            // データ部をinput.hiddenタグへ出力
+// 		            for (var i = 0; i < rowIds.length; i++) {
+// 		                var row = jQuery('#list').getRowData(rowIds[i]);
+// 		                for (var j = 0; j < colNames.length; j++) {
+// 		                    $('<input type="hidden" name="data['+(i+1)+']['+j+']" value="'+htmlEscape(row[colNames[j]])+'" />').appendTo("#mybuffer");
+// 		                }
+// 		            }
+
+// 		            // 送信
+// 		            document.frm_out2csv.submit();
+
+// 		            return true;
+// 		        })
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">CSVファイルをHTMLテーブルからダウンロード</h1>
+		<div id="content" >
+
+
+
+			<input type="button" value="CSVダウンロード" onclick="csv_download()" />
+			<table id="tbl1" border="1"><thead>
+				<tr>
+					<th>Id</th>
+					<th>名</th>
+					<th>国</th>
+					<th>生年</th>
+					<th>没年</th>
+					<th>活躍年</th>
+				</tr></thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td><div contenteditable="true" >ナポレオン</div></td>
+						<td><div contenteditable="true" >フランス</div></td>
+						<td>1769</td>
+						<td>1821</td>
+						<td>1798</td>
+						</tr>
+					<tr>
+						<td>2</td>
+						<td class="h_name">マリア・テレジア</td>
+						<td><div style="width:100%" contenteditable="true" >リトアニア</div></td>
+						<td>1717</td>
+						<td>1780</td>
+						<td>1740</td>
+						</tr>
+					<tr>
+						<td>3</td>
+						<td class="h_name">エリザベス1世</td>
+						<td>イギリス</td>
+						<td>1533</td>
+						<td>1603</td>
+						<td>1560</td>
+						</tr>
+					<tr>
+						<td>4</td>
+						<td class="h_name">アールパード</td>
+						<td>ハンガリー</td>
+						<td>845</td>
+						<td>907</td>
+						<td>896</td>
+						</tr>
+
+				</tbody>
+			</table>
+			<hr />
+
+
+
+		</div><!-- content -->
+
+		<a href="csv_from_table.zip" >ソースコードのダウンロード</a>
+		<div id="footer">(C) kenji uehara 2014/5/12</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>グリッド編集と取得</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function getDataFromTbl(){
+				//alert('TEST');
+			    var data = [];
+			    $('#tbl1 tbody tr').each(function(i) {
+
+			        data[i] = [];
+			        $('td', $(this)).each(function(j) {
+			            data[i][j] = $(this).text();
+			        });
+			    });
+
+				alert(data[1][1]);
+
+			}
+
+			$(document).ready(function(){
+
+
+				$('.h_name').attr('contentEditable', true);//h_name列を編集可能にする。
+
+				//contenteditable="true"
+			});
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">グリッド編集と取得</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<hr />
+
+<strong>テーブルからデータを取得するサンプル</strong><br />
+<pre>
+	function getDataFromTbl(){
+		//alert('TEST');
+	    var data = [];
+	    $('#tbl1 tbody tr').each(function(i) {
+
+	        data[i] = [];
+	        $('td', $(this)).each(function(j) {
+	            data[i][j] = $(this).text();
+	        });
+	    });
+
+		alert(data[1][1]);
+
+	}
+</pre><br />
+
+<strong>DIVやTDなどを編集可能にする。</strong><br />
+<pre>
+	$(document).ready(function(){
+
+
+		$('.h_name').attr('contentEditable', true);//class=h_nameを編集可能にする。
+	});
+</pre>
+
+			<hr />
+			contentEditable属性を入れると編集可能になる。<br />
+			「名」列はマウスカーソルでタッチすると編集できる。<br />
+			IEは国のフランスだけ編集可能。DIV要素にしかcontentEditable効かない。
+
+
+
+			<input type="button" value="テーブルデータ取得" onclick="getDataFromTbl()" />
+			<table id="tbl1" border="1"><thead>
+				<tr>
+					<th>Id</th>
+					<th>名</th>
+					<th>国</th>
+					<th>生年</th>
+					<th>没年</th>
+					<th>活躍年</th>
+					<th>Note</th>
+				</tr></thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td class="h_name">ナポレオン</td>
+						<td><div contenteditable="true" >フランス</div></td>
+						<td>1769</td>
+						<td>1821</td>
+						<td>1798</td>
+						<td>1805年、ナポレオンはイギリス上陸を目指してドーバー海峡に面したブローニュに大軍を集結させた。イギリスはこれに対してオーストリア・ロシアなどを引き込んで第三次対仏大同盟を結成。プロイセンは同盟に対して中立的な立場を取ったもののイギリス・オーストリアからの外交の手は常に伸びており、ナポレオンはこれを中立のままにしておくためにイギリスから奪ったハノーファーをプロイセンに譲渡するとの約束をした。</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td class="h_name">マリア・テレジア</td>
+						<td><div style="width:100%" contenteditable="true" ></div></td>
+						<td>1717</td>
+						<td>1780</td>
+						<td>1740</td>
+						<td>オーストリア継承戦争、７年戦争で活躍。オーストリアを強国にすべく、封建制度に縛られず様々な改革を行った。</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td class="h_name">エリザベス1世</td>
+						<td>イギリス</td>
+						<td>1533</td>
+						<td>1603</td>
+						<td>1560</td>
+						<td>エリザベスの外交政策は主に防衛的なものであった。例外は1559年から1560年のスコットランド出兵[125]とユグノー戦争に介入し、失敗に終わったル・アーヴル占領である（1562年10月～1563年6月）。エリザベスはル・アーヴルとカレー（1558年にフランスに奪回されている）との交換を考えていた。1585年には彼女はスペインの脅威を防ぐためにオランダとノンサッチ条約 (en) を締結している[127]。艦隊の活動を通じてのみエリザベスは攻勢的な政策を追求した。これは対スペイン戦争で成果を挙げ、戦闘の80％が海上で行われた[128]。彼女は1577年から1580年にかけて世界を一周し、スペインの港湾や艦隊を襲撃して名声を勝ち得たフランシス・ドレークをナイトに叙爵している。海賊行為と富の追求がエリザベス時代の船乗りたちを駆り立てていた（女王は彼らをほとんど統制できなかったが）[129][130]。</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td class="h_name">アールパード</td>
+						<td>ハンガリー</td>
+						<td>845</td>
+						<td>907</td>
+						<td>896</td>
+						<td>マジャル人の首長。ハンガリーのアールパード朝初代の君主（在位：896年 - 907年）。ロシア南部にいたマジャル人の長であったが、テュルク系のペチェネグ族などに攻撃され、マジャル人を率いてバルカンに進出した。東ローマ帝国と同盟を結び、第一次ブルガリア帝国を攻撃するが敗北し、ドナウ川の中流域、ハンガリー平原に移住する。ここを本拠地としてイタリアをはじめ各地に遠征した。今日までハンガリーの民族的英雄として愛され、古い年代記や多くの歌謡のテーマとなっている。 ハンガリーの建国神話にはアールパード王が持つ杖の先端に光る鳥が止まり道を示したと言われ、日本神話との関連としても注目される。</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td class="h_name">レフ</td>
+						<td>ポーランド</td>
+						<td>1500</td>
+						<td>1600</td>
+						<td>1530</td>
+						<td>ポーランドを作った最初の首長。レフ族。</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td class="h_name">バトゥ</td>
+						<td>ジョチ・ウルス</td>
+						<td>1207</td>
+						<td>1256</td>
+						<td>1225</td>
+						<td>バトゥ (Batu, 1207年 - 1256年) は、ジョチ家の第2代当主（ハン：在位1225年 - 1256年）で、キプチャック・ハン国（ジョチ・ウルス）の実質的な創設者。チンギス・ハーンの長男・ジョチの次男である。漢語では抜都、巴禿、八都罕。ペルシア語ではباتو bātūと書かれる。</td>
+					</tr>
+					<tr>
+						<td>7</td>
+						<td class="h_name">シャルル2世</td>
+						<td>フランス</td>
+						<td>843</td>
+						<td>877</td>
+						<td>875</td>
+						<td>カロリング朝西フランク王国の初代国王（在位：843年 - 877年）である。後にカール2世（独: Karl II.）として西ローマ皇帝を兼ねた（在位：875年 - 877年）。禿頭王（le Chauve, der Kahle）と呼ばれる。ルートヴィヒ1世（ルイ敬虔王）と3番目の妃ユーディットの子で、ロタール1世、アキテーヌ王ピピン1世、フランク王ルートヴィヒ2世の弟に当たる[1]。</td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td class="h_name">カール大帝</td>
+						<td>フランク王国</td>
+						<td>742</td>
+						<td>814</td>
+						<td>800</td>
+						<td>カールの生涯の大半は征服行で占められていた。46年間の治世のあいだに53回もの軍事遠征をおこなっている。</td>
+					</tr>
+					<tr>
+						<td>9</td>
+						<td class="h_name">プロイセン公・アルブレヒト</td>
+						<td>プロイセン</td>
+						<td>1490</td>
+						<td>1568</td>
+						<td>1510</td>
+						<td>ドイツ騎士団総長。騎士団を国家に代えて、プロイセンを設立。初代プロイセン公となる。</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td class="h_name">エンリケ航海王子</td>
+						<td>ポルトガル</td>
+						<td>1394</td>
+						<td>1460</td>
+						<td>1414</td>
+						<td>エンリケ航海王子の名で知られる。初期の大航海時代で活躍。ポルトガル王国アヴィシュ王朝の創始者である、ジョアン1世の子。</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td class="h_name">初代オランダ国王ウィレム</td>
+						<td>オランダ</td>
+						<td>1772</td>
+						<td>1843</td>
+						<td>1815</td>
+						<td>初代オランダ国王</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/05/12</div>
+		</div><!-- page1 -->
+	</body>
+</html>

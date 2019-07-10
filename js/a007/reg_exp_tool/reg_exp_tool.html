@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>正規表現ツール</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="reg_exp_tool.js"></script>
+</head>
+<body>
+<div id="header" ><h1>正規表現ツール</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+<select id="re_sel" size="6" onchange="changeReSel()" ></select><br>
+<br>
+
+<div style="width:100%">
+	
+	<div style="width:48%;padding-right:2%;float:left;">
+		<h3>JavaScriptでの正規表現</h3>
+		<input type="text" id="re_text" style="width:100%" /><br>
+		<input type="button" value="テスト実行" onclick="testExe()" class="btn btn-success" /><br>
+		<br>
+		
+		<p>出力</p>
+		<table id="res_tbl" class="tbl2">
+			<thead>
+				<tr><th>検証文字列</th><th>マッチ文字</th></tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<div style="width:50%;float:left;">
+		<h3>HTML5の正規表現</h3>
+		pattern属性にセットする正規表現 ：<input type="text" id="re_text_h" /><br>
+		入力：<input type="text" id="inp_h" pattern="" /><br>
+		<input type="button" value="テスト実行" onclick="testExeH()" class="btn btn-success" /><br>
+		
+		
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>正規表現ツール</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2018-4-22</div>
+</body>
+</html>

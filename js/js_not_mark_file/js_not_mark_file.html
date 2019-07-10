@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" /><!-- 髢ｾ�ｪ陷肴��ｿ�ｻ髫ｪ�ｳ邵ｺ霈披雷邵ｺ�ｪ邵ｺ�ｽ-->
+		<title>JavaScript | ファイル名に使えない記号を削除</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function test_func1(){
+
+				//ファイル名で使えない記号「\/:*?"<>|」を置換する。
+				var marks=["\\",'/',':','*','?','a',"<",">",'|'];
+						
+				var v=$('#text1').val();
+				for(var i=0;i<marks.length;i++){
+					v=v.replace(marks[i], "_");
+				}
+				
+				alert(v);
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">JavaScript | ファイル名に使えない記号を削除</div>
+		<div id="content" >
+		
+			<div class="sec1">
+				ファイル名で使えない記号「\/:*?"<>|」を置換します。
+				
+				<input type="text" id="text1" style="width:300px" value='あ\/:*?いうえ&lt&gt|お.jpg' />
+				<input type="button" value="run" onclick="test_func1()" />
+				<pre>			
+//ファイル名で使えない記号「\/:*?"<>|」を置換する。
+var marks=["\\",'/',':','*','?','a',"&lt","&gt",'|'];
+		
+var v=$('#text1').val();
+for(var i=0;i&lt marks.length;i++){
+	v=v.replace(marks[i], "_");
+}
+
+alert(v);
+				</pre>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/03/20</div>
+		</div><!-- page1 -->
+	</body>
+</html>

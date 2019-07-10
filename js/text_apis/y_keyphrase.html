@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Yahooキーフレーズ</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="y_keyphrase.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>Yahooキーフレーズ</h1>
+	</div>
+	
+	文章からキーフレーズを抽出し、重要順にならべて返す。<br>
+	下記サンプルはAjaxにてキーフレーズを取得する方法である。<br>
+	<br>
+	
+	<h2>サンプル</h2>
+	<pre>
+	function test1(){
+	
+		var text1 = $('#text1').val();
+		
+	    var data = {
+	        "appid":アプリケーションID※,
+	        <strong>"sentence":text1,</strong>
+	        "output":"json",
+	        "max-result":10,
+	      };
+		
+	    var url = "<strong>http://jlp.yahooapis.jp/KeyphraseService/V1/extract</strong>";
+	
+		//☆AJAX非同期通信
+		$.ajax({
+			url: url,
+			data: data,
+			cache: false,
+			dataType: "jsonp",
+			success: function(str_json, type) {
+				console.log(str_json);
+				
+			},
+			error: function(xmlHttpRequest, textStatus, errorThrown){
+				$('#res').html(xmlHttpRequest.responseText);
+				
+			}
+		});
+	}	
+	</pre>
+	
+	<aside>
+		※<a href="https://e.developer.yahoo.co.jp/register" target="brank"> アプリケーションIDの作成</a>
+	</aside>
+	<br>
+	
+	<hr>
+	
+	<textarea id="text1" style="width:400px;height:250px">いろは歌（いろはうた）とは、すべての仮名を重複させずに使って作られた誦文(ずもん)のこと。七五調の今様の形式となっている。</textarea><br>
+	<input type="button" value="キーフレーズを取得" onclick="test1()" class="btn btn-success" /><br>
+	<aside>※ 取得結果はコンソールに出力</aside>
+	<br>
+
+	
+	<hr>
+	
+	<p>参考リンク</p>
+	<a href="http://developer.yahoo.co.jp/webapi/jlp/keyphrase/v1/extract.html" target="brank" class="btn btn-link btn-xs">公式ドキュメント</a><br>
+	<a href="http://blog.yuze.jp/archives/51366276.html" target="brank" class="btn btn-link btn-xs">Yahooキーフレーズ抽出APIメモ (use jQuery)</a><br>
+	<br>
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-30 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

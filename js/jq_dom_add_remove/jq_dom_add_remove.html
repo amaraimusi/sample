@@ -1,0 +1,147 @@
+<!DOCTYPE html> 
+<html lang="ja"> 
+	<head> 
+	<title>JQuery DOMの追加と削除</title> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+	<script type="text/javascript" language="javascript">
+	      
+
+	        //▼ページ初期化イベント
+	        $(document).bind("pageinit", function(){
+	        	
+	        });
+	        
+	        //ボタン追加をクリック
+	        $('#btn_add').live('click', function() {
+
+	        	//☆DOMを追加する。
+						var dom=$("#demo1").append("<div class='demo1'>大きなニワトリ</div>");
+						dom.css("color","red");
+
+	        });
+	        
+	        //ボタン削除をクリック
+	        $('#btn_del').live('click', function() {
+
+						$(".demo1").remove();
+					
+	        });
+	</script> 
+
+	<style type="text/css">
+		table{
+			border-collapse:collapse;
+			border-color:#b7badb;
+		
+		}
+		table thead{
+			background-color:#cccee6;
+		}
+		table tbody{
+			background-color:#f5f9fe;
+		}
+	
+		pre{
+			background-color:#ffded9;
+		}
+		.sec1{
+			background-color:#ffaa9d;
+			border-style:solid;
+			border-width:2px;
+			border-color:#db2617;
+			padding:10px;
+			margin-bottom:50px;
+		}
+		
+		.demo{
+			background-color:#c5d3f5;
+		}
+		
+		.demo1{
+			
+			height:40px;
+			background-color:#c5d3f5;
+		}
+		
+		
+	</style>
+
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header" data-position="inline" data-backbtn="false">
+		<h1>JQuery DOMの追加と削除</h1>
+		
+	</div>
+	
+
+	<div data-role="content">	
+		
+		<div class="sec1">
+			<h3>DOMの追加と削除</h3>
+			<div data-role="controlgroup" data-type="horizontal"> 
+				<input type="button" id ="btn_add" value="追加"  />
+				<input type="button" id ="btn_del" value="削除"  />
+			</div>
+			
+			<div class="demo" id="demo1"></div>
+			
+			<strong>JavaScriptコードの主要部分を抜粋</strong>
+			<pre>
+	$("#demo1").append("&ltdiv class='demo1'>大きなニワトリ&lt /div>");
+
+			</pre>
+			<strong>追加したDOMを取得することも可能</strong>
+			<pre>
+	var dom=$("#demo1").append("&ltdiv class='demo1'>大きなニワトリ&lt/div>");
+	dom.css("color","red");
+			</pre>
+			
+			<strong>DOMを削除</strong>
+			<pre>
+	$(".demo1").remove();//class属性に「demo1」を持つDOMすべてを削除する。
+			</pre>
+			<strong>id指定した場合のDOM削除</strong>
+			<pre>
+	$("#testId").remove();//id="testId"の属性を持つDOMを削除する。
+			</pre>
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>(C)kenji uehara</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>Twitter API | サンプル1</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+	      $(function() {
+	          $('#search').click(function() {
+	            var url = "http://search.twitter.com/search.json?callback=?";
+	            
+	            var keyword = $('#keyword').val();
+	            $.getJSON(url, {q:keyword}, function(json) {
+	              jQuery.each(json.results, function(i, obj) {
+	                var result = '';
+	                result = "<a href=\"http://twitter.com/" + obj.from_user + "\">";
+	                result += "<img src=\"" + obj.profile_image_url + "\">";
+	                result += "</a>";
+	                result += "<a href=\"http://twitter.com/" + obj.from_user + "/status"  + obj.id + ">";
+	                result += obj.text;
+	                result += "</a>";
+	                result += "<br>";
+	                $("div#result").append(result);
+	             });
+	            });
+	          });
+	        });
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">Twitter API | サンプル1</div>
+		<div id="content" >
+		
+			<div class="sec1">
+		    <p>検索したいキーワードを入力して、ボタンをクリックしてください</p>
+		    <form name="search" action="#" class="search">
+		      <input type="text" name="keyword" id="keyword" value="" size="60">
+		      <br>
+		      <input type="button" id="search" value="検索する">
+		    </form>
+		
+		    <div id="result">
+		    </div>
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/03/20</div>
+		</div><!-- page1 -->
+	</body>
+</html>

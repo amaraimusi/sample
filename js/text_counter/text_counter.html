@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>テキストエリアの文字数を数える</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+		$(function(){
+
+			//テキストエリアのイベント。文字数を数える
+			$('#ta1').bind('keydown keyup keypress change',function(){
+				var len = $(this).val().length;
+				$('#cnt1').html(len);
+			});
+		});
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">テキストエリアの文字数を数える</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+
+				文字数: <span id="cnt1">0</span><br>
+				<textarea name="textarea" id="ta1" rows="5" cols="100"></textarea>
+
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/10/15</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>HTMLファイル（自身）の更新日を取得</title>
+
+
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="modified_date_of_myself.js"></script>
+
+
+		<script>
+		$(function(){
+			var modified_dt=document.lastModified;
+			$('#res1').html(modified_dt);
+			
+			var modified_date=new Date(document.lastModified).toLocaleDateString();
+			$('#res2').html(modified_date);
+		});
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>HTMLファイル（自身）の更新日を取得</h1>
+		</div>
+	</div>
+
+	
+	<h2>説明</h2>
+	以下のコードで自身ファイルの最終更新日時を取得できる。
+	<pre>document.lastModified;</pre>
+	外部JSファイルで「document.lastModified」を実行した場合、外部JSファイルでなくhtmlファイル側の最終更新日時を取得する。<br>
+	<br>
+	
+	<p>「y/m/d」形式で最終更新日を取得する場合</p>
+	<pre>var modified_date=new Date(document.lastModified).toLocaleDateString();// 例→ modified_date=2016/4/7</pre>
+	<br>
+	<hr>
+	
+	<h3>サンプル</h3>
+	<p>ソースコード</p>
+	<pre>
+	&lt;script&gt;
+	$(function(){
+		var modified_dt=document.lastModified;
+		$('#res1').html(modified_dt);
+		
+		var modified_date=new Date(document.lastModified).toLocaleDateString();
+		$('#res2').html(modified_date);
+	});
+	&lt;/script&gt;
+	～略～
+	最終更新日時：&lt;span id="res1"&gt;&lt;/span&gt;&lt;br&gt;
+	最終更新日：&lt;span id="res2"&gt;&lt;/span&gt;&lt;br&gt;
+	</pre>
+
+
+	<p>出力</p>
+	<div class="output_data">
+		最終更新日時：<span id="res1"></span><br>
+		最終更新日：<span id="res2"></span><br>
+	</div>
+	<hr>
+
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-4-7</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

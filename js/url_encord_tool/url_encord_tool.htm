@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr">
+<head>
+	<link rel="NEXT"  href="mnt_top.php" />
+	<link rev="made" href="mailto:dummy@yoro_yoro" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	
+	<style type="text/css">
+		.text_a {
+			width:100%;
+			color:#72310a;
+		}
+	</style>
+	
+	<script type="text/javascript">
+
+		function urlEncodeAction(){
+			var str=document.getElementById('str1').value;
+			str=encodeURI(str);
+			document.getElementById('str2').value=str;
+		}
+
+
+
+		function urlDecodeAction(){
+			var str=document.getElementById('str2').value;
+			str=decodeURI(str);
+			document.getElementById('str1').value=str;
+		}
+
+	</script>
+	<title>URLエンコードツール</title>
+</head>
+<body>
+
+<div style="width:800px" >
+<p>URLエンコードツール</p>
+<table style="width:70%">
+<tbody>
+<tr><td colspan="2"><input class="text_a" type="text" id="str1" value="テスト" /></td></tr>
+<tr><td><input type="button"  value="↓" onclick="urlEncodeAction()" /></td>
+<td><input type="button"  value="↑"  onclick="urlDecodeAction()" /></td></tr>
+<tr><td colspan="2"><input  class="text_a" type="text" id="str2" value="" /></td></tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>基本クラスの継承</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		
+		
+		<script src="Animal.js"></script>
+		<script src="Cat.js"></script>
+
+
+		<script>
+			$( function() {
+				
+				// 初期値を渡しながら、Catクラスを作成する。CatはAnimalクラスを継承している。
+				var param ={'res_slt':'#res'};
+				var cat = new Cat(param);
+				
+				// 基本クラス(Animal)から継承したshowTitleメソッドを呼び出す。showTitleはCatクラスでは未定義。
+				cat.showTitle();
+				
+				// 基本クラスのrunメソッドをオーバーライドしたrunメソッドを呼び出す。
+				cat.run('東村');
+				
+				// 基本クラスのrunメソッドを呼び出す。
+				cat.base.run('沖縄県');
+				
+			});
+
+
+			
+		</script>
+	</head>
+
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>基本クラスの継承</h1>
+			<p></p>
+		</div>
+	</div>
+
+
+	基本クラスを作成し、サブクラスに継承をさせることを、JavaScriptでも実現できる。<br>
+	メソッドのオーバーライドも可能である。<br>
+	<br>
+	以下のサンプルはCatクラスの挙動を確かめている。<br>
+	Catクラスは基本クラスであるAnimalクラスを継承している。<br>
+	<br>
+	
+	<h2>サンプル</h2>
+	<p>実装のソースコード</p>
+	<pre>
+	&lt;script src="jquery.js"&gt;&lt;/script&gt;
+	&lt;script src="Animal.js"&gt;&lt;/script&gt;
+	&lt;script src="Cat.js"&gt;&lt;/script&gt;
+	～省略～
+	&lt;script&gt;
+	$( function() {
+		// 初期値を渡しながら、Catクラスを作成する。CatはAnimalクラスを継承している。
+		var param ={'res_slt':'#res'};
+		var cat = new Cat(param);
+		
+		// 基本クラス(Animal)から継承したshowTitleメソッドを呼び出す。showTitleはCatクラスでは未定義。
+		cat.showTitle();
+		
+		// 基本クラスのrunメソッドをオーバーライドしたrunメソッドを呼び出す。
+		cat.run('東村');
+		
+		// 基本クラスのrunメソッドを呼び出す。
+		cat.base.run('沖縄県');
+	});
+	&lt;/script&gt;
+	～省略～
+	&lt;div id="res"&gt;&lt;/div&gt;
+	</pre>
+	<br>
+	
+	<p>基本クラスであるAnimalクラスのソースコード</p>
+	<pre>
+	var Animal =function(p_params){
+		this.res_slt = p_params.res_slt;//出力要素
+		
+		this.showTitle = function(){
+			var str = '動物のタイトル&lt;br&gt;';
+			$(this.res_slt).append(str);
+		};
+	
+		this.run=function(place){
+			var str = place + 'を動物が走る&lt;br&gt;';
+			$(this.res_slt).append(str);
+			return str;
+		};
+	};
+	</pre>
+	<br>
+	
+	<p>Catクラスのソースコード</p>
+	<pre>
+	var Cat =function(p_params){
+		<strong>// ★動物クラス継承
+		this.base = new Animal(p_params);
+		for(key in this.base){
+			this[key] = this.base[key];
+		}</strong>
+		
+		this.res_slt = p_params.res_slt;//出力要素
+	
+		// Animalのrunメソッドをオーバーライドしている
+		this.run=function(place){
+			var str = place + 'を猫が走る&lt;br&gt;';
+			$(this.res_slt).append(str);
+			return str;
+		};
+	};
+	</pre>
+	<br>
+	
+
+	<h3>出力</h3>
+	<div id="res" class="output_data"></div>
+	
+	<hr>
+
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2016-4-5</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>

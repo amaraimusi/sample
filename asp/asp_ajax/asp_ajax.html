@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" /><!-- 自動翻訳させない -->
+		<title>ASP.NET | 非同期通信(POST)</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script>
+
+			function test_func1(){
+
+				var url=$("#asp_url").val();
+
+				
+				//☆AJAX非同期通信
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: "key1=neko&key2=あいうえお",
+					cache: false,
+					dataType: "text",
+					success: function(data, type) {
+						alert(data);
+						//alert(type);
+					},
+					error: function(xmlHttpRequest, textStatus, errorThrown){
+						alert(textStatus);
+					}
+				});			
+				
+				
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			
+		</style>
+		
+	</head>
+	<body>
+		<div id="page1">
+		<div id="header">ASP.NET | 非同期通信(POST)</div>
+		<div id="content" >
+		
+			<div class="sec1">
+			
+				Asp.NETで作成したサーバーサイドのプログラムへ、POSTデータを非同期通信で送る。<br />
+				
+			
+				<hr />
+				<p>テスト</p>
+				asp　url　:　<input type="text" id="asp_url" style="width:80%" value="http://localhost:3783/PostTest.aspx" /><br />
+				<input type="button" value="run" onclick="test_func1()" />
+				
+				
+				<hr />
+				
+				
+				<p>送信側（*.html)</p>
+				<pre>			
+
+				//☆AJAX非同期通信
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:3783/PostTest.aspx",
+					data: "key1=neko&key2=あいうえお",
+					cache: false,
+					dataType: "text",
+					success: function(data, type) {
+						alert(data);
+						
+					},
+					error: function(xmlHttpRequest, textStatus, errorThrown){
+						alert(textStatus);
+					}
+				});	
+				</pre><br />
+				
+				<p>受信側であるサーバーサイド(PostText.aspx.cs)</p>
+				<pre>
+				protected void Page_Load(object sender, EventArgs e)
+				    {
+				        Response.AppendHeader("Access-Control-Allow-Origin", "*");//クロスドメイン通信を許可する。
+				
+				        //▽POSTからデータを取得する。
+				        string key1 = Request.Form["key1"];
+				        string key2 = Request.Form["key2"];
+				
+				        //▽データを書き出す。
+				        string msg = key1 + "_" + key2 + "_By asp.net";
+				        Page.Controls.Add(new LiteralControl(msg));  
+				
+				    }
+				</pre><br />
+				
+				<p>受信側であるサーバーサイド(PostText.aspx)</p>
+				
+				<pre>
+				&lt%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PostTest.aspx.cs" Inherits="Test2.PostTest" %>
+				</pre>
+				<div style="font-size:0.8em">※Asp.NET用の設定関連以外は、空白である。</div><br />
+				
+				<p>runボタンを押したときのダイアログ</p>
+				<img src="dialog.png" />
+			</div><!-- sec1 -->
+			
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2013/02/27</div>
+		</div><!-- page1 -->
+	</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQueryで表示順を入れ替える | デモ2</title>
+	
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+
+	<script>
+	function test1(){
+		
+
+
+		var groupSlt = "#animals div";
+		var moveElm = $('#animal2');
+		var indexTo = 4;
+		changePlace(groupSlt,moveElm,indexTo);
+	}
+	
+	
+	/**
+	 * 要素を入れ替え移動する
+	 * 
+	 * @note
+	 * 引数のgroupSltである移動要素のグループセレクタは「移動要素の親セレクタ + 移動要素のタグ」を指定する。（グループをあらわすclass名でもよい）
+	 *  
+	 * @param groupSlt 移動要素のグループセレクタ
+	 * @param moveElm 移動要素<jQueryオブジェクト>
+	 * @param indexTo 移動先のインデックス
+	 */
+	function changePlace(groupSlt,moveElm,indexTo){
+
+		// 移動元のインデックスを取得
+		var indexFrom = $(groupSlt).index(moveElm);
+		
+		var neighbor = $(groupSlt).eq(indexTo);// 移動先の隣り要素
+		
+		// 移動先隣り要素の前後に対象要素を移動する
+		if(indexFrom > indexTo){
+			neighbor.before(moveElm);
+		}else if(indexFrom < indexTo){
+			neighbor.after(moveElm);
+		}
+
+	}
+	</script>
+</head>
+<body>
+<div id="header" ><h1>jQueryで表示順を入れ替える | デモ2</h1></div>
+<div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>サンプル1</h2>
+「ヤンバルクイナ」を5番に移動するサンプル。
+<input type="button" class="btn btn-success" value="test1" onclick="test1()" />
+<hr>
+<div id="animals">
+	<div id="animal1">1  イリオモテヤマネコ</div>
+	<div id="animal2"><span class="text-danger">2 ヤンバルクイナ</span></div>
+	<div id="animal3">3  イボイモリ</div>
+	<div id="animal4">4  リュウキュウヤマガメ</div>
+	<div id="animal5">5  ノグチゲラ</div>
+	<div id="animal6">6  ムラサキ オカヤドカリ</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>jQueryで表示順を入れ替える | デモ2</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2016-11-7</div>
+</body>
+</html>

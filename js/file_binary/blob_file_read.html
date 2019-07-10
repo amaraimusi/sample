@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>FileReaderでBlobを読み取る</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="blob_file_read.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>FileReaderでBlobを読み取る</h1>
+		<p>JavaScriptによるファイルとバイナリデータの扱い</p>
+	</div>
+
+	<h2>サンプル</h2>
+	FileReaderはFileオブジェクトだけでなく、Blobオブジェクトも読み込むことができる。<br>
+	下記のサンプルでは、<a href="blob_from_server.html">サーバー上の画像ファイルからBlob</a>
+	を取得し、そのBlobをFileReaderで読み込む例である。<br>
+	<br>
+	
+	
+	
+	<p>javascript</p>
+	<pre>
+	function test1(){
+		
+		// サーバー上の画像ファイルから、Ajaxを利用してバイトデータを取得する
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'smp1.png', true);
+		xhr.responseType = 'arraybuffer';
+		xhr.onload = function(e) {
+			
+			// 画像ファイルのバイトデータを取得する
+			var arrayBuffer = this.response;
+	
+			// バイトデータとコンテンツタイプからBlobを生成する
+			var blob = new Blob([arrayBuffer], {type: "image/png"});
+	
+			// <strong>★</strong>FileReaderでBlobを読み取る
+			var reader = new FileReader();
+			<strong>reader.readAsDataURL(blob);</strong>
+		
+			// Blob読込後のイベント
+			reader.onload = function(evt) {
+				
+				// データURLスキームを取得する
+				var data_url = reader.result;
+				console.log(data_url);
+				
+				// データURLスキームを画像表示させる。
+				$('#img1').attr('src',data_url);
+				
+				// データURLスキームからbase64形式に変換してみる
+				var base64 = btoa(data_url);
+				console.log(base64);
+			}
+		};
+	
+		xhr.send();
+	}
+	</pre>
+	
+	<input type="button" value="TEST1" onclick="test1()" class="btn btn-primary" /><br>
+	<img id="img1" src="" />
+
+
+
+	<hr>
+
+	<br><br>
+	<a href="index.html" class="btn btn-link btn-xs">目次へ戻る</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-27 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>

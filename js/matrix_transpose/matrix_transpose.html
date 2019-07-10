@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate" />
+		<title>2次元配列の行列を入替</title>
+		<link rel="stylesheet" type="text/css" href="common1.css"  />
+		<script src="jquery-1.11.1.min.js"></script>
+		<script>
+
+
+			$(document).ready(function(){
+
+
+
+				var data=[[1,'neko',99],[2,'nezumi',99],[3,'usi',20],[3,'usi',99],[4,'tora',20],];
+
+
+				//★行列変換
+				var data2=transpose(data);
+
+
+				//出力用
+				var json_text1 = JSON.stringify(data);
+				var json_text2 = JSON.stringify(data2);
+				$("#ary1").html(json_text1);
+				$("#ary2").html(json_text2);
+
+
+
+
+			});
+
+			//★2次元配列の行列入替(nullはエラーになるので注意)
+			function transpose(a) {
+			    return Object.keys(a[0]).map(function (c) {
+			        return a.map(function (r) {
+			            return r[c];
+			        });
+			    });
+			}
+
+
+		</script>
+
+		<style type="text/css">
+
+		</style>
+
+	</head>
+	<body>
+		<div id="page1">
+		<h1 id="header">2次元配列の行列を入替</h1>
+		<div id="content" >
+
+			<div class="sec1">
+
+				<div>変換前</div>
+				<div id="ary1"></div>
+				<hr>
+				<div>行列入替後</div>
+				<div id="ary2"></div><br>
+
+			</div><!-- sec1 -->
+
+		</div><!-- content -->
+		<div id="footer">(C) kenji uehara 2014/08/05</div>
+		</div><!-- page1 -->
+	</body>
+</html>

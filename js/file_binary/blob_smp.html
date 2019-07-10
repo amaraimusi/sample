@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Blobの検証</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="blob_smp.js"></script>
+
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>Blobの検証</h1>
+		<p>JavaScriptによるバイナリデータの扱い | Blob</p>
+	</div>
+
+	<h2>サンプル：基本的なBlobの作成</h2>
+	<pre>
+	// データソース。8bit数値配列形式のバイナリデータ。
+	var i8ary = new Uint8Array([137,80,78,71]);
+	var source = [ i8ary ];
+
+	// オプション情報。コンテンツタイプ（MIME）など。
+	var option = {
+		type: "application/octet-binary"
+	};
+
+	// blobを作成
+	var blob = new <strong>Blob( source , option );</strong>
+	</pre>
+	<input type="button" value="TEST1" onclick="test1()" class="btn btn-primary"/>
+	<div id="res1">出力<br></div>
+	
+	
+
+
+
+
+	
+	<a href="index.html" class="btn btn-link btn-xs">目次へ戻る</a>
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-5-18 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>
