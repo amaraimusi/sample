@@ -26,6 +26,7 @@
 <ol>
 	<li><a href="input_check_valid.php">文字列と数値のチェック</a></li>
 	<li><a href="input_check_valid_date.php">日付系のチェック</a></li>
+	<li><a href="input_check_valid_log.php">エラーログも出力</a></li>
 </ol>
 
 <div class="yohaku"></div>

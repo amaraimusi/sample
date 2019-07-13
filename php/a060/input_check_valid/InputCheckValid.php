@@ -1,9 +1,10 @@
 <?php
+require_once ('LogEx.php');
 /**
  * 入力チェックバリデーション | InputCheckValid
  * 
- * @date 2019-7-11
- * @version 1.0
+ * @date 2019-7-11 | 2019-7-14
+ * @version 1.0.1
  * @license MIT
  * @author k_uehara
  *
@@ -11,14 +12,23 @@
 class InputCheckValid{
     
     var $param;
+    var $logEx; // LogEx.php
     
     /**
      * コンストラクタ
      * @param array $param
+     *  - log_flg ログフラグ 0:ログ出力しない（デフォ）, 1:ログ出力する
+     *  - log_fp ログファイルパス
      *  - smp_str_len    サンプル文字列長    省略可
      */
     public function __construct($param = []){
         $this->param = $this->setParamIfEmpty($param);
+        
+        // ログクラスの生成
+        if(!empty($this->param['log_flg'])){
+            $log_fp = $this->param['log_fp'];
+            $this->logEx = new LogEx(['log_fp' => $log_fp]);
+        }
     }
     
     /**
@@ -29,6 +39,8 @@ class InputCheckValid{
     private function setParamIfEmpty($param){
         if(empty($param)) $param = [];
         
+        if(empty($param['log_flg'])) $param['log_flg'] = 0; // ログフラグ 0:ログ出力しない（デフォ）, 1:ログ出力する
+        if(empty($param['log_fp'])) $param['log_fp'] = null; // ログファイルパス
         if(empty($param['smp_str_len'])) $param['smp_str_len'] = 8; // サンプル文字列長
         
         return $param;
@@ -64,10 +76,11 @@ class InputCheckValid{
      * エンティティのバリデーション
      * @param array $ent エンティティ
      * @param array $validData バリデーションデータ
+     * @param int $row_no 行番号
      * @param int $res_type レスポンスタイプ 0:文字列, 1:配列(キー:フィールド, 値:エラーメッセージ)
      * @return mixed エラー情報 null:すべて正常
      */
-    public function validEnt(&$ent, &$validData, $res_type=0){
+    public function validEnt(&$ent, &$validData, $row_no=null, $res_type=0){
         
         $errs = [];
         foreach($validData as $field => &$validEnt){
@@ -100,14 +113,27 @@ class InputCheckValid{
         }
         unset($validEnt);
         
+        // エラーがなければnullを返す
+        if(empty($errs)) return null;
+        
+        $err_line =  implode(' | ', $errs); // エラー行
+        
+        // 行番が指定されている場合、行情報を追記する。
+        if($row_no !== null){
+            $err_line = $row_no . '行目: ' . $err_line;
+        }
+        
+        // ログファイルにエラー行を出力
+        if($this->param['log_flg'] != 0){
+            $this->logEx->write($err_line);
+        }
+        
         // エラーメッセージのレスポンス
         $res = null;
-        if(!empty($errs)){
-            if($res_type == 1){
-                $res = $errs;
-            }else{
-                $res = implode(' | ', $errs);
-            }
+        if($res_type == 1){
+            $res = $errs;
+        }else{
+            $res = $err_line;
         }
         
         return $res;
@@ -444,8 +470,18 @@ class InputCheckValid{
         return true;
     }
     
-    
-    
+    /**
+     * エラーログテキストを取得
+     * @param int $limit 行制限  テキストファイルから取得するログ取得制限  nullを指定した場合、10万行になる。
+     * @return string ログのテキスト
+     */
+    public function getErrLogText($limit = 200){
+        $err_log_text = '';
+        if(!empty($this->param['log_flg'])){
+            $err_log_text = $this->logEx->getLogText($limit);
+        }
+        return $err_log_text;
+    }
    
     
     
