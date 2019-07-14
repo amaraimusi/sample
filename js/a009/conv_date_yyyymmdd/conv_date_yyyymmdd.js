@@ -2,6 +2,7 @@
 $(() =>{
 	
 	var data = [
+		{'before':null}, 
 		{'before':'1990-1-1'}, 
 		{'before':'2019-1-1'}, 
 		{'before':'2019/1/1'}, 
@@ -9,17 +10,29 @@ $(() =>{
 		{'before':'2019-1-31'}, 
 		{'before':'2019-2-29'}, 
 		{'before':'2019-8-32'}, 
-		{'before':'2019-10-10 1:2:3'}, 
+		{'before':'2019-10-10 1:2:3', 'format':'Y/m/d h:i:s'}, 
 		{'before':'2019-12-31'}, 
 		{'before':'2050-12-31'}, 
+		{'before':'1990-1-1 1:2:3', 'format':'Y-m-d h:i:s'}, 
+		{'before':'2019-7-14 12:13:14', 'format':'Y-m-d h:i:s'}, 
+		{'before':'2019-7-14 12:13', 'format':'Y-m-d h:i:s'}, 
+		{'before':'2019-7-14 12', 'format':'Y-m-d h:i:s'}, 
+		{'before':'2019-7-14', 'format':'Y-m-d h:i:s'}, 
+		{'before':'2019-7', 'format':'Y-m-d h:i:s'}, 
+		{'before':'2019', 'format':'Y-m-d h:i:s'}, 
 		{'before':'AAA'}, 
 	];
 	
 	for(var i in data){
 		var ent = data[i];
 		var before = ent['before'];
+		var format = ent['format'];
 		
-		ent['after'] = convDateTo_yyyymmdd(before);
+		ent['after'] = dateFormat(before, format);
+		
+		if(ent['format'] == null){
+			ent['format'] = 'Y-m-d';
+		}
 	}
 	
 	var html = createHtmlTable(data);
@@ -30,11 +43,15 @@ $(() =>{
 
 
 /**
- * 日付の書式を「yyyy-mm-dd」形式に変換する
+ * 日付フォーマット変換
  * @param mixed date1 日付
+ * @param string format フォーマット Y-m-d, Y/m/d h:i:s など
  * @returns string 「yyyy-mm-dd」形式の日付文字列
  */
-function convDateTo_yyyymmdd(date1){
+function dateFormat(date1, format){
+	
+	if(date1 == null) date1 = new Date().toLocaleString();
+	if(format == null) format = 'Y-m-d';
 	
 	// 引数が文字列型であれば日付型に変換する
 	if((typeof date1) == 'string'){
@@ -45,13 +62,34 @@ function convDateTo_yyyymmdd(date1){
 	}
 	
 	var year = date1.getFullYear();
+	
 	var month = date1.getMonth() + 1;
 	month = ("0" + month).slice(-2); // 2桁の文字列に変換する
+	
 	var day = date1.getDate();
 	day = ("0" + day).slice(-2);
-	var date_str = year + '-' + month + '-' + day;
+	
+	var houre = date1.getHours();
+	houre = ("0" + houre).slice(-2);
+	
+	var minute = date1.getMinutes();
+	minute = ("0" + minute).slice(-2);
+	
+	var second = date1.getSeconds();
+	second = ("0" + second).slice(-2); // 2桁の文字列に変換する
+	
+	var date_str = format;
+	date_str = date_str.replace('Y', year);
+	date_str = date_str.replace('m', month);
+	date_str = date_str.replace('d', day);
+	date_str = date_str.replace('h', houre);
+	date_str = date_str.replace('i', minute);
+	date_str = date_str.replace('s', second);
+	
+	//var date_str = year + '-' + month + '-' + day;
 	return date_str;
 }
+
 
 
 /**
@@ -65,29 +103,18 @@ function createHtmlTable(data){
 		return "";
 	}
 	
-	var html = "<table class='tbl2'>";
+	var html = `
+		<table class='tbl2'><thead><tr>
+			<th>変換前</th><th>フォーマット</th><th>変換後</th>
+		<tr></thead><tbody>
+	`;
 	
-	// 0件目のエンティティからtheadを作成
-	html += "<thead><tr>";
-
-	var ent0 = data[0];
-	for(var field in ent0){
-		html += "<th>" + field + "</th>";
-	}
-	html += "</tr></thead>";
-	
-	// tbodyの部分を作成
 	for(var i in data){
 		var ent = data[i];
-		html += "<tr>";
-		for(var f in ent){
-			html += "<td>" + ent[f] + "</td>"
-		}
-		html += "</tr>";
-		
+		html += `<tr><td>${ent['before']}</td><td>${ent['format']}</td><td>${ent['after']}</td></tr>`;
 	}
 	
-	html+= "</table>";
+	html+= "</tbody></table>";
 
 	return html;
 	
