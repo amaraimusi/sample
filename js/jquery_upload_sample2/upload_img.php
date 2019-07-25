@@ -9,6 +9,11 @@
  * 2014/4/23	拡張子チェックとMIMEチェックを追加
  *
  */
+
+if($_SERVER["REMOTE_ADDR"] !='localhost'){
+    echo 'This sample is localhost only';
+    die();
+}
 		require_once '../../../zss_lib/ADebug.php';
 		require_once '../../../zss_lib/GetMimeType.php';
 
