@@ -70,7 +70,23 @@ foreach($tests as $value){
 	echo "<tr><td>{$value}</td><td>{$value2}</td><td>{$err}</td></tr>";
 }
 
-
+/**
+ * 手入力日時の自動変換 
+ * 
+ * @note
+ * 手入力による様々な日付文字列入力を正しい日付フォーマットに自動変換する。
+ * 全角数値は半角数値に変換される。
+ * 日付文字列の前後に文字列があっても問題ない。
+ * 
+ * 例)
+ * 「山の日８月１２日公共」 → 2019-8-12 12:13:14
+ * 
+ * @param string $date_str 日付文字列
+ * @param string $format 日付フォーマット（デフォ：Y-m-d h:i:s）
+ * @return array
+ *  - value 自動変換後の日付
+ *  - err 入力エラー文字列
+ */
 function humanInputDateTime($date_str, $format='Y-m-d h:i:s'){
 	
 	$date_str0 = $date_str;
