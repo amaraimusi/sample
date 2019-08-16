@@ -55,9 +55,7 @@ foreach($tests as $value){
 	echo "<tr><td>{$value}</td><td>{$res}</td></tr>";
 }
 
-/**
- * 
- */
+
 /**
  * 手入力フラグの自動変換
  *
