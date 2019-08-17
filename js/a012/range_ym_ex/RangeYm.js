@@ -2,7 +2,7 @@
  * 年月による日付範囲入力 | RangeYm.js
  * @date 2019-8-17
  * @license MIT
- * @version 1.0.0
+ * @version 1.0.1
  */
 class RangeYm{
 	
@@ -19,7 +19,14 @@ class RangeYm{
 	init(param){
 		
 		this.param = this._setParamIfEmpty(param);
-		this.tDiv = jQuery('#' + this.param.div_xid); //  This division
+		
+		if(this.param.div_xid instanceof jQuery){
+			this.tDiv = this.param.div_xid;
+			this.param.div_xid = this.tDiv.attr('id');
+		}else{
+			this.tDiv = jQuery('#' + this.param.div_xid); //  This division
+		}
+		
 		
 		// 当機能のHTMLを作成および埋込
 		let html = this._createHtml(); 
@@ -42,10 +49,7 @@ class RangeYm{
 		if(this.param.def !=null){
 			this.setYm(this.param.def); // 年月をセット
 		}
-		
 
-		
-		
 	}
 
 	
