@@ -33,15 +33,29 @@
 
 <h2>デモ</h2>
 <pre><code>
+	$data['neko'][1]['mike'] = 'sallcat';
 	$data[0] = 1;
 	$data['animal'][1] = 'bigcat';
 	$data['animal'][2]['konchu'][2] = 'kuro-ari';
 	$data['fish']='fish';
 	
 	$depth = arrayDepth($data);
+	echo "depth={$depth}&lt;br&gt;";
 	
-	var_dump($depth);
+	$depth2 = arrayDepthSmp($data);
+	echo "depth2={$depth2}&lt;br&gt;";
 	
+	
+	/**
+	 * 配列の階層の深さを調べる
+	 * 
+	 * @note
+	 * 配列すべてをサーチするので処理は重め
+	 * 
+	 * @param array $ary 対象配列
+	 * @param number $depth 深度（再起呼び出しで使用するので省略すること）
+	 * @return number 階層数
+	 */
 	function arrayDepth(&amp;$ary, $depth=0){
 		if(is_array($ary)){
 			$depth++;
@@ -57,19 +71,54 @@
 			return $depth;
 		}
 	}
+	
+	/**
+	 * 配列の階層の深さを調べる（高速版）
+	 *
+	 * @note
+	 * 配列の先頭からのみ深度を調べる。
+	 * 処理は速いが、階層にばらつきのある配列には向かない。
+	 * 行列データなどに。
+	 *
+	 * @param array $ary 対象配列
+	 * @param number $depth 深度（再起呼び出しで使用するので省略すること）
+	 * @return number 階層数
+	 */
+	function arrayDepthSmp(&amp;$ary, $depth=0){
+		if(is_array($ary)){
+			$depth++;
+			$first_key = key($ary);
+			$depth = arrayDepthSmp($ary[$first_key], $depth);
+		}
+		return $depth;
+	}
 </code></pre>
 <p>出力</p>
 <?php 
 
+	$data['neko'][1]['mike'] = 'sallcat';
 	$data[0] = 1;
 	$data['animal'][1] = 'bigcat';
 	$data['animal'][2]['konchu'][2] = 'kuro-ari';
 	$data['fish']='fish';
 	
 	$depth = arrayDepth($data);
+	echo "depth={$depth}<br>";
 	
-	var_dump($depth);
+	$depth2 = arrayDepthSmp($data);
+	echo "depth2={$depth2}<br>";
 	
+	
+	/**
+	 * 配列の階層の深さを調べる
+	 * 
+	 * @note
+	 * 配列すべてをサーチするので処理は重め
+	 * 
+	 * @param array $ary 対象配列
+	 * @param number $depth 深度（再起呼び出しで使用するので省略すること）
+	 * @return number 階層数
+	 */
 	function arrayDepth(&$ary, $depth=0){
 		if(is_array($ary)){
 			$depth++;
@@ -86,6 +135,27 @@
 		}
 	}
 	
+	/**
+	 * 配列の階層の深さを調べる（高速版）
+	 *
+	 * @note
+	 * 配列の先頭からのみ深度を調べる。
+	 * 処理は速いが、階層にばらつきのある配列には向かない。
+	 * 行列データなどに。
+	 *
+	 * @param array $ary 対象配列
+	 * @param number $depth 深度（再起呼び出しで使用するので省略すること）
+	 * @return number 階層数
+	 */
+	function arrayDepthSmp(&$ary, $depth=0){
+		if(is_array($ary)){
+			$depth++;
+			$first_key = key($ary);
+			$depth = arrayDepthSmp($ary[$first_key], $depth);
+		}
+		return $depth;
+	}
+	
 ?>
 
 
@@ -99,6 +169,6 @@
 	<li>配列の階層の深さを調べる</li>
 </ol>
 </div><!-- content -->
-<div id="footer">(C) kenji uehara 2019-1-8</div>
+<div id="footer">(C) kenji uehara 2019-1-8 | 2019-12-24</div>
 </body>
 </html>
