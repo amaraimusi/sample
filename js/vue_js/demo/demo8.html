@@ -5,36 +5,42 @@
 	<meta name="google" content="notranslate" />
 	 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>vue.jsでバインドしている要素群をjQuryで移動させてみる</title>
+	<title>vue.jsによるテーブル</title>
 	
 	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/note_prg/css/common2.css" rel="stylesheet">
 	
 	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
 	<script src="/note_prg/js/bootstrap.min.js"></script>
-	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="vue.min.js"></script>
 
-	<script src="demo7.js"></script>
+	<script src="demo8.js"></script>
 
 </head>
 <body>
 
-<div id="header" ><h1>vue.jsでバインドしている要素群をjQuryで移動させてみる</h1></div>
+<div id="header" ><h1>vue.jsによるテーブル</h1></div>
 <div class="container">
 
 
-vue.jsと関連付けている区画要素をjQueryのinsertAfterメソッドで移動しても、vue.jsのバインドは切れていない。<br>
 <br>
 
 <div id="app1">
-	<div>{{ message1 }}</div>
-	<input v-model="message1">
+	<table>
+		<thaed>
+			<tr><th>ID</th><th>名前</th><th>数値</th></tr>
+		</thaed>
+		<tbody>
+			<tr v-for="ent in data">
+				<td v-for="(value, key) in ent">{{ value }}</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
-<input type="button" value="app1要素を青四角の下へ" onclick="test1()" class="btn btn-primary btn-xs" />
-<input type="button" value="app1要素を赤四角の下へ" onclick="test2()" class="btn btn-danger btn-xs" />
-<div id="box1" style="width:300px;height:100px;background-color:blue"></div>
-<div id="box2" style="width:300px;height:100px;background-color:red"></div>
+
+
+
 
 
 
@@ -44,7 +50,7 @@ vue.jsと関連付けている区画要素をjQueryのinsertAfterメソッドで
 	<li><a href="/sample">サンプルソースコード</a></li>
 	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
 	<li><a href="../">Vue.jsのデモ | 目次</a></li>
-	<li>vue.jsでバインドしている要素群をjQuryで移動させてみる</li>
+	<li>vue.jsによるテーブル</li>
 </ol>
 </div><!-- content -->
 <div id="footer">(C) kenji uehara 2020-2-10</div>
