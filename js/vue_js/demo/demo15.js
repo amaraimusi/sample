@@ -19,7 +19,6 @@ jQuery(() => {
 			},
 			methods: {
 				clickAnimalRdo:(index)=>{
-					console.log('test');//■■■□□□■■■□□□)
 					let animal_name = app.animals[index].animal_name;
 					app.msg1 = index + ':' + animal_name;
 				}
