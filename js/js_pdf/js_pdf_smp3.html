@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jsPDF サンプル3</title>
+
+		<link href="/sample/style2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/sample/style2/css/common2.css" rel="stylesheet">
+
+		<script src="/sample/style2/js/jquery-1.11.1.min.js"></script>
+		<script src="/sample/style2/js/bootstrap.min.js"></script>
+		<script src="jspdf.min.js"></script>
+		<script src="html2canvas.min.js"></script>
+		
+		
+		<script src="js_pdf_smp3.js"></script>
+
+		<style>
+
+		</style>
+	</head>
+
+<body>
+<div class="container">
+
+	<div id="header" >
+		<h1>jsPDF サンプル3</h1>
+	</div>
+	<br>
+
+	jsPDF.jsを使って、要素内の画像や文章などのコンテンツをPDF化できます。<br>
+	スマホ環境にも対応しています。<br>
+	<a href="https://parall.ax/products/jspdf" target="brank">公式サイト</a><br>
+	<br>
+	
+
+	
+	
+	<h2>検証</h2>
+
+	
+	<div id = "test1" style="background-color:white">
+		PDFダウンロードボタンでPDFをダウンロードできます。<br>
+		PC環境であればPDFプレビュー画面が表示され、この画面からダウンロードできます。<br>
+		スマホ環境であればすぐにPDFダウンロードが開始されます。<br>
+		<input type="button" value="PDFダウンロード" onclick="test1()" class="btn btn-success" /><br>
+		<img id = "img1" src="imori.jpg" /><br>
+	</div>
+	
+	<iframe id="renderSpace" frameborder="0" width="450" height="450"></iframe>
+
+
+
+<div id="capture" style="padding: 10px; background: #f5da55">
+    <h4 style="color: #000; ">Hello world!</h4>
+</div>
+	
+
+
+	<div id="footer"  >
+		<a href="/">(c)wacgance</a> 2016-4-7 
+	</div>
+	
+
+		
+
+
+</div><!-- container  -->
+</body>
+</html>
