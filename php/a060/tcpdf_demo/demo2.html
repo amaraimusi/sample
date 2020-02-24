@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TCPDFのCSSスタイルを検証 | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/highlight/default.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="/note_prg/js/highlight.pack.js"></script>
+	<script src="/note_prg/js/livipage.js"></script>
+	<script src="/note_prg/js/ImgCompactK.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div id="header" ><h1>TCPDFのCSSスタイルを検証 | ワクガンス</h1></div>
+<div class="container">
+
+TCPDFは便利であるが、利用できるCSSスタイルは著しく制限されるという弱点がある。HTMLタグにも使用できなものが多数あり。<br>
+レイアウトやデザインについてはある程度の妥協が必須である。<br>
+改ページに関しては、テキストが増えれば、自動的になされるので便利である。<br>
+<br>
+
+<table class="table">
+	<thead><tr><th>HTMLタグまたはCSSスタイル</th><th>効き具合</th></tr></thead>
+	<tbody>
+		<tr><td>
+			padding, margin, width, height,<br>
+			display:inline-block, float:left</td>
+		<td>
+			こららのレイアウト系CSSスタイルは効かない。table要素で何とか代用しなければならない。td,th要素だけはwidthとheightが効く。
+		</td>
+		</tr>
+		
+		<tr><td>
+			div
+		<td>
+			幅は100%で固定である。上記にあるようにpadding, margin, width, heightなどは使えない。
+		</td>
+		</tr>
+		
+		<tr><td>border</td>
+		<td>
+			効く。border-top,border-bottomなどもOK。ただし、線の種類指定はできない。線の太さと色のみ。
+		</td>
+		</tr>
+		
+		<tr><td>table</td>
+		<td>
+			通常のHTML5とは若干挙動が異なる。罫線も破線などは使えず。<br>
+			tdタグのcolspan属性は効くのでレイアウトに活用できる。
+		</td>
+		</tr>
+		
+		<tr><td>background-color</td>
+		<td>
+			効く。
+		</td>
+		</tr>
+		
+		<tr><td>font-size, font-weight, font-style, color, text-decoration</td>
+		<td>
+			文字装飾系のCSSスタイルはあるていど効いているが、部分的に効かないものもある。下線を破線にしたりはできない。<br>
+		</td>
+		</tr>
+		
+		<tr><td>text-align</td>
+		<td>
+			中央寄せ、右寄せ、共に問題ない。
+		</td>
+		</tr>
+		
+		<tr><td>ul, ol</td>
+		<td>
+			効く。しかし上部に隙間が空くので使い勝手は悪い。margin,paddingは使えないので隙間の調整は不可。
+		</td>
+		</tr>
+		
+		<tr><td>strong, small</td>
+		<td>
+			効く。
+		</td>
+		</tr>
+		
+		<tr><td>hr</td>
+		<td>
+			黒線のみ。線の色、太さ、種類は一切指定できず。<br>
+		</td>
+		</tr>
+		
+		<tr><td>空白</td>
+		<td>
+			空白は&amp;npsp;を記述する必要がある。<br>
+		</td>
+		</tr>
+		
+		<tr><td>文字の種類</td>
+		<td>
+			utf-8で使用できるすべての文字が使えるわけではない。<br>
+		</td>
+		</tr>
+	</tbody>
+</table>
+<br><br>
+
+<h1>検証</h1>
+<a href="demo2_pdf.php" class="btn btn-success">PDFを表示</a>
+<a href="demo2_pdf.php" download class="btn btn-success">PDFのダウンロード</a>
+<br><br>
+
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>TCPDFのCSSスタイルを検証</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2020-1-1</div>
+</body>
+</html>
