@@ -234,10 +234,4 @@ class CrudBaseValidation{
 		
 		return true;
 	}
-	
-	
-	
-	
-	
-	
 }
