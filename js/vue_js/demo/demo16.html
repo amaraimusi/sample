@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>vue.jsのバリデーション | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="../js/vue.min.js"></script>
+	<script src="CrudBaseValidation.js"></script>
+	<script src="demo16.js"></script>
+	
+	<style>
+		.tbl2 input[type="text"]{
+			width:480px;
+		}
+	</style>
+</head>
+<body>
+<div id="header" ><h1>vue.jsのバリデーション | ワクガンス</h1></div>
+<div class="container">
+
+
+<div id="app1">
+	<table class="tbl2">
+		<thead><tr><th>項目名</th><th>入力</th><th>説明</th></tr></thead>
+		<tbody>
+			<tr>
+				<td>名前</td>
+				<td>
+					<input type="text" v-model="ent.animal_name" v-on:change="valid_animal_name(ent.animal_name)" />
+					<div class="text-danger">{{valids.animal_name}}</div>
+				</td>
+				<td>必須　10文字以内</td>
+			</tr>
+			<tr>
+				<td>数値</td>
+				<td>
+					<input type="text" v-model="ent.animal_value" v-on:change="valid_animal_value(ent.animal_value)" />
+					<div class="text-danger">{{valids.animal_value}}</div>
+				</td>
+				<td>自然数</td>
+			</tr>
+			<tr>
+				<td>日付</td>
+				<td>
+					<input type="text" v-model="ent.animal_date" v-on:change="valid_animal_date(ent.animal_date)" />
+					<div class="text-danger">{{valids.animal_date}}</div>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>カナ</td>
+				<td>
+					<input type="text" v-model="ent.animal_kana" v-on:change="valid_animal_kana(ent.animal_kana)" />
+					<div class="text-danger">{{valids.animal_kana}}</div>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>ひらがな</td>
+				<td>
+					<input type="text" v-model="ent.animal_hira" v-on:change="valid_animal_hira(ent.animal_hira)" />
+					<div class="text-danger">{{valids.animal_hira}}</div>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>メールアドレス</td>
+				<td>
+					<input type="text" v-model="ent.animal_mail" v-on:change="valid_animal_mail(ent.animal_mail)" />
+					<div class="text-danger">{{valids.animal_mail}}</div>
+				</td>
+				<td>必須</td>
+			</tr>
+			<tr>
+				<td>電話番号</td>
+				<td>
+					<input type="text" v-model="ent.animal_tell" v-on:change="valid_animal_tell(ent.animal_tell)" />
+					<div class="text-danger">{{valids.animal_tell}}</div>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>郵便番号</td>
+				<td>
+					<input type="text" v-model="ent.animal_post" v-on:change="valid_animal_post(ent.animal_post)" />
+					<div class="text-danger">{{valids.animal_post}}</div>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>パスワード</td>
+				<td>
+					<input type="text" v-model="ent.animal_password" v-on:change="valid_animal_password(ent.animal_password)" />
+					<div class="text-danger">{{valids.animal_password}}</div>
+				</td>
+				<td>8文字以上の半角英数字（アルファベットと数値を必ず一つ以上入力すること）</td>
+			</tr>
+			<tr>
+				<td>コード</td>
+				<td>
+					<input type="text" v-model="ent.animal_code" v-on:change="valid_animal_code(ent.animal_code)" />
+					<div class="text-danger">{{valids.animal_code}}</div>
+				</td>
+				<td></td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+
+
+
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>vue.jsのバリデーション</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2020-3-12</div>
+</body>
+</html>
