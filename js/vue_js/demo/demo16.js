@@ -24,14 +24,23 @@ class AnimalClass{
 		
 		let methods = this._getValidMethods(); // バリデーションメソッドリスト
 		
+		// ボタンクリックイベントを追加
+		methods['clickBtn1'] = ()=>{
+				this.clickBtn1();
+		};
+		
 		this.app = new Vue({
 				el: '#app1',
 				data: {
 					ent:ent,
 					valids:valids,
+					err_msg:'',
 				},
 				methods:methods,
 			});
+		
+		this._validationAll(); // エンティティ内の全フィールドを一括バリデーション
+
 	}
 	
 	
@@ -51,10 +60,11 @@ class AnimalClass{
 	 * バリデーションメソッドリスト
 	 */
 	_getValidMethods(){
-		let filters = {
+		let methods = {
 				valid_animal_name:(value)=>{
 					
 					// 必須入力＆文字数制限
+					let err = '';
 					if(value == null || value == ''){
 						err = '必須入力です。';
 					}else{
@@ -156,9 +166,46 @@ class AnimalClass{
 					this.app.valids.animal_code = err;
 				},
 		}
-		return filters;
+		return methods;
 	}
 	
+	
+	/**
+	 * ボタンクリックイベント
+	 * @note
+	 * まとめてバリデーションを行い、一つのエラーメッセージにまとめて表示する。
+	 */
+	clickBtn1(){
+		let err_msg = ''; // エラーメッセージ
+		
+		this._validationAll(); // エンティティ内の全フィールドを一括バリデーション
+		
+		let valids = this.app.valids;
+		for(let i in valids){
+			let err = valids[i];
+			if(err == '' || err == null) continue;
+			err_msg +=err + '<br>';
+		}
+		
+		this.app.err_msg = err_msg; // エラーメッセージ表示
+	}
+	
+	/**
+	 * エンティティ内の全フィールドを一括バリデーション
+	 */
+	_validationAll(){
+		let methods = this._getValidMethods();
+		let ent = this.app.ent;
+		
+		for(let field in ent){
+
+			let key = 'valid_' + field;
+			let validFunction = methods[key];
+			if(validFunction == null) continue;
+			let value = ent[field];
+			validFunction(value);
+		}
+	}
 	
 
 
