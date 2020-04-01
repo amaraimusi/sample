@@ -61,7 +61,7 @@ class AppModel extends Model {
  *
  * @package       Cake.Test.Case.Model
  */
-class Test extends CakeTestModel {
+class $sql extends CakeTestModel {
 
 /**
  * useTable property
