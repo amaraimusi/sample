@@ -46,6 +46,11 @@ if(!empty($_POST)){
 	foreach($fps as $fp){
 		echo "<div style='display:inline-block;padding:5px;'><img src='{$fp}?t={$t}' style='width:32px;height:32px;' /> </div>";
 	}
+// 	echo '<hr>';
+// 	foreach($fps as $fp){
+// 		echo "<div style='display:inline-block;padding:5px;'><img src='{$fp}?t={$t}'  /> </div>";
+// 	}
+	
 	
 }
 
@@ -69,6 +74,14 @@ function makeIcon($icon_text, $index, $back_color, $text_color){
 	imagefill ($img ,0 , 0 ,  $back_color2 ); // 背景色で塗りつぶす
 	
 	$img_fp = "icon{$index}.png"; // 合成結果画像ファイルパス
+	
+// 	// ルートパスを取得する
+// 	$root = $_SERVER['DOCUMENT_ROOT'];
+// 	$root_last_str =  mb_substr($root, -1);
+// 	if($root_last_str == '/' || $root_last_str == '\\'){
+// 		$root = mb_substr($root,0,mb_strlen($root)-1);
+// 	}
+	
 	$fontfile = "ipaexm.ttf"; // 文字列フォントの指定
 	
 	// Windows環境用の文字列フォント設定
@@ -111,6 +124,18 @@ function textOverlay($img, $main_w, $main_h, $size, $angle, $fontfile, $text, $c
 	$text_h = abs($info[1] - $info[5]);
 	$x = ($main_w - $text_w) * 0.5 - $info[0];
 	$y = ($main_h - $text_h) * 0.6  - $info[5] + $info[1];
+	
+// 	$cnt = mb_strlen ($text);
+// 	$b_cnt = mb_strwidth($text);
+// 	$text_w = $b_cnt * $size / 2;
+// 	$a_w = 6 * $cnt; // 調整値
+	
+// 	$text_h = $size;
+// 	$a_h = 6;
+	
+// 	$x = ($main_w - $text_w) * 0.5 - $a_w;
+// 	$y = ($main_h - $text_h) * 0.6 + $size + $a_h;
+	
 	imagettftext($img, $size, $angle, $x, $y, $color, $fontfile, $text); // 文字列を画像に重ねて合成
 }
 
@@ -121,6 +146,18 @@ function numTextOverlay($img, $main_w, $main_h, $size, $angle, $fontfile, $text,
 	$text_h = abs($info[1] - $info[5]);
 	$x = ($main_w - $text_w) * 0.5 - $info[0];
 	$y = ($main_h - $text_h) * 0.2  - $info[5] + $info[1];
+
+// 	$cnt = mb_strlen ($text);
+// 	$b_cnt = mb_strwidth($text);
+// 	$text_w = $b_cnt * $size / 2;
+// 	$a_w = 6 * $cnt; // 調整値
+	
+// 	$text_h = $size;
+// 	$a_h = 0;
+	
+// 	$x = ($main_w - $text_w) * 0.5 - $a_w;
+// 	$y = ($main_h - $text_h) * 0.2 + $size + $a_h;
+	
 	imagettftext($img, $size, $angle, $x, $y, $color, $fontfile, $text); // 文字列を画像に重ねて合成
 }
 
