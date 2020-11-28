@@ -102,7 +102,11 @@ function makeIcon($icon_text, $index, $back_color, $text_color){
 	return $img_fp;
 }
 
-
+/**
+ * カラーコードからRGB値に変換
+ * @param string $color_code カラーコード (例:##da4f42)
+ * @return number[] RGB値
+ */
 function colorcodeToRGB($color_code){
 
 	$color_code = preg_replace("/#/", "", $color_code);
