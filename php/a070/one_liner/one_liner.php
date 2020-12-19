@@ -18,26 +18,49 @@
 <div class="container">
 
 
-<h2>Demo</h2>
+<h2>初期値をセットする際の1行簡易記述</h2>
+<pre><code>
+&lt;?php 
+$data = ['neko'=&gt;'猫'];
+$neko = $data['neko'] ?? '犬';
+$dog = $data['dog'] ?? '犬';
+echo $neko;
+echo $dog;
+?&gt;
+</code></pre>
 <?php 
-
 $data = ['neko'=>'猫'];
 $neko = $data['neko'] ?? '犬';
 $dog = $data['dog'] ?? '犬';
 echo $neko;
 echo $dog;
-
-echo '<br>-------フラグ変換-------<br>';
-$list = [1,99,'あ',true,0,'',null];
-$flg = 0;
-$flg = !!$flg;
-echo $flg;
-
 ?>
-
-
+<hr>
+<h2>falseかtrueのフラグ値に変換するテクニック</h2>
+<pre><code>
+&lt;?php 
+$list = [1, 99, 0.1, 'あ', '赤犬', true, 0, '', null, false];
+foreach($list as $val){
+	$flg = <strong>!!$val</strong>; // falseかtrueのフラグ値に変換する
+	if($flg === false) $flg = 'false';
+	if($flg === true) $flg = 'true';
+	echo "&lt;tr&gt;&lt;td&gt;{$val}&lt;/td&gt;&lt;td&gt;{$flg}&lt;/td&gt;&lt;/tr&gt;";
+}
+?&gt;
+</code></pre>
+<table class="tbl2"><tbody>
 <?php 
+$list = [1, 99, 0.1, 'あ', '赤犬', true, 0, '', null, false];
+foreach($list as $val){
+	$flg = !!$val;
+	if($flg === false) $flg = 'false';
+	if($flg === true) $flg = 'true';
+	echo "<tr><td>{$val}</td><td>{$flg}</td></tr>";
+}
 ?>
+</tbody></table>
+
+
 
 
 <div class="yohaku"></div>
