@@ -49,11 +49,10 @@
 </form>
 <div id="err" class="text-danger"></div>
 <hr>
-<?php 
 
+<div><img id="img_main" src="" style="width:32px;height:32px" /></div>
+<div><img id="img_orig" src=""  /></div>
 
-
-?>
 </div><!-- #vueApp -->
 
 

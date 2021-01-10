@@ -16,13 +16,16 @@ class MakeIcon{
     public function make($param){
         debug('xxx');//■■■□□□■■■□□□)
         
+        $corp_text = $param['corp_text']; // 法人名
+        $group_text = $param['group_text']; // グループ名
+        
+        $back_color = $param['back_color'];
+        $text_color = $param['text_color'];
+        
         $img_w = $param['img_w'];
         $img_h = $param['img_h'];
         $font_size = $param['font_size']; // 文字列のサイズ
         $angle = 0; // 文字列の角度
-        
-        $back_color = $param['back_color'];
-        $text_color = $param['text_color'];
 
         $img =$this->imagecreatetruecolor($img_w, $img_h);
 
@@ -51,7 +54,7 @@ class MakeIcon{
         }
         
         // テキストを重ねる
-        $this->textOverlay($img, $img_w, $img_h, $font_size, $angle, $fontfile, $icon_text, $text_color2 );
+        $this->textOverlay($img, $img_w, $img_h, $font_size, $angle, $fontfile, $group_text, $text_color2 );
         
 //         // 数値テキストを重ねる
 //         $num_text = $index;
@@ -61,19 +64,20 @@ class MakeIcon{
         imagepng($img, $img_fp); // png形式で画像を出力
         
         
-//         $icon_text = $_POST['icon_text'];
+//         $group_text = $_POST['icon_text'];
 //         $back_color= $_POST['back_color'];
 //         $text_color = $_POST['text_color'];
         
 //         $fps = [];
 //         for($i=1;$i<13;$i++){
-//             $fps[] = makeIcon($icon_text, $i, $back_color, $text_color);
+//             $fps[] = makeIcon($group_text, $i, $back_color, $text_color);
 //         }
         
 //         $t = time();
 //         foreach($fps as $fp){
 //             echo "<div style='display:inline-block;padding:5px;'><img src='{$fp}?t={$t}' style='width:32px;height:32px;' /> </div>";
 //         }
+        $param['img_fp'] = $img_fp;
 
         return $param;
         
@@ -81,7 +85,7 @@ class MakeIcon{
     
     
     // ■■■□□□■■■□□□あとで削除
-    function makeIcon2($icon_text, $index, $back_color, $text_color){
+    function makeIcon2($group_text, $index, $back_color, $text_color){
         $img_w = 120;
         $img_h = 120;
         $font_size = 34; // 文字列のサイズ
@@ -117,7 +121,7 @@ class MakeIcon{
         }
         
         // テキストを重ねる
-        textOverlay($img, $img_w, $img_h, $font_size, $angle, $fontfile, $icon_text, $text_color2 );
+        textOverlay($img, $img_w, $img_h, $font_size, $angle, $fontfile, $group_text, $text_color2 );
         
         // 数値テキストを重ねる
         $num_text = $index;

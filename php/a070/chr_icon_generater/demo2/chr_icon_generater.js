@@ -97,6 +97,7 @@ class ChrIconGenerater{
 			try{
 				console.log('A2');//■■■□□□■■■□□□)
 				res =jQuery.parseJSON(res_json);//パース
+				this._setIconImg(res.img_fp);
 			}catch(e){
 				this._showErr(res_json);
 				console.log('A3');//■■■□□□■■■□□□)
@@ -112,6 +113,18 @@ class ChrIconGenerater{
 		});
 	}
 
+	/**
+	* 画像要素に画像パスをセットする
+	 */
+	_setIconImg(img_fp){
+		let u = Math.floor($.now() / 1000);
+		let img_fp2 = img_fp + '?' + u;
+		if (!this.imgMain) this.imgMain = jQuery('#img_main');
+		if (!this.imgOrig) this.imgMain = jQuery('#img_orig');
+		this.imgMain.attr('src', img_fp2);
+		this.imgOrig.attr('src', img_fp2);
+		
+	}
 	
 	/**
 	 * エラーを表示
