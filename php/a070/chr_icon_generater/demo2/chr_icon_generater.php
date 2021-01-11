@@ -16,6 +16,12 @@
 	
 	<script src="chr_icon_generater.js"></script>
 	<script src="script.js"></script>
+	
+	<style>
+	   #inps_tbl td{
+	       padding-left:10px;
+	   }
+	</style>
 
 </head>
 <body>
@@ -32,30 +38,55 @@
 		<input type="text"  v-model="param.img_w" maxlength="3" style="width:60px">×
 		<input type="text"  v-model="param.img_h" maxlength="3" style="width:60px">
 	</div>
-	<div>
-		フォントサイズ:
-		<input type="text"  v-model="param.font_size" maxlength="3" style="width:60px">
-	</div>
 	<input type="button" value="閉じる" class="btn btn-private btn-sm" onclick="jQuery('#config_div').toggle(300);"/>
+	<button type="button" v-on:click="defaultParam" class="btn btn-default btn-xs">入力を初期に戻す</button>
 </div>
 <form action="#" method="post">
-	<table><tbody>
-		<tr><td>略称・法人名</td><td><input type="text"  v-model="param.corp_text" maxlength="3" style="width:60px">(日本語は2文字まで、アルファベットは3文字まで)</td></tr>
-		<tr><td>略称・グループ</td><td><input type="text" v-model="param.group_text"  maxlength="3" style="width:60px">(日本語は2文字、アルファベットは3文字まで)</td></tr>
-		<tr><td>背景色</td><td><input type="color" v-model="param.back_color" ></td></tr>
-		<tr><td>文字色</td><td><input type="color" v-model="param.text_color" ></td></tr>
-		<tr><td></td><td><button type="button" v-on:click="makeIcon" class="btn btn-success">アイコン作成</button></td></tr>
+	<table id="inps_tbl"><tbody>
+		<tr>
+			<td>
+				略称・法人名
+				<input type="text"  v-model="param.corp_text" maxlength="3" style="width:60px" title="全角2文字＋半角1文字まで">
+			</td>
+			<td>
+				背景色
+				<input type="color" v-model="param.corp_backcolor" >
+				<input type="text" v-model="param.corp_backcolor" style="width:90px" >
+			</td>
+			<td>
+				文字色
+				<input type="color" v-model="param.corp_fontcolor" >
+				<input type="text" v-model="param.corp_fontcolor" style="width:90px" >
+			</td>
+		</tr>
+		<tr>
+			<td>
+				略称・グループ名
+				<input type="text" v-model="param.group_text"  maxlength="3" style="width:60px">
+			</td>
+			<td>
+				背景色
+				<input type="color" v-model="param.group_backcolor" >
+				<input type="text" v-model="param.group_backcolor" style="width:90px" >
+			</td>
+			<td>
+				文字色
+				<input type="color" v-model="param.group_fontcolor" >
+				<input type="text" v-model="param.group_fontcolor" style="width:90px" >
+			</td>
+		</tr>
 	</tbody></table>
+	<div>
+		<button type="button" v-on:click="makeIcon" class="btn btn-success">アイコン作成</button>
+	</div>
 </form>
 <div id="err" class="text-danger"></div>
 <hr>
 
-<div><img id="img_main" src="" style="width:32px;height:32px" /></div>
-<div><img id="img_orig" src=""  /></div>
+<div style="margin-bottom:20px"><img id="img_main" src="icon.png" style="width:32px;height:32px" /></div>
+<div><img id="img_orig" src="icon.png"  /></div>
 
 </div><!-- #vueApp -->
-
-
 
 <div class="yohaku"></div>
 <ol class="breadcrumb">

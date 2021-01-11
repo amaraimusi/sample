@@ -15,6 +15,9 @@ class ChrIconGenerater{
 	 */
 	init(param){
 		
+		
+		this.version = '0.9.0';
+		
 		param = this._setParamIfEmpty(param);
 		
 		// ローカルストレージからパラメータを上書きセットする。
@@ -29,11 +32,40 @@ class ChrIconGenerater{
 
 			methods: {
 				makeIcon: this.makeIcon.bind(this),
-					
+				defaultParam: this.defaultParam.bind(this),
 			}
 		})
 		
 	}
+	
+	
+	/** デフォルトパラメータを取得する
+	 */
+	_getDefParam(){
+		
+		let param = {};
+		
+		param['corp_text'] = '東京'; // 法人名
+		param['corp_backcolor'] = '#2b4d58'; // 法人名・背景色
+		param['corp_fontcolor'] = '#ffffff'; // 法人名・文字色
+		param['corp_fontsize'] = '26'; // 法人名・文字サイズ
+		param['group_text'] = '在宅'; // グループ名
+		param['group_backcolor'] = '#613e38'; // グループ名・背景色
+		param['group_fontcolor'] = '#ffffff'; // グループ名・文字色
+		param['group_fontsize'] = 36; // 法人名・文字サイズ
+		param['img_w'] = 128; // 画像の横幅
+		param['img_h'] = 128; // 画像の縦幅
+		param['font_size'] = '34'; // 
+		param['rect1_w_rate'] = '95'; // グループ名矩形・横幅率
+		param['rect1_h_rate'] = '70'; // グループ名矩形・縦幅率
+		param['rect1_top_rate'] = '33'; // グループ名矩形・上位置率
+		param['ellipse1_top_rate'] = '7'; // 法人名楕円・縦位置率
+		param['ellipse1_w_rate'] = '95'; // 法人名楕円・横幅率
+		param['ellipse1_h_rate'] = '45'; // 法人名楕円・縦幅率
+		
+		return param;
+	}
+	
 
 
 	
@@ -43,21 +75,94 @@ class ChrIconGenerater{
 	_setParamIfEmpty(param){
 		
 		if(param == null) param = {};
-
-		if(param['corp_text'] == null) param['corp_text'] = '東京';
-		if(param['group_text'] == null) param['group_text'] = '在宅';
-		if(param['text_color'] == null) param['text_color'] = '#ffffff';
-		if(param['back_color'] == null) param['back_color'] = '#2aa748';
 		
+		let defs = this._getDefParam();
 		
-		if(param['img_w'] == null) param['img_w'] = 128;
-		if(param['img_h'] == null) param['img_h'] = 128;
-		if(param['font_size'] == null) param['font_size'] = 34;
+		for(let key in defs){
+			if(param[key] == null) param[key] = defs[key];
+		}
 		
+		param = this._calcRect1Position(param); // グループ名矩形・位置計算
+		param = this._calcEllipse1Position(param); // 法人名楕円・位置計算
 		
-
 		return param;
 	}
+	
+	
+	
+	
+	/** 法人名楕円・位置計算
+	 * @param {} param
+	 * @return {} param
+	 */
+	_calcEllipse1Position(param){
+		
+		let img_w = param.img_w; // 画像横幅
+		let img_h = param.img_h; // 画像縦幅
+		let ellipse1_top_rate = param.ellipse1_top_rate; // 法人名楕円・縦位置率
+		let ellipse1_w_rate = param.ellipse1_w_rate; // 法人名楕円・横幅率
+		let ellipse1_h_rate = param.ellipse1_h_rate; // 法人名楕円・縦幅率
+		
+		let ellipse1_w = img_w * ellipse1_w_rate * 0.01;
+		let ellipse1_h = img_h * ellipse1_h_rate * 0.01;
+		let ellipse1_cx = img_w / 2;
+		let ellipse1_cy = (img_h * ellipse1_top_rate * 0.01) + (ellipse1_h / 2);
+		
+		ellipse1_w = Math.round(ellipse1_w);
+		ellipse1_h = Math.round(ellipse1_h);
+		ellipse1_cx = Math.round(ellipse1_cx);
+		ellipse1_cy = Math.round(ellipse1_cy);
+		
+		param['ellipse1_w'] = ellipse1_w;
+		param['ellipse1_h'] = ellipse1_h;
+		param['ellipse1_cx'] = ellipse1_cx;
+		param['ellipse1_cy'] = ellipse1_cy;
+		
+		return param;
+		
+	}
+	
+	/**
+	 * グループ名矩形・位置計算
+	 * @param {} param
+	 * @return {} param
+	*/
+	_calcRect1Position(param){
+		
+		let img_w = param.img_w; // 画像横幅
+		let img_h = param.img_h; // 画像縦幅
+		let rect1_w_rate = param.rect1_w_rate; // グループ名矩形・横幅率
+		let rect1_h_rate = param.rect1_h_rate; // グループ名矩形・縦幅率
+		let rect1_top_rate = param.rect1_top_rate; // グループ名矩形・上位置率
+		
+		let rect1_w = img_w * rect1_w_rate * 0.01; // 矩形の横幅
+		let rect1_h = img_h * rect1_h_rate * 0.01; // 矩形の縦幅
+		
+		// 四隅の位置を算出する。
+		let rect1_x1 = (img_w - rect1_w) * 0.5;
+		let rect1_x2 = rect1_x1 + rect1_w;
+		let rect1_y1 = img_h * rect1_top_rate * 0.01;
+		let rect1_y2 = rect1_h + rect1_y1;
+		
+		
+		rect1_w = Math.round(rect1_w);
+		rect1_h = Math.round(rect1_h);
+		rect1_x1 = Math.round(rect1_x1);
+		rect1_y1 = Math.round(rect1_y1);
+		rect1_x2 = Math.round(rect1_x2);
+		rect1_y2 = Math.round(rect1_y2);
+		
+		param['rect1_w'] = rect1_w;
+		param['rect1_h'] = rect1_h;
+		param['rect1_x1'] = rect1_x1;
+		param['rect1_y1'] = rect1_y1;
+		param['rect1_x2'] = rect1_x2;
+		param['rect1_y2'] = rect1_y2;
+		
+		return param;
+	}
+	
+	
 	
 	/**
 	 * ローカルストレージから取得したパラメータをマージする。
@@ -79,31 +184,32 @@ class ChrIconGenerater{
 	makeIcon(){
 		
 		let param = this.vueApp.param;
+		param = this._escapeForAjax(param);
 		let send_json = JSON.stringify(param);//データをJSON文字列にする。
+		
+		let fd = new FormData();
+		fd.append( "key1", send_json );
 
 		// AJAX
 		jQuery.ajax({
-			type: "post",
+			type: "POST",
 			url: "make_icon_action.php",
-			data: "key1=" + send_json,
+			data: fd,
 			cache: false,
 			dataType: "text",
 			processData: false,
 			contentType : false,
 		})
-		.done((res_json, type) => {
-			console.log('A1-2');//■■■□□□■■■□□□)
-			var res;
+		.done((param_json, type) => {
+			let param;
 			try{
-				console.log('A2');//■■■□□□■■■□□□)
-				res =jQuery.parseJSON(res_json);//パース
-				this._setIconImg(res.img_fp);
+				param =jQuery.parseJSON(param_json);//パース
+				this._setIconImg(param.img_fp);
+				this._saveParam(param); // パラメータをローカルストレージに保存
 			}catch(e){
-				this._showErr(res_json);
-				console.log('A3');//■■■□□□■■■□□□)
+				this._showErr(param_json);
 				return;
 			}
-			console.log(res);
 		})
 		.fail((jqXHR, statusText, errorThrown) => {
 			this._showErr('アクセスエラー');
@@ -111,6 +217,30 @@ class ChrIconGenerater{
 			
 			alert(statusText);
 		});
+	}
+	
+	/**
+	 * Ajax送信データ用エスケープ。実体参照（&lt; &gt; &amp; &）を記号に戻す。
+	 * 
+	 * @param any data エスケープ対象 :文字列、オブジェクト、配列を指定可
+	 * @returns エスケープ後
+	 */
+	_escapeForAjax(data){
+		if (typeof data == 'string'){
+			if ( data.indexOf('&') != -1) {
+				data = data.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+				return encodeURIComponent(data);
+			}else{
+				return data;
+			}
+		}else if (typeof data == 'object'){
+			for(var i in data){
+				data[i] = this._escapeForAjax(data[i]);
+			}
+			return data;
+		}else{
+			return data;
+		}
 	}
 
 	/**
@@ -120,7 +250,7 @@ class ChrIconGenerater{
 		let u = Math.floor($.now() / 1000);
 		let img_fp2 = img_fp + '?' + u;
 		if (!this.imgMain) this.imgMain = jQuery('#img_main');
-		if (!this.imgOrig) this.imgMain = jQuery('#img_orig');
+		if (!this.imgOrig) this.imgOrig = jQuery('#img_orig');
 		this.imgMain.attr('src', img_fp2);
 		this.imgOrig.attr('src', img_fp2);
 		
@@ -139,61 +269,6 @@ class ChrIconGenerater{
 	}
 	
 	
-	///■■■□□□■■■□□□以下未使用
-	/**
-	 * プロパティ値を取得する
-	 * @param string key プロパティのキー
-	 * @param mixed init_value 初期値
-	 * @param object param
-	 * @param object lsParam ローカルストレージから取得したパラメータ
-	 * @return プロパティ値
-	 */
-	_getProperty(key, init_value, param, lsParam){
-
-		// ローカルストレージ、引数、デフォルトを優先順にプロパティ値を取得する。
-		let prop_v = null; // プロパティ値
-		if(lsParam[key] != null){
-			prop_v = lsParam[key];
-		}else if(param[key] != null){
-			prop_v = param[key];
-		}else{
-			prop_v = init_value;
-		}
-		return prop_v;
-	}
-	
-	
-	/**
-	 * ローカルストレージパラメータを取得する
-	 */
-	_getLsParam(){
-		
-		let ls_key = this._getLsKey(); // ローカルストレージキーを取得する
-		let param_json = localStorage.getItem(ls_key);
-		let lsParam = JSON.parse(param_json);
-		if(lsParam == null) lsParam = {};
-		return lsParam;
-		
-	}
-	
-	/**
-	 * ローカルストレージで保存しているパラメータをクリアする
-	 */
-	clearlocalStorage(){
-		let ls_key = this._getLsKey(); // ローカルストレージキーを取得する
-		localStorage.removeItem(ls_key);
-	}
-	
-	
-	/**
-	 * ローカルストレージにプロパティを保存
-	 */
-	_saveLsProp(key, val){
-		this.lsParam[key] = val;
-		let ls_key = this._getLsKey(); // ローカルストレージキーを取得する
-		var param_json = JSON.stringify(this.lsParam);
-		localStorage.setItem(ls_key, param_json);
-	}
 	
 	
 	/**
@@ -204,10 +279,34 @@ class ChrIconGenerater{
 		let ls_key = location.href; // 現在ページのURLを取得
 		ls_key = ls_key.split(/[?#]/)[0]; // クエリ部分を除去
 		ls_key += '_ChrIconGenerater';
+		ls_key += this.version;
 		return ls_key;
 	}
 	
+	// パラメータをローカルストレージに保存する
+	_saveParam(param){
+		let ls_key = this._getLsKey(); // ローカルストレージキーを取得する
+		let json_str = JSON.stringify(param);//データをJSON文字列にする。
+		localStorage.setItem(ls_key, json_str);
+		
+	}
 	
+	
+	/** 入力を初期状態に戻す
+	 */
+	defaultParam(){
+		let param = this.vueApp.param;
+		let defs = this._getDefParam();
+		
+		for(let key in defs){
+			param[key] = defs[key];
+		}
+
+		param = this._calcRect1Position(param); // グループ名矩形・位置計算
+		param = this._calcEllipse1Position(param); // 法人名楕円・位置計算
+		
+		this._saveParam(param);
+	}
 
 	
 	// Check empty.
