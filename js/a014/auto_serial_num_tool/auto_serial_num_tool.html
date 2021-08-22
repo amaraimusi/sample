@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>自動連番ツール</title>
+
+	<link href="/note_prg/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+	<script src="/note_prg/js/jquery-1.11.1.min.js"></script>
+	<script src="/note_prg/js/jquery-ui.min.js"></script>
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="auto_serial_num_tool.js"></script>
+
+</head>
+<body>
+<div class="container">
+
+
+	<div class="row">
+		<div id="header" class="col-lg-12" >
+			<h1>自動連番ツール</h1>
+			<p></p>
+		</div>
+	</div>
+
+	<div class="sec3">
+
+		<div>開始値: <input type="number" id="start_num" value="1"  /></div>
+		<div>step:　  <input type="number" id="step" value="1"  /></div>
+		<div>終了値: <input type="number" id="end_num" value="9"  /></div>
+		
+		<textarea id="hina" class="form-control" rows="6" placeholder="ひな形を入力してください" title="ひな形を入力してください。変値は「%+列番」">&lt;div id="animal%0"&gt;&#13;&#x0009;&lt;span&gt;%0&lt;/span&gt;&#13;&#x0009;&lt;span&gt;%0&lt;/span&gt;&#13;&lt;/div&gt;</textarea>
+
+		<br>
+		<input type="button" value="コード作成" onclick="execution1()" class="btn btn-primary" />
+		<pre id="res" style="margin:20px;"></pre>
+		
+		
+
+	</div>
+
+
+	<div class="row">
+		<div id="footer" class="col-md-12"  >
+			<p>(c)wacgance 2021-08-22</p>
+		</div>
+	</div>
+
+</div><!-- container  -->
+</body>
+</html>
