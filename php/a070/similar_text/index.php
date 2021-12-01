@@ -38,6 +38,9 @@
 </table>
 <hr>
 
+<a href="https://github.com/amaraimusi/sample/blob/master/php/a070/similar_text/index.php" class="btn btn-info">ソースコード Git Hub</a><br>
+<br>
+
 <h3>検証</h3>
 <?php 
 $texts = [];
