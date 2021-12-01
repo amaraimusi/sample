@@ -38,7 +38,7 @@
 </table>
 <hr>
 
-<a href="https://github.com/amaraimusi/sample/blob/master/php/a070/similar_text/index.php" class="btn btn-info">ソースコード Git Hub</a><br>
+<a href="https://github.com/amaraimusi/sample/blob/master/php/a070/similar_text/index.php" class="btn btn-info" target="_blank">Git Hub</a>
 <br>
 
 <h3>検証</h3>
@@ -127,43 +127,16 @@ foreach($texts as $i=> $text){
 
     $data = [];
     
-//     $hashs = getHashtags($text);
-//     var_dump($hashs);//■■■□□□■■■□□□($hashs);//■■■□□□■■■□□□)
-    
-    
-//     $text_hashs_str = $text;
-//     if(!empty($hashs)){
-//         $text_hashs_str = implode(',', $hashs);
-//     }
-    
     foreach($items as  $item){
        
         $score = calcScore($text, $item);
-//         $item_hashs = getHashtags($item);
-//         $item_hashs_str = $item;
-//         if(!empty($item_hashs)){
-//             $item_hashs_str = implode(',', $item_hashs);
-//         }
-        
-        
-//         $cnt = mb_substr_count("これはてすとです。", "す"); // 一致数
-        
-//         $percent=null;
-//         //similar_text($text, $item, $percent);//一致率ポインタを渡す。
-//         similar_text($text_hashs_str, $item_hashs_str, $percent);//一致率ポインタを渡す。
-//         //$percent = levenshtein($text, $item);
-       
+
         $ent = [
             'item' => $item,
             'score' => $score,
         ];
         
         $data[] = $ent;
-//         echo "<div>{$percent}</div>";
-//         if($max_per < $percent){
-//             $max_per = $percent;
-//             $recmend_index = $item_index;
-//         }
 
     }
     $data2 = sortByKey('score', SORT_DESC, $data);
@@ -229,13 +202,7 @@ function calcScore($text, $item){
             }
         }
     }
-    
-//     foreach($itemHashA as $i_hash){
-//         $cnt = mb_substr_count($text, $i_hash); // 一致数
-//         $score0 = $cnt * 6;
-//         $score += $score0;
-//     }
-    
+
     return $score;
 }
 
