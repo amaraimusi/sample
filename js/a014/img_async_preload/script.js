@@ -20,8 +20,7 @@ $(()=>{
 	let url = 'https://amaraimusi.sakura.ne.jp/photos/halther/y2019/m03/orig/20190324184033_15534203777882106212973.jpg?v=' + u;
 	img.src = url;
 	
-					
-	
+
 });
 
 
