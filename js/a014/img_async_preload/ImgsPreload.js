@@ -1,9 +1,9 @@
 /**
  * 複数画像をプリロード
+ * @note すべての画像を読み込んだらコールバックを実行（読込エラーであってもコールバックは実行）
  * @since 2022-1-10
  * @version 1.0.0
  * @auther amaraimusi
- * 
  * 
  */
 class ImgsPreload{
