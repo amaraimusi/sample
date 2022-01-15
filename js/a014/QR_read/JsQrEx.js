@@ -1,7 +1,7 @@
 
 /*
 * jsQR.jsのラッパークラス
-* @note QRコードをシンプルに利用するためのクラス。
+* @note QRコードをシンプルに利用するためのクラス。jsQR.jsに依存。
 * @auther amaraimusi
 * @version 1.0.0
 * @since 2022-1-15
