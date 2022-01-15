@@ -13,8 +13,9 @@
 	<script src="/note_prg/js/jquery.min.js"></script>	
 	<script src="/note_prg/js/bootstrap.min.js"></script>
 	
-	
-	<script src="script.js"></script>
+	<script src="./dist/jsQR.js"></script>
+	<script src="JsQrEx.js"></script>
+	<script src="script.js?v=1.0.1"></script>
 
 </head>
 <body>
@@ -22,7 +23,13 @@
 <div class="container">
 
 
-<h2>Demo</h2>
+<h2>Demo</h2>  
+take3
+<canvas id="qr_canvas"></canvas>
+<div id="res" class="text-success"></div>
+
+<input type="button" value="スタート" onclick="start()" class="btn btn-primary"/>
+<input type="button" value="停止" onclick="stop()"  class="btn btn-warning" />
 
 
 
