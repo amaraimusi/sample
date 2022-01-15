@@ -1,7 +1,6 @@
 let jsQrEx;
 $(()=>{
 	jsQrEx = new JsQrEx('qr_canvas', callback);
-	
 });
 
 function callback(value){
