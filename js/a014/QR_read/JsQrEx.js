@@ -1,13 +1,33 @@
 
-
+/*
+* jsQR.jsのラッパークラス
+* @note QRコードをシンプルに利用するためのクラス。
+* @auther amaraimusi
+* @version 1.0.0
+* @since 2022-1-15
+* 
+*/
 class JsQrEx{
 
+	/*
+	* コンストラクタ
+	* @param string canvas_xid canvasタグ要素のid属性値
+	* @param function readCallback QRコードの読込成功時に呼び出されるコールバック
+	* @param object param 下記のプロパティは省略可能
+	* 	- cvs_width int キャンバスの横幅
+	* 	- cvs_height int キャンバスの縦幅
+	* 	- camera_width int カメラの解像度　横
+	* 	- camera_height int カメラの解像度　縦
+	* 	- intarval int setTimerの再帰呼出間隔
+	* 	- errCallback function エラーコールバック←カメラ不許可時に呼び出される。
+	*/
 	constructor(canvas_xid,readCallback, param){
-		console.log('take5');//■■■□□□■■■□□□
+
 		this.active = false;
 		if(canvas_xid==null) new Error('Sytem error:canvas_xid is empty!');
 		if(param==null) param = {};
 		this.readCallback = readCallback;
+		if(typeof readCallback != 'function') throw new Error('System err:readCallback is not function');
 		
 		if(param['cvs_width'] == null) param['cvs_width'] = 640;
 		if(param['cvs_height'] == null) param['cvs_height'] = 480;
@@ -16,6 +36,12 @@ class JsQrEx{
 		if(param['intarval'] == null) param['intarval'] = 50; // ms
 		this.param = param;
 
+		// エラーコールバック
+		this.errCallback = null;
+		if(typeof param['errCallback'] == 'function'){
+			this.errCallback = param.errCallback;
+		}
+		
 		let video=document.createElement('video');
 		video.setAttribute("autoplay","");
 		video.setAttribute("muted","");
@@ -54,7 +80,14 @@ class JsQrEx{
 				//this.start();
 			}
 		).catch( //許可されなかった場合
-			(err)=>{qr.innerHTML=qr.innerHTML+err+'\n';}
+			(err)=>{
+				if(this.errCallback == null){
+					alert('カメラが不許可になっているのでQRコード読込カメラを起動できません。カメラを許可してください。');
+				}else{
+					this.errCallback(err);
+				}
+			}
+			
 		);
 	}
 	
