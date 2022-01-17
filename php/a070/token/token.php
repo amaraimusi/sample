@@ -27,7 +27,8 @@
 
 
 <h2>Demo</h2>
-トークン：
+ブラウザをリロードするたびにトークンを更新します。<br>
+８桁のトークン：
 <?php 
 
 echo makeToken();
@@ -45,18 +46,7 @@ function makeToken($length = 8)
 <br>
 
 <div class="yohaku"></div>
-<ol class="breadcrumb">
-	<li><a href="/">ホーム</a></li>
-	<li><a href="/note_prg">プログラミングの覚書</a></li>
-	<li><a href="/note_prg/js/">JavaScriptの覚書</a></li>
-	<li>テンプレート</li>
-</ol>
-<ol class="breadcrumb">
-	<li><a href="/">ホーム</a></li>
-	<li><a href="/sample">サンプルソースコード</a></li>
-	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
-	<li>テンプレート</li>
-</ol>
+
 </div><!-- content -->
 <div id="footer">(C) kenji uehara 2022-1-4</div>
 </body>
