@@ -2,9 +2,9 @@
 /**
  * 静的テーブルをページネーション化する。ページネーションはBootstrap4に対応
  * @since 2022-1-20
+ * @version 1.0.0
  * @license MIT
  * @auther amaraimusi
- * 
  */
 class StaticPaginationB4{
 	
