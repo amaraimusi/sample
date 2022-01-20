@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>静的テーブルのページネーション(Bootstrap4対応) | static_pagination_b4.js | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap-4.3.1-dist/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/bootstrap-4.3.1-dist/font/css/open-iconic.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap-4.3.1-dist/bootstrap.bundle.min.js"></script>
+	<script src="static_pagination_b4.js"></script>
+	<script src="script.js"></script>
+</head>
+<body>
+<div id="header" ><h1>静的テーブルのページネーション(Bootstrap4対応) | static_pagination_b4.js | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>Demo</h2>
+
+ 
+<table id="tbl1" class="table">
+	<thead>
+		<tr><th>No</th><th>分類</th><th>種別</th><th>名前</th><th>学名</th><th>レッドデータ</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>2</td><td>両生類</td><td>サンショウウオ</td><td>アカイシサンショウウオ</td><td>Hynobius katoi</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>3</td><td>両生類</td><td>サンショウウオ</td><td>ハクバサンショウウオ</td><td>Hynobius hidamontanus</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>4</td><td>両生類</td><td>サンショウウオ</td><td>ホクリクサンショウウオ</td><td>Hynobius takedai</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>5</td><td>両生類</td><td>サンショウウオ</td><td>オオイタサンショウウオ</td><td>Hynobius dunni</td><td>絶滅危惧II類</td></tr>
+		<tr><td>6</td><td>両生類</td><td>サンショウウオ</td><td>オオダイガハラサンショウウオ</td><td>Hynobius boulengeri</td><td>絶滅危惧II類</td></tr>
+		<tr><td>7</td><td>両生類</td><td>サンショウウオ</td><td>オキサンショウウオ</td><td>Hynobius okiensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>8</td><td>両生類</td><td>サンショウウオ</td><td>カスミサンショウウオ</td><td>Hynobius nebulosus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>9</td><td>両生類</td><td>サンショウウオ</td><td>トウキョウサンショウウオ</td><td>Hynobius tokyoensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>10</td><td>両生類</td><td>サンショウウオ</td><td>ベッコウサンショウウオ</td><td>Hynobius stejnegeri</td><td>絶滅危惧II類</td></tr>
+		<tr><td>11</td><td>両生類</td><td>サンショウウオ</td><td>キタサンショウウオ</td><td>Salamandrella keyserlingii</td><td>準絶滅危惧</td></tr>
+		<tr><td>12</td><td>両生類</td><td>サンショウウオ</td><td>イシヅチサンショウウオ</td><td>Hynobius hirosei</td><td>準絶滅危惧</td></tr>
+		<tr><td>13</td><td>両生類</td><td>サンショウウオ</td><td>クロサンショウウオ</td><td>Hynobius nigrescens</td><td>準絶滅危惧</td></tr>
+		<tr><td>14</td><td>両生類</td><td>サンショウウオ</td><td>コガタブチサンショウウオ</td><td>Hynobius yatsui</td><td>準絶滅危惧</td></tr>
+		<tr><td>15</td><td>両生類</td><td>サンショウウオ</td><td>ツシマサンショウウオ</td><td>Hynobius tsuensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>16</td><td>両生類</td><td>サンショウウオ</td><td>トウホクサンショウウオ</td><td>Hynobius lichenatus</td><td>準絶滅危惧</td></tr>
+		<tr><td>17</td><td>両生類</td><td>サンショウウオ</td><td>ヒダサンショウウオ</td><td>Hynobius kimurae</td><td>準絶滅危惧</td></tr>
+		<tr><td>18</td><td>両生類</td><td>サンショウウオ</td><td>ブチサンショウウオ</td><td>Hynobius naevius</td><td>準絶滅危惧</td></tr>
+		<tr><td>19</td><td>両生類</td><td>サンショウウオ</td><td>エゾサンショウウオ</td><td>Hynobius retardatus</td><td>情報不足</td></tr>
+		<tr><td>20</td><td>両生類</td><td>オオサンショウウオ</td><td>オオサンショウウオ</td><td>Andrias japonicus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>21</td><td>両生類</td><td>イモリ</td><td>イボイモリ</td><td>Echinotriton andersoni</td><td>絶滅危惧II類</td></tr>
+		<tr><td>22</td><td>両生類</td><td>イモリ</td><td>アカハライモリ</td><td>Cynops pyrrhogaster</td><td>準絶滅危惧</td></tr>
+		<tr><td>23</td><td>両生類</td><td>イモリ</td><td>シリケンイモリ</td><td>Cynops ensicauda</td><td>準絶滅危惧</td></tr>
+		<tr><td>24</td><td>両生類</td><td>ヒキガエル</td><td>ミヤコヒキガエル</td><td>Bufo gargarizans miyakonis</td><td>準絶滅危惧</td></tr>
+		<tr><td>25</td><td>両生類</td><td>アカガエル</td><td>アマミイシカワガエル</td><td>Odorrana splendida</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>26</td><td>両生類</td><td>アカガエル</td><td>オキナワイシカワガエル</td><td>Odorrana ishikawae</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>27</td><td>両生類</td><td>アカガエル</td><td>コガタハナサキガエル</td><td>Odorrana utsunomiyaorum</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>28</td><td>両生類</td><td>アカガエル</td><td>オットンガエル</td><td>Babina subaspera</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>29</td><td>両生類</td><td>アカガエル</td><td>ナゴヤダルマガエル</td><td>Rana porosa brevipoda</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>30</td><td>両生類</td><td>アカガエル</td><td>ナミエガエル</td><td>Limnonectes namiyei</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>31</td><td>両生類</td><td>アカガエル</td><td>ホルストガエル</td><td>Babina holsti</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>32</td><td>両生類</td><td>アカガエル</td><td>アマミハナサキガエル</td><td>Odorrana amamiensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>33</td><td>両生類</td><td>アカガエル</td><td>ハナサキガエル</td><td>Odorrana narina</td><td>絶滅危惧II類</td></tr>
+		<tr><td>34</td><td>両生類</td><td>アカガエル</td><td>ヤエヤマハラブチガエル</td><td>Rana okinavana</td><td>絶滅危惧II類</td></tr>
+		<tr><td>35</td><td>両生類</td><td>アカガエル</td><td>アマミアカガエル</td><td>Rana kobai</td><td>準絶滅危惧</td></tr>
+		<tr><td>36</td><td>両生類</td><td>アカガエル</td><td>オキタゴガエル</td><td>Rana tagoi okiensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>37</td><td>両生類</td><td>アカガエル</td><td>ヤクシマタゴガエル</td><td>Rana tagoi yakushimensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>38</td><td>両生類</td><td>アカガエル</td><td>トウキョウダルマガエル</td><td>Rana porosa porosa</td><td>準絶滅危惧</td></tr>
+		<tr><td>39</td><td>両生類</td><td>アカガエル</td><td>チョウセンヤマアカガエル</td><td>Rana dybowskii</td><td>準絶滅危惧</td></tr>
+		<tr><td>40</td><td>両生類</td><td>アカガエル</td><td>ツシマアカガエル</td><td>Rana tsushimensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>41</td><td>両生類</td><td>アカガエル</td><td>トノサマガエル</td><td>Rana nigromaculata</td><td>準絶滅危惧</td></tr>
+		<tr><td>42</td><td>両生類</td><td>アカガエル</td><td>リュウキュウアカガエル</td><td>Rana ulma</td><td>準絶滅危惧</td></tr>
+		<tr><td>43</td><td>爬虫類</td><td>ウミガメ</td><td>アカウミガメ</td><td>Caretta caretta</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>44</td><td>爬虫類</td><td>ウミガメ</td><td>タイマイ</td><td>Eretmochelys imbricata</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>45</td><td>爬虫類</td><td>ウミガメ</td><td>アオウミガメ</td><td>Chelonia mydas mydas</td><td>絶滅危惧II類</td></tr>
+		<tr><td>47</td><td>爬虫類</td><td>イシガメ</td><td>リュウキュウヤマガメ</td><td>Geoemyda japonica</td><td>絶滅危惧II類</td></tr>
+		<tr><td>46</td><td>爬虫類</td><td>イシガメ</td><td>ヤエヤマセマルハコガメ</td><td>Cuora flavomarginata evelynae</td><td>絶滅危惧II類</td></tr>
+		<tr><td>48</td><td>爬虫類</td><td>イシガメ</td><td>ニホンイシガメ</td><td>Mauremys japonica</td><td>準絶滅危惧</td></tr>
+		<tr><td>49</td><td>爬虫類</td><td>スッポン</td><td>ニホンスッポン</td><td>Pelodiscus sinensis</td><td>情報不足</td></tr>
+		<tr><td>50</td><td>爬虫類</td><td>トカゲモドキ</td><td>イヘヤトカゲモドキ</td><td>Goniurosaurus kuroiwae toyamai</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>51</td><td>爬虫類</td><td>トカゲモドキ</td><td>クメトカゲモドキ</td><td>Goniurosaurus kuroiwae yamashinae</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>52</td><td>爬虫類</td><td>トカゲモドキ</td><td>オビトカゲモドキ</td><td>Goniurosaurus kuroiwae splendens</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>53</td><td>爬虫類</td><td>トカゲモドキ</td><td>マダラトカゲモドキ</td><td>GGoniurosaurus kuroiwae orientalis</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>54</td><td>爬虫類</td><td>トカゲモドキ</td><td>クロイワトカゲモドキ</td><td>Goniurosaurus kuroiwae kuroiwae</td><td>絶滅危惧II類</td></tr>
+		<tr><td>55</td><td>爬虫類</td><td>ヤモリ</td><td>ミナミトリシマヤモリ</td><td>Perochirus ateles</td><td>絶滅危惧II類</td></tr>
+		<tr><td>56</td><td>爬虫類</td><td>ヤモリ</td><td>タシロヤモリ</td><td>Hemidactylus bowringii</td><td>絶滅危惧II類</td></tr>
+		<tr><td>57</td><td>爬虫類</td><td>ヤモリ</td><td>ヤクヤモリ</td><td>Gekko yakuensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>58</td><td>爬虫類</td><td>ヤモリ</td><td>オキナワヤモリ</td><td>Gekko sp. 1</td><td>準絶滅危惧</td></tr>
+		<tr><td>59</td><td>爬虫類</td><td>ヤモリ</td><td>タカラヤモリ</td><td>Gekko shibatai</td><td>準絶滅危惧</td></tr>
+		<tr><td>60</td><td>爬虫類</td><td>ヤモリ</td><td>タワヤモリ</td><td>Gekko tawaensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>61</td><td>爬虫類</td><td>ヤモリ</td><td>大東諸島のオガサワラヤモリ</td><td>Lepidodactylus lugubrisi</td><td>地域個体群</td></tr>
+		<tr><td>62</td><td>爬虫類</td><td>アガマ</td><td>オキナワキノボリトカゲ</td><td>Japalura polygonata polygonata</td><td>絶滅危惧II類</td></tr>
+		<tr><td>63</td><td>爬虫類</td><td>アガマ</td><td>ヨナグニキノボリトカゲ</td><td>Japalura polygonata donan</td><td>絶滅危惧II類</td></tr>
+		<tr><td>64</td><td>爬虫類</td><td>アガマ</td><td>サキシマキノボリトカゲ</td><td>Japalura polygonata ishigakiensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>65</td><td>爬虫類</td><td>カナヘビ</td><td>ミヤコカナヘビ</td><td>Takydromus toyamai</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>66</td><td>爬虫類</td><td>カナヘビ</td><td>サキシマカナヘビ</td><td>Takydromus dorsalis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>67</td><td>爬虫類</td><td>カナヘビ</td><td>コモチカナヘビ</td><td>Zootoca vivipara</td><td>絶滅危惧II類</td></tr>
+		<tr><td>68</td><td>爬虫類</td><td>カナヘビ</td><td>アムールカナヘビ</td><td>Takydromus amurensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>69</td><td>爬虫類</td><td>カナヘビ</td><td>沖永良部島、徳之島のアオカナヘビ</td><td>Takydromus smaragdinusi</td><td>地域個体群</td></tr>
+		<tr><td>70</td><td>爬虫類</td><td>ナミヘビ</td><td>キクザトサワヘビ</td><td>Opisthotropis kikuzatoi</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>71</td><td>爬虫類</td><td>ナミヘビ</td><td>シュウダ</td><td>Elaphe carinata carinata</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>72</td><td>爬虫類</td><td>ナミヘビ</td><td>ヨナグニシュウダ</td><td>Elaphe carinata yonaguniensis</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>73</td><td>爬虫類</td><td>ナミヘビ</td><td>ミヤコヒバァ</td><td>Amphiesma concelarum</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>74</td><td>爬虫類</td><td>ナミヘビ</td><td>ミヤコヒメヘビ</td><td>Calamaria pfefferi</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>75</td><td>爬虫類</td><td>ナミヘビ</td><td>ヤエヤマタカチホヘビ</td><td>Achalinus formosanus chigiraii</td><td>絶滅危惧II類</td></tr>
+		<tr><td>76</td><td>爬虫類</td><td>ナミヘビ</td><td>サキシマスジオ</td><td>Elaphe taeniura schmackeri</td><td>絶滅危惧II類</td></tr>
+		<tr><td>77</td><td>爬虫類</td><td>ナミヘビ</td><td>ミヤラヒメヘビ</td><td>Calamaria pavimentata miyarai</td><td>絶滅危惧II類</td></tr>
+		<tr><td>78</td><td>爬虫類</td><td>ナミヘビ</td><td>サキシマアオヘビ</td><td>Cyclophiops herminaei</td><td>準絶滅危惧</td></tr>
+		<tr><td>79</td><td>爬虫類</td><td>ナミヘビ</td><td>サキシマバイカダ</td><td>Lycodon ruhstrati multifasciatusi</td><td>準絶滅危惧</td></tr>
+		<tr><td>80</td><td>爬虫類</td><td>ナミヘビ</td><td>イワサキセダカヘビ</td><td>Pareas iwasakiii</td><td>準絶滅危惧</td></tr>
+		<tr><td>81</td><td>爬虫類</td><td>ナミヘビ</td><td>アマミタカチホヘビ</td><td>Achalinus wernerii</td><td>準絶滅危惧</td></tr>
+		<tr><td>82</td><td>爬虫類</td><td>ナミヘビ</td><td>アカマダラ</td><td>Dinodon rufozonatum rufozonatumi</td><td>準絶滅危惧</td></tr>
+		<tr><td>83</td><td>爬虫類</td><td>ナミヘビ</td><td>ダンジョヒバカリ</td><td>Amphiesma vibakari danjoense</td><td>情報不足</td></tr>
+		<tr><td>84</td><td>爬虫類</td><td>ナミヘビ</td><td>宮古諸島のサキシママダラ</td><td>Dinodon rufozonatum walli</td><td>地域個体群</td></tr>
+		<tr><td>85</td><td>爬虫類</td><td>コブラ</td><td>クメジマハイ</td><td>Sinomicrurus japonicus takarai</td><td>絶滅危惧II類</td></tr>
+		<tr><td>86</td><td>爬虫類</td><td>コブラ</td><td>イワサキワモンベニヘビ</td><td>Hemibungarus macclellandi iwasakii</td><td>絶滅危惧II類</td></tr>
+		<tr><td>87</td><td>爬虫類</td><td>コブラ</td><td>ハイ</td><td>Sinomicrurus japonicus boettgeri</td><td>準絶滅危惧</td></tr>
+		<tr><td>88</td><td>爬虫類</td><td>コブラ</td><td>ヒャン</td><td>Sinomicrurus japonicus japonicus</td><td>準絶滅危惧</td></tr>
+		<tr><td>89</td><td>爬虫類</td><td>ウミヘビ</td><td>エラブウミヘビ</td><td>Laticauda semifasciata</td><td>絶滅危惧II類</td></tr>
+		<tr><td>90</td><td>爬虫類</td><td>ウミヘビ</td><td>ヒロオウミヘビ</td><td>Laticauda laticaudata</td><td>絶滅危惧II類</td></tr>
+		<tr><td>91</td><td>爬虫類</td><td>ウミヘビ</td><td>イイジマウミヘビ</td><td>Emydocephalus ijimae</td><td>絶滅危惧II類</td></tr>
+		<tr><td>92</td><td>爬虫類</td><td>クサリヘビ</td><td>トカラハブ</td><td>Protobothrops tokarensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>93</td><td>鳥類</td><td>カイツブリ</td><td>青森県のカンムリカイツブリ繁殖個体群</td><td>Podiceps cristatus cristatus</td><td>地域個体群</td></tr>
+		<tr><td>94</td><td>鳥類</td><td>アホウドリ</td><td>コアホウドリ</td><td>Diomedea immutabilis</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>95</td><td>鳥類</td><td>アホウドリ</td><td>アホウドリ</td><td>Diomedea albatrus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>96</td><td>鳥類</td><td>ミズナギドリ</td><td>オガサワラヒメミズナギドリ</td><td>Puffinus bryani</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>97</td><td>鳥類</td><td>ミズナギドリ</td><td>セグロミズナギドリ</td><td>Puffinus lherminieri bannermani</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>98</td><td>鳥類</td><td>ミズナギドリ</td><td>シロハラミズナギドリ</td><td>Pterodroma hypoleuca</td><td>情報不足</td></tr>
+		<tr><td>99</td><td>鳥類</td><td>ウミツバメ</td><td>クロコシジロウミツバメ</td><td>Oceanodroma castro</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>100</td><td>鳥類</td><td>ウミツバメ</td><td>ヒメクロウミツバメ</td><td>Oceanodroma monorhis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>101</td><td>鳥類</td><td>ウミツバメ</td><td>オーストンウミツバメ</td><td>Oceanodroma tristrami</td><td>準絶滅危惧</td></tr>
+		<tr><td>102</td><td>鳥類</td><td>ウミツバメ</td><td>クロウミツバメ</td><td>Oceanodroma matsudairae</td><td>準絶滅危惧</td></tr>
+		<tr><td>103</td><td>鳥類</td><td>ネッタイチョウ</td><td>アカオネッタイチョウ</td><td>Phaethon rubricauda rothschildi</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>104</td><td>鳥類</td><td>カツオドリ</td><td>アカアシカツオドリ</td><td>Sula sula rubripes</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>105</td><td>鳥類</td><td>カツオドリ</td><td>アオツラカツオドリ</td><td>Sula dactylatra personata</td><td>絶滅危惧II類</td></tr>
+		<tr><td>106</td><td>鳥類</td><td>ウ</td><td>チシマウガラス</td><td>Phalacrocorax urile</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>107</td><td>鳥類</td><td>ウ</td><td>ヒメウ</td><td>Phalacrocorax pelagicus pelagicus</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>108</td><td>鳥類</td><td>サギ</td><td>ハシブトゴイ</td><td>Nycticorax caledonicus crassirostris</td><td>絶滅</td></tr>
+		<tr><td>109</td><td>鳥類</td><td>サギ</td><td>オオヨシゴイ</td><td>Ixobrychus eurhythmus</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>110</td><td>鳥類</td><td>サギ</td><td>サンカノゴイ</td><td>Botaurus stellaris stellaris</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>111</td><td>鳥類</td><td>サギ</td><td>ミゾゴイ</td><td>Gorsachius goisagi</td><td>絶滅危惧II類</td></tr>
+		<tr><td>112</td><td>鳥類</td><td>サギ</td><td>ズグロミゾゴイ</td><td>Gorsachius melanolophus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>113</td><td>鳥類</td><td>サギ</td><td>ヨシゴイ</td><td>Ixobrychus sinensis sinensis</td><td>準絶滅危惧</td></tr>
+		<tr><td>114</td><td>鳥類</td><td>サギ</td><td>チュウサギ</td><td>Egretta intermedia intermedia</td><td>準絶滅危惧</td></tr>
+		<tr><td>115</td><td>鳥類</td><td>サギ</td><td>カラシラサギ</td><td>Egretta eulophotes</td><td>準絶滅危惧</td></tr>
+		<tr><td>116</td><td>鳥類</td><td>コウノトリ</td><td>コウノトリ</td><td>Ciconia boyciana</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>117</td><td>鳥類</td><td>コウノトリ</td><td>ナベコウ</td><td>Ciconia nigra</td><td>希少種</td></tr>
+		<tr><td>118</td><td>鳥類</td><td>トキ</td><td>トキ</td><td>Nipponia nippon</td><td>野生絶滅</td></tr>
+		<tr><td>119</td><td>鳥類</td><td>トキ</td><td>クロツラヘラサギ</td><td>Platalea minor</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>120</td><td>鳥類</td><td>トキ</td><td>ヘラサギ</td><td>Platalea leucorodia major</td><td>情報不足</td></tr>
+		<tr><td>121</td><td>鳥類</td><td>トキ</td><td>クロトキ</td><td>Threskiornis melanocephalus</td><td>情報不足</td></tr>
+		<tr><td>122</td><td>鳥類</td><td>カモ</td><td>カンムリツクシガモ</td><td>Tadorna cristata</td><td>絶滅</td></tr>
+		<tr><td>123</td><td>鳥類</td><td>カモ</td><td>シジュウカラガン</td><td>Branta canadensis leucopareia</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>124</td><td>鳥類</td><td>カモ</td><td>ハクガン</td><td>Anser caerulescens caerulescens</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>125</td><td>鳥類</td><td>カモ</td><td>カリガネ</td><td>Anser erythropus</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>126</td><td>鳥類</td><td>カモ</td><td>コクガン</td><td>Branta bernicla orientalis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>127</td><td>鳥類</td><td>カモ</td><td>ヒシクイ</td><td>Anser fabalis serrirostris</td><td>絶滅危惧II類</td></tr>
+		<tr><td>128</td><td>鳥類</td><td>カモ</td><td>ツクシガモ</td><td>Tadorna tadorna</td><td>絶滅危惧II類</td></tr>
+		<tr><td>129</td><td>鳥類</td><td>カモ</td><td>トモエガモ</td><td>Anas formosa</td><td>絶滅危惧II類</td></tr>
+		<tr><td>130</td><td>鳥類</td><td>カモ</td><td>マガン</td><td>Anser albifrons frontalis</td><td>準絶滅危惧</td></tr>
+		<tr><td>131</td><td>鳥類</td><td>カモ</td><td>オオヒシクイ</td><td>Anser fabalis middendorffii</td><td>準絶滅危惧</td></tr>
+		<tr><td>132</td><td>鳥類</td><td>カモ</td><td>サカツラガン</td><td>Anser cygnoides</td><td>情報不足</td></tr>
+		<tr><td>133</td><td>鳥類</td><td>カモ</td><td>アカツクシガモ</td><td>Tadorna ferruginea</td><td>情報不足</td></tr>
+		<tr><td>134</td><td>鳥類</td><td>カモ</td><td>オシドリ</td><td>Aix galericulata</td><td>情報不足</td></tr>
+		<tr><td>135</td><td>鳥類</td><td>カモ</td><td>アカハジロ</td><td>Aythya baeri</td><td>情報不足</td></tr>
+		<tr><td>136</td><td>鳥類</td><td>カモ</td><td>東北地方以北のシノリガモ繁殖個体群</td><td>Histrionicus histrionicus pacificus</td><td>地域個体群</td></tr>
+		<tr><td>137</td><td>鳥類</td><td>カモ</td><td>コハクチョウ</td><td>Cygnus columbianus jankowskii</td><td>希少種</td></tr>
+		<tr><td>138</td><td>鳥類</td><td>カモ</td><td>コウライアイサ</td><td>Mergus squamatus</td><td>情報不足</td></tr>
+		<tr><td>139</td><td>鳥類</td><td>タカ</td><td>ダイトウノスリ</td><td>Buteo buteo oshiroi</td><td>絶滅</td></tr>
+		<tr><td>140</td><td>鳥類</td><td>タカ</td><td>カンムリワシ</td><td>Spilornis cheela perplexus</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>141</td><td>鳥類</td><td>タカ</td><td>オジロワシ</td><td>Haliaeetus albicilla albicilla</td><td>絶滅危惧II類</td></tr>
+		<tr><td>142</td><td>鳥類</td><td>タカ</td><td>リュウキュウツミ</td><td>Accipiter gularis iwasakii</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>143</td><td>鳥類</td><td>タカ</td><td>オガサワラノスリ</td><td>Buteo buteo toyoshimai</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>144</td><td>鳥類</td><td>タカ</td><td>クマタカ</td><td>Spizaetus nipalensis orientalis</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>145</td><td>鳥類</td><td>タカ</td><td>イヌワシ</td><td>Aquila chrysaetos japonica</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>146</td><td>鳥類</td><td>タカ</td><td>チュウヒ</td><td>Circus spilonotus spilonotus</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>147</td><td>鳥類</td><td>タカ</td><td>オオワシ</td><td>Haliaeetus pelagicus pelagicus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>148</td><td>鳥類</td><td>タカ</td><td>サシバ</td><td>Butastur indicus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>149</td><td>鳥類</td><td>タカ</td><td>ミサゴ</td><td>Pandion haliaetus haliaetus</td><td>準絶滅危惧</td></tr>
+		<tr><td>150</td><td>鳥類</td><td>タカ</td><td>ハチクマ</td><td>Pernis apivorus orientalis</td><td>準絶滅危惧</td></tr>
+		<tr><td>151</td><td>鳥類</td><td>タカ</td><td>オオタカ</td><td>Accipiter gentilis fujiyamae</td><td>準絶滅危惧</td></tr>
+		<tr><td>152</td><td>鳥類</td><td>タカ</td><td>ハイタカ</td><td>Accipiter nisus nisosimilis</td><td>準絶滅危惧</td></tr>
+		<tr><td>153</td><td>鳥類</td><td>ハヤブサ</td><td>ハヤブサ</td><td>Falco peregrinus japonensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>154</td><td>鳥類</td><td>ハヤブサ</td><td>シマハヤブサ</td><td>Falco peregrinus furuitii</td><td>情報不足</td></tr>
+		<tr><td>155</td><td>鳥類</td><td>ハヤブサ</td><td>オオハヤブサ</td><td>Falco peregrinus pealei</td><td>情報不足</td></tr>
+		<tr><td>156</td><td>鳥類</td><td>ハヤブサ</td><td>シベリアハヤブサ</td><td>Falco peregrinus harterti</td><td>希少種</td></tr>
+		<tr><td>157</td><td>鳥類</td><td>ライチョウ</td><td>ライチョウ</td><td>Lagopus mutus japonicus</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>158</td><td>鳥類</td><td>ライチョウ</td><td>エゾライチョウ</td><td>Tetrastes bonasia vicinitas</td><td>情報不足</td></tr>
+		<tr><td>159</td><td>鳥類</td><td>キジ</td><td>ウズラ</td><td>Coturnix japonica</td><td>絶滅危惧II類</td></tr>
+		<tr><td>160</td><td>鳥類</td><td>キジ</td><td>アカヤマドリ</td><td>Syrmaticus soemmerringii soemmerringii</td><td>準絶滅危惧</td></tr>
+		<tr><td>161</td><td>鳥類</td><td>キジ</td><td>コシジロヤマドリ</td><td>Syrmaticus soemmerringii ijimae</td><td>準絶滅危惧</td></tr>
+		<tr><td>162</td><td>鳥類</td><td>ツル</td><td>タンチョウ</td><td>Grus japonensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>163</td><td>鳥類</td><td>ツル</td><td>ナベヅル</td><td>Grus monacha</td><td>絶滅危惧II類</td></tr>
+		<tr><td>164</td><td>鳥類</td><td>ツル</td><td>マナヅル</td><td>Grus vipio</td><td>絶滅危惧II類</td></tr>
+		<tr><td>165</td><td>鳥類</td><td>ツル</td><td>クロヅル</td><td>Grus grus lilfordi</td><td>情報不足</td></tr>
+		<tr><td>166</td><td>鳥類</td><td>ツル</td><td>カナダヅル</td><td>Grus canadensis canadensis</td><td>希少種</td></tr>
+		<tr><td>167</td><td>鳥類</td><td>ツル</td><td>ソデグロヅル</td><td>Grus leucogeranus</td><td>希少種</td></tr>
+		<tr><td>168</td><td>鳥類</td><td>ツル</td><td>アネハヅル</td><td>Anthropoides virgo</td><td>希少種</td></tr>
+		<tr><td>169</td><td>鳥類</td><td>クイナ</td><td>マミジロクイナ</td><td>Poliolimnas cinereus brevipes</td><td>絶滅</td></tr>
+		<tr><td>170</td><td>鳥類</td><td>クイナ</td><td>ヤンバルクイナ</td><td>Gallirallus okinawae</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>171</td><td>鳥類</td><td>クイナ</td><td>オオクイナ</td><td>Rallina eurizonoides sepiaria</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>172</td><td>鳥類</td><td>クイナ</td><td>シマクイナ</td><td>Coturnicops noveboracensis exquisitus</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>173</td><td>鳥類</td><td>クイナ</td><td>ヒクイナ</td><td>Porzana fusca erythrothorax</td><td>準絶滅危惧</td></tr>
+		<tr><td>174</td><td>鳥類</td><td>ノガン</td><td>ノガン</td><td>Otis tarda dybowskii</td><td>希少種</td></tr>
+		<tr><td>175</td><td>鳥類</td><td>タマシギ</td><td>タマシギ</td><td>Rostratula benghalensis benghalensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>176</td><td>鳥類</td><td>チドリ</td><td>シロチドリ</td><td>Charadrius alexandrinus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>177</td><td>鳥類</td><td>シギ</td><td>ヘラシギ</td><td>Eurynorhynchus pygmeus</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>178</td><td>鳥類</td><td>シギ</td><td>カラフトアオアシシギ</td><td>Tringa guttifer</td><td>絶滅危惧IA類</td></tr>
+		<tr><td>179</td><td>鳥類</td><td>シギ</td><td>コシャクシギ</td><td>Numenius minutus</td><td>絶滅危惧IB類</td></tr>
+		<tr><td>180</td><td>鳥類</td><td>シギ</td><td>ツルシギ</td><td>Tringa erythropus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>181</td><td>鳥類</td><td>シギ</td><td>アカアシシギ</td><td>Tringa totanus ussuriensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>182</td><td>鳥類</td><td>シギ</td><td>タカブシギ</td><td>Tringa glareola</td><td>絶滅危惧II類</td></tr>
+		<tr><td>183</td><td>鳥類</td><td>シギ</td><td>オオソリハシシギ</td><td>Limosa lapponica</td><td>絶滅危惧II類</td></tr>
+		<tr><td>184</td><td>鳥類</td><td>シギ</td><td>ホウロクシギ</td><td>Numenius madagascariensis</td><td>絶滅危惧II類</td></tr>
+		<tr><td>185</td><td>鳥類</td><td>シギ</td><td>アマミヤマシギ</td><td>Scolopax mira</td><td>絶滅危惧II類</td></tr>
+		<tr><td>186</td><td>鳥類</td><td>シギ</td><td>ハマシギ</td><td>Calidris alpina</td><td>準絶滅危惧</td></tr>
+		<tr><td>187</td><td>鳥類</td><td>シギ</td><td>オオジシギ</td><td>Gallinago hardwickii</td><td>準絶滅危惧</td></tr>
+		<tr><td>188</td><td>鳥類</td><td>シギ</td><td>ケリ</td><td>Vanellus cinereus</td><td>情報不足</td></tr>
+		<tr><td>189</td><td>鳥類</td><td>シギ</td><td>チシマシギ</td><td>Calidris ptilocnemis kurilensis</td><td>情報不足</td></tr>
+		<tr><td>190</td><td>鳥類</td><td>シギ</td><td>シベリアオオハシシギ</td><td>Limnodromus semipalmatus</td><td>情報不足</td></tr>
+		<tr><td>191</td><td>鳥類</td><td>シギ</td><td>シロハラチュウシャクシギ</td><td>Numenius tenuirostris</td><td>希少種</td></tr>
+		<tr><td>192</td><td>鳥類</td><td>セイタカシギ</td><td>セイタカシギ</td><td>Himantopus himantopus himantopus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>193</td><td>鳥類</td><td>セイタカシギ</td><td>ツバメチドリ</td><td>Glareola maldivarum</td><td>絶滅危惧II類</td></tr>
+		<tr><td>194</td><td>鳥類</td><td>カモメ</td><td>ズグロカモメ</td><td>Larus saundersi</td><td>絶滅危惧II類</td></tr>
+		<tr><td>195</td><td>鳥類</td><td>カモメ</td><td>オオアジサシ</td><td>Thalasseus bergii cristatus</td><td>絶滅危惧II類</td></tr>
+		<tr><td>196</td><td>鳥類</td><td>カモメ</td><td>ベニアジサシ</td><td>Sterna dougallii bangsi</td><td>絶滅危惧II類</td></tr>
+
+	</tbody>
+</table>
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/note_prg">プログラミングの覚書</a></li>
+	<li><a href="/note_prg/js/">JavaScriptの覚書</a></li>
+	<li>静的テーブルのページネーション(Bootstrap4対応) | static_pagination_b4.js</li>
+</ol>
+
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2022-1-20</div>
+</body>
+</html>
