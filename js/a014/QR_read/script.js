@@ -4,7 +4,7 @@ $(()=>{
 });
 
 function callback(value){
-	$('#res').append(value + '<br>');
+	$('#res').html(value);
 	console.log(value);
 }
 
@@ -13,9 +13,14 @@ function errFunc(err){
 }
 
 function start(){
-	jsQrEx.start();
+	jsQrEx.start(()=>{
+		$('#start_btn').hide();
+		$('#stop_btn').show();
+	}, errFunc);
 }
 
 function stop(){
 	jsQrEx.stop();
+	$('#start_btn').show();
+	$('#stop_btn').hide();
 }

@@ -36,17 +36,15 @@ class JsQrEx{
 		if(param['intarval'] == null) param['intarval'] = 50; // ms
 		this.param = param;
 
-		// エラーコールバック
-		this.errCallback = null;
-		if(typeof param['errCallback'] == 'function'){
-			this.errCallback = param.errCallback;
-		}
+
 		
 		let video=document.createElement('video');
+		
 		video.setAttribute("autoplay","");
 		video.setAttribute("muted","");
 		video.setAttribute("playsinline","");
-		video.onloadedmetadata = function(e){video.play();};
+		//video.onloadedmetadata = function(e){video.play();};//■■■□□□■■■□□□
+		this.jq_cvs = jQuery('#' + canvas_xid);
 		let cvs=document.getElementById(canvas_xid);
 		let cvs_ctx=cvs.getContext("2d");
 		let tmp = document.createElement('canvas');
@@ -61,6 +59,7 @@ class JsQrEx{
 		//選択された幅高さ
 		let w = video.videoWidth;
 		let h = video.videoHeight;
+		
 		//画面上の表示サイズ
 		cvs.style.width=(w/2)+"px";
 		cvs.style.height=(h/2)+"px";
@@ -69,28 +68,26 @@ class JsQrEx{
 		cvs.setAttribute("width",w);
 		cvs.setAttribute("height",h);
 
+		this.video = video;
 
-		//カメラ使用の許可ダイアログが表示される
-		navigator.mediaDevices.getUserMedia(
-			//マイクはオフ,なるべく背面カメラを使用、映像サイズはなるべく640×480にする。
-			{"audio":false,"video":{"facingMode":"environment","width":{"ideal":this.param.camera_width},"height":{"ideal":this.param.camera_height}}}
-		).then( //許可された場合
-			(stream)=>{
-				video.srcObject = stream;
-				//this.start();
-			}
-		).catch( //許可されなかった場合
-			(err)=>{
-				if(this.errCallback == null){
-					alert('カメラが不許可になっているのでQRコード読込カメラを起動できません。カメラを許可してください。');
-				}else{
-					this.errCallback(err);
-				}
-			}
-			
-		);
 	}
 	
+	
+	_makeConifgHtml(){
+		
+		let html = `
+			<div>
+				<div><input type="number" class="">xxx</div>
+			</div>
+		`;
+		
+		
+	}
+	
+	
+	
+	
+	// QRコードのスキャン
 	_scan(){
 
 		let video = this.video;
@@ -123,7 +120,6 @@ class JsQrEx{
 		cvs_ctx.rect(x1,y1,m,m);
 		cvs_ctx.stroke();
 		
-		
 		tmp.setAttribute("width",m);
 		tmp.setAttribute("height",m);
 		tmp_ctx.drawImage(cvs,x1,y1,m,m,0,0,m,m);
@@ -140,14 +136,68 @@ class JsQrEx{
 	}
 	
 	
-	start(){
-		if(this.active == false){
-			this.active = true;
-			setTimeout(()=>{this._scan();},500);//0.5秒後にスキャン開始
-		}
+	/**
+	 * カメラ起動
+	 * @param function callback カメラ起動後に実行するコールバック
+	 * @param function errCallback カメラ起動失敗コールバック
+	 */
+	start(callback, errCallback){
+		if(this.active == true) return;
+		
+		this.jq_cvs.show();
+		this.startCallback = callback;
+		this.errCallback = errCallback;
+		
+		navigator.mediaDevices.getUserMedia({
+			"audio":false,
+			"video":{
+				"facingMode":"environment",
+				"width":{
+					"ideal":this.param.camera_width
+					},
+				"height":{
+					"ideal":this.param.camera_height
+					}
+				}
+		  }).then((stream) =>{
+			let video = this.video;
+			video.srcObject = stream;
+			video.onloadedmetadata = (e)=> {
+				video.play();
+
+				this.active = true;
+				setTimeout(()=>{this._scan();},500);//0.5秒後にスキャン開始
+				
+				if(this.startCallback){
+					this.startCallback(); // カメラ起動コールバックを実行
+				}
+				
+		    };
+		  }).catch((e) =>{
+			if(this.errCallback){
+				this.errCallback(e);
+			}else{
+				alert('カメラ起動に失敗しました。');
+			}
+		});
+
 	}
 	
+	/**
+	 * カメラ停止
+	 */
 	stop(){
+		
+		if(this.active == false) return;
+		
 		this.active = false;
+		this.jq_cvs.hide();
+		
+		const tracks = this.video.srcObject.getTracks();
+		tracks.forEach(track => {
+			track.stop();
+		});
+		
+
 	}
 }

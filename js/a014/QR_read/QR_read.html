@@ -24,11 +24,14 @@
 
 
 <h2>Demo</h2>  
+<div>
+	<input id="start_btn" type="button" value="スタート" onclick="start()" class="btn btn-primary"/>
+	<input id="stop_btn" type="button" value="停止" onclick="stop()"  style="display:none" class="btn btn-warning" />
+</div>
+<div>QR読込URL→<span id="res" class="text-success"></span></div>
+<div id="qr_read_config"></div>
 <canvas id="qr_canvas"></canvas>
-<div id="res" class="text-success"></div>
 
-<input type="button" value="スタート" onclick="start()" class="btn btn-primary"/>
-<input type="button" value="停止" onclick="stop()"  class="btn btn-warning" />
 
 
 
