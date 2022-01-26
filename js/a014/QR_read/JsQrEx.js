@@ -71,18 +71,7 @@ class JsQrEx{
 		this.video = video;
 
 	}
-	
-	
-	_makeConifgHtml(){
-		
-		let html = `
-			<div>
-				<div><input type="number" class="">xxx</div>
-			</div>
-		`;
-		
-		
-	}
+
 	
 	
 	
