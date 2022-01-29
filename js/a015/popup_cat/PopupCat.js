@@ -46,6 +46,17 @@ class PopupCat{
 			'z-index': param.z_index,
 		});
 		
+		this.after_cb_flg = false;
+		
+		this.popupElm.click((evt)=>{
+			let elm = $(evt.currentTarget);
+			if(this.afterCallback){
+				this.afterCallback();
+				this.after_cb_flg = true;
+			} 
+			elm.hide();
+		});
+		
 		
 		this.param = param;
 		
@@ -66,9 +77,15 @@ class PopupCat{
 			window.setTimeout(()=>{
 				console.log('xxx');//
 				this.popupElm.hide();
-				if(this.afterCallback) this.afterCallback();
+				if(this.after_cb_flg == false){
+					if(this.afterCallback) this.afterCallback();
+				}else{
+					this.after_cb_flg == true;
+				}
 			}, this.param.set_timeout_time);
 		});
 	}
+	
+	
 	
 }
