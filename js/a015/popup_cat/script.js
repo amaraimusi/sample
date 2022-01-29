@@ -1,17 +1,16 @@
 
+let g_popupCat;
 $(()=>{
-	
-	$('#example1').hide();
-	
+
+	g_popupCat = new PopupCat();
+	g_popupCat.popupize('example1');
 	
 });
 
 function test1(){
-	$('#example1').hide();
-	$('#example1').fadeIn(1000, function() {
-		window.setTimeout(()=>{
-			console.log('xxx');//■■■□□□■■■□□□
-			$('#example1').hide();
-		},1000);
+	
+	g_popupCat.pop(()=>{
+		alert('事後コールバック発動');
 	});
+
 }
