@@ -1,11 +1,33 @@
 
-
+/**
+ * ポップアップ化ライブラリ
+ * @note 
+ *     id属性で指定した要素をポップアップ化する。
+ *     「登録完了」時の通知用ポップアップとして活用できる。
+ *     ポップ発布は左上、右上、右下、左下の4方向に設定可能。
+ *     ポップアップが消えるタイミングでコールバックを実行できる。
+ *     ポップアップをクリックするとポップアップは消える。
+ * @since 2022-1-28
+ * @version 1.0.0
+ * @auther amaraimusi
+ * @license MIT
+ */
 class PopupCat{
 	
+	/**
+	 * ポップアップ化する
+	 * @param xid ポップアップ化する要素のID属性
+	 * @param param
+	 *      - direction_type     方向タイプ left_top:左上,  right_top:右上,  left_bottom:左下,  right_bottom:右下, 
+	 *      - z_index     ポップアップ要素の深度
+	 *      - fadein_time     フェードイン時間（ms)
+	 *      - set_timeout_time     ポップアップ表示後から消えるまでの時間(ms)
+	 * 
+	 */
 	popupize(xid, param){
 		this.popupElm = jQuery('#' + xid);
 		if(param == null) param = {};
-		if(param.popup_type==null) param.popup_type='right_bottom';
+		if(param.direction_type==null) param.direction_type='right_bottom';
 		if(param.z_index==null) param.z_index='2';
 		if(param.fadein_time==null) param.fadein_time=1000;
 		if(param.set_timeout_time==null) param.set_timeout_time=1500;
@@ -15,7 +37,7 @@ class PopupCat{
 		let css_right = '0px';
 		let css_bottom = '0px';
 		
-		switch(param.popup_type){
+		switch(param.direction_type){
 			case 'left_top':
 				css_right = 'auto';
 				css_bottom = 'auto';
@@ -63,10 +85,15 @@ class PopupCat{
 		
 	}
 	
+	/** ポップアップ要素を取得
+	 */
 	getPopupElm(){
 		return this.popupElm;
 	}
 	
+	/** ポップアップ要素を取得
+	 * @param callback function ポップアップが消えたときに実行するコールバック
+	 */
 	pop(callback){
 		
 		this.afterCallback = callback;
