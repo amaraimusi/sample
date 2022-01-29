@@ -102,7 +102,6 @@ class PopupCat{
 		this.popupElm.hide();
 		this.popupElm.fadeIn(this.param.fadein_time, ()=>{
 			window.setTimeout(()=>{
-				console.log('xxx');//
 				this.popupElm.hide();
 				if(this.after_cb_flg == false){
 					if(this.afterCallback) this.afterCallback();
