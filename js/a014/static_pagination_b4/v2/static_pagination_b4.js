@@ -58,6 +58,9 @@ class StaticPaginationB4{
 		this.trs =trs;
 	}
 	
+	
+	
+	
 	/**
 	 * テーブルに適用する
 	 * @param trs TR群要素
@@ -66,6 +69,35 @@ class StaticPaginationB4{
 	 */
 	_applyToTable(trs, cur_page_num, visible_row_count){
 		
+		let data = [];
+		trs.each((i,elm) => {
+			let tr = $(elm);
+			let row_index = tr.index();
+			console.log('row_index=' + row_index);//■■■□□□■■■□□□
+			let search_flg=0;// ■■■□□□■■■□□□
+			let ent = {
+				'row_index':i,
+				'search_flg':search_flg,
+				'show_flg':0,
+				'trElm':tr,
+			};
+			data.push(ent);
+		});
+		
+		/*
+		nekos.eq(0)
+		検索によるフィルターマッピングデータの作成は可能
+	キーは連番、値は行番
+ページによる表示切替
+	マッピングデータをループ
+		検索一致フラグがONである場合
+			カウンタのインクリメント
+		カウンタが閾値の範囲外である場合
+			表示フラグをOFF
+
+	行番アクセスでtr要素の取得も可能だし、もう一つマッピング配列を作ることも可能だろう。
+
+		*/
 		trs.each((i,elm) => {
 			let tr = $(elm);
 			let threshold_start = cur_page_num * visible_row_count; // 閾値・スタート
@@ -75,7 +107,7 @@ class StaticPaginationB4{
 			}else{
 				tr.hide();
 			}
-			console.log(i);//■■■□□□■■■□□□
+			//console.log(i);//■■■□□□■■■□□□
 		});
 			//■■■□□□■■■□□□
 		//trs.hide().slice(cur_page_num * visible_row_count, (cur_page_num + 1) * visible_row_count).show();
