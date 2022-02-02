@@ -6,7 +6,7 @@
  * @license MIT
  * @auther amaraimusi
  */
-class StaticPaginationB4{
+class PaginationRain{
 	
 	/**
 	 * 静的テーブルをページネーション化する
@@ -23,8 +23,11 @@ class StaticPaginationB4{
 		if(param.visible_row_count == null ) param.visible_row_count = 8; // 表示行数
 		if(param.cur_page_num == null) param.cur_page_num = 0; // 初期カレント行番号
 		if(param.pn_position == null ) param.pn_position = 'bottom'; // 表示行数
+		if(param.search_cols_str == null ) param.search_cols_str = '1,2'; // 検索対象列番リスト文字列
 		
 		param['xid'] = xid;
+		param.searchCols = this._makeSearchCols(param.search_cols_str); // 検索対象列番リストを作成
+		
 		
 		let visible_row_count = param.visible_row_count;
 		let pn_position = param.pn_position;
@@ -33,9 +36,13 @@ class StaticPaginationB4{
 		let trs = tbl.find('tbody tr');
 		let num_rows = trs.length;
 		if(num_rows == 0) return; //行数が0件ならページネーション作成を中断
+
+		param.num_rows = num_rows; // 全行数
+		param.all_page_count = Math.ceil(num_rows / visible_row_count); // 全ページ数
 		
-		param['num_rows'] = num_rows; // 全行数
-		param['all_page_count'] = Math.ceil(num_rows / visible_row_count); // 全ページ数
+		if(param.search_placeholder == null){
+			param.search_placeholder = this._getSearchPlaceholder(tbl, param.searchCols); // 検索テキストボックスのplaceholderを作成
+		}
 		
 		// 初期カレントページにlast(最終ページ)が指定されている場合、最終ページ番号をセットする
 		if(param.cur_page_num == 'last'){
@@ -48,8 +55,11 @@ class StaticPaginationB4{
 		
 		// ページネーションHTMLを作成する。
 		let pg_html = this._createPagenationHtml(param);
-		
 		tbl.after(pg_html);
+		
+		// 検索ボックスHTMLを作成する
+		let search_html = this._createSearchHtml(param);
+		tbl.before(search_html);
 		
 		// ページネーションにクリックイベントを追加する
 		this._bindClickPagenation(param); 
@@ -59,6 +69,52 @@ class StaticPaginationB4{
 	}
 	
 	
+	/**
+	* 検索対象列番リストを作成
+	* @param string search_cols_str 検索対象列番リスト文字列
+	* @return [] 検索対象列番リスト
+	*/
+	_makeSearchCols(search_cols_str){
+		if(this._empty(search_cols_str)) return [];
+		let searchCols = [];
+		
+		if(isNaN(search_cols_str)){
+			let ary = search_cols_str.split(',');
+			for(let i in ary){
+				let v = ary[i];
+				v = v.trim();
+				v = v * 1;
+				searchCols.push(v);
+			}
+			
+		}else{
+			searchCols.push(search_cols_str);
+		}
+		
+		return searchCols;
+		
+	}
+	
+	/*
+	* 検索テキストボックスのplaceholderを作成
+	*/
+	_getSearchPlaceholder(tbl, searchCols){
+		if(this._empty(searchCols)) return '';
+		let ths = tbl.find('th');
+		let str = '';
+		for(let i in searchCols){
+			let col_index = searchCols[i];
+			let th_name = ths.eq(col_index).text();
+			if(i == 0) {
+				str += th_name;
+			}else{
+				str += ', ' + th_name;
+			}
+		}
+		
+		return str;
+		
+	}
 	
 	
 	/**
@@ -73,7 +129,6 @@ class StaticPaginationB4{
 		trs.each((i,elm) => {
 			let tr = $(elm);
 			let row_index = tr.index();
-			console.log('row_index=' + row_index);//■■■□□□■■■□□□
 			let search_flg=0;// ■■■□□□■■■□□□
 			let ent = {
 				'row_index':i,
@@ -130,6 +185,23 @@ class StaticPaginationB4{
 		return html;
 	}
 	
+	
+	// 検索ボックスHTMLを作成する
+	_createSearchHtml(param){
+		let html = `
+			<div style='margin-bottom:0.8em;' class='row'>
+				<div class='col-12 col-md-8'>
+					<input id='${param.xid}_search' type='text' class='form-control' placeholder='${param.search_placeholder}' />
+				</div>
+				<div class='col-12 col-md-4'>
+					<button id='${param.xid}_search_btn' class='btn btn-primary'>検索</button>
+				</div>
+			</div>
+		`;
+		return html;
+	}
+	
+	
 	// ページネーションにクリックイベントを追加する
 	_bindClickPagenation(param){
 		let pgItems = jQuery(`#${param.xid}_pagenation li`);
@@ -151,6 +223,21 @@ class StaticPaginationB4{
 				});
 			});
 		
+	}
+	
+	
+	// Check empty.
+	_empty(v){
+		if(v == null || v == '' || v=='0'){
+			return true;
+		}else{
+			if(typeof v == 'object'){
+				if(Object.keys(v).length == 0){
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 	
 }
