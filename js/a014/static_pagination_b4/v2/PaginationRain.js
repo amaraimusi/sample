@@ -58,8 +58,13 @@ class PaginationRain{
 		tbl.after(pg_html);
 		
 		// 検索ボックスHTMLを作成する
+		param.search_btn_xid = param.xid + '_search_btn';
+		console.log('param.search_btn_xid＝' + param.search_btn_xid);//■■■□□□■■■□□□
 		let search_html = this._createSearchHtml(param);
 		tbl.before(search_html);
+		$('#' + param.search_btn_xid).click((evt)=>{
+			this.search();
+		});
 		
 		// ページネーションにクリックイベントを追加する
 		this._bindClickPagenation(param); 
@@ -68,6 +73,12 @@ class PaginationRain{
 		this.trs =trs;
 	}
 	
+	/**
+	* 検索
+	*/
+	search(){
+		console.log('test');//■■■□□□■■■□□□
+	}
 	
 	/**
 	* 検索対象列番リストを作成
@@ -122,14 +133,15 @@ class PaginationRain{
 	 * @param trs TR群要素
 	 * @param cur_page_num カレントページ番号
 	 * @param visible_row_count 表示行数
+	 * @param search_str 検索文字列
 	 */
-	_applyToTable(trs, cur_page_num, visible_row_count){
+	_applyToTable(trs, cur_page_num, visible_row_count, search_str){
 		
 		let data = [];
 		trs.each((i,elm) => {
 			let tr = $(elm);
 			let row_index = tr.index();
-			let search_flg=0;// ■■■□□□■■■□□□
+			let search_flg= this._judgSearch(tr, search_str);　
 			let ent = {
 				'row_index':i,
 				'search_flg':search_flg,
@@ -162,10 +174,39 @@ class PaginationRain{
 			}else{
 				tr.hide();
 			}
-			//console.log(i);//■■■□□□■■■□□□
+
 		});
-			//■■■□□□■■■□□□
-		//trs.hide().slice(cur_page_num * visible_row_count, (cur_page_num + 1) * visible_row_count).show();
+
+	}
+	
+	/**
+	* 検索判定
+	* @param tr TR要素
+	* @param search_str 検索文字
+	* @return 検索判定 0:未一致, 1:一致
+	*/
+	_judgSearch(tr, search_str){
+		if(search_str == null || search_str == '') return 1;
+		
+		// 空 + 空　	1
+		// 空 + 在り	1
+		// 空　+ 無し	0
+		// 在 + 無	1
+
+		let tds = tr.find('td');
+		let join_text = '';
+		for(let i in this.param.searchCols){
+			let col_index = this.param.searchCols[i];
+			let td_text = tds.eq(col_index).text();
+			join_text += td_text;
+		}
+		
+		if(join_text.indexOf(search_str) != -1) {
+			return 1;
+		}
+		
+		return 0;
+		
 	}
 	
 	
@@ -188,16 +229,19 @@ class PaginationRain{
 	
 	// 検索ボックスHTMLを作成する
 	_createSearchHtml(param){
+		
 		let html = `
 			<div style='margin-bottom:0.8em;' class='row'>
 				<div class='col-12 col-md-8'>
 					<input id='${param.xid}_search' type='text' class='form-control' placeholder='${param.search_placeholder}' />
 				</div>
 				<div class='col-12 col-md-4'>
-					<button id='${param.xid}_search_btn' class='btn btn-primary'>検索</button>
+					<button id='${param.search_btn_xid}' class='btn btn-primary'>検索</button>
 				</div>
 			</div>
 		`;
+		
+		
 		return html;
 	}
 	
