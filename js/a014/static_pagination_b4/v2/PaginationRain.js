@@ -22,8 +22,8 @@ class PaginationRain{
 		if(param == null) param = {};
 		if(param.visible_row_count == null ) param.visible_row_count = 8; // 表示行数
 		if(param.cur_page_num == null) param.cur_page_num = 0; // 初期カレント行番号
-		if(param.pn_position == null ) param.pn_position = 'bottom'; // 表示行数
-		if(param.search_cols_str == null ) param.search_cols_str = '1,2'; // 検索対象列番リスト文字列
+		if(param.pn_position == null ) param.pn_position = 'bottom'; // ページネーションの位置 top:テーブルの上、bottomテーブルの下
+		if(param.search_cols_str == null ) param.search_cols_str = '1,2,3'; // 検索対象列番リスト文字列
 		
 		param['xid'] = xid;
 		param.searchCols = this._makeSearchCols(param.search_cols_str); // 検索対象列番リストを作成
@@ -49,36 +49,127 @@ class PaginationRain{
 			param.cur_page_num = param.all_page_count - 1;
 		}
 		let cur_page_num = param.cur_page_num;
-
-		// テーブルに適用する
-		this._applyToTable(trs, cur_page_num, visible_row_count);
+		
+		// データをHTMLテーブルから作成する
+		this.data = this._createDataFromHtmltable(trs);
 		
 		// ページネーションHTMLを作成する。
 		let pg_html = this._createPagenationHtml(param);
 		tbl.after(pg_html);
 		
-		// 検索ボックスHTMLを作成する
-		param.search_btn_xid = param.xid + '_search_btn';
-		console.log('param.search_btn_xid＝' + param.search_btn_xid);//■■■□□□■■■□□□
-		let search_html = this._createSearchHtml(param);
-		tbl.before(search_html);
-		$('#' + param.search_btn_xid).click((evt)=>{
-			this.search();
-		});
-		
+		// 検索ボックスを生成する
+		this._createSearchBox(param, tbl);
+
 		// ページネーションにクリックイベントを追加する
 		this._bindClickPagenation(param); 
+		
+		// ページネーションをデータに反映する
+		this.data = this._reflectPagenationInData(this.data, param);
+
+		// テーブルに適用する
+		this._applyToTable(this.data, param);
 		
 		this.param = param;
 		this.trs =trs;
 	}
 	
+
+	/**
+	* データをHTMLテーブルから作成する
+	* @param trs TR群jQuery要素
+	* @return data
+	*/
+	_createDataFromHtmltable(trs){
+		let data = [];
+		trs.each((i,elm) => {
+			let tr = $(elm);
+			let row_index = tr.index();
+			let ent = {
+				'row_index':i,
+				'search_flg':1, // 検索行表示フラグ 0:未一致, 1:一致
+				'show_flg':0, // 表示フラグ 0:行を非表示, 1:行を表示
+				'trElm':tr,
+			};
+			data.push(ent);
+		});
+		return data;
+	}
+		
+	
 	/**
 	* 検索
 	*/
 	search(){
-		console.log('test');//■■■□□□■■■□□□
+
+		// 検索文字列を取得する
+		let search_str = this.jq_search_tb.val();
+		search_str = search_str.trim();
+
+		// 検索をデータに反映する
+		this.data = this._reflectSearchInData(this.data, search_str);
+		
+		// ページネーションをデータに反映する
+		this.data = this._reflectPagenationInData(this.data, this.param);
+		
+		// テーブルに適用する
+		this._applyToTable(this.data, this.param);
+
 	}
+	
+	
+	/**
+	* 検索をデータに反映する
+	* Reflect the search in data
+	* @param data
+	* @param search_str 検索文字列
+	* @return data
+	*/
+	_reflectSearchInData(data, search_str){
+		for(let i in data){
+			let ent = data[i];
+			let tr = ent.trElm;
+			ent.search_flg　= this._judgSearch(tr, search_str);　
+			if(ent.search_flg){
+				ent.show_flg = 1;
+			}else{
+				ent.show_flg = 0;
+			}
+			console.log(ent.row_index + ' - ' + ent.show_flg + ' - ' + ent.search_flg);//■■■□□□■■■□□□
+		}
+		return data;
+	}
+	
+	/**
+	* ページネーションをデータに反映する
+	* @param data
+	* @return data
+	*/
+	_reflectPagenationInData(data, param){
+		
+		let visible_row_count = param.visible_row_count;// 表示行数
+		let cur_page_num = param.cur_page_num; // カレント行番号
+		
+		let threshold_start = cur_page_num * visible_row_count; // 閾値・スタート
+		let threshold_end = (cur_page_num + 1) * visible_row_count; // 閾値・終わり
+			
+		let counter = 0;
+		for(let i in data){
+			let ent = data[i];
+			if(ent.search_flg){
+				if(threshold_start <= counter & counter < threshold_end){
+					ent.show_flg = 1;
+				}else{
+					ent.show_flg = 0;
+				}
+				counter++;
+			}else{
+				ent.show_flg = 0;
+			}
+
+		}
+		return data;
+	}
+	
 	
 	/**
 	* 検索対象列番リストを作成
@@ -130,27 +221,22 @@ class PaginationRain{
 	
 	/**
 	 * テーブルに適用する
-	 * @param trs TR群要素
-	 * @param cur_page_num カレントページ番号
+	 * @param data
+	 * @param param
 	 * @param visible_row_count 表示行数
 	 * @param search_str 検索文字列
 	 */
-	_applyToTable(trs, cur_page_num, visible_row_count, search_str){
+	_applyToTable(data, param){
 		
-		let data = [];
-		trs.each((i,elm) => {
-			let tr = $(elm);
-			let row_index = tr.index();
-			let search_flg= this._judgSearch(tr, search_str);　
-			let ent = {
-				'row_index':i,
-				'search_flg':search_flg,
-				'show_flg':0,
-				'trElm':tr,
-			};
-			data.push(ent);
-		});
-		
+		for(let i in data){
+			let ent = data[i];
+			let tr = ent.trElm;
+			if(ent.show_flg){
+				tr.show();
+			}else{
+				tr.hide();
+			}
+		}
 		/*
 		nekos.eq(0)
 		検索によるフィルターマッピングデータの作成は可能
@@ -164,7 +250,7 @@ class PaginationRain{
 
 	行番アクセスでtr要素の取得も可能だし、もう一つマッピング配列を作ることも可能だろう。
 
-		*/
+		
 		trs.each((i,elm) => {
 			let tr = $(elm);
 			let threshold_start = cur_page_num * visible_row_count; // 閾値・スタート
@@ -176,6 +262,7 @@ class PaginationRain{
 			}
 
 		});
+		*/
 
 	}
 	
@@ -228,12 +315,15 @@ class PaginationRain{
 	
 	
 	// 検索ボックスHTMLを作成する
-	_createSearchHtml(param){
+	_createSearchBox(param, tbl){
+		
+		param.search_tb_xid = param.xid + '_textbox';
+		param.search_btn_xid = param.xid + '_search_btn';
 		
 		let html = `
 			<div style='margin-bottom:0.8em;' class='row'>
 				<div class='col-12 col-md-8'>
-					<input id='${param.xid}_search' type='text' class='form-control' placeholder='${param.search_placeholder}' />
+					<input id='${param.search_tb_xid}' type='text' class='form-control' placeholder='${param.search_placeholder}' />
 				</div>
 				<div class='col-12 col-md-4'>
 					<button id='${param.search_btn_xid}' class='btn btn-primary'>検索</button>
@@ -241,8 +331,13 @@ class PaginationRain{
 			</div>
 		`;
 		
+		tbl.before(html);
 		
-		return html;
+		this.jq_search_tb = $('#' + param.search_tb_xid);
+		$('#' + param.search_btn_xid).click((evt)=>{
+			this.search();
+		});		
+		
 	}
 	
 	
