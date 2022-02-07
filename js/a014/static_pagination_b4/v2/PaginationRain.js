@@ -100,7 +100,8 @@ class PaginationRain{
 	* 検索
 	*/
 	search(){
-
+		this.param.cur_page_num = 0; // 最初のページに戻す
+		
 		// 検索文字列を取得する
 		let search_str = this.jq_search_tb.val();
 		search_str = search_str.trim();
@@ -134,7 +135,6 @@ class PaginationRain{
 			}else{
 				ent.show_flg = 0;
 			}
-			console.log(ent.row_index + ' - ' + ent.show_flg + ' - ' + ent.search_flg);//■■■□□□■■■□□□
 		}
 		return data;
 	}
@@ -336,7 +336,14 @@ class PaginationRain{
 		this.jq_search_tb = $('#' + param.search_tb_xid);
 		$('#' + param.search_btn_xid).click((evt)=>{
 			this.search();
-		});		
+		});	
+		
+		// 検索テキストボックス要素にEnterキー押下イベントを組み込む
+		this.jq_search_tb.keypress((e)=>{
+			if(e.which==13){ // Enterキーが押下された場合
+				this.search();
+			}
+		});			
 		
 	}
 	
