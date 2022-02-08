@@ -53,9 +53,7 @@ class PaginationRain{
 		// データをHTMLテーブルから作成する
 		this.data = this._createDataFromHtmltable(trs);
 		
-		// ページネーションHTMLを作成する。
-		let pg_html = this._createPagenationHtml(param);
-		tbl.after(pg_html);
+
 		
 		// 検索ボックスを生成する
 		this._createSearchBox(param, tbl);
@@ -69,6 +67,9 @@ class PaginationRain{
 		// テーブルに適用する
 		this._applyToTable(this.data, param);
 		
+		// ページネーション区分を作成する。
+		let pg_html = this._createPagenationDiv(tbl, this.data, param);
+
 		this.param = param;
 		this.trs =trs;
 	}
@@ -297,8 +298,8 @@ class PaginationRain{
 	}
 	
 	
-	// ページネーションHTMLを作成する。
-	_createPagenationHtml(param){
+	// ページネーション区分を作成する。
+	_createPagenationDiv(tbl, data, param){
 		
 		let items_html = '';
 		for(let page_no=0; page_no < param.all_page_count; page_no++){
@@ -310,7 +311,12 @@ class PaginationRain{
 		
 		let html = `<ul id="${param.xid}_pagenation" class="pagination">${items_html}</ul>`;
 		
-		return html;
+		if(param.pn_position == 'top'){
+			tbl.before(html);
+		}else{
+			tbl.after(html);
+		}
+
 	}
 	
 	
