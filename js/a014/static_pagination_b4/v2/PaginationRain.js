@@ -1,7 +1,7 @@
 
 /**
  * 静的テーブルをページネーション化する。ページネーションはBootstrap4に対応
- * @since 2022-1-20
+ * @since 2022-1-20 | 2022-2-9
  * @version 1.0.0
  * @license MIT
  * @auther amaraimusi
@@ -16,7 +16,7 @@ class PaginationRain{
 	 * - cur_page_num カレントページ番号	 0にすると先頭が初期アクティブ、任意の数値を入れるとそのぺージがアクティブ、 「last」入力すると最後のページがアクティブになる。
 	 * - pn_position ページネーションの位置 top:テーブルの上, bottom:テーブルの下(デフォルト)
 	 */
-	pagenation(xid, param){
+	constructor(xid, param){
 		
 		// パラメータにデフォルトをセット
 		if(param == null) param = {};
@@ -29,26 +29,44 @@ class PaginationRain{
 		param.searchCols = this._makeSearchCols(param.search_cols_str); // 検索対象列番リストを作成
 		
 		
-		let visible_row_count = param.visible_row_count;
-		//let pn_position = param.pn_position;■■■□□□■■■□□□
-		
-		let tbl = jQuery('#' + xid);
-		let trs = tbl.find('tbody tr');
-		let num_rows = trs.length;
-		if(num_rows == 0) return; //行数が0件ならページネーション作成を中断
-
-		param.num_rows = num_rows; // 全行数
-		param.all_page_count = Math.ceil(num_rows / visible_row_count); // 全ページ数
-		
-		if(param.search_placeholder == null){
-			param.search_placeholder = this._getSearchPlaceholder(tbl, param.searchCols); // 検索テキストボックスのplaceholderを作成
-		}
-		
 		// 初期カレントページにlast(最終ページ)が指定されている場合、最終ページ番号をセットする
 		if(param.cur_page_num == 'last'){
 			param.cur_page_num = param.all_page_count - 1;
 		}
-		//let cur_page_num = param.cur_page_num;■■■□□□■■■□□□
+
+		this.tbl = jQuery('#' + xid);
+		
+		if(param.search_placeholder == null){
+			param.search_placeholder = this._getSearchPlaceholder(this.tbl, param.searchCols); // 検索テキストボックスのplaceholderを作成
+		}
+		
+		// 検索ボックスのラッパー要素を作成
+		this.tbl.before(`<div id="${param.xid}_search_box_w"></div>`);
+		this.jq_search_box_w = jQuery(`#${param.xid}_search_box_w`);
+
+		this.param = param;
+		
+		this.refresh();
+		
+
+	}
+	
+	
+	/**
+	 * リフレッシュ | HTMLテーブルが動的に変更された後に呼び出す。
+	 */
+	refresh(){
+		let param = this.param;
+		let tbl = this.tbl;
+		let trs = tbl.find('tbody tr');
+		
+		let num_rows = trs.length;
+		if(num_rows == 0) return; //行数が0件ならページネーション作成を中断
+
+		let visible_row_count = param.visible_row_count;
+		
+		param.num_rows = num_rows; // 全行数
+		param.all_page_count = Math.ceil(num_rows / visible_row_count); // 全ページ数
 		
 		// データをHTMLテーブルから作成する
 		this.data = this._createDataFromHtmltable(trs);
@@ -65,7 +83,6 @@ class PaginationRain{
 		// ページネーション目次区分を作成する。
 		this._createPagenationDiv(tbl, this.data, param);
 
-		this.param = param;
 		this.trs =trs;
 	}
 	
@@ -377,7 +394,7 @@ class PaginationRain{
 			</div>
 		`;
 		
-		tbl.before(html);
+		this.jq_search_box_w.html(html);
 		
 		this.jq_search_tb = $('#' + param.search_tb_xid);
 		$('#' + param.search_btn_xid).click((evt)=>{
