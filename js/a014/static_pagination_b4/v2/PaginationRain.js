@@ -23,14 +23,14 @@ class PaginationRain{
 		if(param.visible_row_count == null ) param.visible_row_count = 8; // 表示行数
 		if(param.cur_page_num == null) param.cur_page_num = 0; // 初期カレント行番号
 		if(param.pn_position == null ) param.pn_position = 'bottom'; // ページネーションの位置 top:テーブルの上、bottomテーブルの下
-		if(param.search_cols_str == null ) param.search_cols_str = '1,2,3'; // 検索対象列番リスト文字列
+		if(param.search_cols_str == null ) param.search_cols_str = '1,2'; // 検索対象列番リスト文字列
 		
 		param['xid'] = xid;
 		param.searchCols = this._makeSearchCols(param.search_cols_str); // 検索対象列番リストを作成
 		
 		
 		let visible_row_count = param.visible_row_count;
-		let pn_position = param.pn_position;
+		//let pn_position = param.pn_position;■■■□□□■■■□□□
 		
 		let tbl = jQuery('#' + xid);
 		let trs = tbl.find('tbody tr');
@@ -48,18 +48,13 @@ class PaginationRain{
 		if(param.cur_page_num == 'last'){
 			param.cur_page_num = param.all_page_count - 1;
 		}
-		let cur_page_num = param.cur_page_num;
+		//let cur_page_num = param.cur_page_num;■■■□□□■■■□□□
 		
 		// データをHTMLテーブルから作成する
 		this.data = this._createDataFromHtmltable(trs);
-		
 
-		
 		// 検索ボックスを生成する
 		this._createSearchBox(param, tbl);
-
-		// ページネーションにクリックイベントを追加する
-		this._bindClickPagenation(param); 
 		
 		// ページネーションをデータに反映する
 		this.data = this._reflectPagenationInData(this.data, param);
@@ -67,8 +62,8 @@ class PaginationRain{
 		// テーブルに適用する
 		this._applyToTable(this.data, param);
 		
-		// ページネーション区分を作成する。
-		let pg_html = this._createPagenationDiv(tbl, this.data, param);
+		// ページネーション目次区分を作成する。
+		this._createPagenationDiv(tbl, this.data, param);
 
 		this.param = param;
 		this.trs =trs;
@@ -115,6 +110,9 @@ class PaginationRain{
 		
 		// テーブルに適用する
 		this._applyToTable(this.data, this.param);
+		
+		// 目次を再生成する
+		this._createPagenationDiv(this.tbl, this.data, this.param);
 
 	}
 	
@@ -150,9 +148,13 @@ class PaginationRain{
 		let visible_row_count = param.visible_row_count;// 表示行数
 		let cur_page_num = param.cur_page_num; // カレント行番号
 		
+		// 数値変換
+		visible_row_count = visible_row_count * 1;
+		cur_page_num = cur_page_num * 1;
+		
 		let threshold_start = cur_page_num * visible_row_count; // 閾値・スタート
 		let threshold_end = (cur_page_num + 1) * visible_row_count; // 閾値・終わり
-			
+		
 		let counter = 0;
 		for(let i in data){
 			let ent = data[i];
@@ -238,32 +240,7 @@ class PaginationRain{
 				tr.hide();
 			}
 		}
-		/*
-		nekos.eq(0)
-		検索によるフィルターマッピングデータの作成は可能
-	キーは連番、値は行番
-ページによる表示切替
-	マッピングデータをループ
-		検索一致フラグがONである場合
-			カウンタのインクリメント
-		カウンタが閾値の範囲外である場合
-			表示フラグをOFF
 
-	行番アクセスでtr要素の取得も可能だし、もう一つマッピング配列を作ることも可能だろう。
-
-		
-		trs.each((i,elm) => {
-			let tr = $(elm);
-			let threshold_start = cur_page_num * visible_row_count; // 閾値・スタート
-			let threshold_end = (cur_page_num + 1) * visible_row_count; // 閾値・終わり
-			if(threshold_start <= i & i < threshold_end){
-				tr.show();
-			}else{
-				tr.hide();
-			}
-
-		});
-		*/
 
 	}
 	
@@ -298,27 +275,90 @@ class PaginationRain{
 	}
 	
 	
-	// ページネーション区分を作成する。
+	/**
+	* ページネーション目次区分を作成する
+	* @param tbl HTMLテーブル要素
+	* @param data
+	* @param param
+	*/
 	_createPagenationDiv(tbl, data, param){
 		
+		// ページネーション目次区分が未作成なら作成する。
+		if(this.pagenationDiv == null){
+			let pagenation_div = param.xid + '_patination_div';
+			let pagenation_div_html = `<div id='${pagenation_div}'></div>`;
+			if(param.pn_position == 'top'){
+				tbl.before(pagenation_div_html);
+			}else{
+				tbl.after(pagenation_div_html);
+			}
+			this.pagenationDiv = jQuery('#' + pagenation_div);
+		}
+		
 		let items_html = '';
-		for(let page_no=0; page_no < param.all_page_count; page_no++){
+		let item_counter = 0; // 表示対象の項目カウンター
+		let page_no = 0; // ページカウンター
+		let visible_row_count = param.visible_row_count; // 表示行数
+		let page_item_class = param.xid + '_page_item'; // 項目のclass属性値
+
+		for(let i in data){
+			let ent = data[i];
+			if(ent.search_flg){
+				if(item_counter % visible_row_count == 0){
+					
+					let active_str = '';
+					if(page_no == param.cur_page_num) active_str = 'active';
 			
-			let active_str = '';
-			if(page_no == param.cur_page_num) active_str = 'active';
-			items_html += `<li class="page-item ${active_str}"><span class="page-link">${page_no + 1}</span></li>`;
+					items_html += `
+						<li class="page-item ${active_str} ${page_item_class}" data-page-no="${page_no}">
+							<span class="page-link">${page_no + 1}</span>
+						</li>
+						`;
+					page_no++;
+				}
+				item_counter++;
+			}
+			
 		}
 		
-		let html = `<ul id="${param.xid}_pagenation" class="pagination">${items_html}</ul>`;
-		
-		if(param.pn_position == 'top'){
-			tbl.before(html);
-		}else{
-			tbl.after(html);
+		if(this.toc){
+			this.toc.remove();
 		}
+		
+		let toc_xid = param.xid + '_toc'; // 目次要素のid属性値 table of contents
+		let toc_html = `<ul id="${toc_xid}" class="pagination">${items_html}</ul>`;
+		
+		this.pagenationDiv.html(toc_html);
+		this.jQPageItems = jQuery('.' + page_item_class); // 目次要素を取得
+		
+		
+		this.jQPageItems.click((evt)=>{
+			let jqItem = $(evt.currentTarget);
+			this._clickPageItem(jqItem);
+		});
 
 	}
 	
+	/**
+	* 項目クリックイベント
+	*/
+	_clickPageItem(jqItem){
+		this.jQPageItems.removeClass('active');
+		jqItem.addClass('active');
+		
+		let page_no = jqItem.attr('data-page-no');
+		
+		this.param.cur_page_num = page_no;
+		
+		//ページネーションをデータに反映する
+		this.data = this._reflectPagenationInData(this.data, this.param);
+
+		// テーブルに適用する
+		this._applyToTable(this.data, this.param);
+		
+		
+	}
+
 	
 	// 検索ボックスHTMLを作成する
 	_createSearchBox(param, tbl){
@@ -350,30 +390,6 @@ class PaginationRain{
 				this.search();
 			}
 		});			
-		
-	}
-	
-	
-	// ページネーションにクリックイベントを追加する
-	_bindClickPagenation(param){
-		let pgItems = jQuery(`#${param.xid}_pagenation li`);
-		this.pgItems = pgItems;
-		pgItems.each((i,elm) => {
-			
-				// ページ番号要素をクリックしたときのイベント
-				jQuery(elm).click(evt=>{
-					this.pgItems.removeClass('active');
-					let cur_page_num = this.param.cur_page_num;
-					let visible_row_count = this.param.visible_row_count;
-					cur_page_num = i;
-					this._applyToTable(this.trs, cur_page_num, visible_row_count);
-					this.param.cur_page_num = cur_page_num;
-					
-					var item = $(evt.currentTarget);
-					item.addClass('active');
-					
-				});
-			});
 		
 	}
 	
