@@ -8,7 +8,16 @@
  */
 class ModalCat{
 	
-	modalize(xid){
+	/**
+	 * モーダル化する
+	 * @param xid モーダル化する要素のid属性値
+	 * @param 
+	 *    - width_rate モーダルの幅率 60～80くらいの範囲で指定する
+	 */
+	modalize(xid, param){
+		
+		if(param==null) param ={};
+		if(param.width_rate==null) param.width_rate = 80;
 		
 		let main_xid = xid + '_js_main'; // xidで指定した要素のラップ要素（指定要素の親要素）
 		let close_xid = xid + '_js_modal_close';// id属性名：背景クリックによる閉じる
@@ -45,7 +54,7 @@ class ModalCat{
 			position: 'absolute',
 			top: '50%',
 			transform: 'translate(-50%,-50%)',
-			width: '60%',
+			width: param.width_rate + '%',
 		});
 
 		this.main = main;

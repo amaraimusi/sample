@@ -3,7 +3,7 @@ var modalCat;
 $(()=>{
 	
 	modalCat = new ModalCat();
-	modalCat.modalize('sample_modal');
+	modalCat.modalize('sample_modal', {width_rate:85});
 	
 });
 
