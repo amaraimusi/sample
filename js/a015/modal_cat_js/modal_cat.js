@@ -1,8 +1,8 @@
 
 /**
  * モーダル化ライブラリ
- * @since 2022-1-21
- * @version 1.0.0
+ * @since 2022-1-21 | 2022-2-11
+ * @version 1.0.1
  * @auther amaraimusi
  * @license MIT
  */
@@ -13,6 +13,7 @@ class ModalCat{
 	 * @param xid モーダル化する要素のid属性値
 	 * @param 
 	 *    - width_rate モーダルの幅率 60～80くらいの範囲で指定する
+	 *    - closeBackCallback 背景と閉じたときに実行するコールバック関数（省略可】
 	 */
 	modalize(xid, param){
 		
@@ -30,6 +31,9 @@ class ModalCat{
 		main.prepend(bg_close_html);
 		
 		let bgClose = jQuery(main.find('#' + close_xid)); // 背景クリック閉じる用要素
+		
+		this.closeBackCallback = param.closeBackCallback; // 背景閉じるコールバック
+		
 		
 		main.css({
 			display: 'none',
@@ -61,6 +65,9 @@ class ModalCat{
 
 		bgClose.on('click',()=>{
 			this.main.fadeOut();
+			if(this.closeBackCallback){
+				this.closeBackCallback();
+			}
 			return false;
 		});
 		
