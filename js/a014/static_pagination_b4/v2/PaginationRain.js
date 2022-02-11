@@ -13,8 +13,9 @@ class PaginationRain{
 	 * @param xid string テーブル要素のid属性値
 	 * @param {} param パラメータ
 	 * - visible_row_count 表示行数
-	 * - cur_page_num カレントページ番号	 0にすると先頭が初期アクティブ、任意の数値を入れるとそのぺージがアクティブ、 「last」入力すると最後のページがアクティブになる。
 	 * - pn_position ページネーションの位置 top:テーブルの上, bottom:テーブルの下(デフォルト)
+	 * - search_cols_str 検索対象列番リスト文字列　’0,3,5’と入力するとテーブルの1列目、4列名、6列目が検索対象になる。
+	 * - last_page_flg 最後ページフラグ  1をセットすると初期表示または検索直後のページが末尾ページになる。
 	 */
 	constructor(xid, param){
 		
@@ -24,15 +25,11 @@ class PaginationRain{
 		if(param.cur_page_num == null) param.cur_page_num = 0; // 初期カレント行番号
 		if(param.pn_position == null ) param.pn_position = 'bottom'; // ページネーションの位置 top:テーブルの上、bottomテーブルの下
 		if(param.search_cols_str == null ) param.search_cols_str = '1,2'; // 検索対象列番リスト文字列
+		if(param.last_page_flg == null ) param.last_page_flg = 0; // 最後ページフラグ  0:先頭ページ, 1:末尾ページ
+		
 		
 		param['xid'] = xid;
 		param.searchCols = this._makeSearchCols(param.search_cols_str); // 検索対象列番リストを作成
-		
-		
-		// 初期カレントページにlast(最終ページ)が指定されている場合、最終ページ番号をセットする
-		if(param.cur_page_num == 'last'){
-			param.cur_page_num = param.all_page_count - 1;
-		}
 
 		this.tbl = jQuery('#' + xid);
 		
@@ -67,6 +64,13 @@ class PaginationRain{
 		
 		param.num_rows = num_rows; // 全行数
 		param.all_page_count = Math.ceil(num_rows / visible_row_count); // 全ページ数
+		
+				
+		// 初期カレントページにlast(最終ページ)が指定されている場合、最終ページ番号をセットする
+		param.cur_page_num = 0;
+		if(param.last_page_flg){
+			param.cur_page_num = param.all_page_count - 1;
+		}
 		
 		// データをHTMLテーブルから作成する
 		this.data = this._createDataFromHtmltable(trs);

@@ -1,7 +1,11 @@
 let paginationRain
 $(() =>{
 
-	paginationRain = new PaginationRain('tbl1',{cur_page_num:0, search_cols_str:'1,2,3'});
+	paginationRain = new PaginationRain('tbl1',{
+		cur_page_num:0, 
+		search_cols_str:'1,2,3',
+		last_page_flg:0,
+		});
 
 });
 
