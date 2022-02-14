@@ -1,8 +1,13 @@
 let jsQrEx;
 $(()=>{
-	jsQrEx = new JsQrEx('qr_canvas', callback, {
-		'config_xid':'qr_read_config', // 設定区分要素
-	});
+	jsQrEx = new JsQrEx(
+			'qr_canvas', 
+			(url)=>{
+				callback(url);
+			}, 
+			 'qr_read_config'
+		);
+	
 });
 
 function callback(value){

@@ -13,6 +13,7 @@ class JsQrEx{
 	* コンストラクタ
 	* @param string canvas_xid canvasタグ要素のid属性値
 	* @param function readCallback QRコードの読込成功時に呼び出されるコールバック
+	* @param string config_xid 設定区分要素のxid(省略可能）)
 	* @param object param 下記のプロパティは省略可能
 	* 	- cvs_width int キャンバスの横幅
 	* 	- cvs_height int キャンバスの縦幅
@@ -21,13 +22,14 @@ class JsQrEx{
 	* 	- intarval int setTimerの再帰呼出間隔
 	* 	- errCallback function エラーコールバック←カメラ不許可時に呼び出される。
 	*/
-	constructor(canvas_xid,readCallback, param){
+	constructor(canvas_xid, readCallback, config_xid, param){
 
 		this.active = false;
 		if(canvas_xid==null) new Error('Sytem error:canvas_xid is empty!');
 		if(param==null) param = {};
 		this.readCallback = readCallback;
 		if(typeof readCallback != 'function') throw new Error('System err:readCallback is not function');
+		this.config_xid = config_xid;
 		
 		param = this._setParam(param);
 		
@@ -56,7 +58,7 @@ class JsQrEx{
 		cvs.setAttribute("width",0);
 		cvs.setAttribute("height",0);
 		
-		this._initConfig(param); // 設定区分の初期化と作成
+		this._initConfig(config_xid); // 設定区分の初期化と作成
 		
 
 		this.video = video;
@@ -76,22 +78,20 @@ class JsQrEx{
 			'camera_height':480,
 			'intarval':50,// ms
 			'read_size_rate':0.5,
-			'config_xid':'', // 設定区分のid属性値  未セットだと設定区分を作成しない。
 		};
 		return defParam;
 	}
 	
 	// 設定区分の初期化と作成
-	_initConfig(param){
-		if(param.config_xid == null) return;
-		let config_xid = param.config_xid;
+	_initConfig(config_xid){
+		if(config_xid == null) return;
 		let config_btn_xid = config_xid + '_config_btn';
 		let config_con_xid = config_xid + '_content';
 		let read_size_rate_xid = config_xid + '_size_rate_xid';
 		let apply_btn_xid  = config_xid + '_apply_btn';
 		let def_btn_xid  = config_xid + '_def_btn';
 		
-		this.jQConfig = jQuery('#' + config_xid); 
+		this.jQConfig = jQuery('#' + config_xid);
 		
 		let html = `
 			<button id="${config_btn_xid}" class="btn btn-outline-secondary btn-sm">設定</button>
