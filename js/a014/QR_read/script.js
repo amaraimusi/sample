@@ -1,10 +1,12 @@
 let jsQrEx;
 $(()=>{
-	jsQrEx = new JsQrEx('qr_canvas', callback);
+	jsQrEx = new JsQrEx('qr_canvas', callback, {
+		'config_xid':'qr_read_config', // 設定区分要素
+	});
 });
 
 function callback(value){
-	$('#res').html(value);
+	$('#res').append(value);
 	console.log(value);
 }
 
