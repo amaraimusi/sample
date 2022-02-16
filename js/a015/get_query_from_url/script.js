@@ -30,7 +30,6 @@ function getQueryFromURL(url){
 		
 	if(q_str =='' || q_str==null) return {};
 	
-	q_str = q_str.substring(1, q_str.length);
 	let ary = q_str.split('&');
 	let data = {};
 	for(let i=0 ; i<ary.length ; i++){
