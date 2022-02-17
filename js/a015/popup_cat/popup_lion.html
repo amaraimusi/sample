@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>時間差ポップアップ | PopupLion.js  | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+	<script src="/note_prg/js/jquery.min.js"></script>	
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="PopupCat.js"></script>
+	<script src="PopupLion.js"></script>
+	<script src="script_lion.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>時間差ポップアップ | PopupLion.js  | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>Demo</h2>
+<ol>
+	<li>青いボタンを適当に何個か押した後、緑ボタンを押すすとポップアップが表示される。</li>
+	<li>青いボタンを適当に何個か押した後、ブラウザをリロードするとポップアップが表示される。←主な目的</li>
+	<li>表示中のポップアップをクリックすると即ポップアップを消去</li>
+</ol>
+<br>
+<br>
+
+
+ポップアップをセットする。
+<div>
+	<button type="button" onclick="addPopupCat('赤猫', 4)" class="btn btn-primary">赤猫</button>
+	<button type="button" onclick="addPopupCat('灰猫', 2)" class="btn btn-primary">灰猫</button>
+	<button type="button" onclick="addPopupCat('猫年寄り', 17)" class="btn btn-primary">猫年寄り</button>
+	<button type="button" onclick="addPopupCat('茶白', 5)" class="btn btn-primary">茶白</button>
+	<button type="button" onclick="addPopupDog('おじいさんの犬', '臭くない')" class="btn btn-primary">おじいさんの犬</button>
+	<button type="button" onclick="addPopupDog('きれいな犬', '臭い')" class="btn btn-primary">きれいな犬</button>
+</div>
+
+<div style="margin-top:30px;">
+	<button type="button" onclick="releasePopup()" class="btn btn-success">ポップアップを解放表示する</button>
+</div>
+
+
+
+
+<div  id="example1" style="padding:20px;width:25vw;height:25vh;background-color:#b5cffb;display:none">
+	<div>猫名：<span id="cat_name"> - </span></div>
+	<div>年齢：<span id="cat_age"> - </span></div>
+</div>
+
+<div  id="example2" style="padding:20px;width:30vw;height:20vh;background-color:#b0da98;display:none">
+	<div>イヌ名：<span id="dog_name"> - </span></div>
+	<div>臭さ：<span class="smell"> - </span><span class="smell text-primary"> - </span><span class="smell text-danger"> - </span></div>
+	
+</div>
+
+
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>時間差ポップアップ | PopupLion.js </li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2022-2-17</div>
+</body>
+</html>

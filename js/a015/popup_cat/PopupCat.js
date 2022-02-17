@@ -22,6 +22,7 @@ class PopupCat{
 	 *      - z_index     ポップアップ要素の深度
 	 *      - fadein_time     フェードイン時間（ms)
 	 *      - set_timeout_time     ポップアップ表示後から消えるまでの時間(ms)
+	 *      - popupClickCallback     ポップアップクリックコールバック
 	 * 
 	 */
 	popupize(xid, param){
@@ -31,6 +32,7 @@ class PopupCat{
 		if(param.z_index==null) param.z_index='2';
 		if(param.fadein_time==null) param.fadein_time=1000;
 		if(param.set_timeout_time==null) param.set_timeout_time=1500;
+		this.popupClickCallback = param.popupClickCallback;
 
 		let css_left = '0px';
 		let css_top = '0px';
@@ -72,10 +74,14 @@ class PopupCat{
 		
 		this.popupElm.click((evt)=>{
 			let elm = $(evt.currentTarget);
-			if(this.afterCallback){
-				this.afterCallback();
-				this.after_cb_flg = true;
-			} 
+			console.log('閉じられたクリック');//■■■□□□■■■□□□
+			if(this.popupClickCallback){
+				this.popupClickCallback();
+			}
+//			if(this.afterCallback){
+//				this.afterCallback();
+//				this.aflter_cb_flg = true;
+//			} 
 			elm.hide();
 		});
 		
@@ -97,17 +103,16 @@ class PopupCat{
 	pop(callback){
 		
 		this.afterCallback = callback;
-		
+		this.after_cb_flg = false;
 		
 		this.popupElm.hide();
 		this.popupElm.fadeIn(this.param.fadein_time, ()=>{
 			window.setTimeout(()=>{
 				this.popupElm.hide();
-				if(this.after_cb_flg == false){
-					if(this.afterCallback) this.afterCallback();
-				}else{
-					this.after_cb_flg == true;
-				}
+				if(this.afterCallback){
+					this.afterCallback();
+				} 
+				
 			}, this.param.set_timeout_time);
 		});
 	}
