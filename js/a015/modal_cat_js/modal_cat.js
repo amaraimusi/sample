@@ -1,8 +1,8 @@
 
 /**
  * モーダル化ライブラリ
- * @since 2022-1-21 | 2022-2-11
- * @version 1.0.1
+ * @since 2022-1-21 | 2022-2-17
+ * @version 1.1.0
  * @auther amaraimusi
  * @license MIT
  */
@@ -32,7 +32,9 @@ class ModalCat{
 		
 		let bgClose = jQuery(main.find('#' + close_xid)); // 背景クリック閉じる用要素
 		
+		this.openCallback = param.openCallback; // モーダルオープン・コールバック
 		this.closeBackCallback = param.closeBackCallback; // 背景閉じるコールバック
+		this.closeCallback = param.closeCallback; // 閉じるコールバック
 		
 		
 		main.css({
@@ -68,16 +70,33 @@ class ModalCat{
 			if(this.closeBackCallback){
 				this.closeBackCallback();
 			}
+			if(this.closeCallback){
+				this.closeCallback(); // 閉じるコールバック → 実行
+			}
 			return false;
 		});
 		
 	}
 	
 	open(){
-		this.main.fadeIn();
+		
+		this.main.fadeIn(
+			"slow",
+			()=>{
+				if(this.openCallback){
+					this.openCallback(); // モーダルオープン・コールバック → 実行
+				}
+			});
+		
 	}
 	
 	close(){
-		this.main.fadeOut();
+		this.main.fadeOut(
+			"slow",
+			()=>{
+				if(this.closeCallback){
+					this.closeCallback(); // 閉じるコールバック → 実行
+				}
+			});
 	}
 }

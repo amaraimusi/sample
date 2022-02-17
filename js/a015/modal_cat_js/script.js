@@ -5,8 +5,16 @@ $(()=>{
 	modalCat = new ModalCat();
 	modalCat.modalize('sample_modal', {
 		width_rate:85,
-		closeBackCallback:closeBack,
-		});
+		openCallback:()=>{
+			$('#res1').append('モーダルオープン・コールバック実行<br>');
+		},
+		closeBackCallback:()=>{
+			$('#res1').append('背景クリックコールバック：背景クリックでモーダルが閉じられました。<br>');
+		},
+		closeCallback:()=>{
+			$('#res1').append('閉じるコールバック実行<br>');
+		},
+	});
 	
 });
 
@@ -26,5 +34,3 @@ function closeBack(){
 	$('#res1').append('背景クリックでモーダルが閉じられました。');
 }
 	
-
-res1
