@@ -1,8 +1,8 @@
 
 /**
  * モーダル化ライブラリ
- * @since 2022-1-21 | 2022-2-17
- * @version 1.1.0
+ * @since 2022-1-21 | 2022-2-18
+ * @version 1.1.1
  * @auther amaraimusi
  * @license MIT
  */
@@ -24,6 +24,7 @@ class ModalCat{
 		let close_xid = xid + '_js_modal_close';// id属性名：背景クリックによる閉じる
 
 		let content = jQuery('#' + xid);
+		this.content = content;
 		content.wrap(`<div id='${main_xid}'></div>`); // モーダル化制御のためmain要素でラッピング
 		let main = jQuery('#' + main_xid);
 		
@@ -79,7 +80,7 @@ class ModalCat{
 	}
 	
 	open(){
-		
+		this.content.show();
 		this.main.fadeIn(
 			"slow",
 			()=>{

@@ -2,7 +2,7 @@
 let g_popupLion;
 $(()=>{
 
-	g_popupLion = new PopupLion();
+	g_popupLion = new PopupLion(null, {set_timeout_time:3000});
 	
 	g_popupLion.releasePopup();
 	
