@@ -5,8 +5,8 @@
  *     ポップアップの追加とポップアップの表示をタイミングをずらして実行できる。
  *     主な使い方→ ポップアップを追加してブラウザリロードした後、ポップアップを表示。
  *     PopupCat.jsに依存している。
- * @since 2022-2-17
- * @version 1.0.0
+ * @since 2022-2-17 | 2022-2-19
+ * @version 1.1.0
  * @auther amaraimusi
  * @license MIT
  */
@@ -46,6 +46,7 @@ class PopupLion{
 		let box = {
 			'xid':xid,
 			'data':data,
+			'show_done_flg':0, // 表示済みフラグ
 		}
 		this.boxs.push(box);
 		
@@ -63,12 +64,23 @@ class PopupLion{
 			this._endAllPopup(); // 全てのポップアップ表示完了
 			return;
 		}
-			
-		let box = this.boxs[this.release_index];
+		
+		// ポップアップ表示中にページ遷移が行われた場合の対策
+		let box = null;
+		for(let i = this.release_index; i <  this.boxs.length; i++){
+			if(this.boxs[i].show_done_flg == 0){
+				box = this.boxs[i];
+				this.release_index = i;
+				break;
+			}
+		}
+		
 		if(box == null){
 			this._endAllPopup();
 			return;
 		}
+		
+		box.show_done_flg = 1; // 表示済みにする
 		let xid = box.xid;
 		let popupCat = this._getPopupCat(xid);
 		let popElm = popupCat.getPopupElm();
@@ -82,6 +94,8 @@ class PopupLion{
 		}
 		
 		this.release_index++;
+		
+		this._saveLs(this.boxs);
 
 		popupCat.pop(()=>{
 			this.releasePopup();
