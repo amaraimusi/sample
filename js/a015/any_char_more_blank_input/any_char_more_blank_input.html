@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HTML5のバリデーション | 8文字以上且つ空入力可能 | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+	<script src="/note_prg/js/jquery.min.js"></script>	
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="script.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>HTML5のバリデーション | 8文字以上且つ空入力可能 | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>Demo</h2>
+<input type="text" id="pw1" value="" pattern="^[0-9A-Za-z]{8,24}" value=""  maxlength="24"  class="valid form-control" title="8～24文字の半角英数字で入力してください。" />
+<br>
+<button type="button" onclick="test()" class="btn btn-success">TEST</button><br>
+<br>
+<div id="res" class="text-success"></div>
+
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>HTML5のバリデーション | 8文字以上且つ空入力可能</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2022-2-24</div>
+</body>
+</html>
