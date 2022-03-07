@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>いくつかのソートを検証 | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+	<script src="/note_prg/js/jquery.min.js"></script>	
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="script.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>いくつかのソートを検証 | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>Demo</h2>
+<button type="button" class="btn btn-primary" onclick="test1();">テスト</button>
+<div id="res"></div>
+
+<table id="table1" class="tbl2">
+	<thead>
+		<tr><th>id</th><th>数値</th><th>文字列</th><th>時刻</th><th>日付</th><th>bool</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>100</td><td>123</td><td>ネコ</td><td>12:12</td><td>2022-3-3</td><td>TRUE</td></tr>
+		<tr><td>101</td><td>1</td><td>abc</td><td>12:13</td><td>2022-3-2</td><td>FALSE</td></tr>
+		<tr><td>102</td><td>0.01</td><td>100</td><td>12:11</td><td>2022-3-1</td><td>TRUE</td></tr>
+		<tr><td>103</td><td>0.1</td><td>0</td><td>12:12:12</td><td>2023-3-1</td><td>FALSE</td></tr>
+		<tr><td>104</td><td>-0.5</td><td></td><td>12:12:11</td><td>2021-3-4</td><td>TRUE</td></tr>
+		<tr><td>105</td><td>-3</td><td>-5</td><td>1:01:01</td><td>12:12</td><td>FALSE</td></tr>
+		<tr><td>106</td><td>200</td><td>12:20</td><td>1:1</td><td>2022-3-2 12:12:12</td><td>TRUE</td></tr>
+		<tr><td>107</td><td>4000</td><td>2012-12-12 12:12:12</td><td></td><td>2022-3-2 1:01:01</td><td>TRUE</td></tr>
+		<tr><td>108</td><td>99999</td><td>キャットフード</td><td>12:13:11</td><td>2022-3-2 1:01:00</td><td>FALSE</td></tr>
+		<tr><td>109</td><td>999999999999999</td><td>dog</td><td></td><td>2022-3-2 1:01:02</td><td>0</td></tr>
+		<tr><td>110</td><td>125</td><td>犬のボギー</td><td>11:12</td><td>2022-3-2 5:01:00</td><td>1</td></tr>
+		<tr><td>111</td><td>2</td><td>ライオン</td><td>11:11</td><td></td><td></td></tr>
+		<tr><td>112</td><td>2.1</td><td>1:20</td><td>13:1</td><td>2021-12-12</td><td>1</td></tr>
+		<tr><td>113</td><td></td><td>2:20</td><td>2012-12-13 12:10:12</td><td>12:11</td><td>TRUE</td></tr>
+		<tr><td>114</td><td>0</td><td>2012-12-13 12:12:12</td><td>2022-12-13 12:14:12</td><td>12:13</td><td>FALSE</td></tr>
+		<tr><td>115</td><td>8</td><td>2012-12-13</td><td>12:14</td><td>2022-2-29</td><td>TRUE</td></tr>
+
+	</tbody>
+</table>
+
+
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>いくつかのソートを検証</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2022-3-3</div>
+</body>
+</html>

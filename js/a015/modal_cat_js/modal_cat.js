@@ -85,24 +85,26 @@ class ModalCat{
 		
 	}
 	
-	open(){
+	open(param){
+		this.openParam = param;
 		this.content.show();
 		this.main.fadeIn(
 			"slow",
 			()=>{
 				if(this.openCallback){
-					this.openCallback(); // モーダルオープン・コールバック → 実行
+					this.openCallback(this.openParam); // モーダルオープン・コールバック → 実行
 				}
 			});
 		
 	}
 	
-	close(){
+	close(param){
+		this.closeParam = param;
 		this.main.fadeOut(
 			"slow",
 			()=>{
 				if(this.closeCallback){
-					this.closeCallback(); // 閉じるコールバック → 実行
+					this.closeCallback(this.closeParam); // 閉じるコールバック → 実行
 				}
 			});
 	}
