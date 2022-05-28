@@ -21,10 +21,23 @@
 <div class="container">
 
 
-<h2>Demo1</h2>
-<button type="button" class="btn btn-primary" onclick="test1();">テスト1</button><br>
-<br>
+<h2>Demo3</h2>
 
+<div>
+サービスワーカーを介さず直接フロントエンドからバックエンドのFetch APIによる非同期通信をする。（いつもの非同期通信）
+するとサービスワーカー内のfetchイベントが発動する。<br>
+<button type="button" class="btn btn-primary" onclick="test2();">テスト2:fetchのテスト</button>
+<aside>
+（ログはブラウザのコンソールに出力。Windows+ChromeならF12キーでレスポンスを確認してね。）
+</aside>
+</div>
+
+<div style="margin-top:2em;">
+サービスワーカーからバックエンドへFetch APIによる非同期通信を行う。
+サービスワーカーからも非同期通信ができることができる。ただし、Fetch APIしか使えず従来のXHRは使えない。<br>
+なお、この非同期通信を行ったときもサービスワーカー内のfetchイベントが発動する。<br>
+<button type="button" class="btn btn-primary" onclick="test3();">テスト3:fetchのテスト</button>
+</div>
 
 <div class="yohaku"></div>
 
