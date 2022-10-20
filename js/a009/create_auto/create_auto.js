@@ -8,7 +8,7 @@
 function execution1(){
 
 	// データのエンティティキー
-	var keys = ['wamei', 'field', 'type', 'long', 'def'];// 例→ ネコ名	neko_name	varchar	255	NULL
+	var keys = ['field', 'type', 'not_null', 'def', 'wamei'];// 例→ 	neko_name	varchar(255)	1	NULL ネコ名
 	
 	// 貼り付けテキストエリアからテキストを取得する
 	var text = $('#pasting_csv').val();
@@ -46,10 +46,10 @@ function execution1(){
 ${field_codes_str}
 			sort_no int(11) DEFAULT '0' COMMENT '順番',
 			delete_flg tinyint(1) DEFAULT '0' COMMENT '無効フラグ',
-			update_user varchar(50) DEFAULT NULL COMMENT '更新者',
+			update_user_id int(11) DEFAULT NULL COMMENT '更新者ユーザーID',
 			ip_addr varchar(40) DEFAULT NULL COMMENT 'IPアドレス',
-			created datetime DEFAULT NULL COMMENT '生成日時',
-			modified timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日'
+			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '生成日時',
+			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日'
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 		
 		ALTER TABLE ${tbl_name} ADD PRIMARY KEY (id);
@@ -82,21 +82,32 @@ function _getFieldCodesStr(data){
 		}else{
 			def = "'" + def + "'";
 		}
-	
-		var long = ent['long'];
-		if(long == null || long==''){
-			long = '';
-		}else{
-			long = '(' + long + ')';
-		}
 
-		var code = `${ent.field} ${ent.type}${long} DEFAULT ${def} COMMENT '${ent.wamei}'`;
+		var not_null = 'NOT NULL';
+		if(_empty(ent.not_null)) not_null = '';
+
+		var code = `${ent.field} ${ent.type} ${not_null} DEFAULT ${def} COMMENT '${ent.wamei}'`;
 		code = "\t\t\t" + code + ", \n";
 		codes_str += code;
 	}
 	return codes_str;
 }
 
+
+	// Check empty.
+function _empty(v){
+	if(v == null || v == '' || v=='0'){
+		return true;
+	}else{
+		if(typeof v == 'object'){
+			if(Object.keys(v).length == 0){
+				return true;
+			}
+		}
+		return false;
+	}
+}
+	
 
 
 /**

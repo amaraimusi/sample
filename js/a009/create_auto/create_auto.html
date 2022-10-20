@@ -13,17 +13,17 @@
 
 	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
 	<script src="/note_prg/js/bootstrap.min.js"></script>
-	<script src="create_auto.js"></script>
+	<script src="create_auto.js?v=1.2.0"></script>
 </head>
 <body>
 <div id="header" ><h1>CREATE文:自動生成ツール | ワクガンス</h1></div>
 <div class="container">
 
 
-
+Excelやスプレットシートの表からフィールド名, 型,NOT NULL, デフォルト, 和名（コメント）を貼り付けてください。
 <textarea id="pasting_csv" class="form-control" rows="6" 
-placeholder="Excel表から和名, フィールド名, 型, 	長さ, デフォルト, を貼り付けてください。" 
-title="CSVを貼り付けてください。Excelからそのまま貼り付け可能。タブ区切りのデータ。">ネコ数値&#x0009;neko_val&#x0009;int&#x0009;&#x0009;NULL&#13;ネコ名&#x0009;neko_name&#x0009;varchar&#x0009;255&#x0009;NULL&#13;ネコ日付&#x0009;neko_date&#x0009;date&#x0009;&#x0009;NULL&#13;ネコ種別&#x0009;neko_group&#x0009;int&#x0009;&#x0009;NULL&#13;ネコ日時&#x0009;neko_dt&#x0009;datetime&#x0009;&#x0009;NULL&#13;ネコフラグ&#x0009;neko_flg&#x0009;tinyint&#x0009;4&#x0009;0&#13;画像ファイル名&#x0009;img_fn&#x0009;varchar&#x0009;256&#x0009;NULL&#13;備考&#x0009;note&#x0009;text&#x0009;&#x0009;NULL</textarea>
+placeholder="Excelやスプレットシートの表からフィールド名, 型,NOT NULL, デフォルト, 和名（コメント）を貼り付けてください。" 
+title="CSVを貼り付けてください。Excelからそのまま貼り付け可能。タブ区切りのデータ。">neko_val&#x0009;int&#x0009;&#x0009;100&#x0009;ネコ数値&#13;neko_name&#x0009;varchar(255)&#x0009;&#x0009;&#x0009;ネコ名&#13;neko_date&#x0009;date&#x0009;&#x0009;&#x0009;ネコ日付&#13;neko_group&#x0009;int&#x0009;1&#x0009;0&#x0009;ネコ種別&#13;neko_dt&#x0009;datetime&#x0009;&#x0009;&#x0009;ネコ日時&#13;neko_flg&#x0009;tinyint(1)&#x0009;1&#x0009;0&#x0009;ネコフラグ&#13;img_fn&#x0009;varchar(255)&#x0009;&#x0009;&#x0009;画像ファイル名&#13;note&#x0009;text&#x0009;&#x0009;&#x0009;備考</textarea>
 <br>
 <input type="text" id="tbl_name" value='animals' placeholder="テーブル名" /><br>
 <input type="button" value="コード作成" onclick="execution1()" class="btn btn-primary" />
