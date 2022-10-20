@@ -77,16 +77,21 @@ function _getFieldCodesStr(data){
 		var ent = data[i];
 		
 		var def = ent['def'];
-		if(def == null || def=='NULL' || def==''){
-			def = 'NULL';
+		var def_str = '';
+		if(def == 'null' || def=='NULL'){
+			def_str = 'DEFAULT NULL';
+		}else if(/^([1-9]\d*|0)$/.test(def)){
+			def_str = 'DEFAULT ' + def;
+		}else if(!_empty(def)){
+			def_str = "DEFAULT '" + def + "'";
 		}else{
-			def = "'" + def + "'";
+			
 		}
 
 		var not_null = 'NOT NULL';
 		if(_empty(ent.not_null)) not_null = '';
 
-		var code = `${ent.field} ${ent.type} ${not_null} DEFAULT ${def} COMMENT '${ent.wamei}'`;
+		var code = `${ent.field} ${ent.type} ${not_null} ${def_str} COMMENT '${ent.wamei}'`;
 		code = "\t\t\t" + code + ", \n";
 		codes_str += code;
 	}
