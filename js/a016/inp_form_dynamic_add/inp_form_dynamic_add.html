@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Vue.js 入力フォーム動的追加(一覧の行追加) | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+	<script src="/note_prg/js/jquery.min.js"></script>	
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="script.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>Vue.js 入力フォーム動的追加(一覧の行追加) | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>Demo</h2>
+<div id="app">
+
+	<table class="tbl2">
+		<thead>
+			<tr><th>動物名</th><th>数値</th><th>日付</th><th>種類</th></tr>
+		</thead>
+		<tbody>
+		  <tr v-for="ent in data">
+		    <td>{{ ent.animal_name }} <input type="text" v-model="ent.animal_name" ></td>
+		    <td>{{ ent.value }}</td>
+		    <td>{{ ent.animal_date }}</td>
+		    <td>
+		    	<select v-model="ent.animal_type">
+		    		<option v-for="(value, key) in animalTypeList" v-bind:value="key">{{value}}</option>
+		    	</select>
+		    </td>
+		  </tr>
+		</tbody>
+	</table>
+	
+	<div style="margin-top:20px;">
+		<p>新規入力フォーム</p>
+		<form>
+			<div>動物名<input type="text" v-model="createEnt.animal_name"/></div>
+			<div>数値<input type="number" v-model="createEnt.value" /></div>
+			<div>日付<input type="date" v-model="createEnt.animal_date" /></div>
+			<div>
+				<select v-model="createEnt.animal_type">
+					<option v-for="(value, key) in animalTypeList" v-bind:value="key">{{value}}</option>
+				</select>
+			</div>
+			<div><button type="button" class="btn btn-success" onclick="store()">追加</button></div>
+		</form>
+	</div>
+	
+</div>
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>Vue.js 入力フォーム動的追加(一覧の行追加)</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2022-10-23</div>
+</body>
+</html>
