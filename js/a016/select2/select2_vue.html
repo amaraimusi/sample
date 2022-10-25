@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>検索機能付きセレクトボックス | select2とVue.jsの組み合わせを検証 | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+	<link href="css/select2.min.css" rel="stylesheet">
+	
+	<script src="/note_prg/js/jquery.min.js"></script>	
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script src="/note_prg/js/vue.min.js"></script>
+	<script src="script_vue.js"></script>
+
+</head>
+<body>
+<div id="header" ><h1>検索機能付きセレクトボックス | select2とVue.jsの組み合わせを検証 | ワクガンス</h1></div>
+<div class="container">
+
+
+<h2>Demo</h2>
+
+<div class="text-danger">select2とVue.jsは競合するため併用できない。Vue.jsのテンプレートとコンポーネントを利用しなければならない。</div>
+
+<div id="app1">
+<div>ID→{{animal_id}}</div>
+
+<select name="" id="animal_select" v-model="animal_id">
+	<option >-- レッドデータブック --</option>
+	<option value="1">アベサンショウウオ</option>
+	<option value="2">アカイシサンショウウオ</option>
+	<option value="3">ハクバサンショウウオ</option>
+	<option value="4">ホクリクサンショウウオ</option>
+	<option value="5">オオイタサンショウウオ</option>
+	<option value="6">オオダイガハラサンショウウオ</option>
+	<option value="7">オキサンショウウオ</option>
+	<option value="8">カスミサンショウウオ</option>
+	<option value="9">トウキョウサンショウウオ</option>
+	<option value="10">ベッコウサンショウウオ</option>
+	<option value="11">キタサンショウウオ</option>
+	<option value="12">イシヅチサンショウウオ</option>
+	<option value="13">クロサンショウウオ</option>
+	<option value="14">コガタブチサンショウウオ</option>
+	<option value="15">ツシマサンショウウオ</option>
+	<option value="16">トウホクサンショウウオ</option>
+	<option value="17">ヒダサンショウウオ</option>
+	<option value="18">ブチサンショウウオ</option>
+	<option value="19">エゾサンショウウオ</option>
+	<option value="20">オオサンショウウオ</option>
+	<option value="21">イボイモリ</option>
+	<option value="22">アカハライモリ</option>
+	<option value="23">シリケンイモリ</option>
+	<option value="24">ミヤコヒキガエル</option>
+	<option value="25">アマミイシカワガエル</option>
+	<option value="26">オキナワイシカワガエル</option>
+	<option value="27">コガタハナサキガエル</option>
+	<option value="28">オットンガエル</option>
+	<option value="29">ナゴヤダルマガエル</option>
+	<option value="30">ナミエガエル</option>
+	<option value="31">ホルストガエル</option>
+	<option value="32">アマミハナサキガエル</option>
+	<option value="33">ハナサキガエル</option>
+	<option value="34">ヤエヤマハラブチガエル</option>
+	<option value="35">アマミアカガエル</option>
+	<option value="36">オキタゴガエル</option>
+	<option value="37">ヤクシマタゴガエル</option>
+	<option value="38">トウキョウダルマガエル</option>
+	<option value="39">チョウセンヤマアカガエル</option>
+	<option value="40">ツシマアカガエル</option>
+	<option value="41">トノサマガエル</option>
+	<option value="42">リュウキュウアカガエル</option>
+	<option value="43">アカウミガメ</option>
+	<option value="44">タイマイ</option>
+	<option value="45">アオウミガメ</option>
+	<option value="47">リュウキュウヤマガメ</option>
+</select>
+
+</div><!-- app1 -->
+
+<hr>
+
+<p>HTML</p>
+<pre><code>
+	&lt;link href="css/select2.min.css" rel="stylesheet"&gt;
+	&lt;script src="/note_prg/js/jquery.min.js"&gt;&lt;/script&gt;	
+	&lt;script src="js/select2.min.js"&gt;&lt;/script&gt;
+
+	～略～
+	
+	&lt;select name="" id="animal_select"&gt;
+	&lt;option &gt;-- レッドデータブック --&lt;/option&gt;
+	&lt;option value="1"&gt;アベサンショウウオ&lt;/option&gt;
+	&lt;option value="2"&gt;アカイシサンショウウオ&lt;/option&gt;
+	&lt;option value="42"&gt;リュウキュウアカガエル&lt;/option&gt;
+	&lt;option value="43"&gt;アカウミガメ&lt;/option&gt;
+	&lt;option value="44"&gt;タイマイ&lt;/option&gt;
+	&lt;option value="45"&gt;アオウミガメ&lt;/option&gt;
+	&lt;option value="47"&gt;リュウキュウヤマガメ&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>JavaScript</p>
+<pre><code>
+$(()=>{
+	
+	$('#animal_select').select2({
+    width: '300px',
+    language: 'ja', // 言語
+    tags: true
+  });
+});
+</code></pre>
+
+<div class="yohaku"></div>
+
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>検索機能付きセレクトボックス | select2とVue.jsの組み合わせを検証</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2022-10-25</div>
+</body>
+</html>
