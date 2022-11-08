@@ -22,32 +22,7 @@
 
 
 <h2>Demo</h2>
-<?php 
 
-$d1 = '2022-11-10';
-$d2 = '2022-11-3';
-
-
-// 誤り
-if($d1 > $d2){
-    echo "{$d1}は{$d2}より大きい<br>";
-}else{
-    echo "{$d2}が大きい<br>";
-}
-
-// 正しい比較
-if(strtotime($d1) > strtotime($d2)){
-    echo "{$d1}は{$d2}より大きい<br>";
-}else{
-    echo "{$d2}が大きい<br>";
-}
-
-var_dump(strtotime(''));
-var_dump(strtotime('2022-11-8'));
-var_dump(strtotime(''));
-var_dump(strtotime(''));
-
-?>
 
 <table class="tbl2">
 	<tbody>
