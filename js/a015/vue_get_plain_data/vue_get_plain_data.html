@@ -21,6 +21,69 @@
 <div class="container">
 
 
+<strong>無理</strong><br>
+	連想配列データをvue.jsでバインドした場合、どうしてもvue.jsによって余計な内部関数やプロパティが入ってしまう。それらを除いて一括でプレーンなデータを取得する方法は現状なさそう。<br>
+	一つ一つ丁寧にキーをしていしてデータ取得するしかない。<br>
+	<br>
+	
+	ちなみに「_data」ではなく$dataが良いとのこと。
+	<pre>let data = vueApp.$data</pre>
+	追記：2022-11-11<br>
+	<br>
+	
+	<hr>
+	<p>旧・解説</p>
+	連想配列データには対応できていない。
+	<pre><code>
+
+let app;
+
+$(()=>{
+	
+	let formData = {
+		'cat_name':'ボウシちゃん',
+		'cat_nickname':'オコモさん',
+	};
+	
+	app = new Vue({
+		el: '#app1',
+		data: {
+			'formData':formData,
+		},
+	});
+	
+	let plainData = getPlainDataFromVue(app, 'formData');
+	console.log(plainData);
+	$('#res').html(JSON.stringify( plainData));
+	
+});
+
+/**
+* Vueのappからバインドされていないプレーンなデータを取得する
+* ＠param app VueのApp
+* @param key データのキー省略可
+* @return {} プレーンなデータ
+*/
+function getPlainDataFromVue(app, key){
+	let anyData = null;
+	if(key==null){
+		anyData = app._data;
+	}else{
+		anyData = app[key];
+	}
+	
+	let plainData = {};
+	for(let key2 in anyData){
+		plainData[key2] = anyData[key2];
+	}
+	
+	return plainData;
+}
+
+	</code></pre>
+
+
+
 <h2>Demo</h2>
 <div id="app1">
 	<input type="text" v-model="formData.cat_name" />
