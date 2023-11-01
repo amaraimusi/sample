@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Grid with D3.js</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+<svg width="500" height="500" id="gridSvg" style="border: 1px solid black;"></svg>
+
+<script>
+    const svg = d3.select("#gridSvg");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+
+    // Initial positions for vertical lines
+    const verticalLines = [100, 200, 300, 400];
+    const horizontalLines = [100, 200, 300, 400];
+
+    // Draw lines
+    svg.selectAll(".vertical")
+        .data(verticalLines)
+        .enter().append("line")
+        .attr("class", "vertical")
+        .attr("x1", d => d)
+        .attr("y1", 0)
+        .attr("x2", d => d)
+        .attr("y2", height)
+        .attr("stroke", "black")
+        .attr("stroke-width", 4)
+        .call(d3.drag().on("drag", function (event, d) {
+            d3.select(this)
+                .attr("x1", event.x)
+                .attr("x2", event.x);
+        }));
+
+    svg.selectAll(".horizontal")
+        .data(horizontalLines)
+        .enter().append("line")
+        .attr("class", "horizontal")
+        .attr("x1", 0)
+        .attr("y1", d => d)
+        .attr("x2", width)
+        .attr("y2", d => d)
+        .attr("stroke", "black")
+        .attr("stroke-width", 4)
+        .call(d3.drag().on("drag", function (event, d) {
+            d3.select(this)
+                .attr("y1", event.y)
+                .attr("y2", event.y);
+        }));
+
+    // Save SVG function
+    function saveSVG() {
+        const serializer = new XMLSerializer();
+        const svgString = serializer.serializeToString(svg.node());
+        const blob = new Blob([svgString], { type: "image/svg+xml" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "grid.svg";
+        a.click();
+    }
+
+    // Optional: Button to save SVG
+    // Uncomment below lines to add a save button
+
+    const button = document.createElement("button");
+    button.innerText = "Save SVG";
+    button.addEventListener("click", saveSVG);
+    document.body.appendChild(button);
+
+</script>
+
+<style>
+    .vertical {
+        cursor: ew-resize;
+    }
+
+    .horizontal {
+        cursor: ns-resize;
+    }
+</style>
+
+</body>
+</html>
