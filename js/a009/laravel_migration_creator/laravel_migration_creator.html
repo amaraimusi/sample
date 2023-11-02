@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Laravelマイグレーション生成ツール | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="laravel_migration_creator.js?v=1.0.0"></script>
+</head>
+<body>
+<div id="header" ><h1>Laravelマイグレーション生成ツール | ワクガンス</h1></div>
+<div class="container">
+
+
+Excelやスプレットシートの表からフィールド名, 型,NOT NULL, デフォルト, 和名（コメント）を貼り付けてください。
+<textarea id="pasting_csv" class="form-control" rows="6" 
+placeholder="Excelやスプレットシートの表からフィールド名, 型,NOT NULL, デフォルト, 和名（コメント）を貼り付けてください。" 
+title="CSVを貼り付けてください。Excelからそのまま貼り付け可能。タブ区切りのデータ。">id&#x0009;int&#x0009;&#x0009;&#x0009;ID&#13;neko_val&#x0009;int&#x0009;&#x0009;100&#x0009;ネコ数値&#13;neko_name&#x0009;varchar(255)&#x0009;&#x0009;&#x0009;ネコ名&#13;neko_date&#x0009;date&#x0009;&#x0009;&#x0009;ネコ日付&#13;neko_group&#x0009;int&#x0009;1&#x0009;0&#x0009;ネコ種別&#13;neko_dt&#x0009;datetime&#x0009;&#x0009;&#x0009;ネコ日時&#13;neko_flg&#x0009;tinyint(1)&#x0009;1&#x0009;0&#x0009;ネコフラグ&#13;img_fn&#x0009;varchar(255)&#x0009;&#x0009;&#x0009;画像ファイル名&#13;note&#x0009;text&#x0009;&#x0009;&#x0009;備考</textarea>
+<br>
+<input type="text" id="tbl_name" value='animals' placeholder="テーブル名" /><br>
+<input type="button" value="コード作成" onclick="execution1()" class="btn btn-primary" />
+<pre id="res" style="margin:20px;"></pre>
+
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>Laravelマイグレーション生成ツール</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-1-23</div>
+</body>
+</html>
