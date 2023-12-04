@@ -11,9 +11,7 @@ class RichMenuCurl{
 	public function curlTemplateToLine($param = []){
 		
 		$access_token = $param['access_token'];
-		
-		var_dump('xxx');//■■■□□□■■■□□□)
-		
+
 		// LINE APIのURL
 		$url = 'https://api.line.me/v2/bot/richmenu';
 
