@@ -12,6 +12,8 @@ class RichMenuCurl{
 		
 		$access_token = $param['access_token'];
 		
+		var_dump('xxx');//■■■□□□■■■□□□)
+		
 		// LINE APIのURL
 		$url = 'https://api.line.me/v2/bot/richmenu';
 
@@ -194,6 +196,82 @@ class RichMenuCurl{
 		
 		// レスポンスの表示
 		return $response;
+		
+	}
+	
+	/**
+	 * LINEプラットフォームに登録されているリッチメニュー一覧の情報を取得する
+	 *
+	 * @param array $param
+	 */
+	public function curlListFromLine($params){
+		
+		$access_token = $params['access_token'];
+		
+		// 初期化
+		$curl = curl_init();
+		
+		// cURLオプションの設定
+		curl_setopt($curl, CURLOPT_URL, "https://api.line.me/v2/bot/richmenu/list");
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+				"Authorization: Bearer {$access_token}"
+		));
+		
+		// HTTPリクエストの実行
+		$response = curl_exec($curl);
+		
+		// エラーチェック
+		if(curl_errno($curl)){
+			echo 'Curl error: ' . curl_error($curl);
+		}
+		
+		// cURLセッションの終了
+		curl_close($curl);
+
+		$res = json_decode($response, true);
+
+		return $res;
+		
+	}
+	
+	
+	/**
+	 * LINEリッチメニューを削除するようLINEに送信する（リッチメニューIDを指定して削除）
+	 *
+	 * @param array $param
+	 */
+	public function curlDeleteToLine($params){
+		
+		$access_token = $params['access_token'];
+		$line_rich_menu_id = $params['line_rich_menu_id'];
+		
+		// cURLセッションを初期化
+		$curl = curl_init();
+		
+		// cURLオプションの設定
+		curl_setopt($curl, CURLOPT_URL, "https://api.line.me/v2/bot/richmenu/{$line_rich_menu_id}");
+		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+				"Authorization: Bearer {$access_token}"
+		));
+		
+		// HTTPリクエストを実行
+		$response = curl_exec($curl);
+		
+		// エラーチェック
+		if (curl_errno($curl)) {
+			echo 'Curl error: ' . curl_error($curl);
+		}
+		
+		// cURLセッションを閉じる
+		curl_close($curl);
+		
+		$res = json_decode($response, true);
+		
+		return $res;
+		
 		
 	}
 	

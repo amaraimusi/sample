@@ -250,6 +250,176 @@ function exec3(){
 	
 	
 	
+
+
+
+function exec4(){
+
+	
+	let params = {
+		access_token:$('#access_token').val(),
+		line_rich_menu_id:$('#line_rich_menu_id').val(),
+		mode:'list_from_line',
+	};
+
+	// データ中の「&」と「%」を全角の＆と％に一括エスケープ(&記号や%記号はPHPのJSONデコードでエラーになる)
+	params = _escapeAjaxSendData(params);
+	
+	let fd = new FormData();
+	
+	let params_json = JSON.stringify(params);//データをJSON文字列にする。
+	localStorage.setItem("rich_menu_curl_20231202", params_json); 
+	fd.append( "key1", params_json );
+	
+
+	let ajax_url = "backend.php";
+	
+	// AJAX
+	jQuery.ajax({
+		type: "post",
+		url: ajax_url,
+		data: fd,
+		cache: false,
+		dataType: "text",
+		processData: false,
+		contentType : false,
+	})
+	.done((res_json, type) => {
+		let params;
+		try{
+			params =jQuery.parseJSON(res_json);//パース
+		}catch(e){
+			jQuery("#err").append(res_json);
+			return;
+		}
+		console.log(params);
+		$('#line_rich_menu_id').val(params.line_rich_menu_id) ;
+		
+		let params_json = JSON.stringify(params);//データをJSON文字列にする。
+		localStorage.setItem("rich_menu_curl_20231202", params_json);
+		_resExec4(params.res);
+	})
+	.fail((jqXHR, statusText, errorThrown) => {
+		let errElm = jQuery('#err');
+		errElm.append('アクセスエラー');
+		errElm.append(jqXHR.responseText);
+		alert(statusText);
+	});
+	
+}
+	
+
+function _resExec4(res){
+
+	let richmenus = res.richmenus;
+
+	let data_str = '';
+	for(let i in richmenus){
+		let ent = richmenus[i];
+		let richMenuId = ent.richMenuId;
+		let name = ent.name;
+		let selected = ent.selected;
+		let json_size = JSON.stringify(ent.size);
+		let json_areas = JSON.stringify(ent.areas);
+		let chatBarText = ent.chatBarText;
+		
+		data_str += '<tr>';
+		data_str += `<td>${richMenuId}</td>`;
+		data_str += `<td>${name}</td>`;
+		data_str += `<td>${selected}</td>`;
+		data_str += `<td>${json_size}</td>`;
+		data_str += `<td>${chatBarText}</td>`;
+		data_str += `<td>${json_areas}</td>`;
+		data_str += '</tr>';
+	}
+	
+	let html_str = `
+		<table class='tbl2'>
+			<thead>
+				<tr>
+					<th>richMenuId</th>
+					<th>name</th>
+					<th>selected</th>
+					<th>size</th>
+					<th>chatBarText</th>
+					<th>areas</th>
+				</tr>
+			</thead>
+			<tbody>
+				${data_str}
+			</tbody>
+		</table>
+	`;
+	
+	$('#res').html(html_str);
+	
+}
+	
+	
+	
+
+
+
+function exec5(){
+
+	
+	let params = {
+		access_token:$('#access_token').val(),
+		line_rich_menu_id:$('#line_rich_menu_id').val(),
+		mode:'delete_to_line',
+	};
+
+	// データ中の「&」と「%」を全角の＆と％に一括エスケープ(&記号や%記号はPHPのJSONデコードでエラーになる)
+	params = _escapeAjaxSendData(params);
+	
+	let fd = new FormData();
+	
+	let params_json = JSON.stringify(params);//データをJSON文字列にする。
+	localStorage.setItem("rich_menu_curl_20231202", params_json); 
+	fd.append( "key1", params_json );
+	
+
+	let ajax_url = "backend.php";
+	
+	// AJAX
+	jQuery.ajax({
+		type: "post",
+		url: ajax_url,
+		data: fd,
+		cache: false,
+		dataType: "text",
+		processData: false,
+		contentType : false,
+	})
+	.done((res_json, type) => {
+		let params;
+		try{
+			params =jQuery.parseJSON(res_json);//パース
+		}catch(e){
+			jQuery("#err").append(res_json);
+			return;
+		}
+		console.log(params);
+		$('#line_rich_menu_id').val(params.line_rich_menu_id) ;
+		
+		let params_json = JSON.stringify(params);//データをJSON文字列にする。
+		localStorage.setItem("rich_menu_curl_20231202", params_json); 
+		
+		$('#res').html(params.res);
+	})
+	.fail((jqXHR, statusText, errorThrown) => {
+		let errElm = jQuery('#err');
+		errElm.append('アクセスエラー');
+		errElm.append(jqXHR.responseText);
+		alert(statusText);
+	});
+	
+}
+	
+	
+	
+	
+	
 	
 	
 	
