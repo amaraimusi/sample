@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="google" content="notranslate" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>スネーク記法・キャメル記法変換ツール | ワクガンス</title>
+	<link rel='shortcut icon' href='/home/images/favicon.ico' />
+	
+	<link href="/note_prg/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/note_prg/css/common2.css" rel="stylesheet">
+
+	<script src="/note_prg/js/jquery3.js"></script>	<!-- jquery-3.3.1.min.js -->
+	<script src="/note_prg/js/bootstrap.min.js"></script>
+	<script src="snake_to_camel.js?v=1.0.0"></script>
+</head>
+<body>
+<div id="header" ><h1>スネーク記法・キャメル記法変換ツール | ワクガンス</h1></div>
+<div class="container">
+
+
+<textarea id="pasting_csv" class="form-control" rows="6" 
+placeholder="Excelやスプレットシートの表からフィールド名, 型,NOT NULL, デフォルト, 和名（コメント）を貼り付けてください。" 
+title="CSVを貼り付けてください。Excelからそのまま貼り付け可能。タブ区切りのデータ。">id&#13;neko_val&#13;neko_name&#13;neko_date&#13;neko_group&#13;neko_dt&#13;neko_flg&#13;img_fn&#13;note&#13;okinawa_big_cat</textarea>
+<br>
+<input type="button" value="キャメル記法に変換" onclick="execution1('to_camel')" class="btn btn-primary" />
+<input type="button" value="スネーク記法に変換" onclick="execution1('to_snake')" class="btn btn-primary" />
+<pre id="res" style="margin:20px;"></pre>
+<pre id="res_b" style="margin:20px;"></pre>
+
+
+
+
+<div class="yohaku"></div>
+<ol class="breadcrumb">
+	<li><a href="/">ホーム</a></li>
+	<li><a href="/sample">サンプルソースコード</a></li>
+	<li><a href="/sample/js">JavaScript ｜ サンプル</a></li>
+	<li>スネーク記法・キャメル記法変換ツール</li>
+</ol>
+</div><!-- content -->
+<div id="footer">(C) kenji uehara 2019-1-23</div>
+</body>
+</html>

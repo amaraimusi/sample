@@ -8,6 +8,7 @@ $mode = $params['mode'];
 
 require_once 'RichMenuCurl.php';
 $richMenuCurl = new RichMenuCurl();
+
 switch ($mode) {
 	case 'template_to_line':
 		$line_rich_menu_id = $richMenuCurl->curlTemplateToLine($params);

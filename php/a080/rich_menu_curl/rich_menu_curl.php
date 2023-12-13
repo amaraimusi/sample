@@ -32,7 +32,22 @@
 <div id="header" ><h1>LINEリッチメニューをCURLで送信設定するphpコード | ワクガンス</h1></div>
 <div class="container">
 
+<?php 
+
+require_once 'Service.php';
+$service = new Service();
+$defRichMenuAreas = $service->createDefaultRichMenuAreas('A,B,C,D,E,F,G,H,I');
+dump($defRichMenuAreas);//■■■□□□■■■□□□)
+
+function dump($var){
+	echo '<pre>';
+	var_dump($var);
+	echo '</pre>';
+	
+}
+?>
 <div>
+	
 	
 	<div>
 		<div>

@@ -3,6 +3,7 @@
 
 class RichMenuCurl{
 	
+	
 	/**
 	 * LINEリッチメニューのテンプレートをLINEに送信し、LINEリッチメニューIDを取得する
 	 * 
