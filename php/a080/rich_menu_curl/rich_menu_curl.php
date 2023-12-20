@@ -34,10 +34,8 @@
 
 <?php 
 
-require_once 'Service.php';
-$service = new Service();
-$defRichMenuAreas = $service->createDefaultRichMenuAreas('A,B,C,D,E,F,G,H,I');
-dump($defRichMenuAreas);//■■■□□□■■■□□□)
+
+
 
 function dump($var){
 	echo '<pre>';
@@ -89,7 +87,7 @@ function dump($var){
 
 
 
-<div class="yohaku"></div>
+<div class="yohaku"><a href="test_create_rich_menu_json.php">Test</a></div>
 
 <ol class="breadcrumb">
 	<li><a href="/">ホーム</a></li>

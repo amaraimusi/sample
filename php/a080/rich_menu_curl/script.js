@@ -52,6 +52,12 @@ function exec(){
 		console.log(params);
 		$('#line_rich_menu_id').val(params.line_rich_menu_id) ;
 		
+		if(!_empty(params.errs)){
+			for(let i in params.errs){
+				jQuery("#err").append(params.errs[i]);
+			}
+		}
+		
 		let params_json = JSON.stringify(params);//データをJSON文字列にする。
 		localStorage.setItem("rich_menu_curl_20231202", params_json); 
 		
@@ -418,7 +424,19 @@ function exec5(){
 	
 	
 	
-	
+	// Check empty.
+function _empty(v){
+	if(v == null || v == '' || v=='0'){
+		return true;
+	}else{
+		if(typeof v == 'object'){
+			if(Object.keys(v).length == 0){
+				return true;
+			}
+		}
+		return false;
+	}
+}
 	
 	
 	

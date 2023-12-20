@@ -9,13 +9,11 @@ namespace App\Services\RichMenu;
  */
 class RichMenuCurl{
 	
-	
+
 	/**
  	 * LINE リッチメニュープラットフォームにCURLコマンドでリッチメニューを配信設定する。
 	 */
 	public function curlTemplateToLine($access_token, $rich_menu_json){
-		
-		$errs = [];
 		
 		// LINE APIのURL
 		$url = 'https://api.line.me/v2/bot/richmenu';
@@ -34,29 +32,28 @@ class RichMenuCurl{
 
 		$result = curl_exec($ch); // リクエストの実行
 
-		
 		// エラーチェック
 		if (curl_errno($ch)) {
-			$errs[] = 'Error:' . curl_error($ch);
+			echo 'Error:' . curl_error($ch);
 		}
 	
 		// cURLセッションの終了
 		curl_close($ch);
-
-		$res = json_decode($result,true);//JSONデコード
 		
+		$res = json_decode($result,true);//JSONデコード
+		$err = '';
 		$richMenuId = '';
 		if($res===null){
-			$errs[] = "エラー：LINEプラットフォームへリッチメニューをリンク付けられませんでした。（配信設定失敗）\n" . $res;
+			$err = "エラー：LINEプラットフォームへリッチメニューをリンク付けられませんでした。（配信設定失敗）\n" . $res;
 		}else{
 			$richMenuId = $res['richMenuId'];
 		}
-		
+
 		return [
-				'errs' => $errs,
-				'richMenuId' => $richMenuId,
+			'err' => $err,
+			'richMenuId' => $richMenuId,
 		];
-		
+
 	}
 	
 	

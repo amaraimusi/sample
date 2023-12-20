@@ -1,5 +1,7 @@
 <?php 
 
+use App\Services\RichMenu\RichMenuCurl;
+
 // 通信元から送信されてきたパラメータを取得する。
 $params_json = $_POST['key1'];
 $params=json_decode($params_json,true);//JSON文字を配列に戻す
@@ -11,8 +13,19 @@ $richMenuCurl = new RichMenuCurl();
 
 switch ($mode) {
 	case 'template_to_line':
-		$line_rich_menu_id = $richMenuCurl->curlTemplateToLine($params);
-		$params['line_rich_menu_id'] = $line_rich_menu_id;
+		
+		require_once 'Sample.php';
+		$sample = new Sample();
+		$richMenu = $sample->getSampleRichMenu();
+		$areas = $sample->getSampleAreas1();
+
+		$rich_menu_json  = $richMenuCurl->createRichMenuJson($richMenu, $areas);
+		
+		//$line_rich_menu_id = $richMenuCurl->curlTemplateToLine($params['access_token'], $rich_menu_json);
+		$res = $richMenuCurl->curlTemplateToLine($params['access_token'], $rich_menu_json);
+		
+		$params['line_rich_menu_id'] =$res['richMenuId'];
+		$params['errs'] =$res['errs'];
 		break;
 		
 	case 'img_to_line':
@@ -36,3 +49,9 @@ switch ($mode) {
 // JSONに変換し、通信元に返す。
 $json_str = json_encode($params, JSON_HEX_TAG | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_APOS);
 echo $json_str;
+
+function dump($var){
+	echo "<pre><code>";
+	var_dump($var);
+	echo "</code></pre>";
+}
