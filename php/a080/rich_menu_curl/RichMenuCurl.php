@@ -12,6 +12,11 @@ class RichMenuCurl{
 	
 	/**
  	 * LINE リッチメニュープラットフォームにCURLコマンドでリッチメニューを配信設定する。
+	 *
+	 * @param array $param
+	 * @return []
+	 * - richMenuId リッチメニューID
+	 *  - errs エラーメッセージ配列 :成功時はerrsのメッセージは空。
 	 */
 	public function curlTemplateToLine($access_token, $rich_menu_json){
 		
@@ -37,7 +42,7 @@ class RichMenuCurl{
 		
 		// エラーチェック
 		if (curl_errno($ch)) {
-			$errs[] = 'Error:' . curl_error($ch);
+			$errs[] = 'LINEプラットフォームへのリッチメニュー登録に失敗しました。' . curl_error($ch);
 		}
 	
 		// cURLセッションの終了
@@ -47,7 +52,7 @@ class RichMenuCurl{
 		
 		$richMenuId = '';
 		if($res===null){
-			$errs[] = "エラー：LINEプラットフォームへリッチメニューをリンク付けられませんでした。（配信設定失敗）\n" . $res;
+			$errs[] = "LINEプラットフォームへのリッチメニュー登録に失敗しました。" . $res;
 		}else{
 			$richMenuId = $res['richMenuId'];
 		}
@@ -61,11 +66,16 @@ class RichMenuCurl{
 	
 	
 	/**
-	 * LINEリッチメニューの画像をLINEに送信する
+	 * LINEリッチメニューの画像をLINEに送信する。
 	 *
 	 * @param array $param
+	 * @return []
+	 *  - errs エラーメッセージ配列 :成功時はerrsのメッセージは空。
 	 */
 	public function curlImgToLine($params){
+		
+		$errs = [];
+		
 		$access_token = $params['access_token'];
 		$line_rich_menu_id = $params['line_rich_menu_id'];
 		$img_path = $params['img_path'];
@@ -98,8 +108,8 @@ class RichMenuCurl{
 		// ファイルの内容を読み込む
 		$data = file_get_contents($img_path);
 		if ($data === false) {
-			echo "Failed to read file";
-			return;
+			$errs[] = "LINEへの画像送信に失敗しました。画像読込に失敗しました。";
+			return ['errs' => $errs];
 		}
 		
 		// オプションの設定
@@ -113,13 +123,17 @@ class RichMenuCurl{
 		
 		// エラーチェック
 		if (curl_errno($ch)) {
-			echo 'Error:' . curl_error($ch);
+			$errs[] = "LINEへの画像送信に失敗しました。" .  curl_error($ch);
 		}
 		
 		// cURLセッションの終了
 		curl_close($ch);
 		
-		return $response;
+		
+		$res = json_decode($response,true);//JSONデコード
+		$errs = array_merge($errs, $res);
+		
+		return ['errs' => $errs];
 		
 	}
 	
@@ -128,9 +142,12 @@ class RichMenuCurl{
 	 * LINEリッチメニューをデフォルトに設定するようLINEに送信する（リッチメニューを適用）
 	 *
 	 * @param array $param
+	 * @return []
+	 *  - errs エラーメッセージ配列 :成功時はerrsのメッセージは空。
 	 */
 	public function curlDefaultToLine($params){
 		
+		$errs = [];
 		$access_token = $params['access_token'];
 		$line_rich_menu_id = $params['line_rich_menu_id'];
 
@@ -156,14 +173,18 @@ class RichMenuCurl{
 		
 		// エラーチェック
 		if (curl_errno($ch)) {
-			echo 'Error:' . curl_error($ch);
+			$errs[] = "LINEプラットフォームへのデフォルト設定が失敗しました。" . curl_error($ch);
 		}
 		
 		// cURLセッションの終了
 		curl_close($ch);
 		
+		$res = json_decode($response, true);//JSONデコード
+		
+		$errs = array_merge($errs, $res);
+		
 		// レスポンスの表示
-		return $response;
+		return ['errs' => $errs];
 		
 	}
 	
@@ -211,6 +232,7 @@ class RichMenuCurl{
 	 */
 	public function curlDeleteToLine($params){
 		
+		$errs = [];
 		$access_token = $params['access_token'];
 		$line_rich_menu_id = $params['line_rich_menu_id'];
 		
@@ -230,7 +252,7 @@ class RichMenuCurl{
 		
 		// エラーチェック
 		if (curl_errno($curl)) {
-			echo 'Curl error: ' . curl_error($curl);
+			$errs[] = "LINEプラットフォームからリッチメニューの削除に失敗しました。". curl_error($curl);
 		}
 		
 		// cURLセッションを閉じる
@@ -238,7 +260,9 @@ class RichMenuCurl{
 		
 		$res = json_decode($response, true);
 		
-		return $res;
+		$errs = array_merge($errs, $res);
+		
+		return ['errs' => $errs];
 		
 		
 	}

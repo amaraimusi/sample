@@ -18,10 +18,7 @@ switch ($mode) {
 		$sample = new Sample();
 		$richMenu = $sample->getSampleRichMenu();
 		$areas = $sample->getSampleAreas1();
-
 		$rich_menu_json  = $richMenuCurl->createRichMenuJson($richMenu, $areas);
-		
-		//$line_rich_menu_id = $richMenuCurl->curlTemplateToLine($params['access_token'], $rich_menu_json);
 		$res = $richMenuCurl->curlTemplateToLine($params['access_token'], $rich_menu_json);
 		
 		$params['line_rich_menu_id'] =$res['richMenuId'];
@@ -30,11 +27,13 @@ switch ($mode) {
 		
 	case 'img_to_line':
 		$params['img_path'] = __DIR__ . '/img/' . $params['rich_menu_img'];
-		$params['res'] = $richMenuCurl->curlImgToLine($params);
+		 $res = $richMenuCurl->curlImgToLine($params);
+		 $params = array_merge($params, $res);
 		break;
 		
 	case 'default_to_line':
-		$params['res'] = $richMenuCurl->curlDefaultToLine($params);
+		$res = $richMenuCurl->curlDefaultToLine($params);
+		$params = array_merge($params, $res);
 		break;
 		
 	case 'list_from_line':
@@ -42,7 +41,8 @@ switch ($mode) {
 		break;
 		
 	case 'delete_to_line':
-		$params['res'] = $richMenuCurl->curlDeleteToLine($params);
+		$res = $richMenuCurl->curlDeleteToLine($params);
+		$params = array_merge($params, $res);
 		break;
 }
 

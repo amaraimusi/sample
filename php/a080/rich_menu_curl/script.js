@@ -12,6 +12,8 @@ $(()=>{
 
 function exec(){
 
+	$('#res').html('');
+	$('#err').html('');
 	
 	let params = {
 		access_token:$('#access_token').val(),
@@ -52,11 +54,8 @@ function exec(){
 		console.log(params);
 		$('#line_rich_menu_id').val(params.line_rich_menu_id) ;
 		
-		if(!_empty(params.errs)){
-			for(let i in params.errs){
-				jQuery("#err").append(params.errs[i]);
-			}
-		}
+		_outputErrs(params.errs);
+
 		
 		let params_json = JSON.stringify(params);//データをJSON文字列にする。
 		localStorage.setItem("rich_menu_curl_20231202", params_json); 
@@ -133,8 +132,10 @@ function _escapeForAjax(data){
 
 
 function exec2(){
-
 	
+	$('#res').html('');
+	$('#err').html('');
+
 	let params = {
 		access_token:$('#access_token').val(),
 		line_rich_menu_id:$('#line_rich_menu_id').val(),
@@ -173,12 +174,13 @@ function exec2(){
 			return;
 		}
 		console.log(params);
-		$('#line_rich_menu_id').val(params.line_rich_menu_id) ;
+
+		_outputErrs(params.errs);
+
+		if(_empty(params.errs)){
+			$('#res').html('成功しました。');
+		}
 		
-		let params_json = JSON.stringify(params);//データをJSON文字列にする。
-		localStorage.setItem("rich_menu_curl_20231202", params_json); 
-		
-		$('#res').html(params.res);
 	})
 	.fail((jqXHR, statusText, errorThrown) => {
 		let errElm = jQuery('#err');
@@ -197,8 +199,10 @@ function exec2(){
 
 
 function exec3(){
-
 	
+	$('#res').html('');
+	$('#err').html('');
+
 	let params = {
 		access_token:$('#access_token').val(),
 		line_rich_menu_id:$('#line_rich_menu_id').val(),
@@ -236,12 +240,12 @@ function exec3(){
 			return;
 		}
 		console.log(params);
-		$('#line_rich_menu_id').val(params.line_rich_menu_id) ;
-		
-		let params_json = JSON.stringify(params);//データをJSON文字列にする。
-		localStorage.setItem("rich_menu_curl_20231202", params_json); 
-		
-		$('#res').html(params.res);
+
+		_outputErrs(params.errs);
+
+		if(_empty(params.errs)){
+			$('#res').html('成功しました。');
+		}
 	})
 	.fail((jqXHR, statusText, errorThrown) => {
 		let errElm = jQuery('#err');
@@ -260,8 +264,10 @@ function exec3(){
 
 
 function exec4(){
-
 	
+	$('#res').html('');
+	$('#err').html('');
+
 	let params = {
 		access_token:$('#access_token').val(),
 		line_rich_menu_id:$('#line_rich_menu_id').val(),
@@ -316,6 +322,9 @@ function exec4(){
 	
 
 function _resExec4(res){
+	
+	$('#res').html('');
+	$('#err').html('');
 
 	let richmenus = res.richmenus;
 
@@ -367,8 +376,10 @@ function _resExec4(res){
 
 
 function exec5(){
-
 	
+	$('#res').html('');
+	$('#err').html('');
+
 	let params = {
 		access_token:$('#access_token').val(),
 		line_rich_menu_id:$('#line_rich_menu_id').val(),
@@ -406,12 +417,12 @@ function exec5(){
 			return;
 		}
 		console.log(params);
-		$('#line_rich_menu_id').val(params.line_rich_menu_id) ;
-		
-		let params_json = JSON.stringify(params);//データをJSON文字列にする。
-		localStorage.setItem("rich_menu_curl_20231202", params_json); 
-		
-		$('#res').html(params.res);
+
+		_outputErrs(params.errs);
+
+		if(_empty(params.errs)){
+			$('#res').html('成功しました。');
+		}
 	})
 	.fail((jqXHR, statusText, errorThrown) => {
 		let errElm = jQuery('#err');
@@ -420,6 +431,17 @@ function exec5(){
 		alert(statusText);
 	});
 	
+}
+
+
+function _outputErrs(errs){
+	if(_empty(errs)) return;
+	let err_html = '';
+	for(let i in errs){
+		let err = errs[i];
+		err_html += `<div>${err}</div>`;
+	}
+	$('#err').append(err_html);
 }
 	
 	
