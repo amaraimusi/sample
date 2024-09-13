@@ -48,6 +48,201 @@ class LineAudienceCurl{
 	}
 	
 	
+	public function getAudienceReg($params){
+		
+		
+		$accessToken = 'lPdXJ1j4doZCNpA8gecTEldh9R+mq3XboSroYwUTwiU0cwQRoqEHG8DF8QXLlM9xVekwxxRMhckI2Aim+nqF3SOaKvZMrtipijoqzvjjocigrg7oPCwCmUZXpXSXpXvi2GqIlV5QBSagUHTzrmKLSAdB04t89/1O/w1cDnyilFU='; // ここにLINE APIのアクセストークンを設定
+		
+		$url = 'https://api.line.me/v2/bot/audienceGroup/click';
+		
+		$headers = [
+				'Authorization: Bearer ' . $accessToken,
+				'Content-Type: application/json',
+		];
+		
+		$data = [
+				'description' => 'kitune',
+				//'clickUrl' => 'https://amaraimusi.sakura.ne.jp/',
+				// 'requestId' はオプショナルです。必要に応じて設定してください。
+				'requestId' => '478435281'
+		];
+		
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		
+		$response = curl_exec($ch);
+		curl_close($ch);
+		
+		echo $response;
+		
+		
+// 		$url = 'https://api.line.me/v2/bot/audienceGroup/upload';
+		
+// 		$headers = [
+// 				'Authorization: Bearer ' . $accessToken,
+// 				'Content-Type: application/json',
+// 		];
+		
+// 		$data = [
+// 				'description' => 'kitune',
+// 				'isIfaAudience' => false,
+// 				'audiences' => [
+// 						[
+// 								'id' => null, // requestIdがないのでnullを設定
+// 								'type' => 'CLICK',
+// 								'clickUrl' => 'https://amaraimusi.sakura.ne.jp/',
+// 						],
+// 				],
+// 		];
+		
+// 		$ch = curl_init($url);
+// 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+// 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		
+// 		$response = curl_exec($ch);
+// 		curl_close($ch);
+		
+// 		dump($response);//■■■□□□■■■□□□)
+		
+// 		$access_token = $params['access_token']; //
+// 		$description = $params['description']; // オーディエンス名
+// 		$request_id = $params['request_id']; // ブロードキャストメッセージとナローキャストメッセージのリクエストID
+// 		$click_url = $params['click_url']; // ユーザーがクリックしたURL
+// 		$audiences = $params['audiences']; // ユーザーIDまたはIFAの配列
+		
+	
+// 		$url = 'https://api.line.me/v2/bot/audienceGroup/upload';
+		
+// 		$headers = [
+// 				'Authorization: Bearer ' . $access_token,
+// 				'Content-Type: application/json',
+// 		];
+		
+// 		$data = [
+// 				'description' => 'kitune',
+// 				'isIfaAudience' => false,
+// 				'audiences' => [
+// 						[
+// 								'id' => null, // requestIdがないのでnullを設定
+// 								'type' => 'CLICK',
+// 								'clickUrl' => $click_url,
+// 						],
+// 				],
+// 		];
+		
+// 		$ch = curl_init($url);
+// 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+// 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		
+// 		$response = curl_exec($ch);
+		
+// 		$res = json_decode($response,true);//JSONデコード
+// 		dump($res);//■■■□□□■■■□□□)
+		
+// 		if($res===null){
+// 			$errs[] = "オーディエンス一覧の取得に失敗しました。" . $res;
+// 		}
+		
+// 		return [
+// 				'errs' => $errs,
+// 				'list' => $res,
+// 		];
+	}
+	
+	
+	
+	public function naroMsg(){
+		$accessToken = 'YOUR_ACCESS_TOKEN'; // LINEボットのチャネルアクセストークンを設定
+		$accessToken = 'lPdXJ1j4doZCNpA8gecTEldh9R+mq3XboSroYwUTwiU0cwQRoqEHG8DF8QXLlM9xVekwxxRMhckI2Aim+nqF3SOaKvZMrtipijoqzvjjocigrg7oPCwCmUZXpXSXpXvi2GqIlV5QBSagUHTzrmKLSAdB04t89/1O/w1cDnyilFU='; // ここにLINE APIのアクセストークンを設定
+		
+		
+		$url = 'https://api.line.me/v2/bot/message/narrowcast';
+		
+		$headers = [
+				'Authorization: Bearer ' . $accessToken,
+				'Content-Type: application/json',
+		];
+		
+		$data = [
+				'messages' => [
+						[
+								'type' => 'text',
+								'text' => 'Hello, this is a narrowcast message!' // 送信するメッセージ
+						]
+				],
+				'filter' => [
+						'demographic' => [
+								'appVersion' => '>= 8.0.0',
+								'language' => 'ja'
+						]
+				],
+				// 追加で他のオプションを指定する場合はここに記述
+		];
+		
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		
+		$response = curl_exec($ch);
+		curl_close($ch);
+		
+		echo $response;
+		
+// 		$url = 'https://api.line.me/v2/bot/message/narrowcast';
+		
+// 		$headers = [
+// 				'Authorization: Bearer ' . $accessToken,
+// 				'Content-Type: application/json',
+// 		];
+		
+// 		$data = [
+// 				'messages' => [
+// 						[
+// 								'type' => 'text',
+// 								'text' => 'Hello, this is a narrowcast message!' // 送信するメッセージ
+// 						]
+// 				],
+// 				'recipient' => [
+// 						// ターゲットユーザーの条件を設定
+// 						'demographic' => [
+// 								'type' => 'operator',
+// 								'and' => [
+// 										[
+// 												'type' => 'language',
+// 												'value' => 'ja' // 言語が日本語のユーザーをターゲット
+// 										],
+// 										[
+// 												'type' => 'appVersion',
+// 												'op' => '>=',
+// 												'value' => '8.0.0' // アプリバージョンが8.0.0以上のユーザーをターゲット
+// 										]
+// 								]
+// 						]
+// 				]
+// 		];
+		
+// 		$ch = curl_init($url);
+// 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+// 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		
+// 		$response = curl_exec($ch);
+// 		curl_close($ch);
+		
+// 		echo $response;
+	}
+	
+	
 // 	/**
 //  	 * LINE リッチメニュープラットフォームにCURLコマンドでリッチメニューを配信設定する。
 // 	 *

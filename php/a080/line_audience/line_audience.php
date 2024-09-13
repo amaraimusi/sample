@@ -44,17 +44,38 @@ function dump($var){
 	
 	<div>
 		<div>
-			<label for="access_token">アクセストークン</label>
-			<input type="text" id="access_token" style="width:100%" />
+			<button type="button" class="btn btn-info btn-sm" onclick="changeMode('list')">一覧</button>
+			<button type="button" class="btn btn-info btn-sm" onclick="changeMode('reg')">登録</button>
+			<button type="button" class="btn btn-info btn-sm" onclick="changeMode('delete')">削除</button>
 		</div>
 		<div>
-			<label for="line_audience_group_id">LINEオーディエンスID</label>
+			<label for="access_token">アクセストークン (一覧表示、登録、削除)</label>
+			<input type="text" id="access_token" style="width:100%" />
+		</div>
+		<div class="reg">
+			<label for="description">オーディエンス名(登録)</label>
+			<input type="text" id="description" name="description" style="width:100%" />
+		</div>
+		<div class="reg">
+			<label for="request_id">ブロードキャストメッセージとナローキャストメッセージのリクエストID(登録)</label>
+			<input type="text" id="request_id" name="request_id" style="width:100%" />
+		</div>
+		<div class="reg">
+			<label for="click_url">ユーザーがクリックしたURL(登録)</label>
+			<input type="text" id="click_url" name="click_url" style="width:100%" />
+		</div>
+		<div class="reg">
+			<label for="audiences">ユーザーIDまたはIFAの配列(登録)</label>
+			<input type="text" id="audiences" name="audiences" style="width:100%" />
+		</div>
+		<div class="delete">
+			<label for="line_audience_group_id">LINEオーディエンスID（削除）</label>
 			<input type="text" id="line_audience_group_id" style="width:100%" />
 		</div>
 
-		<button type="button" class="btn btn-success btn-sm" onclick="exec();">一覧表示</button>
-		<button type="button" class="btn btn-success btn-sm" onclick="exec2();">登録</button>
-		<button type="button" class="btn btn-danger btn-sm" onclick="exec5();">削除</button>
+		<button type="button" class="btn btn-success btn-sm list" onclick="exec();">一覧表示 実行</button>
+		<button type="button" class="btn btn-success btn-sm reg" onclick="exec2();">登録 実行</button>
+		<button type="button" class="btn btn-danger btn-sm delete" onclick="exec5();">削除 実行</button>
 		
 	</div>
 	<div id="audience_list"></div>

@@ -21,9 +21,10 @@ switch ($mode) {
 		break;
 		
 	case 'audience_reg':
-		$params['img_path'] = __DIR__ . '/img/' . $params['rich_menu_img'];
-		 $res = $lineAudienceCurl->curlImgToLine($params);
-		 $params = array_merge($params, $res);
+		//$res = $lineAudienceCurl->getAudienceReg($params);
+		$res = $lineAudienceCurl->naroMsg();
+		$params['res'] =$res['res'];
+		$params['errs'] =$res['errs'];
 		break;
 		
 	case 'audience_delete':

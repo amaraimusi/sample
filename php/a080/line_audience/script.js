@@ -4,8 +4,14 @@ $(()=>{
 	if(params_json){
 		let params = JSON.parse(params_json);
 		$('#access_token').val(params.access_token);
-		$('#line_audience_group_id').val(params.line_audience_group_id);
+		$('#description').val(params.description);
+		$('#request_id').val(params.request_id);
+		$('#click_url').val(params.click_url);
+		$('#audiences').val(params.audiences);
+
 	}
+	
+	changeMode('list');
 });
 
 
@@ -141,9 +147,14 @@ function exec2(){
 
 	let params = {
 		access_token:$('#access_token').val(),
-		line_audience_group_id:$('#line_audience_group_id').val(),
+		description:$('#description').val(),
+		request_id:$('#request_id').val(),
+		click_url:$('#click_url').val(),
+		audiences:$('#audiences').val(),
 		mode:'audience_reg',
 	};
+	
+	
 
 	// データ中の「&」と「%」を全角の＆と％に一括エスケープ(&記号や%記号はPHPのJSONデコードでエラーになる)
 	params = _escapeAjaxSendData(params);
@@ -151,7 +162,6 @@ function exec2(){
 	let fd = new FormData();
 	
 	let params_json = JSON.stringify(params);//データをJSON文字列にする。
-	localStorage.setItem("line_audience_20240316", params_json); 
 	fd.append( "key1", params_json );
 	
 
@@ -181,7 +191,10 @@ function exec2(){
 
 		if(_empty(params.errs)){
 			$('#res').html('成功しました。');
+			localStorage.setItem("line_audience_20240316", params_json); 
 		}
+		
+		
 		
 	})
 	.fail((jqXHR, statusText, errorThrown) => {
@@ -329,6 +342,11 @@ function _empty(v){
 	}
 	
 	
-	
+function changeMode(code){
+	jQuery('.list').hide();
+	jQuery('.reg').hide();
+	jQuery('.delete').hide();
+	jQuery('.' + code).show();
+}
 	
 	
